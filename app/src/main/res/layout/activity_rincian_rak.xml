@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatutks" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatudks" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatusks" />
+
+            <ImageView
+                android:id="@+id/imageView2112"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView129"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatutks" />
+
+            <ImageView
+                android:id="@+id/imageView210"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatudks" />
+
+            <ImageView
+                android:id="@+id/imageView2121"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatusks" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView19"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatutkd" />
+
+            <ImageView
+                android:id="@+id/imageView20"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatudkd" />
+
+            <ImageView
+                android:id="@+id/imageView21"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatuskd" />
+
+            <ImageView
+                android:id="@+id/imageView22"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView24"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView25"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView33"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatutks" />
+
+            <ImageView
+                android:id="@+id/imageView34"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatudkt" />
+
+            <ImageView
+                android:id="@+id/imageView35"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/raksatuskt" />
+
+            <ImageView
+                android:id="@+id/imageView36"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView37"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView38"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView39"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView61"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView62"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView63"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView64"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView65"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView66"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView67"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView40"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView41"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView42"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView43"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView44"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView45"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView46"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView26"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView27"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView28"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView29"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView30"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView31"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView32"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView47"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView48"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView49"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView50"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView51"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView52"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView53"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView18"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView17"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView54"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView55"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView56"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView57"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/jlnrak" />
+
+            <ImageView
+                android:id="@+id/imageView58"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView59"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+
+            <ImageView
+                android:id="@+id/imageView60"
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/rakkeduaskd" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

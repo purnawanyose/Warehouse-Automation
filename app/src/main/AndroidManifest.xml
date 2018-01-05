@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.semenindonesia.sisi.warehouseautomation">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ImageViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".ScannerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ScannerReservationPage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".StockOpActivity" />
+        <activity
+            android:name=".DetailOpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AdminInitialPage"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".InterimActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ScannerReservationDetail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StockOpnameActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReservationDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BonSementaraActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".QuantDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ScannerOnhandPageActivity" />
+        <activity
+            android:name=".ReservationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RincianRakActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RecycleViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- <activity android:name="config.InterimRv" /> -->
+        <activity
+            android:name=".OnhandLocationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".UserManagementAdmin" />
+        <activity android:name=".ConnectionSettingActivity" />
+        <activity android:name=".PlantAssigmentActivity"></activity>
+    </application>
+
+</manifest>

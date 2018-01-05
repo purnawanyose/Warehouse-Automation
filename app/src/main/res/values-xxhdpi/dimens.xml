@@ -1,0 +1,13 @@
+<resources>
+	<dimen name="font_xs">24sp</dimen>
+	<dimen name="font_s">33.6sp</dimen>
+	<dimen name="font_m">43.2sp</dimen>
+	<dimen name="font_l">48sp</dimen>
+	<dimen name="font_xl">57.6sp</dimen>
+	<dimen name="gap_xs">9.6dp</dimen>
+	<dimen name="gap_s">19.2dp</dimen>
+	<dimen name="gap_m">38.4dp</dimen>
+	<dimen name="gap_l">76.8dp</dimen>
+	<dimen name="gap_xl">100.8dp</dimen>
+	<dimen name="gap_xxl">144dp</dimen>
+</resources>

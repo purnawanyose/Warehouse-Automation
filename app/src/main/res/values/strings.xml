@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Warehouse Automation</string>
+    <string name="ver">Ver. 1.0.19</string>
+    <string name="app">Mobile Application</string>
+    <string name="mobile">Mobile</string>
+    <string name="title_activity_quant">QuantActivity</string>
+    <string name="title_activity_stock_opname">StockOpnameActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="wh_no">Wh No. :</string>
+    <string name="level">Level :</string>
+    <string name="title_activity_interim_rv">InterimRv</string>
+</resources>
