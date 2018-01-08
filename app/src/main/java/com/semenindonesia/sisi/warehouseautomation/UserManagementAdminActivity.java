@@ -3,8 +3,11 @@ package com.semenindonesia.sisi.warehouseautomation;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,14 +18,34 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserManagementAdmin extends AppCompatActivity {
+import helper.RealmHelper;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import model.UserModel;
+
+public class UserManagementAdminActivity extends AppCompatActivity {
     final Context context = this;
     Button btnAdd;
+
+    private static final String TAG = "UserManagementActivity";
+
+
+    private RecyclerView recyclerView;
+    private RealmHelper helper;
+    private ArrayList<UserModel> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_management_admin);
+
+
+        data = new ArrayList<>();
+        helper = new RealmHelper(UserManagementAdminActivity.this);
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.rvUser);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
 

@@ -99,7 +99,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView81"
+                    android:id="@+id/textVieww81"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:layout_marginTop="8dp"
@@ -135,7 +135,7 @@
             tools:layout_editor_absoluteY="8dp">
 
             <View
-                android:id="@+id/view4"
+                android:id="@+id/view4q"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_below="@+id/linear1"

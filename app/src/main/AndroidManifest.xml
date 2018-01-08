@@ -72,9 +72,10 @@
             android:name=".OnhandLocationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".UserManagementAdmin" />
+        <activity android:name=".UserManagementAdminActivity" />
         <activity android:name=".ConnectionSettingActivity" />
-        <activity android:name=".PlantAssigmentActivity"></activity>
+        <activity android:name=".PlantAssigmentActivity" />
+        <activity android:name=".AddUserManagementActivity"></activity>
     </application>
 
 </manifest>

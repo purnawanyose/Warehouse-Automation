@@ -22,7 +22,7 @@ public class AdminInitialPage extends AppCompatActivity {
         button20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminInitialPage.this, UserManagementAdmin.class );
+                Intent intent = new Intent(AdminInitialPage.this, UserManagementAdminActivity.class );
                 startActivity(intent);
             }
         });
