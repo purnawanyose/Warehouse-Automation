@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context="com.semenindonesia.sisi.warehouseautomation.ReservationActivity">
 
 
@@ -78,13 +80,14 @@
                 android:id="@+id/linearPlant"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="5dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView61"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="     Plant"
+                    android:text="Plant"
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black" />
 
@@ -93,6 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:text="7702"
                     android:inputType="textPersonName"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -101,13 +105,14 @@
                 android:id="@+id/linearNoReservation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="5dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView62"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="     No. Reservation"
+                    android:layout_height="match_parent"
+                    android:text="No. Reservation"
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black" />
 
@@ -123,29 +128,21 @@
                 android:id="@+id/linearMovType"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="     Mov Type"
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/black" />
-
-                <Spinner
-                    android:id="@+id/spinnerMovType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/movtype"
                     android:layout_width="match_parent"
-                    android:layout_height="19dp"
-                    android:editable="true"
+                    android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:visibility="visible" />
+                    android:hint="Mvt Type"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/srcmovtype"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_weight="6"
+                    android:src="@drawable/ic_search_black_24dp"/>
 
             </LinearLayout>
 
@@ -153,22 +150,23 @@
                 android:id="@+id/linearMaterialNo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView64"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="     Material No."
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/black" />
+                android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/etMaterialNo"
+                    android:id="@+id/materialno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:hint="Material No." />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_weight="6"
+                    app:srcCompat="@drawable/ic_search_black_24dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -181,7 +179,7 @@
                     android:id="@+id/tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="     Regment Date End"
+                    android:text="Regment Date End"
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black" />
 

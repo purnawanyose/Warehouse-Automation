@@ -1,5 +1,6 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.mrapp.android.dialog.WizardDialog;
+import fragment.Filter_Movtype;
 import model.Reservation;
 import model.Response;
 import response.ReservationMainResponse;
@@ -45,6 +48,28 @@ public class ReservationActivity extends AppCompatActivity {
         teeeet = etPlant.getText();
 
 
+
+    }
+
+    @OnClick(R.id.srcmovtype)
+    public void actionsrcmovtype() {
+
+        WizardDialog.Builder dialogBuilder = new WizardDialog.Builder(ReservationActivity.this);
+        dialogBuilder.addFragment("", Filter_Movtype.class);
+        dialogBuilder.setFinishButtonText("Search items");
+        dialogBuilder.setHeaderIcon(R.drawable.ic_search_black_24dp);
+        dialogBuilder.showHeader(true);
+        dialogBuilder.setFullscreen(false);
+        dialogBuilder.setMaxHeight(600);
+        dialogBuilder.setCancelable(true);
+        dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
+        WizardDialog dialog = dialogBuilder.create();
+        dialog.show(getSupportFragmentManager(),"test");
 
     }
 
