@@ -11,6 +11,8 @@ import model.Reservation;
 import response.BonSementaraResponse;
 import response.ClearResponse;
 import response.InterimResponse;
+import response.MasterSpecialStockResponse;
+import response.MovTypeSelectionResponse;
 import response.QuantResponse;
 import response.ReservationDetailResponse;
 import response.ReservationMainResponse;
@@ -81,9 +83,14 @@ public interface ApiInterface {
 //    Call<ReservationMainResponse> getReservationMain(@Query("plant") TextView plant);
 //    Call<ReservationMainResponse> getReservationMain(@Query("plant") String plant);
 
+    @GET("Master/spesialStok/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<MasterSpecialStockResponse> getMasterSpecialStock();
 
-//    @GET("Reservation/stockwm/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?text=WM&lgnum=204&lgtyp=SG4&lgpla=A.A1.3.02")
-//    Call<OnhandResponse> getOnhand();
+    @GET("Master/movementType/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<MovTypeSelectionResponse> getMovTypeSelection(
+            @Query("bwart[0]") String bwart,
+            @Query("sobkz[0]") String sobkz
+    );
 
 
 
