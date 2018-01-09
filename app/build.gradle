@@ -51,4 +51,6 @@ dependencies {
     compile 'com.arasthel:asyncjob-library:1.0.3'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+
+    compile 'com.android.support:appcompat-v7:23.0.3'
 }

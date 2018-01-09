@@ -60,7 +60,6 @@ public class UserManagementAdminActivity extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
 
-
                 alertDialogBuilder.setView(promptsView);
                 alertDialogBuilder
                         .setCancelable(false)
@@ -82,39 +81,9 @@ public class UserManagementAdminActivity extends AppCompatActivity {
 
                 // show it
                 alertDialog.show();
-
-            }
-        });
-    }
-   /* public void spinner(){
-        Spinner spinner;
-        spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-        List<String> list = new ArrayList<String>();
-        list.add("Admin");
-        list.add("Operator");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-*/
-   /* public void cbTest(){
-        btnTest = (Button) findViewById(R.id.btnTest);
-        CheckBox someCheckBox= (CheckBox) findViewById (R.id.cbTest);
-        someCheckBox.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    btnTest.setEnabled(false);
-                } else {
-                    //CODE TO MAKE THE EDITTEXT DISABLED
-//                    password.setEnabled(false);
-
-                }
             }
         });
 
-    }*/
+    }
+
 }
