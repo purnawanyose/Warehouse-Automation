@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -25,7 +26,9 @@ import model.UserModel;
 
 public class UserManagementAdminActivity extends AppCompatActivity {
     final Context context = this;
-    Button btnAdd;
+    Button btnAdd, btnTest;
+    CheckBox cbTest;
+
 
     private static final String TAG = "UserManagementActivity";
 
@@ -38,7 +41,6 @@ public class UserManagementAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_management_admin);
-
 
         data = new ArrayList<>();
         helper = new RealmHelper(UserManagementAdminActivity.this);
@@ -57,6 +59,7 @@ public class UserManagementAdminActivity extends AppCompatActivity {
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
+
 
                 alertDialogBuilder.setView(promptsView);
                 alertDialogBuilder
@@ -79,12 +82,11 @@ public class UserManagementAdminActivity extends AppCompatActivity {
 
                 // show it
                 alertDialog.show();
+
             }
         });
-
-
     }
-    public void spinner(){
+   /* public void spinner(){
         Spinner spinner;
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
@@ -96,4 +98,23 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
+*/
+   /* public void cbTest(){
+        btnTest = (Button) findViewById(R.id.btnTest);
+        CheckBox someCheckBox= (CheckBox) findViewById (R.id.cbTest);
+        someCheckBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    btnTest.setEnabled(false);
+                } else {
+                    //CODE TO MAKE THE EDITTEXT DISABLED
+//                    password.setEnabled(false);
+
+                }
+            }
+        });
+
+    }*/
 }

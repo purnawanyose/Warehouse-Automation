@@ -29,7 +29,6 @@ public class AddActivity extends AppCompatActivity {
 
         password = (EditText) findViewById(R.id.password);
         username = (EditText) findViewById(R.id.username);
-        save = (Button) findViewById(R.id.save);
 
 
         save.setOnClickListener(new View.OnClickListener() {

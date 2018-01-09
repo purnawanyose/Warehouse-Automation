@@ -28,7 +28,7 @@
             android:name=".DetailOpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AdminInitialPage"
+            android:name=".AddUserManagementActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,7 +75,8 @@
         <activity android:name=".UserManagementAdminActivity" />
         <activity android:name=".ConnectionSettingActivity" />
         <activity android:name=".PlantAssigmentActivity" />
-        <activity android:name=".AddUserManagementActivity"></activity>
+        <activity android:name=".AdminInitialPage" />
+        <activity android:name=".CheckCoba"></activity>
     </application>
 
 </manifest>
