@@ -28,13 +28,14 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 
     //    compile 'com.android.support:appcompat-v7:23.2.0'
-    
 
+
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.arasthel:asyncjob-library:1.0.3'
 
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
@@ -48,9 +49,7 @@ dependencies {
     compile 'io.realm:realm-android:0.87.4'
     compile 'com.github.michael-rapp:android-material-dialog:4.1.0'
     compile 'com.leavjenn.smoothdaterangepicker:library:0.2.0'
-    compile 'com.arasthel:asyncjob-library:1.0.3'
+    compile 'com.android.support:support-v4:26.+'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-
-    compile 'com.android.support:appcompat-v7:23.0.3'
 }

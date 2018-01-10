@@ -70,15 +70,10 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
 
         tglAwal = (TextView) findViewById(R.id.tglAwal);
         tglAkhir = (TextView) findViewById(R.id.tglAkhir);
-
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
         findViewsById();
-
         setDateTimeField();
-
-
-
     }
     private void findViewsById() {
         tglAwal = (EditText) findViewById(R.id.tglAwal);
