@@ -68,6 +68,10 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
         holder.textmvtype.setText(dataList.get(position).getBWART());
         holder.textSS.setText(dataList.get(position).getSPRAS());
         holder.textRegdate.setText(dataList.get(position).getBTEXT());
+        
+        holder.checkfilter.setId(position);
+
+
         holder.checkfilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -197,8 +197,14 @@
                             android:id="@+id/tglAwal"
                             android:layout_width="129dp"
                             android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:editable="false"
                             android:ems="10"
-                            android:inputType="date" />
+                            android:hint="Tanggal Awal"
+                            android:inputType="date"
+                            android:text="@string/date_selected"
+                            android:textAlignment="center"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
 
                         <ImageView
                             android:id="@+id/imageView700"
@@ -219,7 +225,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="date" />
+                            android:hint="Tanggal Akhir"
+                            android:inputType="date"
+                            android:textAlignment="center" />
 
                         <ImageView
                             android:id="@+id/imageView72"

@@ -33,6 +33,10 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.arasthel:asyncjob-library:1.0.3'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 286a921add17ae4e41390cd272943547374390bc
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.android.support:appcompat-v7:26.+'

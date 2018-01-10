@@ -10,7 +10,26 @@
     <string name="wh_no">Wh No. :</string>
     <string name="level">Level :</string>
     <string name="title_activity_interim_rv">InterimRv</string>
+<<<<<<< HEAD
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+    <string name="date_label_set">Press the button to set the date</string>
+    <string name="date_button_set">Set Date</string>
+    <string name="date_view_set">The Date is: </string>
+    <string name="date_selected"></string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="addusermanagement">Open DialogFragment</string>
+    <string name="alertaddusermanagement">Open Alert DialogFragment</string>
+    <string-array name="UserList">
+        <item>Admin</item>
+        <item>Operator</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+>>>>>>> 286a921add17ae4e41390cd272943547374390bc
 </resources>
