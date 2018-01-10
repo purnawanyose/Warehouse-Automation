@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         layReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OnhandLocationActivity.class );
+                Intent intent = new Intent(MainActivity.this, ReservationActivity.class );
                 startActivity(intent);
             }
         });

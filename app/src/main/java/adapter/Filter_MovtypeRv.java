@@ -2,10 +2,14 @@ package adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.semenindonesia.sisi.warehouseautomation.R;
@@ -27,19 +31,22 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
     public ArrayList<MovTypeSelection> dataList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textmvtype)
+
         TextView textmvtype;
-        @BindView(R.id.textSS)
         TextView textSS;
-        @BindView(R.id.textRegdate)
         TextView textRegdate;
-        @BindView(R.id.checkfilter)
-        CheckBox checkfilter;
+        RadioButton checkfilter;
+        LinearLayout linear;
+        String checked;
 
         private MyViewHolder(View view) {
             super(view);
             context = view.getContext();
-
+            textmvtype = (TextView) view.findViewById(R.id.textmvtype);
+            textSS = (TextView) view.findViewById(R.id.textSS);
+            textRegdate = (TextView) view.findViewById(R.id.textRegdate);
+            checkfilter = (RadioButton) view.findViewById(R.id.checkfilter);
+            linear = (LinearLayout) view.findViewById(R.id.Linear_rv_filter);
         }
     }
 
@@ -56,10 +63,17 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
     }
 
     @Override
-    public void onBindViewHolder(Filter_MovtypeRv.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final Filter_MovtypeRv.MyViewHolder holder, final int position) {
+        Log.e("data check", " "+ dataList.size());
         holder.textmvtype.setText(dataList.get(position).getBWART());
         holder.textSS.setText(dataList.get(position).getSPRAS());
         holder.textRegdate.setText(dataList.get(position).getBTEXT());
+        holder.checkfilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                holder.checked = dataList.get(position).getBWART();
+            }
+        });
 
     }
 

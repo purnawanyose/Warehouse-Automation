@@ -70,7 +70,7 @@ public class Filter_Movtype extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SelectedItem = movlist.get(position).getSOBKZ();
+                SelectedItem = contentlist.get(position).getCode();
             }
 
             @Override

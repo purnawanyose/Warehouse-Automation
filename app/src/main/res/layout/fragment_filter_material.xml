@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="fragment.Filter_Movtype">
+    tools:context="fragment.Filter_material">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,22 +22,42 @@
                 android:layout_marginTop="@dimen/gap_s">
 
                 <EditText
-                    android:id="@+id/mvtype"
+                    android:id="@+id/mtno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Movement Type"
+                    android:hint="Material No"
                     android:maxLines="1" />
             </android.support.design.widget.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/spinnerSS"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:maxLines="1" />
+                android:layout_marginTop="@dimen/gap_s">
+
+                <EditText
+                    android:id="@+id/matdesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_s">
+
+                <EditText
+                    android:id="@+id/maxrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Max Row"
+                    android:text="100"
+                    android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_search_filter"
+                android:id="@+id/btn_search_mat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_s"
@@ -56,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Mvt Type"
+                    android:text="Material No"
                     android:textAlignment="viewStart"
                     android:textColor="@android:color/background_light"
                     android:textStyle="bold" />
@@ -66,19 +85,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="SS"
+                    android:text="Material Description"
                     android:textAlignment="viewStart"
                     android:textColor="@android:color/background_light"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Reg Date"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/background_light"
-                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView13"
@@ -91,13 +102,14 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/filter_recyleview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/filter_recyleview_mat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
     </ScrollView>
+
 
 </FrameLayout>

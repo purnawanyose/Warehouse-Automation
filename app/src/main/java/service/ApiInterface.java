@@ -12,6 +12,7 @@ import response.BonSementaraResponse;
 import response.ClearResponse;
 import response.InterimResponse;
 import response.MasterSpecialStockResponse;
+import response.MaterialResponse;
 import response.MovTypeSelectionResponse;
 import response.QuantResponse;
 import response.ReservationDetailResponse;
@@ -92,6 +93,12 @@ public interface ApiInterface {
             @Query("sobkz[0]") String sobkz
     );
 
+    @GET("Master/material/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<MaterialResponse> getMaterial(
+            @Query("row") String row,
+            @Query("matnr[0]") String matnr,
+            @Query("maktg[0]") String maktg
+    );
 
 
 }
