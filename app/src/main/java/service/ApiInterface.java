@@ -14,6 +14,7 @@ import response.InterimResponse;
 import response.MasterSpecialStockResponse;
 import response.MaterialResponse;
 import response.MovTypeSelectionResponse;
+import response.OnHandResponse;
 import response.QuantResponse;
 import response.ReservationDetailResponse;
 import response.ReservationMainResponse;
@@ -34,6 +35,17 @@ import retrofit2.http.Query;
 public interface ApiInterface {
     @GET("Interim/detail/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=7702&lgtyp[0]=9*")
     Call<InterimResponse> getInterim();
+
+    /*@GET("Reservation/stockwm/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<OnHandResponse> getOnHand(
+            @Query("text") String text,
+            @Query("lgnum") String lgnum,
+            @Query("lgtyp") String lgtyp,
+            @Query("lgpla") String lgpla
+    );*/
+    @GET("Reservation/stockwm/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?text=WM&lgnum=204&lgtyp=SG4&lgpla=A.A1.3.02")
+    Call<OnHandResponse> getOnHand();
+
 
     @GET("Interim/detail/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<QuantResponse> getQuant(

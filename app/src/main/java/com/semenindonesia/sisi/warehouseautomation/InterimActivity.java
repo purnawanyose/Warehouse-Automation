@@ -63,8 +63,6 @@ public class InterimActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     /*Method to generate List of employees using RecyclerView with custom adapter*/

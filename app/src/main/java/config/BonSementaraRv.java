@@ -81,40 +81,6 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
             cb2 = itemView.findViewById(R.id.cb2);
             button11 = itemView.findViewById(R.id.button11);
 
-
-          /*  cb2 = (CheckBox) itemView.findViewById(R.id.cb2);
-//            cb1.setChecked(true);
-            cb2.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View cb2) {
-                    //is chkIos checked?
-                    if (((CheckBox) cb2).isChecked()) {
-                        cb3.setChecked(true);
-                    } else {
-
-                    }
-                }
-*/
-                /*
-                 button11.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View button11) {
-                        cb2.setChecked(true);
-                    }*/
-
-          /*  textView56.setLinkTextColor(Color.BLUE);
-            textView56.setPaintFlags(textView56.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-            textView56.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, QuantDetailActivity.class);
-                    context = itemView.getContext();
-                    itemView.getContext().startActivity(intent);
-                }
-            });*/
-//            });
         }
     }
 }
