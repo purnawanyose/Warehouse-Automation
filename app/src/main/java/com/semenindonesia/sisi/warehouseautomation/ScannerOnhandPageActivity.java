@@ -38,6 +38,7 @@ public class ScannerOnhandPageActivity extends AppCompatActivity {
 
     private OnHandRv adapter;
     private RecyclerView recyclerView;
+    String level, plant, whn, stype, slc,strgbin;
 
 
     @Override
@@ -46,11 +47,40 @@ public class ScannerOnhandPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanner_onhand_page);
 
 
+        tvLevel = (TextView) findViewById(R.id.tvLevel);
+        tvPlant = (TextView) findViewById(R.id.tvPlant);
+        sloc = (TextView) findViewById(R.id.sloc);
+        whno = (TextView) findViewById(R.id.whno);
+        strgtype = (TextView) findViewById(R.id.strgtype);
+        strgBin = (TextView) findViewById(R.id.strgBin);
+
+           /* Bundle extras = getIntent().getExtras();*/
+       tvLevel.setText(getIntent().getStringExtra("level"));
+        tvPlant.setText(getIntent().getStringExtra("plant"));
+        sloc.setText(getIntent().getStringExtra("sloc"));
+        strgtype.setText(getIntent().getStringExtra("stype"));
+        whno.setText(getIntent().getStringExtra("whs"));
+        strgBin.setText(getIntent().getStringExtra("sbin"));
+
+
+        Bundle extras = getIntent().getExtras();
+        level = extras.getString("level");
+        plant = extras.getString("plant");
+        slc = extras.getString("sloc");
+        whn = extras.getString("whs");
+        stype = extras.getString("stype");
+        strgbin = extras.getString("sbin");
+
+
+
+        final Context context = this.getApplicationContext();
+
          /*Create handle for the RetrofitInstance interface*/
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
-        Call<OnHandResponse> call = apiService.getOnHand();
+        Call<OnHandResponse> call = apiService.getOnHand(level,whn,stype,strgbin);
+//        Log.e("AZMI","BURHAN",+Call.class);
 
         /*Log the URL called*/
         Log.wtf("URL Called", call.request().url() + "");
@@ -70,21 +100,6 @@ public class ScannerOnhandPageActivity extends AppCompatActivity {
             }
         });
 
-
-            tvLevel = (TextView) findViewById(R.id.tvLevel);
-            tvPlant = (TextView) findViewById(R.id.tvPlant);
-            sloc = (TextView) findViewById(R.id.sloc);
-            whno = (TextView) findViewById(R.id.whno);
-            strgtype = (TextView) findViewById(R.id.strgtype);
-            strgBin = (TextView) findViewById(R.id.strgBin);
-
-           /* Bundle extras = getIntent().getExtras();*/
-            tvLevel.setText(getIntent().getStringExtra("level"));
-            tvPlant.setText(getIntent().getStringExtra("plant"));
-            sloc.setText(getIntent().getStringExtra("sloc"));
-            strgtype.setText(getIntent().getStringExtra("stype"));
-            whno.setText(getIntent().getStringExtra("whs"));
-            strgBin.setText(getIntent().getStringExtra("sbin"));
 
     }
     private void generateOnhandResponse(ArrayList<OnHand> empDataList) {

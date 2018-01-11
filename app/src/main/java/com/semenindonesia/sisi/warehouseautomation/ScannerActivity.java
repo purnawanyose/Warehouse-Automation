@@ -104,12 +104,19 @@ public class ScannerActivity extends AppCompatActivity {
                     button4.setEnabled(true);
                     button5.setEnabled(true);
                     button6.setEnabled(true);
-                    levelText.setText("Level     :  "+scan[0]);
+                    levelText.setText(scan[0]);
+                    plantText.setText(scan[1]);
+                    slocText.setText(scan[2]);
+                    sbinText.setText(scan[5]);
+                    whText.setText(scan[3]);
+                    strgText.setText(scan[4]);
+                    /*levelText.setText("Level     :  "+scan[0]);
                     plantText.setText("Plant     :  "+scan[1]);
                     slocText.setText("Sloc       :  "+scan[2]);
                     sbinText.setText("Strg Bin     :  "+scan[5]);
                     whText.setText("  Wh No.       :  "+scan[3]);
-                    strgText.setText("Strg Type  :  "+scan[4]);
+                    strgText.setText("Strg Type  :  "+scan[4]);*/
+
                 }
             }
         });
@@ -127,6 +134,11 @@ public class ScannerActivity extends AppCompatActivity {
                 intent.putExtra("sbin", sbinText.getText().toString());
                 intent.putExtra("whs", whText.getText().toString());
                 intent.putExtra("stype", strgText.getText().toString());
+//
+//                intent.putExtra("MATNR", data.getMATNR());
+//                intent.putExtra("WERKS", data.getWERKS());
+//                intent.putExtra("LQNUM", data.getLQNUM());
+//                intent.putExtra("LGTYP", data.getLGTYP());
                 startActivity(intent);
                     //======== Menuju ke form quant ========
             }

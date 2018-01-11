@@ -41,9 +41,9 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
     @Override
     public void onBindViewHolder(OnHandViewHolder holder, int position) {
         holder.textView64.setText(dataList.get(position).getMATDESC() +"\n"+"\n"+ dataList.get(position).getMATNO());
-//        holder.textView65.setText(dataList.get(position).getVALTYPE()+"/"+dataList.get(position).getSPCSTK());
-//        holder.textView90.setText(dataList.get(position).getQUANTITY());
-//        holder.textView91.setText(dataList.get(position).getUOM());
+        holder.textView65.setText(dataList.get(position).getVALTYPE()+"/"+dataList.get(position).getSPCSTK());
+        holder.textView90.setText(dataList.get(position).getQUANTITY());
+        holder.textView91.setText(dataList.get(position).getUOM());
     }
 
     @Override
@@ -59,11 +59,11 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
         OnHandViewHolder(final View itemView) {
             super(itemView);
             context = itemView.getContext();
-            textView64 = (TextView) itemView.findViewById(R.id.textView51);
-            textView65 = (TextView) itemView.findViewById(R.id.textView52);
-            textView90 = (TextView) itemView.findViewById(R.id.textView53);
-            textView91 = (TextView) itemView.findViewById(R.id.textView54);
-            textView92 = (TextView) itemView.findViewById(R.id.textView55);
+            textView64 = (TextView) itemView.findViewById(R.id.textView64);
+            textView65 = (TextView) itemView.findViewById(R.id.textView65);
+            textView90 = (TextView) itemView.findViewById(R.id.textView90);
+            textView91 = (TextView) itemView.findViewById(R.id.textView91);
+            textView92 = (TextView) itemView.findViewById(R.id.textView92);
             bOnHand = (Button) itemView.findViewById(R.id.button2);
             linearClear = (LinearLayout) itemView.findViewById(R.id.linearClear);
         }
