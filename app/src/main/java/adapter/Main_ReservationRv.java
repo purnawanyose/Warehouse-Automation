@@ -62,7 +62,7 @@ public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.
         Log.e("data check", " "+ dataList.size());
         holder.reserveno.setText(dataList.get(position).getRSNUM());
         holder.regdate.setText(dataList.get(position).getBDART());
-        
+
     }
 
     @Override

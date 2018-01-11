@@ -10,11 +10,9 @@
     <string name="wh_no">Wh No. :</string>
     <string name="level">Level :</string>
     <string name="title_activity_interim_rv">InterimRv</string>
-<<<<<<< HEAD
-    <!-- TODO: Remove or change this placeholder text -->
-=======
 
->>>>>>> 1cf1fdcf51a27f83c237f3fb62a132fcf5690ce9
+    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="date_label_set">Press the button to set the date</string>
     <string name="date_button_set">Set Date</string>
     <string name="date_view_set">The Date is: </string>
@@ -27,9 +25,7 @@
         <item>Admin</item>
         <item>Operator</item>
     </string-array>
-<<<<<<< HEAD
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-=======
->>>>>>> 1cf1fdcf51a27f83c237f3fb62a132fcf5690ce9
 </resources>

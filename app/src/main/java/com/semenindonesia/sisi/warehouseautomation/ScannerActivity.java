@@ -41,15 +41,9 @@ public class ScannerActivity extends AppCompatActivity {
     private OnHandRv adapter;
     private RecyclerView recyclerView;
 
-<<<<<<< HEAD
-=======
     private Context context;
     public ArrayList<OnHand> dataList;
 
-
-
-
->>>>>>> 1cf1fdcf51a27f83c237f3fb62a132fcf5690ce9
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
