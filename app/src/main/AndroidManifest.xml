@@ -28,6 +28,7 @@
             android:name=".DetailOpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+<<<<<<< HEAD
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -37,6 +38,8 @@
             </intent-filter>
         </activity>
         <activity
+=======
+>>>>>>> 1cf1fdcf51a27f83c237f3fb62a132fcf5690ce9
             android:name=".InterimActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -72,6 +75,17 @@
         <activity
             android:name=".OnhandLocationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
+=======
+
+        <activity android:name=".MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+>>>>>>> 1cf1fdcf51a27f83c237f3fb62a132fcf5690ce9
         <activity android:name=".AdminInitialPage" />
         <activity android:name=".UserManagementAdminActivity" />
         <activity android:name=".ConnectionSettingActivity" />

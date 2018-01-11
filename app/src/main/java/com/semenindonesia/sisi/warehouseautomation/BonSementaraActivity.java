@@ -53,6 +53,7 @@ public class BonSementaraActivity extends AppCompatActivity {
             public void onResponse(Call<BonSementaraResponse> call, Response<BonSementaraResponse> response) {
                 generateBonresponse((ArrayList<BonSementara>) response.body().getBonSementara());
                 List<BonSementara> content = response.body().getBonSementara();
+                Log.e("aa","aaas"+content.toString());
             }
 
             @Override
@@ -76,62 +77,4 @@ public class BonSementaraActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
-
-
-
-    /*TextView RSNUM;
-    TextView MAKTX;
-    TextView WERKS;
-    TextView BDMNG;
-    TextView MEINS;
-    TableLayout TABLAY;
-    TableRow LAYROW;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bon_sementara);
-
-
-        TABLAY = (TableLayout) findViewById(R.id.tablay);
-        LAYROW = (TableRow) findViewById(R.id.rowlay);
-        RSNUM =(TextView) findViewById(R.id.reservation);
-        MAKTX =(TextView) findViewById(R.id.material);
-        WERKS =(TextView) findViewById(R.id.noreservation);
-        BDMNG =(TextView) findViewById(R.id.qty);
-        MEINS =(TextView) findViewById(R.id.uom);
-
-
-
-        final Context context = this.getApplicationContext();
-
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<BonSementaraResponse> call = apiService.getBonSementara();
-        call.enqueue(new Callback<BonSementaraResponse>() {
-            @Override
-            public void onResponse(Call<BonSementaraResponse> call, Response<BonSementaraResponse> response) {
-                List<BonSementara> content = response.body().getBonSementara();
-                for (BonSementara data : content) {
-
-
-                    RSNUM.setText(data.getRSNUM() + "  "+ data.getRSPOS());
-                    MAKTX.setText(data.getMAKTX() +"\n"+ data.getMATNR());
-                    WERKS.setText(data.getWERKS() +"\n"+ data.getLGORT());
-                    BDMNG.setText(data.getBDMNG());
-                    MEINS.setText(data.getMEINS());
-
-                    Log.e("content", "Material No " + content.toString());
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BonSementaraResponse> call, Throwable t) {
-                t.printStackTrace();
-                Log.e("Interim", "Material Noooooooooooo"+ call);
-
-            }
-        });
-
-    }*/
 }
