@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.semenindonesia.sisi.warehouseautomation.R;
@@ -40,8 +42,10 @@ public class Filter_material extends Fragment {
     EditText maxrow;
     Button search;
     RecyclerView recyclerView_mat;
+    LinearLayout linear;
     private Filter_MaterialRv adapter ;
     private ArrayList<Material> matlist =  new ArrayList<Material>();
+    public static int materiallist;
 
     public Filter_material() {
         // Required empty public constructor
@@ -54,7 +58,7 @@ public class Filter_material extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_filter_material, container, false);
 
-        matno = (EditText) view.findViewById(R.id.materialno);
+        matno = (EditText) view.findViewById(R.id.mtno);
         matdesc = (EditText) view.findViewById(R.id.matdesc);
         maxrow = (EditText) view.findViewById(R.id.maxrow);
         search = (Button) view.findViewById(R.id.btn_search_mat);
@@ -63,7 +67,10 @@ public class Filter_material extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search(maxrow.getText().toString(),matno.getText().toString(),matdesc.getText().toString());
+                String maxrowT = maxrow.getText().toString();
+                String matnoT  = matno.getText().toString();
+                String matdescT= matdesc.getText().toString();
+                search(maxrowT,matnoT,matdescT);
             }
         });
 
@@ -86,6 +93,7 @@ public class Filter_material extends Fragment {
                     Material mat = new Material(data.getMATNR(),data.getSPRAS(),data.getMAKTX(),data.getMATNR());
                     matlist.add(mat);
                 }
+                materiallist = matlist.size();
                 adapter = new Filter_MaterialRv(matlist);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
                 recyclerView_mat.setLayoutManager(mLayoutManager);
@@ -100,7 +108,6 @@ public class Filter_material extends Fragment {
             public void onFailure(Call<MaterialResponse>call, Throwable t) {
                 // Log error here since request failed
                 Log.e("Error Retrofit: ", t.toString());
-                return;
             }
         });
 

@@ -11,6 +11,8 @@
     <string name="level">Level :</string>
     <string name="title_activity_interim_rv">InterimRv</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="date_label_set">Press the button to set the date</string>
     <string name="date_button_set">Set Date</string>
     <string name="date_view_set">The Date is: </string>
@@ -23,4 +25,7 @@
         <item>Admin</item>
         <item>Operator</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/text_matno"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Material No."
-        android:textAlignment="viewStart"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textdesc"
-        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:id="@+id/text_matno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:text="Material No."
+            android:textAlignment="viewStart"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Material Desc"
-        android:textAlignment="viewStart"
-        android:textStyle="bold" />
-
-
-    <RadioButton
-        android:id="@+id/checkmat"
-        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:id="@+id/textdesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:text="Material Desc"
+            android:textAlignment="viewStart"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1.6">
+    </RadioGroup>
 
 </LinearLayout>

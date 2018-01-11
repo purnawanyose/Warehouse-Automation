@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
@@ -19,11 +21,14 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
+import adapter.Filter_MaterialRv;
+import adapter.Main_ReservationRv;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,6 +36,8 @@ import butterknife.Unbinder;
 import de.mrapp.android.dialog.WizardDialog;
 import fragment.DatePickerFragment;
 import fragment.Filter_Movtype;
+import fragment.Filter_material;
+import model.Material;
 import model.Reservation;
 import model.Response;
 import response.ReservationMainResponse;
@@ -55,9 +62,14 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private DatePickerDialog toDatePickerDialog;
     private SimpleDateFormat dateFormatter;
 
+    private Main_ReservationRv adapter ;
+    private ArrayList<Reservation> rsvlist =  new ArrayList<Reservation>();
+
     @BindView(R.id.etPlant)
     EditText etPlant;
     Editable teeeet;
+    @BindView(R.id.recycler_view_reservation)
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,46 +160,69 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    @OnClick(R.id.srcmat)
+    public void actionsrcmat() {
+
+        WizardDialog.Builder dialogBuilder = new WizardDialog.Builder(ReservationActivity.this);
+        dialogBuilder.addFragment("", Filter_material.class);
+        dialogBuilder.setFinishButtonText("Search items");
+        dialogBuilder.setHeaderIcon(R.drawable.ic_search_black_24dp);
+        dialogBuilder.showHeader(true);
+        dialogBuilder.setFullscreen(false);
+        dialogBuilder.setMaxHeight(600);
+        dialogBuilder.setCancelable(true);
+        dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
+        WizardDialog dialog = dialogBuilder.create();
+        dialog.show(getSupportFragmentManager(),"test");
+
+    }
+
     @OnClick(R.id.btnSearch)
     void actionCari() {
-        String bb = "Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[1]="+teeeet+"";
-        Log.e("aa","as"+bb.toString());
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationMainResponse> call = apiService.getReservationMain(bb);
+        Call<ReservationMainResponse> call = apiService.getReservationMain("7702","W210","51556926","1");
 
         call.enqueue(new Callback<ReservationMainResponse>() {
 
             @Override
             public void onResponse(Call<ReservationMainResponse> call, retrofit2.Response<ReservationMainResponse> response) {
                 List<Reservation> reservation = response.body().getReservationMain();
-                loadData(reservation);
-//
-//                for (Reservation data : reservation ) {
-//                    Plant.setText(data.getWERKS());
-//
-//
-//                if (Plant == Plant.getText()) {
-//                    Log.e("reservation", "Material No " + call.toString());
-//                }else{
-//                    Log.e("asjsa","asj");
-//                }
+                for (Reservation data : reservation){
+                    Reservation rsv = new Reservation(data.getRSNUM(),data.getRSPOS(),data.getRSART(),data.getBDART(),
+                            data.getRSSTA(),data.getXLOEK(),data.getXWAOK(),data.getKZEAR(),data.getXFEHL(),data.getMATNR(),
+                            data.getMAKTX(),data.getWERKS(),data.getLGORT(),data.getCHARG(),data.getSORTF(),data.getSOBKZ(),
+                            data.getBDTER(),data.getBDMNG(),data.getMEINS(),data.getSHKZG(),data.getENMNG(),data.getAUFNR(),
+                            data.getBWART(),data.getPSPEL(),data.getZZWBS()
+                    );
+                rsvlist.add(rsv);
+                }
+
+                adapter = new Main_ReservationRv(rsvlist);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ReservationActivity.this);
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                if (rsvlist.size() < 1){
+                    Toast.makeText(ReservationActivity.this,"Data Not Found!",Toast.LENGTH_LONG).show();
+                }
 
                 }
 
 
             @Override
             public void onFailure(Call<ReservationMainResponse> call, Throwable t) {
-
+                Toast.makeText(ReservationActivity.this,"Error retrofit!",Toast.LENGTH_SHORT).show();
+                Log.e("Error Retrofit: ", t.toString());
             }
 
         });
     }
 
-    private void loadData(List<Reservation> reservation) {
-        for (Reservation data : reservation) {
-            etPlant.setText(data.getMAKTX());
-        }
-    }
 }
 

@@ -46,9 +46,6 @@ public class ScannerActivity extends AppCompatActivity {
     public ArrayList<OnHand> dataList;
     String s1,s2,s3,s4,s5,s6;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
