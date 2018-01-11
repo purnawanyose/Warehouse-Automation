@@ -28,13 +28,14 @@ import model.MovTypeSelection;
 public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.MyViewHolder> {
 
     public ArrayList<Material> dataList;
+    private int selectedPosition = -1;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textmatno;
         TextView textmatdesc;
         LinearLayout linear;
-        CheckBox check;
+        public CheckBox check;
         String checked;
         Context context;
         private ArrayList<Material> matlist =  new ArrayList<Material>();
@@ -63,14 +64,18 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
 
     @Override
     public void onBindViewHolder(final Filter_MaterialRv.MyViewHolder holder, final int position) {
-        Log.e("data check", " "+ dataList.size());
+        //Log.e("data check", " "+ dataList.size());
         holder.textmatno.setText(dataList.get(position).getMATNR());
         holder.textmatdesc.setText(dataList.get(position).getMAKTX());
+
+        holder.check.setChecked(position == selectedPosition);
         holder.check.setId(position);
-        holder.linear.setOnClickListener(new View.OnClickListener() {
+        holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.checked = dataList.get(position).getMATNR();
+                Log.e("checked : ", ""+holder.checked);
+                itemCheckChanged(v);
             }
         });
 
@@ -79,6 +84,20 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    //On selecting any view set the current position to selectedPositon and notify adapter
+    private void itemCheckChanged(View v) {
+        selectedPosition = (Integer) v.getId();
+        notifyDataSetChanged();
+    }
+
+    public void deleteSelectedPosition() {
+        if (selectedPosition != -1) {
+            dataList.remove(selectedPosition);
+            selectedPosition = -1;//after removing selectedPosition set it back to -1
+            notifyDataSetChanged();
+        }
     }
 
 }
