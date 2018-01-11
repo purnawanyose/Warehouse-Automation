@@ -34,7 +34,7 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
         TextView textmatno;
         TextView textmatdesc;
         LinearLayout linear;
-        RadioGroup rg;
+        CheckBox check;
         String checked;
         Context context;
         private ArrayList<Material> matlist =  new ArrayList<Material>();
@@ -44,7 +44,8 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
             context = view.getContext();
             textmatno = (TextView) view.findViewById(R.id.text_matno);
             textmatdesc = (TextView) view.findViewById(R.id.textdesc);
-            rg = (RadioGroup) view.findViewById(R.id.radiogroup);
+            check = (CheckBox) view.findViewById(R.id.check);
+            linear = (LinearLayout) view.findViewById(R.id.linear_mat);
         }
     }
 
@@ -65,27 +66,14 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
         Log.e("data check", " "+ dataList.size());
         holder.textmatno.setText(dataList.get(position).getMATNR());
         holder.textmatdesc.setText(dataList.get(position).getMAKTX());
-
-        final RadioButton[] rb = new RadioButton[Filter_material.materiallist];
-        Log.e("matlist : ", ""+Filter_material.materiallist);
-        rb[position] = new RadioButton(holder.context);
-        rb[position].setId(position);
-        rb[position].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.check.setId(position);
+        holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.e("checked : ", ""+rb[position].getId());
+            public void onClick(View v) {
                 holder.checked = dataList.get(position).getMATNR();
             }
         });
-        rb[position].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.e("checked : ", ""+rb[position].getId());
-                holder.rg.clearCheck();
-            }
-        });
 
-        holder.rg.addView(rb[position]);
     }
 
     @Override

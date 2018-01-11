@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_mat"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,11 +36,11 @@
             android:textAlignment="viewStart"
             android:textStyle="bold" />
     </LinearLayout>
-    <RadioGroup
-        android:id="@+id/radiogroup"
+    <CheckBox
+        android:id="@+id/check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1.6">
-    </RadioGroup>
+    </CheckBox>
 
 </LinearLayout>

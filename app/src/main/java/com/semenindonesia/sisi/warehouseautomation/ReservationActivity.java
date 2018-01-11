@@ -87,6 +87,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         findViewsById();
         setDateTimeField();
     }
+
     private void findViewsById() {
         tglAwal = (EditText) findViewById(R.id.tglAwal);
         tglAwal.setInputType(InputType.TYPE_NULL);
@@ -186,13 +187,14 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     void actionCari() {
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationMainResponse> call = apiService.getReservationMain("7702","W210","51556926","1");
+        Call<ReservationMainResponse> call = apiService.getReservationMain("7702", "W210", "51556926", "1");
 
         call.enqueue(new Callback<ReservationMainResponse>() {
 
             @Override
             public void onResponse(Call<ReservationMainResponse> call, retrofit2.Response<ReservationMainResponse> response) {
                 List<Reservation> reservation = response.body().getReservationMain();
+                rsvlist.clear();
                 for (Reservation data : reservation){
                     Reservation rsv = new Reservation(data.getRSNUM(),data.getRSPOS(),data.getRSART(),data.getBDART(),
                             data.getRSSTA(),data.getXLOEK(),data.getXWAOK(),data.getKZEAR(),data.getXFEHL(),data.getMATNR(),
