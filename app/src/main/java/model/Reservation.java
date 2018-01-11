@@ -127,7 +127,13 @@ public class Reservation {
      * @param rSART
      * @param bWART
      */
-    public Reservation(String rSNUM, String rSPOS, String rSART, String bDART, String rSSTA, String xLOEK, String xWAOK, String kZEAR, String xFEHL, String mATNR, String mAKTX, String wERKS, String lGORT, String cHARG, String sORTF, String sOBKZ, String bDTER, String bDMNG, String mEINS, String sHKZG, String eNMNG, String aUFNR, String bWART, String pSPEL, String zZWBS) {
+    public Reservation(String rSNUM, String rSPOS, String rSART, String bDART,
+                       String rSSTA, String xLOEK, String xWAOK, String kZEAR,
+                       String xFEHL, String mATNR, String mAKTX, String wERKS,
+                       String lGORT, String cHARG, String sORTF, String sOBKZ,
+                       String bDTER, String bDMNG, String mEINS, String sHKZG,
+                       String eNMNG, String aUFNR, String bWART, String pSPEL,
+                       String zZWBS) {
         super();
         this.rSNUM = rSNUM;
         this.rSPOS = rSPOS;

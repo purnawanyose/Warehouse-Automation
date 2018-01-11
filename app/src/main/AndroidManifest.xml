@@ -30,7 +30,11 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".InterimActivity"
@@ -68,17 +72,7 @@
         <activity
             android:name=".OnhandLocationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-<<<<<<< HEAD
-        <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-=======
         <activity android:name=".AdminInitialPage" />
->>>>>>> 286a921add17ae4e41390cd272943547374390bc
         <activity android:name=".UserManagementAdminActivity" />
         <activity android:name=".ConnectionSettingActivity" />
         <activity android:name=".PlantAssigmentActivity" />

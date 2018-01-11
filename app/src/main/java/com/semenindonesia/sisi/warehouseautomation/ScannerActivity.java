@@ -25,10 +25,6 @@ public class ScannerActivity extends AppCompatActivity {
     Button button2,button4,button5,button6;
     String levelTextt;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

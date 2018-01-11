@@ -78,11 +78,14 @@ public interface ApiInterface {
 //    @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[X1]={plant}&rsnum[1]={norev}&rbwart[0]={movtype}&matnr={matno}")
 //    Call<ReservationMainResponse> getReservationMain(@Path("plant") String plant, @Path("norev") String norev, @Path("movtype") String movtype, @Path("matno") String matno);
 
-    @GET("bb")
-    Call<ReservationMainResponse> getReservationMain(String bb);
-//    Call<ReservationMainResponse> getReservationMain(@Path("plant")String plant);
-//    Call<ReservationMainResponse> getReservationMain(@Query("plant") TextView plant);
-//    Call<ReservationMainResponse> getReservationMain(@Query("plant") String plant);
+    @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<ReservationMainResponse> getReservationMain(
+            @Query("rwerks[1]") String rwerks,
+            @Query("rlgort[0]") String rlgort,
+            @Query("rsnum[0]") String rsnum,
+            @Query("detail") String detail
+
+    );
 
     @GET("Master/spesialStok/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<MasterSpecialStockResponse> getMasterSpecialStock();
