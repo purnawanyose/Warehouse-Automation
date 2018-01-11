@@ -79,27 +79,45 @@ public class ScannerOnhandPageActivity extends AppCompatActivity {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
-        Call<OnHandResponse> call = apiService.getOnHand(level,whn,stype,strgbin);
-//        Log.e("AZMI","BURHAN",+Call.class);
+        if (level.toString().matches("WM")){
+            Call<OnHandResponse> call = apiService.getOnHand(level,whn,stype,strgbin);
+             /*Log the URL called*/
+            Log.wtf("URL Called", call.request().url() + "");
 
-        /*Log the URL called*/
-        Log.wtf("URL Called", call.request().url() + "");
+            call.enqueue(new Callback<OnHandResponse>() {
 
-        call.enqueue(new Callback<OnHandResponse>() {
+                @Override
+                public void onResponse(Call<OnHandResponse> call, Response<OnHandResponse> response) {
+                    generateOnhandResponse((ArrayList<OnHand>) response.body().getOnHand());
+                    List<OnHand> content = response.body().getOnHand();
+                    Log.e("aa","aaas"+content.toString());
+                }
 
-            @Override
-            public void onResponse(Call<OnHandResponse> call, Response<OnHandResponse> response) {
-                generateOnhandResponse((ArrayList<OnHand>) response.body().getOnHand());
-                List<OnHand> content = response.body().getOnHand();
-                Log.e("aa","aaas"+content.toString());
-            }
+                @Override
+                public void onFailure(Call<OnHandResponse> call, Throwable t) {
+                    Toast.makeText(ScannerOnhandPageActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            Call<OnHandResponse> call = apiService.getOnHandIm(level,plant,slc);
+             /*Log the URL called*/
+            Log.wtf("URL Called", call.request().url() + "");
 
-            @Override
-            public void onFailure(Call<OnHandResponse> call, Throwable t) {
-                Toast.makeText(ScannerOnhandPageActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-            }
-        });
+            call.enqueue(new Callback<OnHandResponse>() {
 
+                @Override
+                public void onResponse(Call<OnHandResponse> call, Response<OnHandResponse> response) {
+                    generateOnhandResponse((ArrayList<OnHand>) response.body().getOnHand());
+                    List<OnHand> content = response.body().getOnHand();
+                    Log.e("aa","aaas"+content.toString());
+                }
+
+                @Override
+                public void onFailure(Call<OnHandResponse> call, Throwable t) {
+                    Toast.makeText(ScannerOnhandPageActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
     }
     private void generateOnhandResponse(ArrayList<OnHand> empDataList) {

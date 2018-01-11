@@ -43,6 +43,12 @@ public interface ApiInterface {
             @Query("lgtyp") String lgtyp,
             @Query("lgpla") String lgpla
     );
+    @GET("Reservation/stockwm/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<OnHandResponse> getOnHandIm(
+            @Query("text") String text,
+            @Query("plant") String plant,
+            @Query("sloc") String sloc
+    );
     /*@GET("Reservation/stockwm/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?text=WM&lgnum=204&lgtyp=SG4&lgpla=A.A1.3.02")
     Call<OnHandResponse> getOnHand();
 */

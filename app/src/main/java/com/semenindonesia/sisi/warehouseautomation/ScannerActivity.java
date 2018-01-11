@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class ScannerActivity extends AppCompatActivity {
 
     private Context context;
     public ArrayList<OnHand> dataList;
+    String s1,s2,s3,s4,s5,s6;
 
 
 
@@ -51,7 +53,6 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
-        tvSbin = (TextView) findViewById(R.id.tvSbin);
         tvScan = (TextView) findViewById(R.id.tvScan);
         button2 = (Button) findViewById(R.id.button2);
         button4 = (Button) findViewById(R.id.button4);
@@ -68,11 +69,69 @@ public class ScannerActivity extends AppCompatActivity {
         button4.setEnabled(false);
         button5.setEnabled(false);
         button6.setEnabled(false);
-
 ////        tvScan.setText("Azmi# Burhan");
 //        aa = tvScan.getText().toString();
 
-        tvScan.addTextChangedListener(new TextWatcher() {
+
+        tvScan.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    String scanner = tvScan.getText().toString();
+                    String[] scan = scanner.split("#");
+                    Log.e("Hasil","Scan"+scanner.toString());
+                    if(tvScan.getText().toString().matches("")){
+                        button2.setEnabled(false);
+                        button4.setEnabled(false);
+                        button5.setEnabled(false);
+                        button6.setEnabled(false);
+                        plantText.setText("Plant");
+                        levelText.setText("Level");
+                        slocText.setText("Sloc");
+                        sbinText.setText("Strg Bin");
+                        whText.setText("Wh No.");
+                        strgText.setText("Strg Type");
+                    }else {
+                        if(scan[0].toString().matches("WM")){
+                            button2.setEnabled(true);
+                            button4.setEnabled(true);
+                            button5.setEnabled(true);
+                            button6.setEnabled(true);
+                            levelText.setText(scan[0]);
+                            plantText.setText(scan[1]);
+                            slocText.setText(scan[2]);
+                            sbinText.setText(scan[5]);
+                            whText.setText(scan[3]);
+                            strgText.setText(scan[4]);
+                            levelText.setVisibility(View.VISIBLE);
+                            plantText.setVisibility(View.VISIBLE);
+                            slocText.setVisibility(View.VISIBLE);
+                            sbinText.setVisibility(View.VISIBLE);
+                            whText.setVisibility(View.VISIBLE);
+                            strgText.setVisibility(View.VISIBLE);
+                        }else if(scan[0].toString().matches("IM")){
+                            button2.setEnabled(true);
+                            button4.setEnabled(true);
+                            button5.setEnabled(true);
+                            button6.setEnabled(true);
+                            levelText.setText(scan[0]);
+                            plantText.setText(scan[1]);
+                            slocText.setText(scan[2]);
+                            levelText.setVisibility(View.VISIBLE);
+                            plantText.setVisibility(View.VISIBLE);
+                            slocText.setVisibility(View.VISIBLE);
+                        }else{
+
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+        /*tvScan.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -85,42 +144,10 @@ public class ScannerActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String scanner = tvScan.getText().toString();
-                String[] scan = scanner.split("#");
-                Log.e("Hasil","Scan"+scanner.toString());
-                if(tvScan.getText().toString().matches("")){
-                    button2.setEnabled(false);
-                    button4.setEnabled(false);
-                    button5.setEnabled(false);
-                    button6.setEnabled(false);
-                    plantText.setText("Plant");
-                    levelText.setText("Level");
-                    slocText.setText("Sloc");
-                    sbinText.setText("Strg Bin");
-                    whText.setText("Wh No.");
-                    strgText.setText("Strg Type");
-                }else {
-                    button2.setEnabled(true);
-                    button4.setEnabled(true);
-                    button5.setEnabled(true);
-                    button6.setEnabled(true);
-                    levelText.setText(scan[0]);
-                    plantText.setText(scan[1]);
-                    slocText.setText(scan[2]);
-                    sbinText.setText(scan[5]);
-                    whText.setText(scan[3]);
-                    strgText.setText(scan[4]);
-                    /*levelText.setText("Level     :  "+scan[0]);
-                    plantText.setText("Plant     :  "+scan[1]);
-                    slocText.setText("Sloc       :  "+scan[2]);
-                    sbinText.setText("Strg Bin     :  "+scan[5]);
-                    whText.setText("  Wh No.       :  "+scan[3]);
-                    strgText.setText("Strg Type  :  "+scan[4]);*/
 
-                }
             }
         });
-
+*/
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,9 +172,9 @@ public class ScannerActivity extends AppCompatActivity {
         });
 
 
-        tvSbin.setLinkTextColor(Color.BLUE);
-        tvSbin.setPaintFlags(tvSbin.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-        tvSbin.setOnClickListener(new View.OnClickListener() {
+        sbinText.setLinkTextColor(Color.BLUE);
+        sbinText.setPaintFlags(sbinText.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        sbinText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ScannerActivity.this, ImageViewActivity.class);
