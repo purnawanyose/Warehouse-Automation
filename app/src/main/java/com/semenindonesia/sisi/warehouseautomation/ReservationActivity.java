@@ -3,6 +3,7 @@ package com.semenindonesia.sisi.warehouseautomation;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +14,10 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +73,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     Editable teeeet;
     @BindView(R.id.recycler_view_reservation)
     RecyclerView recyclerView;
+    ImageView img_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,15 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
 
         findViewsById();
         setDateTimeField();
+/*
+        img_search = (ImageView) findViewById(R.id.img_search);
+        img_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReservationActivity.this, ReservationDetailActivity.class );
+                startActivity(intent);
+            }
+        });*/
     }
     private void findViewsById() {
         tglAwal = (EditText) findViewById(R.id.tglAwal);

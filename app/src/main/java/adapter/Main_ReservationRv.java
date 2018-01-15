@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -35,13 +36,17 @@ public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.
         LinearLayout linear;
         String checked;
         Context context;
+        ImageView img_search;
         private ArrayList<Reservation> matlist =  new ArrayList<Reservation>();
+
 
         private MyViewHolder(View view) {
             super(view);
             context = view.getContext();
             reserveno = (TextView) view.findViewById(R.id.reserve_no);
             regdate = (TextView) view.findViewById(R.id.regdate);
+            img_search = (ImageView) view.findViewById(R.id.img_search);
+
         }
     }
 
