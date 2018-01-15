@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapter.MappingAdapter;
 import config.OnHandRv;
 import model.OnHand;
 import response.OnHandResponse;
@@ -31,6 +32,8 @@ import service.ApiInterface;
 
 import static android.R.attr.data;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.levelText;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.nama_lorong;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.strgBin;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.view;
 
 public class ScannerActivity extends AppCompatActivity {
@@ -45,6 +48,9 @@ public class ScannerActivity extends AppCompatActivity {
     private Context context;
     public ArrayList<OnHand> dataList;
     String s1,s2,s3,s4,s5,s6;
+
+    RecyclerView recyclerView1;
+    TextView nama_lorong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,8 @@ public class ScannerActivity extends AppCompatActivity {
         sbinText = (TextView) findViewById(R.id.sbinText);
         whText = (TextView) findViewById(R.id.whText);
         strgText = (TextView) findViewById(R.id.strgText);
+//        recyclerView1 = (RecyclerView) findViewById(R.id.rece)
+        nama_lorong = (TextView) findViewById(R.id.nama_lorong);
 
         button2.setEnabled(false);
         button4.setEnabled(false);
@@ -128,23 +136,6 @@ public class ScannerActivity extends AppCompatActivity {
                 return false;
             }
         });
-        /*tvScan.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-*/
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,10 +163,20 @@ public class ScannerActivity extends AppCompatActivity {
         sbinText.setLinkTextColor(Color.BLUE);
         sbinText.setPaintFlags(sbinText.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         sbinText.setOnClickListener(new View.OnClickListener() {
+            public static final String TAG = "ScannerActivity";
+
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScannerActivity.this, ImageViewActivity.class);
+
+                String huruf = (String) sbinText.getText().toString();
+                String akhir = huruf.substring(0,2);
+                Log.e(TAG, "onClick: "+akhir );
+
+//                nama_lorong.setBackgroundColor(Color.BLUE);
+                Intent intent = new Intent(ScannerActivity.this, MappingUtamaActivity.class);
+                intent.putExtra("sbin", sbinText.getText().toString());
                 startActivity(intent);
+
             }
 
         });
