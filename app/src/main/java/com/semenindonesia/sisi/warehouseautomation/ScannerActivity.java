@@ -170,9 +170,8 @@ public class ScannerActivity extends AppCompatActivity {
 
                 String huruf = (String) sbinText.getText().toString();
                 String akhir = huruf.substring(0,2);
-                Log.e(TAG, "onClick: "+akhir );
+                Log.e(TAG, "onClicdsfhgjgfdsafghk: "+akhir );
 
-//                nama_lorong.setBackgroundColor(Color.BLUE);
                 Intent intent = new Intent(ScannerActivity.this, MappingUtamaActivity.class);
                 intent.putExtra("sbin", sbinText.getText().toString());
                 startActivity(intent);

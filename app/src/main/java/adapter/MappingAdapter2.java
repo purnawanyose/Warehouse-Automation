@@ -2,13 +2,7 @@ package adapter;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,51 +10,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.semenindonesia.sisi.warehouseautomation.InterimActivity;
 import com.semenindonesia.sisi.warehouseautomation.MappingUtamaActivity;
-import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
 
 import java.util.ArrayList;
-
-import config.InterimRv;
-import model.Interim;
 
 /**
  * Created by muham on 1/15/2018.
  */
 
-public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHolder> {
+public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHolder> {
     private static final String TAG = "MappingAdapter";
-    ArrayList<String> lorong;
+    ArrayList<String> lorong2;
     String strg;
-    private Context context;
 
     String a;
     String bb;
     TextView c;
     String sbinn;
-    public MappingAdapter(ArrayList<String> lorong) {
-        this.lorong = lorong;
+    public MappingAdapter2(ArrayList<String> lorong2) {
+        this.lorong2 = lorong2;
     }
 
     @Override
-    public MappingAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MappingAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mappingutamarv, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MappingAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final MappingAdapter2.ViewHolder viewHolder, int i) {
         applyClickEvents(viewHolder,i);
         clickEvents(viewHolder, i);
     }
 
     @Override
     public int getItemCount() {
-        return lorong.size();
+        return lorong2.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -75,18 +62,18 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
 
     private void clickEvents(final ViewHolder holder, final int position){
         c = holder.mNamaLorong;
-        holder.mNamaLorong.setText(lorong.get(position));
+        holder.mNamaLorong.setText(lorong2.get(position));
         a = (String) holder.mNamaLorong.getText();
         sbinn = MappingUtamaActivity.sbin;
         bb = sbinn.substring(0,2);
         Log.e(TAG, "sbibsibidsbsa: "+bb );
-        if (bb.equals(lorong.get(position))){
+        if (bb.equals(lorong2.get(position))){
             Log.e(TAG, "clickEvents: assssssssssss"+bb);
 //            Log.e(TAG, "asdfghjkhgfd: "+position);
 //            holder.mNamaLorong.setBackgroundColor(Color.BLUE + Color.BLACK);
             manageBlinkEffect();
         }else{
-
+//            Log.e(TAG, "asdfgsfaasgrthgdsfdfsagh: "+lorong.get(position) );
         }
     }
 
@@ -96,7 +83,7 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
 
             @Override
             public void onClick(View view) {
-                final String data = lorong.get(position);
+                final String data = lorong2.get(position);
                 //======== Menuju ke form quant ========
                 Log.e(TAG, "onClick: "+data );
             }

@@ -13,13 +13,13 @@ import adapter.MappingAdapter;
 
 public class MappingUtamaActivity extends AppCompatActivity {
     private static final String TAG = "MappingUtamaActivity";
-    ArrayList<String> lorong;
+    ArrayList<String> lorong, lorong2;
     RecyclerView mRecyclerView, mRecyclerView2;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager2;
     RecyclerView.Adapter mAdapter2;
-    String sbin;
+    public static String sbin;
 
     String a;
     @Override
@@ -64,11 +64,44 @@ public class MappingUtamaActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-    sendData();
-    }
+//        Bundle extras = getIntent().getExtras();
+//        sbin = extras.getString("sbin");
 
-    public void sendData() {
+        lorong2 = new ArrayList<>();
+        lorong2.add("W1");
+        lorong2.add("V1");
+        lorong2.add("U1");
+        lorong2.add("T1");
+        lorong2.add("S1");
+        lorong2.add("R1");
+        lorong2.add("Q1");
+        lorong2.add("P1");
+        lorong2.add("O1");
+        lorong2.add("N1");
+        lorong2.add("M1");
+        lorong2.add("L1");
+        lorong2.add("K1");
+        lorong2.add("J1");
+        lorong2.add("I1");
+        lorong2.add("H1");
+        lorong2.add("HANG");
+        lorong2.add("TANGGA");
+        lorong2.add("HANG");
+        lorong2.add("G1");
+        lorong2.add("F1");
+        lorong2.add("E1");
+        lorong2.add("D1");
+        lorong2.add("C1");
+        lorong2.add("B1");
+        lorong2.add("A1");
+        mRecyclerView2.setHasFixedSize(true);
+        mLayoutManager2 = new LinearLayoutManager(this);
+        mAdapter2 = new MappingAdapter(lorong2);
+        mRecyclerView2.setLayoutManager(mLayoutManager2);
+        mRecyclerView2.setAdapter(mAdapter2);
+
         Bundle extras = getIntent().getExtras();
         sbin = extras.getString("sbin");
+
     }
 }
