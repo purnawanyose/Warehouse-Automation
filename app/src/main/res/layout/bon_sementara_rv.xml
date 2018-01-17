@@ -77,7 +77,7 @@
             android:textSize="12sp" />
 
         <CheckBox
-            android:id="@+id/cb1"
+            android:id="@+id/combo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center" />

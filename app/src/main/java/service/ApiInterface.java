@@ -79,7 +79,11 @@ public interface ApiInterface {
     );
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-    Call<ReservationDetailResponse> getReservation();
+    Call<ReservationDetailResponse> getReservation(
+            @Query("werks[1]") String rwerks,
+            @Query("rsnum[0]") String rsnum,
+            @Query("detail") String detail);
+
 
     @GET("Reservation/listBonSementara/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[1]=7702&rsortf[0]=BS*&rdetail=1")
     Call<BonSementaraResponse> getBonSementara();

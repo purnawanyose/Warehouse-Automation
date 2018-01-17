@@ -7,6 +7,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView89"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Denah Lorong"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -20,7 +35,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler1"
                 android:layout_width="130dp"
-                android:layout_height="510dp">
+                android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
@@ -29,16 +44,11 @@
             android:layout_width="57dp"
             android:layout_height="match_parent"
             android:layout_weight="0.05"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <ImageView
                 android:id="@+id/imageView74"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/partjalana" />
-
-            <ImageView
-                android:id="@+id/imageView76"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/partjalana" />
@@ -46,20 +56,81 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2.01"
             android:orientation="horizontal"
             android:weightSum="1">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler2"
-                android:layout_width="130dp"
+                android:layout_width="148dp"
                 android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView76"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/jlnrak" />
+
+        <ImageView
+            android:id="@+id/imageView75"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/jlnrak" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.02"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="57dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/imageView74"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/partjalana" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.02"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

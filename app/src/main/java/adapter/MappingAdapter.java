@@ -15,13 +15,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.ListPopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.semenindonesia.sisi.warehouseautomation.AdminInitialPage;
+import com.semenindonesia.sisi.warehouseautomation.BinActivity;
 import com.semenindonesia.sisi.warehouseautomation.InterimActivity;
 import com.semenindonesia.sisi.warehouseautomation.MappingUtamaActivity;
 import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
+import com.semenindonesia.sisi.warehouseautomation.UserManagementAdminActivity;
 
 import java.util.ArrayList;
 
@@ -37,7 +41,6 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
     ArrayList<String> lorong;
     String strg;
     private Context context;
-
     String a;
     String bb;
     TextView c;
@@ -66,10 +69,12 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "MappingAdapter";
         public TextView mNamaLorong, strgBin;
+
         public ViewHolder(View itemView) {
             super(itemView);
             mNamaLorong = itemView.findViewById(R.id.nama_lorong);
             strgBin = itemView.findViewById(R.id.sbinText);
+            context = itemView.getContext();
         }
     }
 
@@ -82,23 +87,29 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
         Log.e(TAG, "sbibsibidsbsa: "+bb );
         if (bb.equals(lorong.get(position))){
             Log.e(TAG, "clickEvents: assssssssssss"+bb);
-//            Log.e(TAG, "asdfghjkhgfd: "+position);
-//            holder.mNamaLorong.setBackgroundColor(Color.BLUE + Color.BLACK);
             manageBlinkEffect();
         }else{
 
         }
     }
 
-    private void applyClickEvents(final ViewHolder holder, final int position) {
+    private void applyClickEvents(final MappingAdapter.ViewHolder holder, final int position) {
+        sbinn = MappingUtamaActivity.sbin;
+        bb = sbinn.substring(0,2);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             public static final String TAG = "MappingAdapter";
-
             @Override
             public void onClick(View view) {
                 final String data = lorong.get(position);
-                //======== Menuju ke form quant ========
-                Log.e(TAG, "onClick: "+data );
+                c = holder.mNamaLorong;
+                if(bb.equals(lorong.get(position))){
+                    applyClickEventss(holder, position);
+                    Log.e(TAG, "SUKSES"+bb);
+
+                }else{
+                    Log.e(TAG, "onClick: "+data +c);
+                }
             }
         });
     }
@@ -111,5 +122,17 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
         anim.setRepeatCount(Animation.INFINITE);
         anim.start();
     }
-
+    private void applyClickEventss(final MappingAdapter.ViewHolder holder, final int position) {
+        holder.mNamaLorong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sbinn = MappingUtamaActivity.sbin;
+                bb = sbinn.substring(0,2);
+                Intent intent = new Intent(context, BinActivity.class);
+                intent.putExtra("namaLorong", bb);
+                context = v.getContext();
+                v.getContext().startActivity(intent);
+            }
+        });
+    }
 }

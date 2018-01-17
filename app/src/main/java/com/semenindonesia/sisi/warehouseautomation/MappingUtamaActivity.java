@@ -13,12 +13,14 @@ import adapter.MappingAdapter;
 
 public class MappingUtamaActivity extends AppCompatActivity {
     private static final String TAG = "MappingUtamaActivity";
-    ArrayList<String> lorong, lorong2;
-    RecyclerView mRecyclerView, mRecyclerView2;
+    ArrayList<String> lorong, lorong2, lorong3;
+    RecyclerView mRecyclerView, mRecyclerView2, mRecyclerView3;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager2;
     RecyclerView.Adapter mAdapter2;
+    RecyclerView.LayoutManager mLayoutManager3;
+    RecyclerView.Adapter mAdapter3;
     public static String sbin;
 
     String a;
@@ -29,6 +31,7 @@ public class MappingUtamaActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler1);
         mRecyclerView2 = (RecyclerView) findViewById(R.id.recycler2);
+        mRecyclerView3 = (RecyclerView) findViewById(R.id.recycler3);
 
         lorong = new ArrayList<>();
         lorong.add("W2");
@@ -99,6 +102,28 @@ public class MappingUtamaActivity extends AppCompatActivity {
         mAdapter2 = new MappingAdapter(lorong2);
         mRecyclerView2.setLayoutManager(mLayoutManager2);
         mRecyclerView2.setAdapter(mAdapter2);
+
+        lorong3 = new ArrayList<>();
+        lorong3.add("L3");
+        lorong3.add("K3");
+        lorong3.add("J3");
+        lorong3.add("I3");
+        lorong3.add("H3");
+        lorong3.add("HANG");
+        lorong3.add("TANGGA");
+        lorong3.add("HANG");
+        lorong3.add("G3");
+        lorong3.add("F3");
+        lorong3.add("E3");
+        lorong3.add("D3");
+        lorong3.add("C3");
+        lorong3.add("B3");
+        lorong3.add("A3");
+        mRecyclerView3.setHasFixedSize(true);
+        mLayoutManager3 = new LinearLayoutManager(this);
+        mAdapter3 = new MappingAdapter(lorong3);
+        mRecyclerView3.setLayoutManager(mLayoutManager3);
+        mRecyclerView3.setAdapter(mAdapter3);
 
         Bundle extras = getIntent().getExtras();
         sbin = extras.getString("sbin");

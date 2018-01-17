@@ -27,6 +27,8 @@ public class ScannerReservationDetail extends AppCompatActivity {
     TextView RSNUM;
     TextView BDTER;
 
+    String rNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

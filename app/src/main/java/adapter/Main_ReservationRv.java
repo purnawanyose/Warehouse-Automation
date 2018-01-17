@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +14,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.semenindonesia.sisi.warehouseautomation.BinActivity;
+import com.semenindonesia.sisi.warehouseautomation.MappingUtamaActivity;
+import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
+import com.semenindonesia.sisi.warehouseautomation.ReservationDetailActivity;
 
 import java.util.ArrayList;
 
+import config.InterimRv;
 import fragment.Filter_material;
+import model.Interim;
 import model.Material;
 import model.Reservation;
 
@@ -26,7 +33,7 @@ import model.Reservation;
  */
 
 public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.MyViewHolder>{
-
+    private Context context;
     public ArrayList<Reservation> dataList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -42,11 +49,11 @@ public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.
 
         private MyViewHolder(View view) {
             super(view);
-            context = view.getContext();
+
             reserveno = (TextView) view.findViewById(R.id.reserve_no);
             regdate = (TextView) view.findViewById(R.id.regdate);
             img_search = (ImageView) view.findViewById(R.id.img_search);
-
+            context = view.getContext();
         }
     }
 
@@ -67,6 +74,7 @@ public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.
         Log.e("data check", " "+ dataList.size());
         holder.reserveno.setText(dataList.get(position).getRSNUM());
         holder.regdate.setText(dataList.get(position).getBDART());
+        click(holder, position);
 
     }
 
@@ -75,4 +83,21 @@ public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.
         return dataList.size();
     }
 
+    private void click(final Main_ReservationRv.MyViewHolder holder, final int position){
+        holder.img_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Reservation data = dataList.get(position);
+                Intent intent = new Intent(holder.context, ReservationDetailActivity.class);
+                intent.putExtra("RSNUM", data.getRSNUM());
+                intent.putExtra("WERKS", data.getWERKS());
+                intent.putExtra("LGORT", data.getLGORT());
+
+                context = v.getContext();
+                v.getContext().startActivity(intent);
+
+            }
+        });
+    }
 }
+

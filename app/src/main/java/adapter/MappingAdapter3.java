@@ -20,34 +20,34 @@ import java.util.ArrayList;
  * Created by muham on 1/15/2018.
  */
 
-public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHolder> {
+public class MappingAdapter3 extends RecyclerView.Adapter<MappingAdapter3.ViewHolder> {
     private static final String TAG = "MappingAdapter";
-    ArrayList<String> lorong2;
+    ArrayList<String> lorong3;
     String strg;
 
     String a;
     String bb;
     TextView c;
     String sbinn;
-    public MappingAdapter2(ArrayList<String> lorong2) {
-        this.lorong2 = lorong2;
+    public MappingAdapter3(ArrayList<String> lorong3) {
+        this.lorong3 = lorong3;
     }
 
     @Override
-    public MappingAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MappingAdapter3.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mappingutamarv, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MappingAdapter2.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final MappingAdapter3.ViewHolder viewHolder, int i) {
         applyClickEvents(viewHolder,i);
         clickEvents(viewHolder, i);
     }
 
     @Override
     public int getItemCount() {
-        return lorong2.size();
+        return lorong3.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,33 +62,40 @@ public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHo
 
     private void clickEvents(final ViewHolder holder, final int position){
         c = holder.mNamaLorong;
-        holder.mNamaLorong.setText(lorong2.get(position));
+        holder.mNamaLorong.setText(lorong3.get(position));
         a = (String) holder.mNamaLorong.getText();
         sbinn = MappingUtamaActivity.sbin;
         bb = sbinn.substring(0,2);
         Log.e(TAG, "sbibsibidsbsa: "+bb );
-        if (bb.equals(lorong2.get(position))){
+        if (bb.equals(lorong3.get(position))){
             Log.e(TAG, "clickEvents: assssssssssss"+bb);
-//            Log.e(TAG, "asdfghjkhgfd: "+position);
-//            holder.mNamaLorong.setBackgroundColor(Color.BLUE + Color.BLACK);
             manageBlinkEffect();
+
         }else{
-//            Log.e(TAG, "asdfgsfaasgrthgdsfdfsagh: "+lorong.get(position) );
+
         }
     }
 
-    private void applyClickEvents(final ViewHolder holder, final int position) {
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            public static final String TAG = "MappingAdapter";
+        private void applyClickEvents(final ViewHolder holder, final int position) {
+            sbinn = MappingUtamaActivity.sbin;
+            bb = sbinn.substring(0,2);
 
-            @Override
-            public void onClick(View view) {
-                final String data = lorong2.get(position);
-                //======== Menuju ke form quant ========
-                Log.e(TAG, "onClicSSSSSSSSSk: "+data );
-            }
-        });
-    }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                public static final String TAG = "MappingAdapter";
+                @Override
+                public void onClick(View view) {
+                    final String data = lorong3.get(position);
+                    c = holder.mNamaLorong;
+                   if(bb.equals(lorong3.get(position))){
+                       Log.e(TAG, "SUKSES"+bb);
+                   }else{
+                       Log.e(TAG, "onClick: "+data +c);
+                   }
+
+
+                }
+            });
+        }
     private void manageBlinkEffect() {
         ObjectAnimator anim = ObjectAnimator.ofInt(c, "backgroundColor", Color.WHITE, Color.GREEN,
                 Color.WHITE);

@@ -91,6 +91,16 @@
             tools:layout_editor_absoluteX="280dp"
             tools:layout_editor_absoluteY="208dp" />
 
+        <CheckBox
+            android:id="@+id/cb3"
+            style="@android:style/Widget.CompoundButton.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            tools:layout_editor_absoluteX="280dp"
+            tools:layout_editor_absoluteY="208dp" />
+
     </LinearLayout>
 
     <LinearLayout

@@ -112,40 +112,6 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
             public void onClick(View view) {
                 final Interim data = dataList.get(position);
                 int a = Integer.parseInt(String.valueOf(data.getVERME()));
-
-              /*  if(data.getSOBKZ().equals("K")&&(a < 0)){
-                    final Context context = this.getApplicationContext();
-                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                    Call<ClearResponse> call = apiService.getQuant(WERKSS,LGTYPP,LQNUMM,MATNRR);
-//        Call<QuantResponse> call = apiService.getQuant("7702","902","602","623-000013");
-
-
-                    Log.e("aa","bb"+ Call.class);
-                    call.enqueue(new Callback<ClearResponse>() {
-                        @Override
-                        public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
-                            List<Interim> content = response.body().getClear();
-                            Log.e("content", "Material No " + content);
-                            for (Quant data : content) {
-                                Log.e("content", "Material No " + content.toString());
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ClearResponse> call, Throwable t) {
-                            t.printStackTrace();
-                            Log.e("Interim", "Material Noooooooooooo"+ call);
-
-                        }
-                    });
-                }else if(a>0){
-
-                }else if(a<0){
-
-                }else{
-
-                }*/
                 //======== Menuju ke form quant ========
                 Intent intent = new Intent(context, QuantDetailActivity.class );
                 intent.putExtra("MATNR", data.getMATNR());

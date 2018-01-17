@@ -27,7 +27,7 @@ import service.ApiClient;
 import service.ApiInterface;
 
 import static android.R.id.list;
-import static com.semenindonesia.sisi.warehouseautomation.R.id.cb1;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.combo1;
 
 public class BonSementaraActivity extends AppCompatActivity {
     private BonSementaraRv adapter;
@@ -62,6 +62,8 @@ public class BonSementaraActivity extends AppCompatActivity {
             }
         });
    /* link();*/
+
+
 
     }
 

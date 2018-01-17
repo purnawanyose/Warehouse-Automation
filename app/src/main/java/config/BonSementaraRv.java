@@ -23,7 +23,9 @@ import model.BonSementara;
 import model.Interim;
 
 import static android.R.id.list;
-import static com.semenindonesia.sisi.warehouseautomation.R.id.cb1;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.combo1;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.checkBox;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.sad;
 
 /**
  * Created by muham on 1/4/2018.
@@ -32,6 +34,7 @@ import static com.semenindonesia.sisi.warehouseautomation.R.id.cb1;
 public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewHolder>{
 
     public ArrayList<BonSementara> dataList;
+    CheckBox cb2, cb1, cb3;
 
     public BonSementaraRv(ArrayList<BonSementara> dataList) {
         this.dataList = dataList;
@@ -41,6 +44,7 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
     public BonSementaraRv.BonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.bon_sementara_rv, parent, false);
+
         return new BonSementaraRv.BonViewHolder(view);
 
 
@@ -54,9 +58,6 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
         holder.textView46.setText(dataList.get(position).getBDMNG());
         holder.textView47.setText(dataList.get(position).getMEINS());
 
-
-//        holder.txtEmpEmail.setText(dataList.get(position).getEmail());
-//        holder.txtEmpPhone.setText(dataList.get(position).getPhone());
     }
 
     @Override
@@ -77,8 +78,9 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
             textView45 = itemView.findViewById(R.id.textView45);
             textView46 = itemView.findViewById(R.id.textView46);
             textView47 = itemView.findViewById(R.id.textView47);
-            cb1 = itemView.findViewById(R.id.cb1);
+            cb1 = itemView.findViewById(R.id.combo1);
             cb2 = itemView.findViewById(R.id.cb2);
+            cb2 = itemView.findViewById(R.id.cb3);
             button11 = itemView.findViewById(R.id.button11);
 
         }

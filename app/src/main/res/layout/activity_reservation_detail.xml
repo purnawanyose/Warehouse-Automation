@@ -227,7 +227,6 @@
             tools:layout_editor_absoluteY="8dp">
 
             <TextView
-                android:id="@+id/textView67"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -237,7 +236,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView68"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
 
@@ -247,7 +245,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView69"
                 android:layout_width="67dp"
                 android:layout_height="wrap_content"
                 android:text="Qty \n(Req/GI)"
@@ -256,7 +253,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView70"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -266,7 +262,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView71"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -276,7 +271,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView72"
                 android:layout_width="54dp"
                 android:layout_height="wrap_content"
                 android:text="Σ QTY"
@@ -285,7 +279,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView73"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -296,6 +289,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_reservation_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
