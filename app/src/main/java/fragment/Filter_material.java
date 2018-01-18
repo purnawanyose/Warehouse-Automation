@@ -47,6 +47,7 @@ public class Filter_material extends Fragment {
     private ArrayList<Material> matlist =  new ArrayList<Material>();
     public static int materiallist;
 
+
     public Filter_material() {
         // Required empty public constructor
     }

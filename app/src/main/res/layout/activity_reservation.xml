@@ -130,18 +130,26 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/movtype"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Mvt Type"
-                    android:layout_weight="1"/>
+                    android:layout_marginTop="@dimen/gap_s"
+                    android:layout_weight="1">
+                    <EditText
+                        android:id="@+id/movtype"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Mvt Type"
+                        android:layout_weight="1"/>
+                </android.support.design.widget.TextInputLayout>
+
                 <ImageView
                     android:id="@+id/srcmovtype"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:layout_weight="6"
+                    android:layout_marginTop="@dimen/gap_s"
                     android:src="@drawable/ic_search_black_24dp"/>
 
             </LinearLayout>
@@ -152,20 +160,28 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_s"
+                    android:layout_weight="1">
+
                 <EditText
                     android:id="@+id/materialno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="Material No." />
+
+                </android.support.design.widget.TextInputLayout>
 
                 <ImageView
                     android:id="@+id/srcmat"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:layout_weight="6"
+                    android:layout_marginTop="@dimen/gap_s"
                     app:srcCompat="@drawable/ic_search_black_24dp" />
             </LinearLayout>
 
@@ -263,6 +279,7 @@
                         android:id="@+id/cbMvtInd"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:layout_weight="1" />
 
                 </LinearLayout>

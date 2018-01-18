@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 
 import adapter.Filter_MaterialRv;
+import adapter.Filter_MovtypeRv;
 import adapter.Main_ReservationRv;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +62,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private Calendar calendar;
     private TextView tglAwal, tglAkhir;
     private int year, month, day;
+    private EditText movtype, mattype, etNoReservation;
 
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
@@ -74,6 +77,8 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     @BindView(R.id.recycler_view_reservation)
     RecyclerView recyclerView;
     ImageView img_search;
+    CheckBox mvt, finalz, delete;
+    String mvtS, finalzS, deleteS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,23 +87,45 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         ButterKnife.bind(this);
 
         etPlant =(EditText) findViewById(R.id.etPlant);
-        teeeet = etPlant.getText();
+        etNoReservation =(EditText) findViewById(R.id.etNoReservation);
 
         tglAwal = (TextView) findViewById(R.id.tglAwal);
         tglAkhir = (TextView) findViewById(R.id.tglAkhir);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
+        movtype = (EditText) findViewById(R.id.movtype);
+        mattype = (EditText) findViewById(R.id.materialno);
+
         findViewsById();
         setDateTimeField();
-/*
-        img_search = (ImageView) findViewById(R.id.img_search);
-        img_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ReservationActivity.this, ReservationDetailActivity.class );
-                startActivity(intent);
-            }
-        });*/
+
+        mvt = (CheckBox) findViewById(R.id.cbMvtInd);
+        finalz = (CheckBox) findViewById(R.id.cbMvtInd);
+        delete = (CheckBox) findViewById(R.id.cbMvtInd);
+
+
+        if (mvt.isChecked()){
+            mvtS = "X";
+            finalzS ="";
+            deleteS ="";
+            finalz.setChecked(false);
+            delete.setChecked(false);
+        }else if (finalz.isChecked()){
+            finalzS = "X";
+            mvtS ="";
+            deleteS ="";
+            mvt.setChecked(false);
+            delete.setChecked(false);
+        }else if (delete.isChecked()){
+            deleteS = "X";
+            mvtS = "";
+            finalzS="";
+            mvt.setChecked(false);
+            finalz.setChecked(false);
+        }else {
+
+        }
+
     }
 
     private void findViewsById() {
@@ -166,7 +193,9 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-
+                String checked = Filter_MovtypeRv.selected;
+                movtype.setText(checked);
+                Log.e("checked"," "+checked);
             }
         });
         WizardDialog dialog = dialogBuilder.create();
@@ -188,7 +217,9 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-
+                String checked = Filter_MaterialRv.selected;
+                mattype.setText(checked);
+                Log.e("checked"," "+checked);
             }
         });
         WizardDialog dialog = dialogBuilder.create();
@@ -200,7 +231,8 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     void actionCari() {
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationMainResponse> call = apiService.getReservationMain("7702", "W210", "51556926", "1");
+        Call<ReservationMainResponse> call = apiService.getReservationMain(etNoReservation.getText().toString(),etPlant.getText().toString()
+                , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
 
         call.enqueue(new Callback<ReservationMainResponse>() {
 

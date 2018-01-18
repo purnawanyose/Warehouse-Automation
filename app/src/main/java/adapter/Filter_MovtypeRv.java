@@ -27,6 +27,7 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
 
 
     private Context context;
+    public static String selected;
 
     public ArrayList<MovTypeSelection> dataList;
     private int selectedPosition = -1;
@@ -36,8 +37,7 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
         TextView textmvtype;
         TextView textSS;
         TextView textRegdate;
-        public CheckBox check;
-        RadioButton checkfilter;
+        CheckBox checkfilter;
         LinearLayout linear;
         String checked;
 
@@ -47,7 +47,7 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
             textmvtype = (TextView) view.findViewById(R.id.textmvtype);
             textSS = (TextView) view.findViewById(R.id.textSS);
             textRegdate = (TextView) view.findViewById(R.id.textRegdate);
-            checkfilter = (RadioButton) view.findViewById(R.id.checkfilter);
+            checkfilter = (CheckBox) view.findViewById(R.id.checkfilter);
             linear = (LinearLayout) view.findViewById(R.id.Linear_rv_filter);
         }
     }
@@ -66,16 +66,19 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
 
     @Override
     public void onBindViewHolder(final Filter_MovtypeRv.MyViewHolder holder, final int position) {
-        Log.e("data check", " "+ dataList.size());
+       // Log.e("data check", " "+ dataList.size());
         holder.textmvtype.setText(dataList.get(position).getBWART());
         holder.textSS.setText(dataList.get(position).getSPRAS());
         holder.textRegdate.setText(dataList.get(position).getBTEXT());
 
+        holder.checkfilter.setChecked(position == selectedPosition);
         holder.checkfilter.setId(position);
         holder.checkfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.checked = dataList.get(position).getBWART();
+                selected = holder.checked;
+                Log.e("checked"," "+selected);
                 itemCheckChanged(v);
             }
         });
@@ -90,6 +93,14 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
     private void itemCheckChanged(View v) {
         selectedPosition = (Integer) v.getId();
         notifyDataSetChanged();
+    }
+
+    public void deleteSelectedPosition() {
+        if (selectedPosition != -1) {
+            dataList.remove(selectedPosition);
+            selectedPosition = -1;//after removing selectedPosition set it back to -1
+            notifyDataSetChanged();
+        }
     }
 
 }

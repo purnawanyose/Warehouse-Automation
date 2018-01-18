@@ -29,6 +29,7 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
 
     public ArrayList<Material> dataList;
     private int selectedPosition = -1;
+    public static String selected;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -74,6 +75,7 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
             @Override
             public void onClick(View v) {
                 holder.checked = dataList.get(position).getMATNR();
+                selected = holder.checked;
                 Log.e("checked : ", ""+holder.checked);
                 itemCheckChanged(v);
             }
