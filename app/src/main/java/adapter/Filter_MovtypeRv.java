@@ -29,12 +29,14 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
     private Context context;
 
     public ArrayList<MovTypeSelection> dataList;
+    private int selectedPosition = -1;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textmvtype;
         TextView textSS;
         TextView textRegdate;
+        public CheckBox check;
         RadioButton checkfilter;
         LinearLayout linear;
         String checked;
@@ -70,20 +72,24 @@ public class Filter_MovtypeRv extends RecyclerView.Adapter<Filter_MovtypeRv.MyVi
         holder.textRegdate.setText(dataList.get(position).getBTEXT());
 
         holder.checkfilter.setId(position);
-
-
-        holder.checkfilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.checkfilter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
                 holder.checked = dataList.get(position).getBWART();
+                itemCheckChanged(v);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    //On selecting any view set the current position to selectedPositon and notify adapter
+    private void itemCheckChanged(View v) {
+        selectedPosition = (Integer) v.getId();
+        notifyDataSetChanged();
     }
 
 }

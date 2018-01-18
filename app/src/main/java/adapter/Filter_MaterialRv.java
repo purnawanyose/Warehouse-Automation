@@ -28,13 +28,14 @@ import model.MovTypeSelection;
 public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.MyViewHolder> {
 
     public ArrayList<Material> dataList;
+    private int selectedPosition = -1;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textmatno;
         TextView textmatdesc;
         LinearLayout linear;
-        RadioGroup rg;
+        public CheckBox check;
         String checked;
         Context context;
         private ArrayList<Material> matlist =  new ArrayList<Material>();
@@ -44,7 +45,8 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
             context = view.getContext();
             textmatno = (TextView) view.findViewById(R.id.text_matno);
             textmatdesc = (TextView) view.findViewById(R.id.textdesc);
-            rg = (RadioGroup) view.findViewById(R.id.radiogroup);
+            check = (CheckBox) view.findViewById(R.id.check);
+            linear = (LinearLayout) view.findViewById(R.id.linear_mat);
         }
     }
 
@@ -62,35 +64,40 @@ public class Filter_MaterialRv extends RecyclerView.Adapter<Filter_MaterialRv.My
 
     @Override
     public void onBindViewHolder(final Filter_MaterialRv.MyViewHolder holder, final int position) {
-        Log.e("data check", " "+ dataList.size());
+        //Log.e("data check", " "+ dataList.size());
         holder.textmatno.setText(dataList.get(position).getMATNR());
         holder.textmatdesc.setText(dataList.get(position).getMAKTX());
 
-        final RadioButton[] rb = new RadioButton[Filter_material.materiallist];
-        Log.e("matlist : ", ""+Filter_material.materiallist);
-        rb[position] = new RadioButton(holder.context);
-        rb[position].setId(position);
-        rb[position].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.check.setChecked(position == selectedPosition);
+        holder.check.setId(position);
+        holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.e("checked : ", ""+rb[position].getId());
+            public void onClick(View v) {
                 holder.checked = dataList.get(position).getMATNR();
-            }
-        });
-        rb[position].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.e("checked : ", ""+rb[position].getId());
-                holder.rg.clearCheck();
+                Log.e("checked : ", ""+holder.checked);
+                itemCheckChanged(v);
             }
         });
 
-        holder.rg.addView(rb[position]);
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    //On selecting any view set the current position to selectedPositon and notify adapter
+    private void itemCheckChanged(View v) {
+        selectedPosition = (Integer) v.getId();
+        notifyDataSetChanged();
+    }
+
+    public void deleteSelectedPosition() {
+        if (selectedPosition != -1) {
+            dataList.remove(selectedPosition);
+            selectedPosition = -1;//after removing selectedPosition set it back to -1
+            notifyDataSetChanged();
+        }
     }
 
 }
