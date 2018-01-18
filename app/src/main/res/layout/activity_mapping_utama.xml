@@ -21,7 +21,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="290dp"
+        android:layout_height="348dp"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -48,7 +48,7 @@
             android:weightSum="1">
 
             <ImageView
-                android:id="@+id/imageView74"
+                android:id="@+id/imageVidew74"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/partjalana" />

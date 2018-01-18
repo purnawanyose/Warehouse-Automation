@@ -36,6 +36,9 @@ public interface ApiInterface {
     @GET("Interim/detail/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=7702&lgtyp[0]=9*")
     Call<InterimResponse> getInterim();
 
+    @GET("Reservation/resumeReservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=2702&werks[1]=7702")
+    Call<ReservationMainResponse> getHomeReservation();
+
     @GET("Reservation/stockwm/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<OnHandResponse> getOnHand(
             @Query("text") String text,

@@ -21,8 +21,10 @@ import java.util.List;
 
 import model.BonSementara;
 import model.Interim;
+import model.Reservation;
 import response.BonSementaraResponse;
 import response.InterimResponse;
+import response.ReservationMainResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,6 +49,31 @@ public class MainActivity extends AppCompatActivity {
     TextView Interim;
     TextView Bon;
 
+
+    public void Reservation(){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<ReservationMainResponse> call = apiService.getHomeReservation();
+        call.enqueue(new Callback<ReservationMainResponse>() {
+
+            @Override
+            public void onResponse(Call<ReservationMainResponse> call, Response<ReservationMainResponse> response) {
+                List<model.Reservation> content = response.body().getReservationMain();
+                int i = 0;
+                for (Reservation data : content) {
+                    d = d + 1;
+                    Log.e("sa", "as" + d);
+
+                }
+                Reservation.setText("" + d);
+            }
+
+            @Override
+            public void onFailure(Call<ReservationMainResponse> call, Throwable t) {
+                t.printStackTrace();
+                Log.e("Interim", "Material Noooooooooooo" + call);
+            }
+        });
+    }
     public void Bon(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<BonSementaraResponse> call = apiService.getBonSementara();

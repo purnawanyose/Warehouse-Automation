@@ -78,7 +78,10 @@
         <activity android:name=".AddUserManagementActivity" />
         <activity android:name=".CheckCoba" />
         <activity android:name=".MappingUtamaActivity" />
-        <activity android:name=".BinActivity"></activity>
+        <activity android:name=".BinActivity" />
+        <activity android:name=".MapUtamaActivity" />
+        <activity android:name=".MappingAUPC" />
+        <activity android:name=".MappingAUPB"></activity>
     </application>
 
 </manifest>

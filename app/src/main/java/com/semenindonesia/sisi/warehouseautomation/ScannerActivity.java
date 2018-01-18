@@ -172,7 +172,7 @@ public class ScannerActivity extends AppCompatActivity {
                 String akhir = huruf.substring(0,2);
                 Log.e(TAG, "onClicdsfhgjgfdsafghk: "+akhir );
 
-                Intent intent = new Intent(ScannerActivity.this, MappingUtamaActivity.class);
+                Intent intent = new Intent(ScannerActivity.this, MapUtamaActivity.class);
                 intent.putExtra("sbin", sbinText.getText().toString());
                 startActivity(intent);
 

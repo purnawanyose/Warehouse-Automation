@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.semenindonesia.sisi.warehouseautomation.AdminInitialPage;
 import com.semenindonesia.sisi.warehouseautomation.BinActivity;
 import com.semenindonesia.sisi.warehouseautomation.InterimActivity;
+import com.semenindonesia.sisi.warehouseautomation.MappingAUPC;
 import com.semenindonesia.sisi.warehouseautomation.MappingUtamaActivity;
 import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
@@ -68,12 +70,13 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "MappingAdapter";
-        public TextView mNamaLorong, strgBin;
+        public TextView mNamaLorong, strgBin, AUPC;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mNamaLorong = itemView.findViewById(R.id.nama_lorong);
             strgBin = itemView.findViewById(R.id.sbinText);
+            AUPC = itemView.findViewById(R.id.AUPC);
             context = itemView.getContext();
         }
     }
@@ -82,7 +85,7 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
         c = holder.mNamaLorong;
         holder.mNamaLorong.setText(lorong.get(position));
         a = (String) holder.mNamaLorong.getText();
-        sbinn = MappingUtamaActivity.sbin;
+        sbinn = MappingAUPC.sbin;
         bb = sbinn.substring(0,2);
         Log.e(TAG, "sbibsibidsbsa: "+bb );
         if (bb.equals(lorong.get(position))){
@@ -94,7 +97,7 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
     }
 
     private void applyClickEvents(final MappingAdapter.ViewHolder holder, final int position) {
-        sbinn = MappingUtamaActivity.sbin;
+        sbinn = MappingAUPC.sbin;
         bb = sbinn.substring(0,2);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +129,7 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
         holder.mNamaLorong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sbinn = MappingUtamaActivity.sbin;
+                sbinn = MappingAUPC.sbin;
                 bb = sbinn.substring(0,2);
                 Intent intent = new Intent(context, BinActivity.class);
                 intent.putExtra("namaLorong", bb);
@@ -135,4 +138,6 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
             }
         });
     }
+
+
 }
