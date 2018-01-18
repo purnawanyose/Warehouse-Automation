@@ -14,8 +14,8 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.semenindonesia.sisi.warehouseautomation.BinActivity;
+import com.semenindonesia.sisi.warehouseautomation.MappingAUPA;
 import com.semenindonesia.sisi.warehouseautomation.MappingAUPB;
-import com.semenindonesia.sisi.warehouseautomation.MappingAUPC;
 import com.semenindonesia.sisi.warehouseautomation.R;
 
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ import java.util.ArrayList;
  * Created by muham on 1/15/2018.
  */
 
-public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHolder> {
-    private static final String TAG = "MappingAdapter2";
+public class MappingAdapter3 extends RecyclerView.Adapter<MappingAdapter3.ViewHolder> {
+    private static final String TAG = "MappingAdapter3";
     ArrayList<String> lorong;
     String strg;
     private Context context;
@@ -33,18 +33,18 @@ public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHo
     String bb;
     TextView c;
     String sbinn;
-    public MappingAdapter2(ArrayList<String> lorong) {
+    public MappingAdapter3(ArrayList<String> lorong) {
         this.lorong = lorong;
     }
 
     @Override
-    public MappingAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mappingutamarv2, viewGroup, false);
+    public MappingAdapter3.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mappingutamarv3, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MappingAdapter2.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final MappingAdapter3.ViewHolder viewHolder, int i) {
         applyClickEvents(viewHolder,i);
         clickEvents(viewHolder, i);
     }
@@ -55,14 +55,14 @@ public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private static final String TAG = "MappingAdapter2";
-        public TextView mNamaLorong, strgBin, AUPB;
+        private static final String TAG = "MappingAdapter3";
+        public TextView mNamaLorong, strgBin, AUPA;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mNamaLorong = itemView.findViewById(R.id.nama_lorong);
             strgBin = itemView.findViewById(R.id.sbinText);
-            AUPB = itemView.findViewById(R.id.AUPB);
+            AUPA = itemView.findViewById(R.id.AUPA);
             context = itemView.getContext();
         }
     }
@@ -71,7 +71,7 @@ public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHo
         c = holder.mNamaLorong;
         holder.mNamaLorong.setText(lorong.get(position));
         a = (String) holder.mNamaLorong.getText();
-        sbinn = MappingAUPB.sbin;
+        sbinn = MappingAUPA.sbin;
         bb = sbinn.substring(0,2);
         Log.e(TAG, "sbibsibidsbsa: "+bb );
         if (bb.equals(lorong.get(position))){
@@ -82,8 +82,8 @@ public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHo
         }
     }
 
-    private void applyClickEvents(final MappingAdapter2.ViewHolder holder, final int position) {
-        sbinn = MappingAUPB.sbin;
+    private void applyClickEvents(final MappingAdapter3.ViewHolder holder, final int position) {
+        sbinn = MappingAUPA.sbin;
         bb = sbinn.substring(0,2);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -111,11 +111,11 @@ public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHo
         anim.setRepeatCount(Animation.INFINITE);
         anim.start();
     }
-    private void applyClickEventss(final MappingAdapter2.ViewHolder holder, final int position) {
+    private void applyClickEventss(final MappingAdapter3.ViewHolder holder, final int position) {
         holder.mNamaLorong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sbinn = MappingAUPB.sbin;
+                sbinn = MappingAUPA.sbin;
                 bb = sbinn.substring(0,2);
                 Intent intent = new Intent(context, BinActivity.class);
                 intent.putExtra("namaLorong", bb);
