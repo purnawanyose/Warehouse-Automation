@@ -28,14 +28,17 @@ public class MapUtamaActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         sbin = extras.getString("sbin");
-
         String c = sbin.substring(0,2);
         Log.e("sdagjkl;f", "onCreate: "+c);
-        String s1 = "ABCDEFGHIJKLMNOPQRSTUVW";
+
+
+        String s1 = "ABCDEFG";
         String s2 = "HIJKLMNOPQRSTUVWXYZ";
         String s3 = "ABCDEFGHIJKLMNOPQRSTUVW";
+
+
         for (int i = 0; i < s1.length(); i++) {
-            Log.e("hjhjhjhjhh", "onCreate: "+s1.charAt(i));
+            Log.e("hjhjhjhjhh", "onCreate: "+s2.charAt(i));
             if (c.equals(s1.charAt(i)+"1")){
                 AUPC.setBackgroundColor(Color.BLUE);
                 Animation anim = new AlphaAnimation(0.0f, 1.0f);
@@ -70,11 +73,11 @@ public class MapUtamaActivity extends AppCompatActivity {
                 AUPB.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle extras = getIntent().getExtras();
-                        sbin = extras.getString("sbin");
-                        String c = sbin.substring(0,2);
+//                        Bundle extras = getIntent().getExtras();
+//                        sbin = extras.getString("sbin");
+//                        String c = sbin.substring(0,2);
                         Intent intent = new Intent(MapUtamaActivity.this, MappingAUPB.class );
-                        intent.putExtra("sbin", c);
+//                        intent.putExtra("sbin", c);
                         startActivity(intent);
                     }
                 });
