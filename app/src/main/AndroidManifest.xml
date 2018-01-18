@@ -81,7 +81,8 @@
         <activity android:name=".BinActivity" />
         <activity android:name=".MapUtamaActivity" />
         <activity android:name=".MappingAUPC" />
-        <activity android:name=".MappingAUPB"></activity>
+        <activity android:name=".MappingAUPB" />
+        <activity android:name=".MappingAUPA"></activity>
     </application>
 
 </manifest>
