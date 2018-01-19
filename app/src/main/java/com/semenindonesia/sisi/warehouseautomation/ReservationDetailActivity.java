@@ -49,7 +49,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,"51558160","1");
+        Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,rNumber,"1");
         call.enqueue(new Callback<ReservationDetailResponse>() {
             @Override
             public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {

@@ -25,6 +25,7 @@ import java.util.List;
 
 import adapter.Filter_MovtypeRv;
 import model.Content;
+import model.Material;
 import model.MovTypeSelection;
 import response.MasterSpecialStockResponse;
 import response.MovTypeSelectionResponse;
@@ -46,6 +47,7 @@ public class Filter_Movtype extends Fragment {
     String SelectedItem, movtype = "*";
     private Filter_MovtypeRv adapter;
     private ArrayList<MovTypeSelection> movlist;
+    private int selectedPosition = -1;
 
     public Filter_Movtype() {
         // Required empty public constructor
