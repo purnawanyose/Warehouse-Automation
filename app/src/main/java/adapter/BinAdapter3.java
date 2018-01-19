@@ -3,7 +3,6 @@ package adapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,8 +12,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
+import com.semenindonesia.sisi.warehouseautomation.LayoutKetiga;
 import com.semenindonesia.sisi.warehouseautomation.LayoutPertama;
-import com.semenindonesia.sisi.warehouseautomation.MappingAUPC;
 import com.semenindonesia.sisi.warehouseautomation.R;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
  * Created by muham on 1/15/2018.
  */
 
-public class BinAdapter extends RecyclerView.Adapter<BinAdapter.ViewHolder> {
+public class BinAdapter3 extends RecyclerView.Adapter<BinAdapter3.ViewHolder> {
     private static final String TAG = "BinAdapter";
     ArrayList<String> bin;
     String strg;
@@ -32,18 +31,18 @@ public class BinAdapter extends RecyclerView.Adapter<BinAdapter.ViewHolder> {
     String bbb,bb,bbbb;
     TextView c;
     String sbinn,sbinFull;
-    public BinAdapter(ArrayList<String> bin) {
+    public BinAdapter3(ArrayList<String> bin) {
         this.bin = bin;
     }
 
     @Override
-    public BinAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public BinAdapter3.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mappingutamarv, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final BinAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final BinAdapter3.ViewHolder viewHolder, int i) {
         applyClickEvents(viewHolder,i);
         clickEvents(viewHolder, i);
     }
@@ -66,9 +65,9 @@ public class BinAdapter extends RecyclerView.Adapter<BinAdapter.ViewHolder> {
             context = itemView.getContext();
         }
     }
-    private void applyClickEvents(final BinAdapter.ViewHolder holder, final int position) {
-        sbinn = LayoutPertama.sbinnn;
-        sbinFull = LayoutPertama.sbinFull;
+    private void applyClickEvents(final BinAdapter3.ViewHolder holder, final int position) {
+        sbinn = LayoutKetiga.sbinnn;
+        sbinFull = LayoutKetiga.sbinFull;
         bb = String.valueOf(sbinFull.charAt(2));
 
 
@@ -87,13 +86,13 @@ public class BinAdapter extends RecyclerView.Adapter<BinAdapter.ViewHolder> {
             }
         });
     }
-    private void clickEvents(final BinAdapter.ViewHolder holder, final int position){
+    private void clickEvents(final BinAdapter3.ViewHolder holder, final int position){
         c = holder.mNamaLorong;
         holder.mNamaLorong.setText(bin.get(position));
         a = (String) holder.mNamaLorong.getText();
-        sbinn = LayoutPertama.sbinnn;
+        sbinn = LayoutKetiga.sbinnn;
         String aa = sbinn.substring(0,2);
-        sbinFull = LayoutPertama.sbinFull;
+        sbinFull = LayoutKetiga.sbinFull;
         bb = String.valueOf(sbinFull.charAt(4));
         aa = sbinFull.substring(3);
         String cc = String.valueOf(sbinFull.charAt(3));

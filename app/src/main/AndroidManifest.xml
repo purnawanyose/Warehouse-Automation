@@ -83,7 +83,10 @@
         <activity android:name=".MappingAUPC" />
         <activity android:name=".MappingAUPB" />
         <activity android:name=".MappingAUPA" />
-        <activity android:name=".LayoutPertama"></activity>
+        <activity android:name=".LayoutPertama" />
+        <activity android:name=".LayoutKedua" />
+        <activity android:name=".LayoutKetiga" />
+        <activity android:name=".LayoutKeempat"></activity>
     </application>
 
 </manifest>
