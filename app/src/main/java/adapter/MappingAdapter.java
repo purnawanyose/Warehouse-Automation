@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.semenindonesia.sisi.warehouseautomation.AdminInitialPage;
 import com.semenindonesia.sisi.warehouseautomation.BinActivity;
 import com.semenindonesia.sisi.warehouseautomation.InterimActivity;
+import com.semenindonesia.sisi.warehouseautomation.LayoutPertama;
 import com.semenindonesia.sisi.warehouseautomation.MappingAUPC;
 import com.semenindonesia.sisi.warehouseautomation.MappingUtamaActivity;
 import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
@@ -46,7 +47,7 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
     String a;
     String bb;
     TextView c;
-    String sbinn;
+    String sbinn,sbinFull;
     public MappingAdapter(ArrayList<String> lorong) {
         this.lorong = lorong;
     }
@@ -61,6 +62,7 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
     public void onBindViewHolder(final MappingAdapter.ViewHolder viewHolder, int i) {
         applyClickEvents(viewHolder,i);
         clickEvents(viewHolder, i);
+
     }
 
     @Override
@@ -88,6 +90,8 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
         sbinn = MappingAUPC.sbin;
         bb = sbinn.substring(0,2);
         Log.e(TAG, "sbibsibidsbsa: "+bb );
+
+
         if (bb.equals(lorong.get(position))){
             Log.e(TAG, "clickEvents: assssssssssss"+bb);
             manageBlinkEffect();
@@ -107,12 +111,37 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
                 final String data = lorong.get(position);
                 c = holder.mNamaLorong;
                 if(bb.equals(lorong.get(position))){
+
                     applyClickEventss(holder, position);
                     Log.e(TAG, "SUKSES"+bb);
 
                 }else{
                     Log.e(TAG, "onClick: "+data +c);
                 }
+            }
+        });
+    }
+
+    private void applyClickEventss(final MappingAdapter.ViewHolder holder, final int position) {
+        holder.mNamaLorong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sbinn = MappingAUPC.sbin;
+                sbinFull = MappingAUPC.sbinFull;
+                Log.e(TAG, "mappingadapter"+sbinn );
+                bb = sbinn.substring(0,2);
+
+                if (sbinn.equals("A1")){
+                    Intent intent = new Intent(context, LayoutPertama.class);
+                    intent.putExtra("namaLorong", sbinn);
+                    intent.putExtra("sbinFull", sbinFull);
+
+                    context = v.getContext();
+                    v.getContext().startActivity(intent);
+                }else{
+
+                }
+
             }
         });
     }
@@ -125,19 +154,5 @@ public class MappingAdapter extends RecyclerView.Adapter<MappingAdapter.ViewHold
         anim.setRepeatCount(Animation.INFINITE);
         anim.start();
     }
-    private void applyClickEventss(final MappingAdapter.ViewHolder holder, final int position) {
-        holder.mNamaLorong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sbinn = MappingAUPC.sbin;
-                bb = sbinn.substring(0,2);
-                Intent intent = new Intent(context, BinActivity.class);
-                intent.putExtra("namaLorong", bb);
-                context = v.getContext();
-                v.getContext().startActivity(intent);
-            }
-        });
-    }
-
 
 }

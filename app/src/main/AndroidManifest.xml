@@ -82,7 +82,8 @@
         <activity android:name=".MapUtamaActivity" />
         <activity android:name=".MappingAUPC" />
         <activity android:name=".MappingAUPB" />
-        <activity android:name=".MappingAUPA"></activity>
+        <activity android:name=".MappingAUPA" />
+        <activity android:name=".LayoutPertama"></activity>
     </application>
 
 </manifest>

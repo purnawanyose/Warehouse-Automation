@@ -51,6 +51,7 @@ public class MapUtamaActivity extends AppCompatActivity {
                         String c = sbin.substring(0,2);
                         Intent intent = new Intent(MapUtamaActivity.this, MappingAUPC.class );
                         intent.putExtra("sbin", c);
+                        intent.putExtra("sbinFull", sbin);
                         startActivity(intent);
                     }
                 });

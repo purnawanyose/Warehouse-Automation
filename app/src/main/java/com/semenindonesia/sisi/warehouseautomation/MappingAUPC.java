@@ -16,13 +16,16 @@ public class MappingAUPC extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
-    public static String sbin;
+    public static String sbin,sbinFull;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapping_aupc);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvAUPC);
+
+
 
         lorong = new ArrayList<>();
         lorong.add("H1");
@@ -41,5 +44,6 @@ public class MappingAUPC extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         sbin = extras.getString("sbin");
+        sbinFull = extras.getString("sbinFull");
     }
 }
