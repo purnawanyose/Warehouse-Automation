@@ -14,6 +14,7 @@ import response.InterimResponse;
 import response.MasterSpecialStockResponse;
 import response.MaterialResponse;
 import response.MovTypeSelectionResponse;
+import response.OnHandLocationResponse;
 import response.OnHandResponse;
 import response.QuantResponse;
 import response.ReservationDetailResponse;
@@ -105,7 +106,7 @@ public interface ApiInterface {
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<ReservationMainResponse> getReservationMain(
-            @Query("rsnum") String rsnum,
+            @Query("rsnum[0]") String rsnum,
             @Query("rwerks[1]") String rwerks,
             @Query("rbwart[0]") String rbwart,
             @Query("rmatnr") String rmatnr,
@@ -130,6 +131,11 @@ public interface ApiInterface {
             @Query("row") String row,
             @Query("matnr[0]") String matnr,
             @Query("maktg[0]") String maktg
+    );
+    @GET("Reservation/stockMaterial/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<OnHandLocationResponse> getOnhandLocation(
+            @Query("werks[0]") String werks,
+            @Query("matnr[0]") String matnr
     );
 
 

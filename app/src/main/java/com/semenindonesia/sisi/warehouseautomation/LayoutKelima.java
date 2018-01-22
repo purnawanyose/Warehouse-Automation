@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import adapter.BinAdapter3;
 import adapter.BinAdapter4;
+import adapter.BinAdapter5;
 
-public class LayoutKeempat extends AppCompatActivity {
-    private static final String TAG = "LayoutPertama";
+public class LayoutKelima extends AppCompatActivity {
+    private static final String TAG = "LayoutKelima";
     ArrayList<String> bin, bin2;
     RecyclerView mRecyclerView;
     RecyclerView mRecyclerView2;
@@ -23,10 +23,10 @@ public class LayoutKeempat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout_keempat);
+        setContentView(R.layout.activity_layout_kelima);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rvKeempat2);
-        mRecyclerView2 = (RecyclerView) findViewById(R.id.rvKeempat1);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rvKelima1);
+        mRecyclerView2 = (RecyclerView) findViewById(R.id.rvKelima2);
         textView73 = (TextView) findViewById(R.id.tvKetiga);
 
         bin = new ArrayList<>();
@@ -40,7 +40,7 @@ public class LayoutKeempat extends AppCompatActivity {
         bin.add("1");
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new BinAdapter4(bin);
+        mAdapter = new BinAdapter5(bin);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -55,7 +55,7 @@ public class LayoutKeempat extends AppCompatActivity {
         bin2.add("9");
         mRecyclerView2.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new BinAdapter4(bin2);
+        mAdapter = new BinAdapter5(bin2);
         mRecyclerView2.setLayoutManager(mLayoutManager);
         mRecyclerView2.setAdapter(mAdapter);
 
@@ -65,4 +65,5 @@ public class LayoutKeempat extends AppCompatActivity {
 
         textView73.setText("STORAGE BIN\t\t: "+sbinFull);
     }
+
 }

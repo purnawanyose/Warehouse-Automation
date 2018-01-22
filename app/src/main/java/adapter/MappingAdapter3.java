@@ -14,6 +14,10 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.semenindonesia.sisi.warehouseautomation.BinActivity;
+import com.semenindonesia.sisi.warehouseautomation.LayoutKedua;
+import com.semenindonesia.sisi.warehouseautomation.LayoutKeempat;
+import com.semenindonesia.sisi.warehouseautomation.LayoutKelima;
+import com.semenindonesia.sisi.warehouseautomation.LayoutPertama;
 import com.semenindonesia.sisi.warehouseautomation.MappingAUPA;
 import com.semenindonesia.sisi.warehouseautomation.MappingAUPB;
 import com.semenindonesia.sisi.warehouseautomation.R;
@@ -32,7 +36,7 @@ public class MappingAdapter3 extends RecyclerView.Adapter<MappingAdapter3.ViewHo
     String a;
     String bb;
     TextView c;
-    String sbinn;
+    String sbinn,sbinFull;
     public MappingAdapter3(ArrayList<String> lorong) {
         this.lorong = lorong;
     }
@@ -87,7 +91,7 @@ public class MappingAdapter3 extends RecyclerView.Adapter<MappingAdapter3.ViewHo
         bb = sbinn.substring(0,2);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-            public static final String TAG = "MappingAdapter2";
+            public static final String TAG = "MappingAdapter3";
             @Override
             public void onClick(View view) {
                 final String data = lorong.get(position);
@@ -116,14 +120,18 @@ public class MappingAdapter3 extends RecyclerView.Adapter<MappingAdapter3.ViewHo
             @Override
             public void onClick(View v) {
                 sbinn = MappingAUPA.sbin;
-                bb = sbinn.substring(0,2);
-                Intent intent = new Intent(context, BinActivity.class);
-                intent.putExtra("namaLorong", bb);
+                sbinFull = MappingAUPA.sbinFull;
+                Log.e(TAG, "mappingadapter" + sbinn);
+                bb = sbinn.substring(0, 2);
+
+                Intent intent = new Intent(context, LayoutKelima.class);
+                intent.putExtra("namaLorong", sbinn);
+                intent.putExtra("sbinFull", sbinFull);
+
                 context = v.getContext();
                 v.getContext().startActivity(intent);
             }
         });
     }
-
 
 }

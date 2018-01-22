@@ -16,7 +16,7 @@ public class MappingAUPA extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
-    public static String sbin;
+    public static String sbin,sbinFull;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,5 +59,6 @@ public class MappingAUPA extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         sbin = extras.getString("sbin");
+        sbinFull = extras.getString("sbinFull");
     }
 }

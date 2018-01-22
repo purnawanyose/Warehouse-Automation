@@ -86,7 +86,8 @@
         <activity android:name=".LayoutPertama" />
         <activity android:name=".LayoutKedua" />
         <activity android:name=".LayoutKetiga" />
-        <activity android:name=".LayoutKeempat"></activity>
+        <activity android:name=".LayoutKeempat" />
+        <activity android:name=".LayoutKelima"></activity>
     </application>
 
 </manifest>

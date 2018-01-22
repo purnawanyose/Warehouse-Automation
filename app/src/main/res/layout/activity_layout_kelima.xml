@@ -68,7 +68,7 @@
         android:weightSum="1">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvKeempat1"
+            android:id="@+id/rvKelima1"
             android:layout_width="147dp"
             android:layout_height="match_parent" />
 
@@ -98,7 +98,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvKeempat2"
+            android:id="@+id/rvKelima2"
             android:layout_width="147dp"
             android:layout_height="match_parent" />
 

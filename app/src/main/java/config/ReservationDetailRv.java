@@ -59,7 +59,7 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
         Log.e("ASfdgdhsjak", "onBindViewHolder: " + scan);
 
         holder.textView67.setText(dataList.get(position).getRSPOS());
-        holder.textView68.setText(dataList.get(position).getMAKTX());
+        holder.textView68.setText(dataList.get(position).getMAKTX()+"\n"+dataList.get(position).getMATNR());
         holder.textView69.setText(scan[0] + "/" + scann[0]);
         holder.textView70.setText(dataList.get(position).getMEINS());
         holder.textView72.setText(ttl);
@@ -97,7 +97,11 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
             public void onClick(View v) {
                 final Reservation data = dataList.get(position);
                 Intent intent = new Intent(context, OnhandLocationActivity.class);
-
+                intent.putExtra("PLANT", data.getWERKS());
+                intent.putExtra("RSVNO", data.getRSNUM());
+                intent.putExtra("ORDER", data.getAUFNR());
+                intent.putExtra("MATNR", data.getMAKTX()+" "+data.getMATNR());
+                intent.putExtra("MATNO", data.getMATNR());
                 context = v.getContext();
                 v.getContext().startActivity(intent);
             }

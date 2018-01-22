@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.semenindonesia.sisi.warehouseautomation.BinActivity;
 import com.semenindonesia.sisi.warehouseautomation.LayoutKedua;
+import com.semenindonesia.sisi.warehouseautomation.LayoutKetiga;
 import com.semenindonesia.sisi.warehouseautomation.LayoutPertama;
 import com.semenindonesia.sisi.warehouseautomation.MappingAUPB;
 import com.semenindonesia.sisi.warehouseautomation.MappingAUPC;
@@ -138,6 +139,15 @@ public class MappingAdapter2 extends RecyclerView.Adapter<MappingAdapter2.ViewHo
                 }else if (sbinn.equals("J1")){
                     Log.e(TAG, "onClickAZMI: "+sbinn );
                     Intent intent = new Intent(context, LayoutKedua.class);
+                    intent.putExtra("namaLorong", sbinn);
+                    intent.putExtra("sbinFull", sbinFull);
+
+                    context = v.getContext();
+                    v.getContext().startActivity(intent);
+
+                }else{
+                    Log.e(TAG, "onClickAZMI: "+sbinn );
+                    Intent intent = new Intent(context, LayoutKetiga.class);
                     intent.putExtra("namaLorong", sbinn);
                     intent.putExtra("sbinFull", sbinFull);
 

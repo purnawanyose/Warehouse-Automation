@@ -69,34 +69,4 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
             linearClear = (LinearLayout) itemView.findViewById(R.id.linearClear);
         }
     }
-    /*private void applyClickEvents(OnHandRv.OnHandViewHolder holder, final int position) {
-        holder.bOnHand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final OnHand data = dataList.get(position);
-                //======== Menuju ke form quant ========
-                Intent intent = new Intent(context, QuantDetailActivity.class );
-                                intent.putExtra("LGNUM", data.getWHSNO());
-                                intent.putExtra("LGTYP", data.getSTYPE());
-                                intent.putExtra("LGPLA", data.getSBIN());
-                context = view.getContext();
-                view.getContext().startActivity(intent);
-            }
-        });
-    }
-    private void clearEvent(OnHandRv.OnHandViewHolder holder, final int position) {
-        holder.linearClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final OnHand data = dataList.get(position);
-                //======== Menuju ke form quant ========
-                Intent intent = new Intent(context, QuantDetailActivity.class );
-                intent.putExtra("LGNUM", data.getWHSNO());
-                intent.putExtra("LGTYP", data.getSTYPE());
-                intent.putExtra("LGPLA", data.getSBIN());
-                context = view.getContext();
-                view.getContext().startActivity(intent);
-            }
-        });
-    }*/
 }

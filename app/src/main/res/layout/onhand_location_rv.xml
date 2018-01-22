@@ -55,12 +55,13 @@
             android:textAlignment="center"
             android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/textView92"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et2"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@android:color/black" />
+            android:layout_weight="0.36"
+            android:ems="10"
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <View
