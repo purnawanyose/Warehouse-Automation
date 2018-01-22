@@ -66,7 +66,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
 
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
-    private SimpleDateFormat dateFormatter;
+    private SimpleDateFormat dateFormatter,dateFormatterr;
 
     private Main_ReservationRv adapter ;
     private ArrayList<Reservation> rsvlist =  new ArrayList<Reservation>();
@@ -92,6 +92,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         tglAwal = (TextView) findViewById(R.id.tglAwal);
         tglAkhir = (TextView) findViewById(R.id.tglAkhir);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatterr = new SimpleDateFormat("yyyyMMdd", Locale.US);
 
         movtype = (EditText) findViewById(R.id.movtype);
         mattype = (EditText) findViewById(R.id.materialno);
@@ -147,7 +148,9 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                tglAwal.setText(dateFormatter.format(newDate.getTime()));
+                tglAwal.setText(dateFormatterr.format(newDate.getTime()));
+                String aa = tglAwal.getText().toString();
+
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -157,7 +160,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                tglAkhir.setText(dateFormatter.format(newDate.getTime()));
+                tglAkhir.setText(dateFormatterr.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -233,7 +236,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<ReservationMainResponse> call = apiService.getReservationMain(etNoReservation.getText().toString(),etPlant.getText().toString()
                 , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
-
+        Log.wtf("URL Called", call.request().url() + "");
         call.enqueue(new Callback<ReservationMainResponse>() {
 
             @Override

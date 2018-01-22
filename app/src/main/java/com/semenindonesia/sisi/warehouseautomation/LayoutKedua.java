@@ -8,42 +8,45 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import adapter.MappingAdapter;
+import adapter.BinAdapter;
+import adapter.BinAdapter2;
 
-public class MappingAUPC extends AppCompatActivity {
-    private static final String TAG = "MappingAUPC";
-    ArrayList<String> lorong;
+public class LayoutKedua extends AppCompatActivity {
+    private static final String TAG = "LayoutKedua";
+    ArrayList<String> bin;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
-    public static String sbin,sbinFull;
-
+    public static String sbinnn,sbinFull;
+    TextView textView733;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapping_aupc);
+        setContentView(R.layout.activity_layout_kedua);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rvAUPC);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rvKedua);
+        textView733 = (TextView) findViewById(R.id.textView733);
 
-
-
-        lorong = new ArrayList<>();
-        lorong.add("H1");
-        lorong.add("G1");
-        lorong.add("F1");
-        lorong.add("E1");
-        lorong.add("D1");
-        lorong.add("C1");
-        lorong.add("B1");
-        lorong.add("A1");
+        bin = new ArrayList<>();
+        bin.add("7");
+        bin.add("6");
+        bin.add("5");
+        bin.add("4");
+        bin.add("3");
+        bin.add("2");
+        bin.add("1");
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new MappingAdapter(lorong);
+        mAdapter = new BinAdapter2(bin);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
         Bundle extras = getIntent().getExtras();
-        sbin = extras.getString("sbin");
+        sbinnn = extras.getString("namaLorong");
         sbinFull = extras.getString("sbinFull");
+
+        textView733.setText("STORAGE BIN\t\t: "+sbinFull);
+
+
     }
 }
