@@ -71,6 +71,8 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private Main_ReservationRv adapter ;
     private ArrayList<Reservation> rsvlist =  new ArrayList<Reservation>();
 
+    Call<ReservationMainResponse> call;
+
     @BindView(R.id.etPlant)
     EditText etPlant;
     Editable teeeet;
@@ -234,13 +236,20 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     void actionCari() {
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationMainResponse> call = apiService.getReservationMain(etNoReservation.getText().toString(),etPlant.getText().toString()
-                , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
-        Log.wtf("URL Called", call.request().url() + "");
+        if (etNoReservation.getText().toString().equalsIgnoreCase("")){
+            call = apiService.getReservationMain(etNoReservation.getText().toString(),etPlant.getText().toString()
+                    , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
+            Log.wtf("URL Called", call.request().url() + "");
+        }else {
+            call = apiService.getReservationMainRsv(etNoReservation.getText().toString(),etPlant.getText().toString()
+                    , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
+            Log.wtf("URL Called", call.request().url() + "");
+        }
         call.enqueue(new Callback<ReservationMainResponse>() {
 
             @Override
             public void onResponse(Call<ReservationMainResponse> call, retrofit2.Response<ReservationMainResponse> response) {
+
                 List<Reservation> reservation = response.body().getReservationMain();
                 rsvlist.clear();
                 for (Reservation data : reservation){

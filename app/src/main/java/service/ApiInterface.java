@@ -106,6 +106,19 @@ public interface ApiInterface {
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<ReservationMainResponse> getReservationMain(
+            @Query("rsnum") String rsnum,
+            @Query("rwerks[1]") String rwerks,
+            @Query("rbwart[0]") String rbwart,
+            @Query("rmatnr") String rmatnr,
+            @Query("mvtind") String mvtind,
+            @Query("final") String finalz,
+            @Query("delete") String delete,
+            @Query("bdter_awal") String bdter_awal,
+            @Query("bdter_akhir") String bdter_akhir
+    );
+
+    @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<ReservationMainResponse> getReservationMainRsv(
             @Query("rsnum[0]") String rsnum,
             @Query("rwerks[1]") String rwerks,
             @Query("rbwart[0]") String rbwart,
@@ -116,6 +129,7 @@ public interface ApiInterface {
             @Query("bdter_awal") String bdter_awal,
             @Query("bdter_akhir") String bdter_akhir
     );
+
 
     @GET("Master/spesialStok/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<MasterSpecialStockResponse> getMasterSpecialStock();
