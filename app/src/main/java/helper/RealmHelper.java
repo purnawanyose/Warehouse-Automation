@@ -28,7 +28,7 @@ public class RealmHelper {
      * @param context
      */
     public RealmHelper(Context context) {
-        realm = Realm.getInstance(context);
+//        realm = Realm.getInstance(context);
         this.context = context;
     }
 
@@ -114,7 +114,7 @@ public class RealmHelper {
         RealmResults<User> dataDesults = realm.where(User.class).equalTo("id", id).findAll();
         realm.beginTransaction();
         dataDesults.remove(0);
-        dataDesults.removeLast();
+//        dataDesults.removeLast();
         dataDesults.clear();
         realm.commitTransaction();
 

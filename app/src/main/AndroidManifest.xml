@@ -16,7 +16,7 @@
         <activity
             android:name=".ImageViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".ScannerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -28,7 +28,7 @@
             android:name=".DetailOpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,7 +87,7 @@
         <activity android:name=".LayoutKedua" />
         <activity android:name=".LayoutKetiga" />
         <activity android:name=".LayoutKeempat" />
-        <activity android:name=".LayoutKelima"></activity>
+        <activity android:name=".LayoutKelima" />
     </application>
 
 </manifest>

@@ -24,9 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -79,6 +81,8 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     ImageView img_search;
     CheckBox mvt, finalz, delete;
     String mvtS, finalzS, deleteS;
+    String date1,date2;
+    Date dateObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,8 +152,15 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                tglAwal.setText(dateFormatterr.format(newDate.getTime()));
-                String aa = tglAwal.getText().toString();
+                tglAwal.setText(dateFormatter.format(newDate.getTime()));
+
+                try {
+                    String aa = tglAwal.getText().toString();
+                    dateObject = dateFormatter.parse(aa);
+                    date1 = new SimpleDateFormat("yyyyMMdd", Locale.US).format(dateObject);
+                } catch (ParseException e) {e.printStackTrace();
+
+                }
 
             }
 
@@ -160,7 +171,15 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                tglAkhir.setText(dateFormatterr.format(newDate.getTime()));
+                tglAkhir.setText(dateFormatter.format(newDate.getTime()));
+                try {
+                    String bb = tglAkhir.getText().toString();
+                    dateObject = dateFormatter.parse(bb);
+                    date2 = new SimpleDateFormat("yyyyMMdd", Locale.US).format(dateObject);
+                } catch (ParseException e) {e.printStackTrace();
+
+                }
+
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -234,8 +253,10 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     void actionCari() {
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+
         Call<ReservationMainResponse> call = apiService.getReservationMain(etNoReservation.getText().toString(),etPlant.getText().toString()
-                , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
+                , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,date1,date2);
         Log.wtf("URL Called", call.request().url() + "");
         call.enqueue(new Callback<ReservationMainResponse>() {
 

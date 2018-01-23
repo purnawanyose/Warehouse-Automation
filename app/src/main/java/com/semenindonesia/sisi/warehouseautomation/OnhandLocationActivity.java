@@ -61,42 +61,28 @@ public class OnhandLocationActivity extends AppCompatActivity {
         plantt = extras.getString("PLANT");
         matnoo = extras.getString("MATNO");
 
-        tvScann.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-
-                     /*Create handle for the RetrofitInstance interface*/
-                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        /*Create handle for the RetrofitInstance interface*/
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
-                    Call<OnHandLocationResponse> call = apiService.getOnhandLocation("7702","623-000005");
+        Call<OnHandLocationResponse> call = apiService.getOnhandLocation("7702","623-000005");
 
         /*Log the URL called*/
-                    Log.wtf("URL Called", call.request().url() + "");
+        Log.wtf("URL Called", call.request().url() + "");
 
-                    call.enqueue(new Callback<OnHandLocationResponse>() {
+        call.enqueue(new Callback<OnHandLocationResponse>() {
 
-                        @Override
-                        public void onResponse(Call<OnHandLocationResponse> call, Response<OnHandLocationResponse> response) {
-                            generateReservationDetailResponse((ArrayList<OnHandLocation>) response.body().getOnhandlocation());
-                            List<OnHandLocation> content = response.body().getOnhandlocation();
-                        }
-
-                        @Override
-                        public void onFailure(Call<OnHandLocationResponse> call, Throwable t) {
-                            Toast.makeText(OnhandLocationActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-
-                }
-                return false;
+            @Override
+            public void onResponse(Call<OnHandLocationResponse> call, Response<OnHandLocationResponse> response) {
+                generateReservationDetailResponse((ArrayList<OnHandLocation>) response.body().getOnHandLocation());
+                List<OnHandLocation> content = response.body().getOnHandLocation();
             }
 
+            @Override
+            public void onFailure(Call<OnHandLocationResponse> call, Throwable t) {
+                Toast.makeText(OnhandLocationActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
         });
-
     }
     private void generateReservationDetailResponse(ArrayList<OnHandLocation> empDataList) {
         recyclerView = (RecyclerView) findViewById(R.id.rv_onhand_location);

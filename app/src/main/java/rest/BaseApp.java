@@ -14,7 +14,7 @@ public class BaseApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+/*
         //kode konfigurasi Realm
         RealmConfiguration config = new RealmConfiguration.Builder(this)
                 //versi database
@@ -22,7 +22,7 @@ public class BaseApp extends Application {
                 .migration(new DataMigration())
                 .build();
 
-        Realm.setDefaultConfiguration(config);
+        Realm.setDefaultConfiguration(config);*/
 
     }
 
