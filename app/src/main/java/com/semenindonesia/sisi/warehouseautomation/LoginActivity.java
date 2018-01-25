@@ -43,9 +43,12 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     Log.e("login", "testtt" + username.getText());
-                }else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    builder.setMessage("Username atau Password Salah").setNegativeButton("Retry",null).create().show();
+                }else if (usernameKey.equals("") && passwordKey.equals("")) {
+                    Toast.makeText(getApplicationContext(), "LOGIN SUKSES Tanpa User Password", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Log.e("login", "testtt" + username.getText());
                 }
             }
         });

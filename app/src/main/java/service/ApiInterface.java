@@ -116,14 +116,9 @@ public interface ApiInterface {
             @Query("bdter_awal") String bdter_awal,
             @Query("bdter_akhir") String bdter_akhir
     );
-<<<<<<< HEAD
-    @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-    Call<ReservationMainResponse> getReservationMainRev(
-=======
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<ReservationMainResponse> getReservationMainRsv(
->>>>>>> cd350491bcb1826d92d08a5ce1c8df8cfaf6c0de
             @Query("rsnum[0]") String rsnum,
             @Query("rwerks[1]") String rwerks,
             @Query("rbwart[0]") String rbwart,

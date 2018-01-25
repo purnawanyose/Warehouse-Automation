@@ -202,7 +202,7 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Sloc \nWN"
@@ -212,7 +212,7 @@
 
             <TextView
                 android:id="@+id/textView63"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
 
                 android:layout_weight="1"
@@ -275,7 +275,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_onhand_location"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:paddingLeft="7dp" />
 
     </LinearLayout>
 

@@ -62,7 +62,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
         matnoo = extras.getString("MATNO");
 
         /*Create handle for the RetrofitInstance interface*/
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
         Call<OnHandLocationResponse> call = apiService.getOnhandLocation("7702","623-000005");
@@ -81,8 +81,11 @@ public class OnhandLocationActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<OnHandLocationResponse> call, Throwable t) {
                 Toast.makeText(OnhandLocationActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("Test", "onFailure: "+Call.class );
             }
         });
+
+
     }
     private void generateReservationDetailResponse(ArrayList<OnHandLocation> empDataList) {
         recyclerView = (RecyclerView) findViewById(R.id.rv_onhand_location);

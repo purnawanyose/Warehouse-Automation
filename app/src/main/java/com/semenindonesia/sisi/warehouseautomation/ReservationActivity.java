@@ -54,6 +54,7 @@ import service.ApiClient;
 import service.ApiInterface;
 
 //import static com.semenindonesia.sisi.warehouseautomation.R.id.Plant;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.cbMvtInd;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.checkbox;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.etPlant;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.plantt;
@@ -106,10 +107,9 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         findViewsById();
         setDateTimeField();
 
-        mvt = (CheckBox) findViewById(R.id.cbMvtInd);
-        finalz = (CheckBox) findViewById(R.id.cbMvtInd);
-        delete = (CheckBox) findViewById(R.id.cbMvtInd);
-
+        mvt = (CheckBox) findViewById(cbMvtInd);
+        finalz = (CheckBox) findViewById(cbMvtInd);
+        delete = (CheckBox) findViewById(cbMvtInd);
 
         if (mvt.isChecked()){
             mvtS = "X";
@@ -255,23 +255,22 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     void actionCari() {
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-<<<<<<< HEAD
+
 
 
         Call<ReservationMainResponse> call = apiService.getReservationMain(etNoReservation.getText().toString(),etPlant.getText().toString()
                 , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,date1,date2);
         Log.wtf("URL Called", call.request().url() + "");
-=======
+
         if (etNoReservation.getText().toString().equalsIgnoreCase("")){
             call = apiService.getReservationMain(etNoReservation.getText().toString(),etPlant.getText().toString()
-                    , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
+                    , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,date1,date2);
             Log.wtf("URL Called", call.request().url() + "");
         }else {
             call = apiService.getReservationMainRsv(etNoReservation.getText().toString(),etPlant.getText().toString()
-                    , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,tglAwal.getText().toString(),tglAkhir.getText().toString());
+                    , movtype.getText().toString(), mattype.getText().toString(), mvtS,finalzS,deleteS,date1,date2);
             Log.wtf("URL Called", call.request().url() + "");
         }
->>>>>>> cd350491bcb1826d92d08a5ce1c8df8cfaf6c0de
         call.enqueue(new Callback<ReservationMainResponse>() {
 
             @Override

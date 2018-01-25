@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,6 +45,7 @@ public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.
         String checked;
         Context context;
         ImageView img_search;
+        CheckBox cbMvtInd;
         private ArrayList<Reservation> matlist =  new ArrayList<Reservation>();
 
 
@@ -53,6 +55,7 @@ public class Main_ReservationRv extends RecyclerView.Adapter<Main_ReservationRv.
             reserveno = (TextView) view.findViewById(R.id.reserve_no);
             regdate = (TextView) view.findViewById(R.id.regdate);
             img_search = (ImageView) view.findViewById(R.id.img_search);
+            cbMvtInd = (CheckBox) view.findViewById(R.id.cbMvtInd);
             context = view.getContext();
         }
     }

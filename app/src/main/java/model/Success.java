@@ -3,28 +3,11 @@ package model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
- * Created by muham on 1/22/2018.
+ * Created by muham on 1/24/2018.
  */
 
-public class OnHandLocation {
-    public OnHandLocation() {
-    }
-
-    public OnHandLocation(String pLANT, String sLOC, String bATCH, String sS, String sSK, String qTY, String wHN, String sTYPE, String sBIN) {
-        this.pLANT = pLANT;
-        this.sLOC = sLOC;
-        this.bATCH = bATCH;
-        this.sS = sS;
-        this.sSK = sSK;
-        this.qTY = qTY;
-        this.wHN = wHN;
-        this.sTYPE = sTYPE;
-        this.sBIN = sBIN;
-    }
-
+public class Success {
     @SerializedName("PLANT")
     @Expose
     private String pLANT;
