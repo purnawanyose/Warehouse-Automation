@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
     private Context context;
 
     public ArrayList<OnHandLocation> dataList;
+
 
     public OnHandLocationRv(ArrayList<OnHandLocation> dataList) {
         this.dataList = dataList;
@@ -56,7 +58,15 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
         holder.ohl5.setText(dataList.get(position).getSSK());
         holder.ohl6.setText(ttl);
 
-        clickEvents(holder, position);
+        String sbinN = dataList.get(position).getSBIN();
+
+        if (OnhandLocationActivity.scan.equals(sbinN)){
+            holder.et2.setEnabled(true);
+            Log.e("aaaaa", "onBindViewHolder: "+dataList.get(position).getSBIN());
+            Log.e("bb", "onBindViewHolder: "+OnhandLocationActivity.scan.toString());
+        }else {
+
+        }
 
     }
 
@@ -68,7 +78,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
     public class OnhandLocationViewHolder extends RecyclerView.ViewHolder {
         TextView ohl1, ohl2, ohl3, ohl4, ohl5,ohl6,ohl7, tvScann;
         EditText et2;
-
+        Button btnAction;
         OnhandLocationViewHolder(final View itemView) {
             super(itemView);
             context = itemView.getContext();
@@ -80,11 +90,12 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             ohl6 = (TextView) itemView.findViewById(R.id.ohl6);
             et2 = (EditText) itemView.findViewById(R.id.et2);
             tvScann = (TextView) itemView.findViewById(R.id.tvScann);
+            btnAction = (Button) itemView.findViewById(R.id.btnAction);
 
             et2.setEnabled(false);
         }
     }
-    private void clickEvents(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
+   /* private void clickEvents(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
         holder.et2.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -98,6 +109,8 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
                         holder.et2.setText("111");
                         Log.e("as", "onKey: "+dataList.get(position).getSBIN());
                         Log.e("as", "onKey: "+scan[5]);
+                    }else{
+
                     }
 
                 }else{
@@ -106,7 +119,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
                 return false;
             }
         });
-    }
+    }*/
 
 
 }

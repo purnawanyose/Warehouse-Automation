@@ -17,8 +17,9 @@
 
         <TextView
             android:id="@+id/ohl1"
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:paddingRight="5dp"
             android:text="Sloc \nWN"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -26,7 +27,7 @@
 
         <TextView
             android:id="@+id/ohl2"
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
 
             android:text="SType \nSbin"
@@ -83,7 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.36"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <View

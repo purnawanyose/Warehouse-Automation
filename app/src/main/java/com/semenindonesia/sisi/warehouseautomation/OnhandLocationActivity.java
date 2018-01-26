@@ -1,5 +1,6 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +32,16 @@ import service.ApiInterface;
 
 import static com.semenindonesia.sisi.warehouseautomation.R.drawable.rsv;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.tvScan;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.visible;
 
 public class OnhandLocationActivity extends AppCompatActivity {
     TextView tvScann,et2;
     TextView plant, norsv, order, matno;
 
-    String plantt, norsvv,orderr,matnoo;
+    String plantt, norsvv,orderr,matnoo,rsvnoo,ordr,matnrr;
     private RecyclerView recyclerView;
+    public static String scan = "dfsgfsdgs";
+    public static Button btnAction;
 
     private OnHandLocationRv adapter;
     @Override
@@ -44,12 +49,15 @@ public class OnhandLocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onhand_location);
 
+        recyclerView = (RecyclerView) findViewById(R.id.rv_onhand_location);
+
         plant = (TextView) findViewById(R.id.noreservation);
         norsv = (TextView) findViewById(R.id.reservationno);
         order = (TextView) findViewById(R.id.order);
         matno = (TextView) findViewById(R.id.material);
         tvScann = (TextView) findViewById(R.id.tvScann);
         et2 = (TextView) findViewById(R.id.et2);
+        btnAction = (Button) findViewById(R.id.btnAction);
 
           /* Bundle extras = getIntent().getExtras();*/
         plant.setText("Plant \t\t\t\t\t\t : "+getIntent().getStringExtra("PLANT"));
@@ -60,12 +68,51 @@ public class OnhandLocationActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         plantt = extras.getString("PLANT");
         matnoo = extras.getString("MATNO");
+        rsvnoo = extras.getString("RSVNO");
+        ordr = extras.getString("ORDER");
+        matnrr = extras.getString("MATNR");
 
+        retrofit();
+
+        tvScann.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    tvScann.setVisibility(View.GONE);
+                    btnAction.setVisibility(View.VISIBLE);
+                    btnAction.setEnabled(false);
+                    // Perform action on key press
+                    String scanner = tvScann.getText().toString();
+                    String[] scann = scanner.split("#");
+                    Log.e("Hasil", "Scan" + scanner.toString());
+                    String s = scann[5];
+                    scan = s;
+                    Log.e("aa", "onKey: " + scan.toString());
+                    retrofit();
+                }else{
+
+                }
+                return false;
+            }
+        });
+
+        btnAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailRv.class);
+
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void retrofit(){
         /*Create handle for the RetrofitInstance interface*/
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
-        Call<OnHandLocationResponse> call = apiService.getOnhandLocation("7702","623-000005");
+        Call<OnHandLocationResponse> call = apiService.getOnhandLocation(plantt,matnoo);
 
         /*Log the URL called*/
         Log.wtf("URL Called", call.request().url() + "");
@@ -84,11 +131,16 @@ public class OnhandLocationActivity extends AppCompatActivity {
                 Log.e("Test", "onFailure: "+Call.class );
             }
         });
-
-
     }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void generateReservationDetailResponse(ArrayList<OnHandLocation> empDataList) {
-        recyclerView = (RecyclerView) findViewById(R.id.rv_onhand_location);
 
         adapter = new OnHandLocationRv(empDataList);
 
