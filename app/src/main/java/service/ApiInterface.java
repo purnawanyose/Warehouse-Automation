@@ -26,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -152,5 +153,8 @@ public interface ApiInterface {
             @Query("matnr[0]") String matnr
     );
 
+ /*   @POST(" Reservation/goodIssue\n" +
+            "    X-API-KEY: 80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8");
 
+*/
 }

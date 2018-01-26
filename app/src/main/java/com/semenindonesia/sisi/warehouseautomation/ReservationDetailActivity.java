@@ -25,11 +25,13 @@ import service.ApiInterface;
 public class ReservationDetailActivity extends AppCompatActivity {
 
     TextView WERKS;
-    TextView rsv,order,textView68;
+    TextView rsv,order,textView68,textView66;
 
     String rNumber, rwerks,rlgort;
     private ReservationDetailRv adapter;
     private RecyclerView recyclerView;
+    public static String chart ="1";
+    public static String akhirTampung;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,18 @@ public class ReservationDetailActivity extends AppCompatActivity {
         rsv =(TextView) findViewById(R.id.rsv);
         order =(TextView) findViewById(R.id.order);
         textView68 = (TextView) findViewById(R.id.textView68);
+        textView66 = (TextView) findViewById(R.id.textView66);
+
+
+
+
+
+        if (OnhandLocationActivity.matnooo != null ){
+            textView66.setText(chart);
+        }else{
+
+        }
+
 
         final Context context = this.getApplicationContext();
 
@@ -46,9 +60,9 @@ public class ReservationDetailActivity extends AppCompatActivity {
         rNumber = extras.getString("RSNUM");
         rwerks = extras.getString("WERKS");
         rlgort = extras.getString("LGORT");
+        akhirTampung = extras.getString("TAMPUNG");
 
-
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,rNumber,"1");
         call.enqueue(new Callback<ReservationDetailResponse>() {
             @Override

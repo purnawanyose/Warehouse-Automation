@@ -31,6 +31,7 @@ import service.ApiClient;
 import service.ApiInterface;
 
 import static com.semenindonesia.sisi.warehouseautomation.R.drawable.rsv;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.plantText;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.tvScan;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.visible;
 
@@ -42,6 +43,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public static String scan = "dfsgfsdgs";
     public static Button btnAction;
+    public static String qtybro, matnooo,ambilTampung;
 
     private OnHandLocationRv adapter;
     @Override
@@ -71,6 +73,8 @@ public class OnhandLocationActivity extends AppCompatActivity {
         rsvnoo = extras.getString("RSVNO");
         ordr = extras.getString("ORDER");
         matnrr = extras.getString("MATNR");
+        matnooo = extras.getString("MATNO");
+        ambilTampung = extras.getString("TAMPUNG");
 
         retrofit();
 
@@ -81,7 +85,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     tvScann.setVisibility(View.GONE);
                     btnAction.setVisibility(View.VISIBLE);
-                    btnAction.setEnabled(false);
+                    btnAction.setEnabled(true);
                     // Perform action on key press
                     String scanner = tvScann.getText().toString();
                     String[] scann = scanner.split("#");
@@ -100,7 +104,15 @@ public class OnhandLocationActivity extends AppCompatActivity {
         btnAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailRv.class);
+                Log.e("MASRAMZI", "onClick: "+qtybro );
+                Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailActivity.class);
+                intent.putExtra("WERKS",plantt);
+                intent.putExtra("matno",matnooo);
+                intent.putExtra("RSNUM",rsvnoo);
+                intent.putExtra("WERKS",ordr);
+                intent.putExtra("matnr",matnrr);
+                intent.putExtra("QTY",qtybro);
+                intent.putExtra("TAMPUNG",ambilTampung);
 
                 startActivity(intent);
             }

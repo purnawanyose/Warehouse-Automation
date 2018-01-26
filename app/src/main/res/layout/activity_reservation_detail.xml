@@ -186,18 +186,18 @@
                     android:textColor="@android:color/background_light" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView66"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
             <ImageView
                 android:id="@+id/imageView71"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.57"
                 app:srcCompat="@drawable/keranjang_belanja" />
+
+            <TextView
+                android:id="@+id/textView66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.14" />
         </LinearLayout>
 
         <LinearLayout

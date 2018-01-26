@@ -29,6 +29,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
     private Context context;
 
     public ArrayList<OnHandLocation> dataList;
+    public static String qty;
 
 
     public OnHandLocationRv(ArrayList<OnHandLocation> dataList) {
@@ -67,6 +68,15 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
         }else {
 
         }
+//        clickEvents(holder, position);
+        holder.et2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                OnhandLocationActivity.qtybro = holder.et2.getText().toString();
+                return false;
+            }
+        });
+
 
     }
 
@@ -95,31 +105,4 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             et2.setEnabled(false);
         }
     }
-   /* private void clickEvents(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
-        holder.et2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    String scanner = holder.tvScann.getText().toString();
-                    String[] scan = scanner.split("#");
-                    holder.et2.setEnabled(true);
-                    holder.et2.setText("1");
-                    if (dataList.get(position).getSBIN().equals(scan[5])){
-                        holder.et2.setText("111");
-                        Log.e("as", "onKey: "+dataList.get(position).getSBIN());
-                        Log.e("as", "onKey: "+scan[5]);
-                    }else{
-
-                    }
-
-                }else{
-
-                }
-                return false;
-            }
-        });
-    }*/
-
-
 }
