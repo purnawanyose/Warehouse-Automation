@@ -49,12 +49,18 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
         String ttl = String.valueOf(s1);
         Log.e("sss","aaaa"+ttl);
 
+        holder.sbin = dataList.get(position).getSBIN();
+
         holder.ohl1.setText(dataList.get(position).getSLOC()+"\n"+ dataList.get(position).getWHN());
         holder.ohl2.setText(dataList.get(position).getSTYPE()+"\n"+ dataList.get(position).getSBIN());
         holder.ohl3.setText(dataList.get(position).getBATCH());
         holder.ohl4.setText(dataList.get(position).getSS());
         holder.ohl5.setText(dataList.get(position).getSSK());
         holder.ohl6.setText(ttl);
+
+        if (OnhandLocationActivity.scan.equalsIgnoreCase(dataList.get(position).getSBIN())){
+            holder.et2.setEnabled(true);
+        }
 
         clickEvents(holder, position);
 
@@ -68,6 +74,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
     public class OnhandLocationViewHolder extends RecyclerView.ViewHolder {
         TextView ohl1, ohl2, ohl3, ohl4, ohl5,ohl6,ohl7, tvScann;
         EditText et2;
+        String sbin;
 
         OnhandLocationViewHolder(final View itemView) {
             super(itemView);
@@ -108,5 +115,10 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
         });
     }
 
+    public static void Scanner(String sbin){
+
+
+
+    }
 
 }

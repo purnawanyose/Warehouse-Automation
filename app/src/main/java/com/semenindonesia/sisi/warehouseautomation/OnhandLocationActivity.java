@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,6 +36,8 @@ import static com.semenindonesia.sisi.warehouseautomation.R.id.tvScan;
 public class OnhandLocationActivity extends AppCompatActivity {
     TextView tvScann,et2;
     TextView plant, norsv, order, matno;
+
+    public static String scan = "";
 
     String plantt, norsvv,orderr,matnoo;
     private RecyclerView recyclerView;
@@ -82,6 +86,14 @@ public class OnhandLocationActivity extends AppCompatActivity {
             public void onFailure(Call<OnHandLocationResponse> call, Throwable t) {
                 Toast.makeText(OnhandLocationActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 Log.e("Test", "onFailure: "+Call.class );
+            }
+        });
+
+        tvScann.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                scan = tvScann.getText().toString();
+                return false;
             }
         });
 
