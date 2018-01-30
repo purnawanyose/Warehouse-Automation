@@ -1,12 +1,17 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.TextView;
+
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +48,40 @@ public class ReservationDetailActivity extends AppCompatActivity {
         textView68 = (TextView) findViewById(R.id.textView68);
         textView66 = (TextView) findViewById(R.id.textView66);
 
+        final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Retrieve Data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+            @Override
+            public void doOnBackground() {
+
+                // Pretend it's doing some background processing
+                try {
+                    Thread.sleep(6000);
 
 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
+                // Create a fake result (MUST be final)
+                final boolean result = true;
+
+                // Send the result to the UI thread and show it on a Toast
+                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                    @Override
+                    public void doInUIThread() {
+                        khud.dismiss();
+                    }
+                });
+            }
+        });
 
         if (OnhandLocationActivity.matnooo != null ){
             textView66.setText(chart);
@@ -97,5 +133,14 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent a = new Intent(this,ReservationActivity.class);
+            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(a);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

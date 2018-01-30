@@ -68,7 +68,7 @@ public class BinAdapter2 extends RecyclerView.Adapter<BinAdapter2.ViewHolder> {
     private void applyClickEvents(final BinAdapter2.ViewHolder holder, final int position) {
         sbinn = LayoutKedua.sbinnn;
         sbinFull = LayoutKedua.sbinFull;
-        bb = String.valueOf(sbinFull.charAt(2));
+        bb = String.valueOf(sbinFull.charAt(3));
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,12 +93,12 @@ public class BinAdapter2 extends RecyclerView.Adapter<BinAdapter2.ViewHolder> {
         sbinn = LayoutKedua.sbinnn;
         String aa = sbinn.substring(0,2);
         sbinFull = LayoutKedua.sbinFull;
-        bb = String.valueOf(sbinFull.charAt(4));
-        aa = sbinFull.substring(3);
-        String cc = String.valueOf(sbinFull.charAt(3));
+        bb = String.valueOf(sbinFull.charAt(5));
+        aa = sbinFull.substring(4);
+        String cc = String.valueOf(sbinFull.charAt(4));
         Log.e(TAG, "clickEvents: AZis"+cc );
         Log.e(TAG, "sbibsibidsbsa: "+bb );
-        String ee = sbinFull.substring(3);
+        String ee = sbinFull.substring(4);
         Log.e(TAG, "lllllllllllll"+ee);
 
         if (bb.equals(bin.get(position)) && cc.equals("0")){

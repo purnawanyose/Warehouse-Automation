@@ -169,7 +169,7 @@ public class ScannerActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String huruf = (String) sbinText.getText().toString();
-                String akhir = huruf.substring(0,2);
+                String akhir = huruf.substring(1,3);
                 Log.e(TAG, "onClicdsfhgjgfdsafghk: "+akhir );
 
                 Intent intent = new Intent(ScannerActivity.this, MapUtamaActivity.class);
@@ -191,6 +191,16 @@ public class ScannerActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent a = new Intent(this,MainActivity.class);
+            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(a);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
 

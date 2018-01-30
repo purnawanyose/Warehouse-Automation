@@ -1,6 +1,7 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by muham on 1/29/2018.
@@ -29,6 +32,7 @@ public class AddUserActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseInstance;
 
     private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +91,7 @@ public class AddUserActivity extends AppCompatActivity {
 
         toggleButton();
     }
+
     // Changing button text
     private void toggleButton() {
         if (TextUtils.isEmpty(userId)) {
@@ -95,6 +100,7 @@ public class AddUserActivity extends AppCompatActivity {
             btnSave.setText("Update");
         }
     }
+
     /**
      * Creating new user node under 'users'
      */
@@ -112,6 +118,7 @@ public class AddUserActivity extends AppCompatActivity {
 
         addUserChangeListener();
     }
+
     /**
      * User data change listener
      */
@@ -147,6 +154,7 @@ public class AddUserActivity extends AppCompatActivity {
             }
         });
     }
+
     private void updateUser(String name, String email) {
         // updating the user via child nodes
         if (!TextUtils.isEmpty(name))

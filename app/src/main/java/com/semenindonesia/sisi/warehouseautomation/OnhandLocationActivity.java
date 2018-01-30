@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,8 +78,41 @@ public class OnhandLocationActivity extends AppCompatActivity {
         matnrr = extras.getString("MATNR");
         matnooo = extras.getString("MATNO");
         ambilTampung = extras.getString("TAMPUNG");
+        final KProgressHUD khud = KProgressHUD.create(OnhandLocationActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Retrieve Data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
 
-        retrofit();
+        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+            @Override
+            public void doOnBackground() {
+
+                // Pretend it's doing some background processing
+                try {
+                    retrofit();
+                    Thread.sleep(6000);
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Create a fake result (MUST be final)
+                final boolean result = true;
+
+                // Send the result to the UI thread and show it on a Toast
+                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                    @Override
+                    public void doInUIThread() {
+                        khud.dismiss();
+                    }
+                });
+            }
+        });
 
         tvScann.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -144,13 +180,6 @@ public class OnhandLocationActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
     private void generateReservationDetailResponse(ArrayList<OnHandLocation> empDataList) {
 
@@ -162,4 +191,5 @@ public class OnhandLocationActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
+
 }

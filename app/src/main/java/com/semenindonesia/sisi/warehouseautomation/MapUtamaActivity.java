@@ -28,7 +28,7 @@ public class MapUtamaActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         sbin = extras.getString("sbin");
-        String c = sbin.substring(0,2);
+        String c = sbin.substring(1,3);
         Log.e("sdagjkl;f", "onCreate: "+c);
 
         for(char a : "ABCDEFGH".toCharArray()){
@@ -48,7 +48,7 @@ public class MapUtamaActivity extends AppCompatActivity {
                         Bundle extras = getIntent().getExtras();
                         sbin = extras.getString("sbin");
 
-                        String c = sbin.substring(0,2);
+                        String c = sbin.substring(1,3);
                         Intent intent = new Intent(MapUtamaActivity.this, MappingAUPC.class );
                         intent.putExtra("sbin", c);
                         intent.putExtra("sbinFull", sbin);
@@ -75,7 +75,7 @@ public class MapUtamaActivity extends AppCompatActivity {
                         Bundle extras = getIntent().getExtras();
                         sbin = extras.getString("sbin");
 
-                        String c = sbin.substring(0,2);
+                        String c = sbin.substring(1,3);
                         Intent intent = new Intent(MapUtamaActivity.this, MappingAUPB.class );
                         intent.putExtra("sbin", c);
                         intent.putExtra("sbinFull", sbin);
@@ -102,7 +102,7 @@ public class MapUtamaActivity extends AppCompatActivity {
                         Bundle extras = getIntent().getExtras();
                         sbin = extras.getString("sbin");
 
-                        String c = sbin.substring(0,2);
+                        String c = sbin.substring(1,3);
                         Intent intent = new Intent(MapUtamaActivity.this, MappingAUPB.class );
                         intent.putExtra("sbin", c);
                         intent.putExtra("sbinFull", sbin);
@@ -129,7 +129,7 @@ public class MapUtamaActivity extends AppCompatActivity {
                         Bundle extras = getIntent().getExtras();
                         sbin = extras.getString("sbin");
 
-                        String c = sbin.substring(0,2);
+                        String c = sbin.substring(1,3);
                         Intent intent = new Intent(MapUtamaActivity.this, MappingAUPA.class );
                         intent.putExtra("sbin", c);
                         intent.putExtra("sbinFull", sbin);

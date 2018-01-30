@@ -3,6 +3,7 @@ package config;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +41,17 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
 
     @Override
     public void onBindViewHolder(OnHandViewHolder holder, int position) {
+
+        String scanner = dataList.get(position).getQUANTITY();
+        String[] scan = scanner.split("\\.");
+        int s1 = Integer.parseInt(scan[0]);
+        String ttl = String.valueOf(s1);
+        Log.e("sss","aaaa"+ttl);
+
         holder.textView64.setText(dataList.get(position).getMATDESC() +"\n"+"\n"+ dataList.get(position).getMATNO());
         holder.textView30.setText(dataList.get(position).getSPCSTK());
         holder.textView65.setText(dataList.get(position).getVALTYPE());
-        holder.textView90.setText(dataList.get(position).getQUANTITY());
+        holder.textView90.setText(ttl);
         holder.textView91.setText(dataList.get(position).getUOM());
     }
 
