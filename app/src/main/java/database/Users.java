@@ -2,6 +2,7 @@ package database;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 /**
  * Created by yosep on 1/23/2018.
@@ -11,8 +12,11 @@ public class Users extends RealmObject{
 
     @PrimaryKey
     private int id;
+    @Required
     private String username;
+    @Required
     private String password;
+    @Required
     private String role;
     private String ad;
 

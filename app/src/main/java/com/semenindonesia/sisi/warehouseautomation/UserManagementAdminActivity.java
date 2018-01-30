@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,10 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
+import database.Users;
 import de.mrapp.android.dialog.WizardDialog;
 import fragment.AddUserManagement;
 import fragment.Filter_Movtype;
-import helper.RealmHelper;
+import database.RealmHelper;
+import helper.User;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import model.UserModel;
@@ -37,6 +40,9 @@ public class UserManagementAdminActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RealmHelper helper;
     private ArrayList<UserModel> data;
+    Realm realm;
+
+    String user,pass,role;
 
     FragmentManager fm = getSupportFragmentManager();
 
@@ -52,6 +58,10 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rvUser);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd = (Button) findViewById(R.id.btnAdd);
+
+        Realm.init(this);
+        realm=Realm.getDefaultInstance();
+        helper = new RealmHelper(UserManagementAdminActivity.this);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +82,15 @@ public class UserManagementAdminActivity extends AppCompatActivity {
                 dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
+                        user = AddUserManagement.usernametxt;
+                        pass = AddUserManagement.passwordtxt;
+                        role = AddUserManagement.role;
+                        Log.e(TAG, "onDismiss: "+user+pass+role);
+                        realm.beginTransaction();
 
+                        helper.addUser(user,pass,"",role);
+
+                        realm.commitTransaction();
                     }
                 });
                 WizardDialog dialog = dialogBuilder.create();
@@ -81,5 +99,8 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         });
 
     }
+
+
+
 
 }

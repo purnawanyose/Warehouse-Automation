@@ -11,9 +11,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.ActionBarContextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -38,6 +40,7 @@ public class AddUserManagement extends Fragment{
     EditText password;
     Button save;
     Spinner spinner;
+    public static String usernametxt, passwordtxt, role;
 
 
     public AddUserManagement() {
@@ -48,13 +51,13 @@ public class AddUserManagement extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_add_user_management, container, false);
+
         checkBox = (CheckBox) rootView.findViewById(R.id.checkBox);
         password = (EditText) rootView.findViewById(R.id.password);
+        username = (EditText) rootView.findViewById(R.id.username);
 
         checkBox.setChecked(true);
         password.setVisibility(View.INVISIBLE);
-
-
 
         List<String> spinnerArray =  new ArrayList<String>();
         spinnerArray.add("Admin");
@@ -64,8 +67,37 @@ public class AddUserManagement extends Fragment{
                 getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) rootView.findViewById(R.id.spinner);
+        final Spinner sItems = (Spinner) rootView.findViewById(R.id.spinner);
         sItems.setAdapter(adapter);
+        sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                role = sItems.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        username.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                usernametxt = username.getText().toString();
+                return false;
+            }
+        });
+
+        password.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                passwordtxt = password.getText().toString();
+                return false;
+            }
+        });
+
+
 
         CheckBox someCheckBox= (CheckBox) rootView.findViewById (R.id.checkBox);
         someCheckBox.setOnClickListener(new View.OnClickListener() {
