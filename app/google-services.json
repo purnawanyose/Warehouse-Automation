@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "673060231072",
+    "firebase_url": "https://warehouseautomation-c8d83.firebaseio.com",
+    "project_id": "warehouseautomation-c8d83",
+    "storage_bucket": "warehouseautomation-c8d83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673060231072:android:40c95511049cd517",
+        "android_client_info": {
+          "package_name": "com.semenindonesia.sisi.warehouseautomation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673060231072-iqu42jne21mt39ni211var30j1jiqb2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApkswne_jTK6ZgHrgq1iFKf91ABfAf8rI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

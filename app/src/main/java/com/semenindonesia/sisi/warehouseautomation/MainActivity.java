@@ -17,6 +17,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import java.util.List;
 
 import model.BonSementara;
@@ -141,6 +144,42 @@ public class MainActivity extends AppCompatActivity {
 
         Bon();
         Interim();
+
+        final KProgressHUD khud = KProgressHUD.create(MainActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Retrieve Data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+            @Override
+            public void doOnBackground() {
+
+                // Pretend it's doing some background processing
+                try {
+
+                    Thread.sleep(6000);
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Create a fake result (MUST be final)
+                final boolean result = true;
+
+                // Send the result to the UI thread and show it on a Toast
+                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                    @Override
+                    public void doInUIThread() {
+                        khud.dismiss();
+                    }
+                });
+            }
+        });
 
 //BUTTON ON CLICK -BEGIN-
 

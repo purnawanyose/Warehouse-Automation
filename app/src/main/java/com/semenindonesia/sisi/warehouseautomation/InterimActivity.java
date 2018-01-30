@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +44,45 @@ public class InterimActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interim_storage);
 
-        /*Create handle for the RetrofitInstance interface*/
+
+        final KProgressHUD khud = KProgressHUD.create(InterimActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Retrieve Data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+            @Override
+            public void doOnBackground() {
+
+                // Pretend it's doing some background processing
+                try {
+                    retrifit();
+                    Thread.sleep(6000);
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Create a fake result (MUST be final)
+                final boolean result = true;
+
+                // Send the result to the UI thread and show it on a Toast
+                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                    @Override
+                    public void doInUIThread() {
+                        khud.dismiss();
+                    }
+                });
+            }
+        });
+    }
+    public void  retrifit(){
+         /*Create handle for the RetrofitInstance interface*/
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
@@ -55,6 +97,9 @@ public class InterimActivity extends AppCompatActivity {
             public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
                 generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
                 List<Interim> content = response.body().getInterim();
+                if (content.size() < 1){
+                    Toast.makeText(InterimActivity.this,"Data Not Found!",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -62,7 +107,6 @@ public class InterimActivity extends AppCompatActivity {
                 Toast.makeText(InterimActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     /*Method to generate List of employees using RecyclerView with custom adapter*/
@@ -77,6 +121,15 @@ public class InterimActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent a = new Intent(this,MainActivity.class);
+            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(a);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
 

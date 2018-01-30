@@ -28,6 +28,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
     private Context context;
 
     public ArrayList<OnHandLocation> dataList;
+    public static String qty;
 
     public OnHandLocationRv(ArrayList<OnHandLocation> dataList) {
         this.dataList = dataList;
@@ -61,6 +62,15 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
         if (OnhandLocationActivity.scan.equalsIgnoreCase(dataList.get(position).getSBIN())){
             holder.et2.setEnabled(true);
         }
+//        clickEvents(holder, position);
+        holder.et2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                OnhandLocationActivity.qtybro = holder.et2.getText().toString();
+                return false;
+            }
+        });
+
 
         clickEvents(holder, position);
 
@@ -91,6 +101,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             et2.setEnabled(false);
         }
     }
+<<<<<<< HEAD
     private void clickEvents(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
         holder.et2.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -121,4 +132,6 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
 
     }
 
+=======
+>>>>>>> 62ff7254fa9a1a0a80500f4568a641c38e2c63d8
 }

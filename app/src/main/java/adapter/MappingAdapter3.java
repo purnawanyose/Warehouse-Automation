@@ -122,7 +122,7 @@ public class MappingAdapter3 extends RecyclerView.Adapter<MappingAdapter3.ViewHo
                 sbinn = MappingAUPA.sbin;
                 sbinFull = MappingAUPA.sbinFull;
                 Log.e(TAG, "mappingadapter" + sbinn);
-                bb = sbinn.substring(0, 2);
+                bb = sbinn.substring(0,2);
 
                 Intent intent = new Intent(context, LayoutKelima.class);
                 intent.putExtra("namaLorong", sbinn);

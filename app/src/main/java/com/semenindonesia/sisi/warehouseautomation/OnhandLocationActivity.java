@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +34,7 @@ import service.ApiClient;
 import service.ApiInterface;
 
 import static com.semenindonesia.sisi.warehouseautomation.R.drawable.rsv;
+import static com.semenindonesia.sisi.warehouseautomation.R.id.plantText;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.tvScan;
 
 public class OnhandLocationActivity extends AppCompatActivity {
@@ -41,6 +45,12 @@ public class OnhandLocationActivity extends AppCompatActivity {
 
     String plantt, norsvv,orderr,matnoo;
     private RecyclerView recyclerView;
+<<<<<<< HEAD
+=======
+    public static String scan = "dfsgfsdgs";
+    public static Button btnAction;
+    public static String qtybro, matnooo,ambilTampung;
+>>>>>>> 62ff7254fa9a1a0a80500f4568a641c38e2c63d8
 
     private OnHandLocationRv adapter;
     @Override
@@ -64,7 +74,93 @@ public class OnhandLocationActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         plantt = extras.getString("PLANT");
         matnoo = extras.getString("MATNO");
+<<<<<<< HEAD
 
+=======
+        rsvnoo = extras.getString("RSVNO");
+        ordr = extras.getString("ORDER");
+        matnrr = extras.getString("MATNR");
+        matnooo = extras.getString("MATNO");
+        ambilTampung = extras.getString("TAMPUNG");
+        final KProgressHUD khud = KProgressHUD.create(OnhandLocationActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Retrieve Data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+            @Override
+            public void doOnBackground() {
+
+                // Pretend it's doing some background processing
+                try {
+                    retrofit();
+                    Thread.sleep(6000);
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Create a fake result (MUST be final)
+                final boolean result = true;
+
+                // Send the result to the UI thread and show it on a Toast
+                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                    @Override
+                    public void doInUIThread() {
+                        khud.dismiss();
+                    }
+                });
+            }
+        });
+
+        tvScann.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    tvScann.setVisibility(View.GONE);
+                    btnAction.setVisibility(View.VISIBLE);
+                    btnAction.setEnabled(true);
+                    // Perform action on key press
+                    String scanner = tvScann.getText().toString();
+                    String[] scann = scanner.split("#");
+                    Log.e("Hasil", "Scan" + scanner.toString());
+                    String s = scann[5];
+                    scan = s;
+                    Log.e("aa", "onKey: " + scan.toString());
+                    retrofit();
+                }else{
+
+                }
+                return false;
+            }
+        });
+
+        btnAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("MASRAMZI", "onClick: "+qtybro );
+                Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailActivity.class);
+                intent.putExtra("WERKS",plantt);
+                intent.putExtra("matno",matnooo);
+                intent.putExtra("RSNUM",rsvnoo);
+                intent.putExtra("WERKS",ordr);
+                intent.putExtra("matnr",matnrr);
+                intent.putExtra("QTY",qtybro);
+                intent.putExtra("TAMPUNG",ambilTampung);
+
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void retrofit(){
+>>>>>>> 62ff7254fa9a1a0a80500f4568a641c38e2c63d8
         /*Create handle for the RetrofitInstance interface*/
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
@@ -88,6 +184,10 @@ public class OnhandLocationActivity extends AppCompatActivity {
                 Log.e("Test", "onFailure: "+Call.class );
             }
         });
+<<<<<<< HEAD
+=======
+    }
+>>>>>>> 62ff7254fa9a1a0a80500f4568a641c38e2c63d8
 
         tvScann.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -110,4 +210,5 @@ public class OnhandLocationActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
+
 }
