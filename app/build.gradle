@@ -50,4 +50,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'com.google.firebase:firebase-database:9.6.1'
 }
+    apply plugin: 'com.google.gms.google-services'

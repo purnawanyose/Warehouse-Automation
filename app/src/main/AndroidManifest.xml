@@ -28,7 +28,7 @@
             android:name=".DetailOpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".AddUserActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,6 +88,7 @@
         <activity android:name=".LayoutKetiga" />
         <activity android:name=".LayoutKeempat" />
         <activity android:name=".LayoutKelima" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>
