@@ -63,20 +63,20 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             holder.et2.setEnabled(true);
         }
 //        clickEvents(holder, position);
-        holder.et2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                OnhandLocationActivity.qtybro = holder.et2.getText().toString();
-                return false;
-            }
-        });
 
 
         clickEvents(holder, position);
 
     }
 
-    @Override
+    @Override/* holder.et2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                OnhandLocationActivity.qtybro = holder.et2.getText().toString();
+                return false;
+            }
+        });
+*/
     public int getItemCount() {
         return dataList.size();
     }
@@ -101,24 +101,15 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             et2.setEnabled(false);
         }
     }
-<<<<<<< HEAD
     private void clickEvents(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
         holder.et2.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    String scanner = holder.tvScann.getText().toString();
-                    String[] scan = scanner.split("#");
-                    holder.et2.setEnabled(true);
-                    holder.et2.setText("1");
-                    if (dataList.get(position).getSBIN().equals(scan[5])){
-                        holder.et2.setText("111");
-                        Log.e("as", "onKey: "+dataList.get(position).getSBIN());
-                        Log.e("as", "onKey: "+scan[5]);
-                    }
+                    OnhandLocationActivity.qtybro = holder.et2.getText().toString();
+                    Log.e("SHIt", "onKey: "+OnhandLocationActivity.qtybro );
 
-                }else{
 
                 }
                 return false;
@@ -129,9 +120,5 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
     public static void Scanner(String sbin){
 
 
-
     }
-
-=======
->>>>>>> 62ff7254fa9a1a0a80500f4568a641c38e2c63d8
 }

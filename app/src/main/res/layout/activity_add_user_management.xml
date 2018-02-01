@@ -106,6 +106,16 @@
                 android:background="@android:color/black" />
 
         </LinearLayout>
+        <Button
+            android:id="@+id/btn_savee"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="SAVE"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
