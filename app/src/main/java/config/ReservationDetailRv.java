@@ -24,12 +24,16 @@ import adapter.Main_ReservationRv;
 import model.Interim;
 import model.Reservation;
 
+import static com.semenindonesia.sisi.warehouseautomation.OnhandLocationActivity.nilaiAkhir;
+
 public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailRv.ReservationDetailViewHolder> {
 
     TextView textView56, textView27;
     private Context context;
     String cc, ccc;
     public static String chart,tampung;
+    public static String akhirNilai;
+    public static String akhirNilaii[];
 
     public ArrayList<Reservation> dataList;
 
@@ -70,25 +74,20 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
 
         if (OnhandLocationActivity.matnooo != null)
         {
+            holder.img.setEnabled(false);
             if (OnhandLocationActivity.matnooo.equals(dataList.get(position).getMATNR()))
             {
-                Log.e("Testmatno", "onBindViewHolder: "+OnhandLocationActivity.matnooo.toString());
-                holder.textView72.setText(OnhandLocationActivity.qtybro);
-                tampung = holder.textView72.getText().toString();
-                Log.e("Test Tampung", "onBindViewHolder: "+tampung);
-            }else
-                {
+                akhirNilai = String.valueOf(OnhandLocationActivity.nilaiAkhir);
+                holder.textView72.setText(akhirNilai);
+                Log.e("tetakhirnilai", "onBindViewHolder: "+akhirNilai);
 
+//                Keranjang.nilaiTampung[position] = Integer.parseInt((holder.textView72.getText().toString()));
+
+            }else {
+                    holder.textView72.setText("0");
                 }
-        }/*else if(tampung != null){
-            if (OnhandLocationActivity.matnooo.equals(dataList.get(position).getMATNR())){
-                holder.textView72.setText(ReservationDetailActivity.akhirTampung);
-                Log.e("Test Tampung Akhir", "onBindViewHolder: "+ReservationDetailActivity.akhirTampung);
-            }else
-            {
+        }
 
-            }
-        }*/
     }
 
     @Override
@@ -115,18 +114,18 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
             img = (ImageView) itemView.findViewById(R.id.img);
         }
     }
-    private void click(ReservationDetailViewHolder holder, final int position) {
+    private void click(final ReservationDetailViewHolder holder, final int position) {
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Reservation data = dataList.get(position);
                 Intent intent = new Intent(context, OnhandLocationActivity.class);
+
                 intent.putExtra("PLANT", data.getWERKS());
                 intent.putExtra("RSVNO", data.getRSNUM());
                 intent.putExtra("ORDER", data.getAUFNR());
                 intent.putExtra("MATNR", data.getMAKTX()+" "+data.getMATNR());
                 intent.putExtra("MATNO", data.getMATNR());
-                intent.putExtra("TAMPUNG",tampung);
                 context = v.getContext();
                 v.getContext().startActivity(intent);
             }

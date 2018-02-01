@@ -107,9 +107,8 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    OnhandLocationActivity.qtybro = holder.et2.getText().toString();
-                    Log.e("SHIt", "onKey: "+OnhandLocationActivity.qtybro );
-
+                    OnhandLocationActivity.qtybroo[position] = Integer.parseInt(holder.et2.getText().toString());
+                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.qtybroo[position]);
 
                 }
                 return false;
