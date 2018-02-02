@@ -101,7 +101,6 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             et2.setEnabled(false);
         }
     }
-<<<<<<< HEAD
     private void clickEvents(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
         holder.et2.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -132,6 +131,4 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
 
     }
 
-=======
->>>>>>> 62ff7254fa9a1a0a80500f4568a641c38e2c63d8
 }
