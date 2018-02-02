@@ -46,16 +46,28 @@ public class OnhandLocationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public static String scan = "dfsgfsdgs";
     public static Button btnAction;
+<<<<<<< HEAD
     public static String qtybro, matnooo,ambilTampung;
 
+=======
+    public static String  matnooo,ambilTampung;
+    public static List<String>list;
+    public static List<String>qtybro;
+    public  static  int qtybroo[];
+    public  static  int nilaiAkhir = 0;
+>>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
     private OnHandLocationRv adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onhand_location);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_onhand_location);
+<<<<<<< HEAD
 
+=======
+>>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
         plant = (TextView) findViewById(R.id.noreservation);
         norsv = (TextView) findViewById(R.id.reservationno);
         order = (TextView) findViewById(R.id.order);
@@ -64,6 +76,13 @@ public class OnhandLocationActivity extends AppCompatActivity {
         et2 = (TextView) findViewById(R.id.et2);
         btnAction = (Button) findViewById(R.id.btnAction);
 
+<<<<<<< HEAD
+=======
+        list = new ArrayList<String>();
+
+
+
+>>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
 //        tvScann.setOnKeyListener(null);
 
           /* Bundle extras = getIntent().getExtras();*/
@@ -79,7 +98,6 @@ public class OnhandLocationActivity extends AppCompatActivity {
         ordr = extras.getString("ORDER");
         matnrr = extras.getString("MATNR");
         matnooo = extras.getString("MATNO");
-        ambilTampung = extras.getString("TAMPUNG");
         final KProgressHUD khud = KProgressHUD.create(OnhandLocationActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -97,7 +115,6 @@ public class OnhandLocationActivity extends AppCompatActivity {
                 try {
                     retrofit();
                     Thread.sleep(6000);
-
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -142,24 +159,45 @@ public class OnhandLocationActivity extends AppCompatActivity {
         btnAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("MASRAMZI", "onClick: "+qtybro );
                 Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailActivity.class);
                 intent.putExtra("WERKS",plantt);
                 intent.putExtra("matno",matnooo);
                 intent.putExtra("RSNUM",rsvnoo);
                 intent.putExtra("WERKS",ordr);
                 intent.putExtra("matnr",matnrr);
-                intent.putExtra("QTY",qtybro);
                 intent.putExtra("TAMPUNG",ambilTampung);
 
+                list.size();
+
+                for (int i = 0; i <qtybroo.length ; i++) {
+                    int nilai = qtybroo[i];
+                    Log.e("TESTIS", "onCreate: "+nilai);
+
+                    nilaiAkhir = nilaiAkhir + nilai;
+                    Log.e("TESTISTESTIS", "onCreate: "+nilaiAkhir);
+
+                }
+                int index = 0;
+                Log.e("TEST ARRAY", "onCreate: "+qtybroo.length);
+                intent.putExtra("QTY",nilaiAkhir);
                 startActivity(intent);
             }
         });
 
+
+
+
     }
     private void retrofit(){
+<<<<<<< HEAD
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
+=======
+        /*Create handle for the RetrofitInstance interface*/
+        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        /*Call the method with parameter in the interface to get the employee data*/
+>>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
         Call<OnHandLocationResponse> call = apiService.getOnhandLocation(plantt,matnoo);
 
         Log.wtf("URL Called", call.request().url() + "");
@@ -189,6 +227,8 @@ public class OnhandLocationActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+
+        qtybroo = new int[empDataList.size()];
     }
 
 }

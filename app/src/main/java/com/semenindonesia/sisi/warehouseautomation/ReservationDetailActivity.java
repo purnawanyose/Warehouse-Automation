@@ -8,7 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arasthel.asyncjob.AsyncJob;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -17,9 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.InterimRv;
+import config.Keranjang;
 import config.ReservationDetailRv;
 import model.Interim;
 import model.Reservation;
+import response.InterimResponse;
 import response.ReservationDetailResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +41,11 @@ public class ReservationDetailActivity extends AppCompatActivity {
     private ReservationDetailRv adapter;
     private RecyclerView recyclerView;
     public static String chart ="1";
-    public static String akhirTampung;
+    public static String akhirTampung, tampung1;
+    public static int[] akhirNilaii;
+    public static int akhirNilaiii;
+
+    Button btnGoodIssued;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,8 @@ public class ReservationDetailActivity extends AppCompatActivity {
         order =(TextView) findViewById(R.id.order);
         textView68 = (TextView) findViewById(R.id.textView68);
         textView66 = (TextView) findViewById(R.id.textView66);
+
+        btnGoodIssued = (Button) findViewById(R.id.btnGoodIssued);
 
         final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -83,13 +94,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
             }
         });
 
-        if (OnhandLocationActivity.matnooo != null ){
-            textView66.setText(chart);
-        }else{
-
-        }
-
-
         final Context context = this.getApplicationContext();
 
         Bundle extras = getIntent().getExtras();
@@ -97,8 +101,16 @@ public class ReservationDetailActivity extends AppCompatActivity {
         rwerks = extras.getString("WERKS");
         rlgort = extras.getString("LGORT");
         akhirTampung = extras.getString("TAMPUNG");
+        tampung1 = extras.getString("QTY");
 
-                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        btnGoodIssued.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postRetrofit();
+            }
+        });
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,rNumber,"1");
         call.enqueue(new Callback<ReservationDetailResponse>() {
             @Override
@@ -121,7 +133,39 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        if (OnhandLocationActivity.matnooo != null ){
+            textView66.setText(chart);
+        }else{
+
+        }
+
+
+
     }
+
+    private void postRetrofit(){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<ReservationDetailResponse> call = apiService.setGoodIssued("20180131","20180131","Coba Azmi","AZMI","7702","961","3","052165269","2","W201","C1","","");
+        Log.wtf("URL Called", call.request().url() + "");
+        call.enqueue(new Callback<ReservationDetailResponse>() {
+
+            @Override
+            public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
+                List<Reservation> content = response.body().getReservation();
+                if (content.size() < 1){
+                    Toast.makeText(ReservationDetailActivity.this,"Data Not Found!",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReservationDetailResponse> call, Throwable t) {
+                Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     private void generateReservationDetailResponse(ArrayList<Reservation> empDataList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_reservation_detail);
 
@@ -133,6 +177,8 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {

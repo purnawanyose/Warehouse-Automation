@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,10 +21,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
+import config.Management_User_Rv;
 import database.Users;
 import de.mrapp.android.dialog.WizardDialog;
 import fragment.AddUserManagement;
@@ -42,6 +52,13 @@ public class UserManagementAdminActivity extends AppCompatActivity {
     private ArrayList<UserModel> data;
     Realm realm;
 
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    List<model.User>list;
+    RecyclerView recycle;
+    Button view;
+
+
     String user,pass,role;
 
     FragmentManager fm = getSupportFragmentManager();
@@ -51,6 +68,11 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_management_admin);
 
+
+        recycle = (RecyclerView) findViewById(R.id.rvUser);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("message");
+
 /*
         data = new ArrayList<>();
         helper = new RealmHelper(UserManagementAdminActivity.this);
@@ -58,49 +80,59 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rvUser);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd = (Button) findViewById(R.id.btnAdd);
+        view = (Button) findViewById(R.id.button3);
 
         Realm.init(this);
         realm=Realm.getDefaultInstance();
         helper = new RealmHelper(UserManagementAdminActivity.this);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                list = new ArrayList<model.User>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    model.User value = dataSnapshot1.getValue(model.User.class);
+                    model.User fire = new model.User();
 
+                    String username = value.getUsername();
+                    String password = value.getPassword();
+                    String role = value.getRole();
 
-                WizardDialog.Builder dialogBuilder = new WizardDialog.Builder(UserManagementAdminActivity.this);
-                dialogBuilder.addFragment("", AddUserManagement.class);
-                dialogBuilder.showHeader(false);
-//                dialogBuilder.setHeaderBackground(R.drawable.semensi);
-                dialogBuilder.setHeaderIcon(R.drawable.semensi);
-                dialogBuilder.setFinishButtonText("Save");
-                dialogBuilder.showHeader(false);
-                dialogBuilder.setFullscreen(false);
-                dialogBuilder.setHeight(400);
-                dialogBuilder.setMaxHeight(500);
-                dialogBuilder.setCancelable(true);
-                dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        user = AddUserManagement.usernametxt;
-                        pass = AddUserManagement.passwordtxt;
-                        role = AddUserManagement.role;
-                        Log.e(TAG, "onDismiss: "+user+pass+role);
-                        realm.beginTransaction();
+                    fire.setUsername(username);
+                    fire.setPassword(password);
+                    fire.setRole(role);
+                    list.add(fire);
+                }
+            }
 
-                        helper.addUser(user,pass,"",role);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "onCancelled: ",databaseError.toException() );
 
-                        realm.commitTransaction();
-                    }
-                });
-                WizardDialog dialog = dialogBuilder.create();
-                dialog.show(getSupportFragmentManager(),"test");
             }
         });
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserManagementAdminActivity.this, AddUserManagementActivity.class );
+                startActivity(intent);
+            }
+        });
+
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                Management_User_Rv recyclerAdapter = new Management_User_Rv(list,UserManagementAdminActivity.this);
+                RecyclerView.LayoutManager recyce = new GridLayoutManager(UserManagementAdminActivity.this,2);
+                recycle.setLayoutManager(recyce);
+                recycle.setItemAnimator(new DefaultItemAnimator());
+                recycle.setAdapter(recyclerAdapter);
+                return false;
+            }
+        });
+
+
     }
-
-
-
-
 }
