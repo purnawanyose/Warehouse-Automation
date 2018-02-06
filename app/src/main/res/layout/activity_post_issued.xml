@@ -32,6 +32,7 @@
                 android:id="@+id/docDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 android:ems="10"
                 android:hint="Document Date"
                 android:inputType="date" />
@@ -55,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Posting Date"
+                android:editable="false"
                 android:inputType="date" />
         </LinearLayout>
 
