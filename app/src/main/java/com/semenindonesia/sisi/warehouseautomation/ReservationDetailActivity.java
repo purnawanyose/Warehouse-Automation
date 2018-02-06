@@ -1,6 +1,7 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,9 +20,15 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapter.Filter_MaterialRv;
+import butterknife.OnClick;
 import config.InterimRv;
 import config.Keranjang;
 import config.ReservationDetailRv;
+import de.mrapp.android.dialog.WizardDialog;
+import fragment.Filter_Movtype;
+import fragment.Filter_material;
+import fragment.GoodIssued;
 import model.Interim;
 import model.Reservation;
 import response.InterimResponse;
@@ -44,6 +51,11 @@ public class ReservationDetailActivity extends AppCompatActivity {
     public static String akhirTampung, tampung1;
     public static int[] akhirNilaii;
     public static int akhirNilaiii;
+    String WERKSS,RSVNO, BWART, LGORT;
+    public static String RSPOS;
+    public static String specialStock;
+    public static String wbs_elem;
+    public static String val_type;
 
     Button btnGoodIssued;
 
@@ -76,7 +88,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(6000);
 
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -102,13 +113,11 @@ public class ReservationDetailActivity extends AppCompatActivity {
         rlgort = extras.getString("LGORT");
         akhirTampung = extras.getString("TAMPUNG");
         tampung1 = extras.getString("QTY");
+        wbs_elem = extras.getString("WBS");
+        val_type = extras.getString("VAL");
+        specialStock = extras.getString("SS");
 
-        btnGoodIssued.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postRetrofit();
-            }
-        });
+
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,rNumber,"1");
@@ -119,9 +128,16 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 List<Reservation> content = response.body().getReservation();
                 for (Reservation data : content) {
                     Log.e("content", "Material No " + content.toString());
+
                     WERKS.setText("Plant \t\t\t\t\t\t : "+data.getWERKS());
                     rsv.setText("Reservation No. \t : "+data.getRSNUM());
                     order.setText("Order \t\t\t\t\t\t : "+data.getAUFNR());
+
+                    WERKSS = data.getWERKS();
+                    RSVNO = data.getRSNUM();
+                    BWART = data.getBWART();
+                    LGORT = data.getLGORT();
+
 //                    textView68.setText(data.getMAKTX());
                 }
             }
@@ -140,30 +156,35 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
         }
 
-
-
-    }
-
-    private void postRetrofit(){
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationDetailResponse> call = apiService.setGoodIssued("20180131","20180131","Coba Azmi","AZMI","7702","961","3","052165269","2","W201","C1","","");
-        Log.wtf("URL Called", call.request().url() + "");
-        call.enqueue(new Callback<ReservationDetailResponse>() {
-
+        btnGoodIssued.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
-                List<Reservation> content = response.body().getReservation();
-                if (content.size() < 1){
-                    Toast.makeText(ReservationDetailActivity.this,"Data Not Found!",Toast.LENGTH_LONG).show();
-                }
-            }
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PostIssuedActivity.class);
 
-            @Override
-            public void onFailure(Call<ReservationDetailResponse> call, Throwable t) {
-                Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                intent.putExtra("PLANT", WERKSS);
+                intent.putExtra("RSVNO", RSVNO);
+                intent.putExtra("BWART", BWART);
+                intent.putExtra("LGORT", LGORT);
+                intent.putExtra("RSPOS", RSPOS);
+                intent.putExtra("WBS", wbs_elem);
+                intent.putExtra("SS", specialStock);
+                intent.putExtra("VAL", val_type);
+
+
+//                intent.putExtra("ORDER", order.getText().toString());
+                intent.putExtra("NILAIAKHIR", ReservationDetailRv.akhirNilai);
+                Log.e("Test BTN ISSUED", "onClick: "+ReservationDetailRv.akhirNilai);
+                Log.e("Test RSPOS", "onClick: "+RSPOS);
+                Log.e("Test RSPOS", "onClick: "+wbs_elem);
+                Log.e("Test RSPOS", "onClick: "+specialStock);
+                Log.e("Test RSPOS", "onClick: "+val_type);
+                startActivity(intent);
+
             }
         });
     }
+    // END ON CREATE
+
 
 
     private void generateReservationDetailResponse(ArrayList<Reservation> empDataList) {
@@ -177,7 +198,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

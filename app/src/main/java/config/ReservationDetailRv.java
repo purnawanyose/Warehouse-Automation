@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +35,11 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
     public static String chart,tampung;
     public static String akhirNilai;
     public static String akhirNilaii[];
+    public static String a;
+    public static String b;
+    public static String c;
+
+
 
     public ArrayList<Reservation> dataList;
 
@@ -68,6 +74,8 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
         holder.textView68.setText(dataList.get(position).getMAKTX()+"\n"+dataList.get(position).getMATNR());
         holder.textView69.setText(scan[0] + "/" + scann[0]);
         holder.textView70.setText(dataList.get(position).getMEINS());
+
+
 //        holder.textView72.setText(ttl);
 
         click(holder, position);
@@ -79,12 +87,22 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
             {
                 akhirNilai = String.valueOf(OnhandLocationActivity.nilaiAkhir);
                 holder.textView72.setText(akhirNilai);
-                Log.e("tetakhirnilai", "onBindViewHolder: "+akhirNilai);
+                ReservationDetailActivity.RSPOS = dataList.get(position).getRSPOS();
+
+                if (holder.textView72 != null){
+                    b = dataList.get(position).getRSPOS();
+                    Log.e("BB", "onBindViewHolder: "+b);
+
+                }else{
+                    Log.e("ERRpppp", "onBindViewHolder: "+holder.textView72);
+
+                }
+
+
 
 //                Keranjang.nilaiTampung[position] = Integer.parseInt((holder.textView72.getText().toString()));
 
             }else {
-                    holder.textView72.setText("0");
                 }
         }
 
@@ -100,6 +118,7 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
         EditText textView72;
         LinearLayout linearClear;
         ImageView img;
+        Button btnIssued;
 
         ReservationDetailViewHolder(final View itemView) {
             super(itemView);
@@ -111,6 +130,7 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
             textView71 = (TextView) itemView.findViewById(R.id.textView71);
             textView72 = (EditText) itemView.findViewById(R.id.textView72);
             textView66 = (EditText) itemView.findViewById(R.id.textView66);
+            btnIssued = (Button) itemView.findViewById(R.id.btnGoodIssued);
             img = (ImageView) itemView.findViewById(R.id.img);
         }
     }
@@ -120,7 +140,6 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
             public void onClick(View v) {
                 final Reservation data = dataList.get(position);
                 Intent intent = new Intent(context, OnhandLocationActivity.class);
-
                 intent.putExtra("PLANT", data.getWERKS());
                 intent.putExtra("RSVNO", data.getRSNUM());
                 intent.putExtra("ORDER", data.getAUFNR());

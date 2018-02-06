@@ -9,10 +9,12 @@ import java.net.URLEncoder;
 
 import javax.xml.transform.Result;
 
+import model.Interim;
 import model.Reservation;
 import response.BonSementaraResponse;
 import response.ClearResponse;
 import response.InterimResponse;
+import response.IssuedResponse;
 import response.MasterSpecialStockResponse;
 import response.MaterialResponse;
 import response.MovTypeSelectionResponse;
@@ -29,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -104,9 +107,6 @@ public interface ApiInterface {
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[1]=7702&rlgort[0]=W210&rsnum[0]=51556926&detail=1")
     Call<ScannerReservationDetailResponse> getScannerReservationDetail();
-//
-//    @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[X1]={plant}&rsnum[1]={norev}&rbwart[0]={movtype}&matnr={matno}")
-//    Call<ReservationMainResponse> getReservationMain(@Path("plant") String plant, @Path("norev") String norev, @Path("movtype") String movtype, @Path("matno") String matno);
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<ReservationMainResponse> getReservationMain(
@@ -156,11 +156,57 @@ public interface ApiInterface {
             @Query("matnr[0]") String matnr
     );
 
+    @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<InterimResponse> getVermePositif(
+            @Query("[I_LGNUM]") String i_lgnum,
+            @Query("[I_BWLVS]") String bwlvs,
+            @Query("[I_MATNR]") String matnr,
+            @Query("[I_WERKS]") String werks,
+            @Query("[I_LGORT]") String lgort,
+            @Query("[I_CHARG]") String charg,
+            @Query("[I_ANFME]") String anfme,
+            @Query("[I_ALTME]") String altme,
+            @Query("[I_VLQNR]") String vlqnr,
+            @Query("[I_COMMIT_WORK]") String commit,
+            @Query("[I_BNAME]") String bname,
+            @Query("[I_KOMPL]") String kompl
+    );
+    @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<InterimResponse> getVermeNegatif(
+            @Query("[I_LGNUM]") String i_lgnum,
+            @Query("[I_BWLVS]") String bwlvs,
+            @Query("[I_MATNR]") String matnr,
+            @Query("[I_WERKS]") String werks,
+            @Query("[I_LGORT]") String lgort,
+            @Query("[I_CHARG]") String charg,
+            @Query("[I_ANFME]") String anfme,
+            @Query("[I_ALTME]") String altme,
+            @Query("[I_VLQNR]") String vlqnr,
+            @Query("[I_COMMIT_WORK]") String commit,
+            @Query("[I_BNAME]") String bname,
+            @Query("[I_KOMPL]") String kompl
+    );
+    @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<InterimResponse> getSobkz(
+            @Query("[I_LGNUM]") String i_lgnum,
+            @Query("[I_BWLVS]") String bwlvs,
+            @Query("[I_MATNR]") String matnr,
+            @Query("[I_WERKS]") String werks,
+            @Query("[I_LGORT]") String lgort,
+            @Query("[I_CHARG]") String charg,
+            @Query("[I_ANFME]") String anfme,
+            @Query("[I_ALTME]") String altme,
+            @Query("[I_VLQNR]") String vlqnr,
+            @Query("[I_COMMIT_WORK]") String commit,
+            @Query("[I_BNAME]") String bname,
+            @Query("[I_KOMPL]") String kompl
+    );
 
-    @GET ("Reservation/goodIssue/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-//    @FormUrlEncoded
-    Call <ReservationDetailResponse> setGoodIssued(
-            @Query("PSTNG_DATE") String PSTNG_DATE,
+
+    @POST ("Reservation/goodIssue/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    @FormUrlEncoded
+    Call <IssuedResponse> setGoodIssued(
+        /*    @Query("PSTNG_DATE") String PSTNG_DATE,
             @Query("DOC_DATE") String DOC_DATE,
             @Query("HEADER_TXT") String HEADER_TXT,
             @Query("PR_UNAME") String PR_UNAME,
@@ -172,23 +218,19 @@ public interface ApiInterface {
             @Query("STGE_LOC") String STGE_LOC,
             @Query("VAL_TYPE") String VAL_TYPE,
             @Query("SPEC_STOCK") String SPEC_STOCK,
-            @Query("WBS_ELEM") String WBS_ELEM
-            /*@Field("PSTNG_DATE") String PSTNG_DATE,
-            @Field("DOC_DATE") String DOC_DATE,
-            @Field("HEADER_TXT") String HEADER_TXT,
-            @Field("PR_UNAME") String PR_UNAME,
-            @Field("PLANT") String PLANT,
-            @Field("MOVE_TYPE") String MOVE_TYPE,
-            @Field("ENTRY_QNT") String ENTRY_QNT,
-            @Field("RESERV_NO") String RESERV_NO,
-            @Field("RES_ITEM") String RES_ITEM,
-            @Field("STGE_LOC") String STGE_LOC,
-            @Field("VAL_TYPE") String VAL_TYPE,
-            @Field("SPEC_STOCK") String SPEC_STOCK,
-            @Field("WBS_ELEM") String WBS_ELEM*/
+            @Query("WBS_ELEM") String WBS_ELEM*/
+            @Field("header[PSTNG_DATE]") String PSTNG_DATE,
+            @Field("header[DOC_DATE]") String DOC_DATE,
+            @Field("header[HEADER_TXT]") String HEADER_TXT,
+            @Field("detail[0][PR_UNAME]") String PR_UNAME,
+            @Field("detail[0][PLANT}") String PLANT,
+            @Field("detail[0][MOVE_TYPE]") String MOVE_TYPE,
+            @Field("detail[0][ENTRY_QNT]") String ENTRY_QNT,
+            @Field("detail[0][RESERV_NO]") String RESERV_NO,
+            @Field("detail[0][RES_ITEM]") String RES_ITEM,
+            @Field("detail[0][STGE_LOC]") String STGE_LOC,
+            @Field("detail[0][VAL_TYPE]") String VAL_TYPE,
+            @Field("detail[0][SPEC_STOCK]") String SPEC_STOCK,
+            @Field("detail[0][WBS_ELEM]") String WBS_ELEM
     );
- /*   @POST(" Reservation/goodIssue\n" +
-            "    X-API-KEY: 80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8");
-
-*/
 }
