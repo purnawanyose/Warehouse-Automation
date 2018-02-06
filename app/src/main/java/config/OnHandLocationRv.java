@@ -98,7 +98,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             et2 = (EditText) itemView.findViewById(R.id.et2);
             tvScann = (TextView) itemView.findViewById(R.id.tvScann);
 
-            et2.setEnabled(false);
+            et2.setEnabled(true);
         }
     }
     private void clickEvents(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
@@ -108,7 +108,15 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     OnhandLocationActivity.qtybroo[position] = Integer.parseInt(holder.et2.getText().toString());
+                    OnhandLocationActivity.specialStock[position] =(holder.ohl4.getText().toString());
+                    OnhandLocationActivity.wbs_elem[position] = (holder.ohl5.getText().toString());
+                    OnhandLocationActivity.val_type[position] = (holder.ohl3.getText().toString());
+
+
                     Log.e("SHIt", "onKey: "+ OnhandLocationActivity.qtybroo[position]);
+                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.specialStock[position]);
+                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.wbs_elem[position]);
+                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.val_type[position]);
 
                 }
                 return false;

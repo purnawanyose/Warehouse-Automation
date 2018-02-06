@@ -20,11 +20,19 @@ public class ReservationDetailResponse {
     private List <Reservation> reservation;
 
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public List<Reservation> getReservation() {
         return reservation;
     }
 
-    public String getStatus() {
-        return status;
+    public void setReservation(List<Reservation> reservation) {
+        this.reservation = reservation;
     }
 }

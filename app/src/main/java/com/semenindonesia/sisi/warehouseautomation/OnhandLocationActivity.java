@@ -51,7 +51,11 @@ public class OnhandLocationActivity extends AppCompatActivity {
     public static List<String>qtybro;
     public  static  int qtybroo[];
     public  static  int nilaiAkhir = 0;
+    public static String specialStock[];
+    public static String wbs_elem[];
+    public static String val_type[];
     private OnHandLocationRv adapter;
+    String ss, wbs, val;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,9 +169,23 @@ public class OnhandLocationActivity extends AppCompatActivity {
                     Log.e("TESTISTESTIS", "onCreate: "+nilaiAkhir);
 
                 }
+                for (int i = 0; i <specialStock.length ; i++) {
+                     ss = specialStock[i];
+
+                }
                 int index = 0;
                 Log.e("TEST ARRAY", "onCreate: "+qtybroo.length);
+
                 intent.putExtra("QTY",nilaiAkhir);
+                intent.putExtra("SS",ss);
+                intent.putExtra("WBS",wbs_elem);
+                intent.putExtra("VAL",val_type);
+
+                Log.e("TESTISTESTIS", "onCreate: "+specialStock[0]);
+                Log.e("TESTISTESTIS", "onCreate: "+wbs_elem);
+                Log.e("TESTISTESTIS", "onCreate: "+val_type);
+
+
                 startActivity(intent);
             }
         });
@@ -213,6 +231,9 @@ public class OnhandLocationActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         qtybroo = new int[empDataList.size()];
+        specialStock = new String[empDataList.size()];
+        wbs_elem = new String[empDataList.size()];
+        val_type = new String[empDataList.size()];
     }
 
 }

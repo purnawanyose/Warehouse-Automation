@@ -4,24 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.Image;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.semenindonesia.sisi.warehouseautomation.ImageViewActivity;
 import com.semenindonesia.sisi.warehouseautomation.InterimActivity;
 import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Interim;
 import model.Quant;
 import response.ClearResponse;
@@ -65,9 +64,8 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
         holder.textView56.setText(dataList.get(position).getLQNUM());
 
         applyClickEvents(holder,position);
-//        holder.txtEmpEmail.setText(dataList.get(position).getEmail());
-//        holder.txtEmpPhone.setText(dataList.get(position).getPhone());
-    }
+//        clearInterim(holder, position);
+ }
 
     @Override
     public int getItemCount() {
@@ -76,6 +74,7 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
 
     public class InterimViewHolder  extends RecyclerView.ViewHolder{
         TextView textView51,textView52, textView53, textView54, textView55, textView56;
+        ImageView imgClear;
         LinearLayout linearClear;
 
         InterimViewHolder(final View itemView) {
@@ -87,6 +86,7 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
             textView54 = (TextView) itemView.findViewById(R.id.textView54);
             textView55 = (TextView) itemView.findViewById(R.id.textView55);
             textView56 = (TextView) itemView.findViewById(R.id.textView56);
+            imgClear = (ImageView) itemView.findViewById(R.id.imgClear);
             linearClear = (LinearLayout) itemView.findViewById(R.id.linearClear);
         }
     }
@@ -106,20 +106,94 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
             }
         });
     }
-    private void clearEvent(InterimRv.InterimViewHolder holder, final int position) {
-        holder.linearClear.setOnClickListener(new View.OnClickListener() {
+
+    private void clearInterim(InterimRv.InterimViewHolder holder, final int position){
+        holder.imgClear.setOnClickListener(new View.OnClickListener() {
+            int a = Integer.parseInt(dataList.get(position).getVERME());
             @Override
-            public void onClick(View view) {
-                final Interim data = dataList.get(position);
-                int a = Integer.parseInt(String.valueOf(data.getVERME()));
-                //======== Menuju ke form quant ========
-                Intent intent = new Intent(context, QuantDetailActivity.class );
-                intent.putExtra("MATNR", data.getMATNR());
-                intent.putExtra("WERKS", data.getWERKS());
-                intent.putExtra("LQNUM", data.getLQNUM());
-                intent.putExtra("LGTYP", data.getLGTYP());
-                context = view.getContext();
-                view.getContext().startActivity(intent);
+            public void onClick(View v) {
+//                if (dataList.get(position).getVERME(())
+                if (a >=1){
+                     /*Create handle for the RetrofitInstance interface*/
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+//                    Call<InterimResponse> call = apiService.getInterim();
+                    Call<InterimResponse> call = apiService.getVermePositif("A","A","A","A","A","A","A","A","A","A","A","A");
+
+                    /*Log the URL called*/
+                    Log.wtf("URL Called", call.request().url() + "");
+
+                    call.enqueue(new Callback<InterimResponse>() {
+
+                        @Override
+                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
+                            List<Interim> content = response.body().getInterim();
+                            if (content.size() < 1){
+
+                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else if (a <=1){
+
+                    /*Create handle for the RetrofitInstance interface*/
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+//                    Call<InterimResponse> call = apiService.getInterim();
+                    Call<InterimResponse> call = apiService.getVermeNegatif("A","A","A","A","A","A","A","A","A","A","A","A");
+                    /*Log the URL called*/
+                    Log.wtf("URL Called", call.request().url() + "");
+
+                    call.enqueue(new Callback<InterimResponse>() {
+
+                        @Override
+                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
+                            List<Interim> content = response.body().getInterim();
+                            if (content.size() < 1){
+                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else if (dataList.get(position).getSOBKZ().equalsIgnoreCase("K") && a <=1){
+                    /*Create handle for the RetrofitInstance interface*/
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+//                    Call<InterimResponse> call = apiService.getInterim();
+                    Call<InterimResponse> call = apiService.getSobkz("A","A","A","A","A","A","A","A","A","A","A","A");
+                    /*Log the URL called*/
+                    Log.wtf("URL Called", call.request().url() + "");
+
+                    call.enqueue(new Callback<InterimResponse>() {
+
+                        @Override
+                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
+                            List<Interim> content = response.body().getInterim();
+                            if (content.size() < 1){
+                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else{
+
+                }
             }
         });
     }
