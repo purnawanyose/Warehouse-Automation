@@ -46,16 +46,11 @@ public class OnhandLocationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public static String scan = "dfsgfsdgs";
     public static Button btnAction;
-<<<<<<< HEAD
-    public static String qtybro, matnooo,ambilTampung;
-
-=======
     public static String  matnooo,ambilTampung;
     public static List<String>list;
     public static List<String>qtybro;
     public  static  int qtybroo[];
     public  static  int nilaiAkhir = 0;
->>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
     private OnHandLocationRv adapter;
 
     @Override
@@ -64,10 +59,6 @@ public class OnhandLocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onhand_location);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_onhand_location);
-<<<<<<< HEAD
-
-=======
->>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
         plant = (TextView) findViewById(R.id.noreservation);
         norsv = (TextView) findViewById(R.id.reservationno);
         order = (TextView) findViewById(R.id.order);
@@ -76,13 +67,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
         et2 = (TextView) findViewById(R.id.et2);
         btnAction = (Button) findViewById(R.id.btnAction);
 
-<<<<<<< HEAD
-=======
         list = new ArrayList<String>();
-
-
-
->>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
 //        tvScann.setOnKeyListener(null);
 
           /* Bundle extras = getIntent().getExtras();*/
@@ -189,15 +174,11 @@ public class OnhandLocationActivity extends AppCompatActivity {
 
     }
     private void retrofit(){
-<<<<<<< HEAD
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-=======
         /*Create handle for the RetrofitInstance interface*/
-        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
->>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
         Call<OnHandLocationResponse> call = apiService.getOnhandLocation(plantt,matnoo);
 
         Log.wtf("URL Called", call.request().url() + "");

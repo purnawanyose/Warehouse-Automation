@@ -120,8 +120,4 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
 
 
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> efe530df295a64c88a46e80ccce2df1005693bd1
 }
