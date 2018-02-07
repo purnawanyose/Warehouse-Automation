@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -349,12 +350,33 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Intent a = new Intent(this,MainActivity.class);
-            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(a);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
+            builder.setMessage("Apakah Anda Yakin Akan Keluar?");
+            builder.setCancelable(true);
+            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    dialog.cancel();
+                }
+            });
+            builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
+
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    finish();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed(){
+
     }
 }
 

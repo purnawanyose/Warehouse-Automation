@@ -17,13 +17,13 @@
 
         <TextView
             android:id="@+id/ohl1"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:paddingRight="5dp"
             android:text="Sloc \nWN"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/ohl2"
@@ -31,31 +31,30 @@
             android:layout_height="wrap_content"
 
             android:text="SType \nSbin"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/ohl3"
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_weight="0.36"
+            android:paddingRight="15dp"
             android:text="B"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/ohl4"
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.36"
-            android:paddingRight="10dp"
+            android:paddingRight="15dp"
             android:text="SS"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/ohl5"
@@ -64,9 +63,9 @@
             android:layout_weight="0.36"
             android:paddingRight="10dp"
             android:text="WBS/ \nVendor"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/ohl6"
@@ -74,9 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.36"
             android:text="Qty OH"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/et2"

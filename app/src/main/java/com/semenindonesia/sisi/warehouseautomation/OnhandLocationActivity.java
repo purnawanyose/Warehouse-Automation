@@ -31,6 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import service.ApiClient;
+import service.ApiClientLocal;
 import service.ApiInterface;
 
 import static com.semenindonesia.sisi.warehouseautomation.R.drawable.rsv;
@@ -42,7 +43,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
     TextView tvScann,et2;
     TextView plant, norsv, order, matno;
 
-    String plantt, norsvv,orderr,matnoo,rsvnoo,ordr,matnrr;
+    String plantt, norsvv,orderr,matnoo,rsvnoo,ordr,matnrr, werkss, lgortt, rsposs;
     private RecyclerView recyclerView;
     public static String scan = "dfsgfsdgs";
     public static Button btnAction;
@@ -73,6 +74,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
 
         list = new ArrayList<String>();
 
+//        tvScann.setFocusable(false);
 
 
 //        tvScann.setOnKeyListener(null);
@@ -89,7 +91,13 @@ public class OnhandLocationActivity extends AppCompatActivity {
         rsvnoo = extras.getString("RSVNO");
         ordr = extras.getString("ORDER");
         matnrr = extras.getString("MATNR");
+        werkss = extras.getString("WERKS");
+        lgortt = extras.getString("LGORT");
+        rsposs= extras.getString("RSPOS");
+
         matnooo = extras.getString("MATNO");
+
+
         final KProgressHUD khud = KProgressHUD.create(OnhandLocationActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -151,6 +159,9 @@ public class OnhandLocationActivity extends AppCompatActivity {
         btnAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                retrofitLokal();
+
                 Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailActivity.class);
                 intent.putExtra("WERKS",plantt);
                 intent.putExtra("matno",matnooo);
@@ -159,7 +170,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
                 intent.putExtra("matnr",matnrr);
                 intent.putExtra("TAMPUNG",ambilTampung);
 
-                list.size();
+               /* list.size();
 
                 for (int i = 0; i <qtybroo.length ; i++) {
                     int nilai = qtybroo[i];
@@ -184,9 +195,10 @@ public class OnhandLocationActivity extends AppCompatActivity {
                 Log.e("TESTISTESTIS", "onCreate: "+specialStock[0]);
                 Log.e("TESTISTESTIS", "onCreate: "+wbs_elem);
                 Log.e("TESTISTESTIS", "onCreate: "+val_type);
-
+*/
 
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -218,6 +230,39 @@ public class OnhandLocationActivity extends AppCompatActivity {
                 Log.e("Test", "onFailure: "+Call.class );
             }
         });
+    }
+
+    private void retrofitLokal(){
+        /*Create handle for the RetrofitInstance interface*/
+        final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
+
+        /*Call the method with parameter in the interface to get the employee data*/
+        for (int i = 0; i <specialStock.length ; i++) {
+            if (qtybroo[i] > 0 && String.valueOf(qtybroo[i]) != null ){
+                Call<ReservationDetailResponse> call = apiService.getApiLocal("BURHAN",plantt,werkss,
+                        String.valueOf(qtybroo[i]),rsvnoo,rsposs,lgortt,val_type[i],specialStock[i],wbs_elem[i]);
+
+                /*Log the URL called*/
+                Log.wtf("URL Called", call.request().url() + "");
+
+                call.enqueue(new Callback<ReservationDetailResponse>() {
+
+                    @Override
+                    public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
+//                generateReservationDetailResponse((ArrayList<OnHandLocation>) response.body().getOnHandLocation());
+//                List<OnHandLocation> content = response.body().getOnHandLocation();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ReservationDetailResponse> call, Throwable t) {
+                        Toast.makeText(OnhandLocationActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        Log.e("Test", "onFailure: "+Call.class );
+                    }
+                });
+            }else{
+
+            }
+        }
     }
 
     private void generateReservationDetailResponse(ArrayList<OnHandLocation> empDataList) {

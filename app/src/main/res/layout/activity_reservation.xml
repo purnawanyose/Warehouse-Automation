@@ -40,8 +40,8 @@
 
                 <ImageView
                     android:id="@+id/imageView70"
-                    android:layout_width="103dp"
-                    android:layout_height="72dp"
+                    android:layout_width="69dp"
+                    android:layout_height="53dp"
                     app:srcCompat="@drawable/semensi" />
 
                 <TextView
@@ -94,11 +94,12 @@
                 <EditText
                     android:id="@+id/etPlant"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:ems="10"
-                    android:text="7702"
                     android:inputType="textPersonName"
-                    android:textColor="@android:color/black" />
+                    android:text="7702"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -119,9 +120,10 @@
                 <EditText
                     android:id="@+id/etNoReservation"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -135,13 +137,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_s"
                     android:layout_weight="1">
+
                     <EditText
                         android:id="@+id/movtype"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
                         android:ems="10"
                         android:hint="Mvt Type"
-                        android:layout_weight="1"/>
+                        android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>
 
                 <ImageView
@@ -166,13 +170,14 @@
                     android:layout_marginTop="@dimen/gap_s"
                     android:layout_weight="1">
 
-                <EditText
-                    android:id="@+id/materialno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Material No." />
+                    <EditText
+                        android:id="@+id/materialno"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:ems="10"
+                        android:hint="Material No."
+                        android:inputType="textPersonName"
+                        android:textSize="14sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -195,6 +200,7 @@
                     android:id="@+id/tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
                     android:text="Regment Date End"
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black" />
@@ -212,7 +218,7 @@
                         <EditText
                             android:id="@+id/tglAwal"
                             android:layout_width="129dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="35dp"
                             android:clickable="true"
                             android:editable="false"
                             android:ems="10"
@@ -220,7 +226,8 @@
                             android:inputType="date"
                             android:text="@string/date_selected"
                             android:textAlignment="center"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp" />
 
                         <ImageView
                             android:id="@+id/imageView700"
@@ -238,12 +245,13 @@
                         <EditText
                             android:id="@+id/tglAkhir"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="35dp"
                             android:layout_weight="1"
                             android:ems="10"
                             android:hint="Tanggal Akhir"
                             android:inputType="date"
-                            android:textAlignment="center" />
+                            android:textAlignment="center"
+                            android:textSize="14sp" />
 
                         <ImageView
                             android:id="@+id/imageView72"

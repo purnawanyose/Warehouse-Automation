@@ -3,6 +3,7 @@ package com.semenindonesia.sisi.warehouseautomation;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,14 +30,19 @@ import de.mrapp.android.dialog.WizardDialog;
 import fragment.Filter_Movtype;
 import fragment.Filter_material;
 import fragment.GoodIssued;
+import model.Cart;
 import model.Interim;
+import model.OnHandLocation;
 import model.Reservation;
+import response.CallCartResponse;
 import response.InterimResponse;
+import response.OnHandLocationResponse;
 import response.ReservationDetailResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import service.ApiClient;
+import service.ApiClientLocal;
 import service.ApiInterface;
 
 public class ReservationDetailActivity extends AppCompatActivity {
@@ -47,7 +53,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
     String rNumber, rwerks,rlgort;
     private ReservationDetailRv adapter;
     private RecyclerView recyclerView;
-    public static String chart ="1";
+    int chart = 0;
     public static String akhirTampung, tampung1;
     public static int[] akhirNilaii;
     public static int akhirNilaiii;
@@ -56,6 +62,9 @@ public class ReservationDetailActivity extends AppCompatActivity {
     public static String specialStock;
     public static String wbs_elem;
     public static String val_type;
+    public static int cart[];
+    public static int cartt;
+    int chartNilai;
 
     Button btnGoodIssued;
 
@@ -137,9 +146,19 @@ public class ReservationDetailActivity extends AppCompatActivity {
                     RSVNO = data.getRSNUM();
                     BWART = data.getBWART();
                     LGORT = data.getLGORT();
-
-//                    textView68.setText(data.getMAKTX());
                 }
+
+                Log.e("CART LENGTH","onCreate: "+cart.length );
+
+                for (int i = 0; i <cart.length ; i++) {
+
+                     chartNilai = cart[i];
+                    Log.e("Test Cart "+i, "onCreate: "+chartNilai);
+
+                    chart = chart + chartNilai;
+//                    Log.e("TESTISTESTIS", "onCreate: "+chart);
+                }
+//                textView66.setText(chartNilai);
             }
 
             @Override
@@ -149,12 +168,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
             }
         });
-
-        if (OnhandLocationActivity.matnooo != null ){
-            textView66.setText(chart);
-        }else{
-
-        }
 
         btnGoodIssued.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,14 +193,20 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 Log.e("Test RSPOS", "onClick: "+val_type);
                 startActivity(intent);
 
+
             }
         });
+
+        Log.e("TESTSTTSTSTSTTST","onCreate: "+"aaaaaaaaaaaa");
     }
     // END ON CREATE
 
 
 
     private void generateReservationDetailResponse(ArrayList<Reservation> empDataList) {
+        cart = new int[empDataList.size()];
+        Log.e("EMP DATALIST","onCreate: "+cart.length);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_reservation_detail);
 
         adapter = new ReservationDetailRv(empDataList);
@@ -197,16 +216,55 @@ public class ReservationDetailActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
-    }
 
+
+
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Intent a = new Intent(this,ReservationActivity.class);
-            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(a);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ReservationDetailActivity.this);
+            builder.setMessage("Apakah Anda Yakin Akan Keluar?");
+            builder.setCancelable(true);
+            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+
+                   /*Create handle for the RetrofitInstance interface*/
+                    final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+                    Call<CallCartResponse> call = apiService.getDelete(RSVNO);
+
+                    /*Log the URL called*/
+                    Log.wtf("URL Called", call.request().url() + "");
+
+                    call.enqueue(new Callback<CallCartResponse>() {
+                        @Override
+                        public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
+                            Toast.makeText(ReservationDetailActivity.this, "Berhasil Delete", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<CallCartResponse> call, Throwable t) {
+                            Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                            Log.e("Test", "onFailure: "+Call.class );
+                        }
+                    });
+                }
+            });
+            builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
+
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    finish();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }
