@@ -13,7 +13,9 @@ public class Cart {
 
     }
 
-    public Cart(String PSTNG_DATE, String DOC_DATE, String HEADER_TXT, String PR_UNAME, String PLANT, String MOVE_TYPE, String ENTRY_QNT, String RESERV_NO, String RES_ITEM, String STGE_LOC, String VAL_TYPE, String SPEC_STOCK, String WBS_ELEM) {
+    public Cart(String PSTNG_DATE, String DOC_DATE, String HEADER_TXT, String PR_UNAME, String PLANT, String MOVE_TYPE,
+                String ENTRY_QNT, String RESERV_NO, String RES_ITEM, String STGE_LOC, String VAL_TYPE, String SPEC_STOCK,
+                String WBS_ELEM) {
         this.PSTNG_DATE = PSTNG_DATE;
         this.DOC_DATE = DOC_DATE;
         this.HEADER_TXT = HEADER_TXT;
