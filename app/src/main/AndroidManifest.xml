@@ -89,6 +89,7 @@
         <activity android:name=".LayoutKeempat" />
         <activity android:name=".LayoutKelima" />
         <activity android:name=".PostIssuedActivity"></activity>
+        <activity android:name=".PostTransferLocActivity"></activity>
     </application>
 
 </manifest>

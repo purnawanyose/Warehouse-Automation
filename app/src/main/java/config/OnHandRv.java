@@ -8,16 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.semenindonesia.sisi.warehouseautomation.OnhandLocationActivity;
 import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
+
+import com.semenindonesia.sisi.warehouseautomation.PostTransferLocActivity;
+import com.semenindonesia.sisi.warehouseautomation.ScannerOnhandPageActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
 
 import java.util.ArrayList;
 
 import model.Interim;
 import model.OnHand;
+import model.Reservation;
 
 public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
 
@@ -37,6 +43,7 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
         View view = layoutInflater.inflate(R.layout.onhand_location_rv, parent, false);
         return new OnHandViewHolder(view);
 
+
     }
 
     @Override
@@ -53,6 +60,8 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
         holder.textView65.setText(dataList.get(position).getVALTYPE());
         holder.textView90.setText(ttl);
         holder.textView91.setText(dataList.get(position).getUOM());
+
+        tansferLoc(holder,position);
     }
 
     @Override
@@ -63,6 +72,7 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
     public class OnHandViewHolder  extends RecyclerView.ViewHolder{
         TextView textView64,textView65, textView90, textView91, textView92,textView30;
         Button bOnHand;
+        ImageView btnLoc;
         LinearLayout linearClear;
 
         OnHandViewHolder(final View itemView) {
@@ -74,7 +84,24 @@ public class OnHandRv extends RecyclerView.Adapter<OnHandRv.OnHandViewHolder> {
             textView90 = (TextView) itemView.findViewById(R.id.textView90);
             textView91 = (TextView) itemView.findViewById(R.id.textView91);
             bOnHand = (Button) itemView.findViewById(R.id.button2);
+            btnLoc = (ImageView) itemView.findViewById(R.id.imageView3);
             linearClear = (LinearLayout) itemView.findViewById(R.id.linearClear);
         }
+    }
+
+    private void tansferLoc(final OnHandViewHolder holder, final int position){
+
+        holder.btnLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final OnHand data = dataList.get(position);
+                Intent intent = new Intent(context, PostTransferLocActivity.class);
+                intent.putExtra("MATNO", data.getMATNO());
+                intent.putExtra("PLANT", data.getPLANT());
+                intent.putExtra("SLOCCC", ScannerOnhandPageActivity.testSloc);
+                context = v.getContext();
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 }

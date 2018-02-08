@@ -1,15 +1,20 @@
 package service;
 
 //import muhammadazmib.rertofitbasic.model.Items;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.semenindonesia.sisi.warehouseautomation.ScannerReservationDetail;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.transform.Result;
 
+import model.Cart;
 import model.Interim;
+import model.OnHand;
 import model.Reservation;
 import response.BonSementaraResponse;
 import response.CallCartResponse;
@@ -27,8 +32,10 @@ import response.ReservationMainResponse;
 import response.ScannerReservationDetailResponse;
 import response.ScannerReservationPageResponse;
 import response.StockOpnameResponse;
+import response.TranslocResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -159,50 +166,50 @@ public interface ApiInterface {
 
     @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<InterimResponse> getVermePositif(
-            @Query("[I_LGNUM]") String i_lgnum,
-            @Query("[I_BWLVS]") String bwlvs,
-            @Query("[I_MATNR]") String matnr,
-            @Query("[I_WERKS]") String werks,
-            @Query("[I_LGORT]") String lgort,
-            @Query("[I_CHARG]") String charg,
-            @Query("[I_ANFME]") String anfme,
-            @Query("[I_ALTME]") String altme,
-            @Query("[I_VLQNR]") String vlqnr,
-            @Query("[I_COMMIT_WORK]") String commit,
-            @Query("[I_BNAME]") String bname,
-            @Query("[I_KOMPL]") String kompl
+            @Query("data[I_LGNUM]") String i_lgnum,
+            @Query("data[I_BWLVS]") String bwlvs,
+            @Query("data[I_MATNR]") String matnr,
+            @Query("data[I_WERKS]") String werks,
+            @Query("data[I_LGORT]") String lgort,
+            @Query("data[I_CHARG]") String charg,
+            @Query("data[I_ANFME]") String anfme,
+            @Query("data[I_ALTME]") String altme,
+            @Query("data[I_VLQNR]") String vlqnr,
+            @Query("data[I_COMMIT_WORK]") String commit,
+            @Query("data[I_BNAME]") String bname,
+            @Query("data[I_KOMPL]") String kompl
     );
     @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<InterimResponse> getVermeNegatif(
-            @Query("[I_LGNUM]") String i_lgnum,
-            @Query("[I_BWLVS]") String bwlvs,
-            @Query("[I_MATNR]") String matnr,
-            @Query("[I_WERKS]") String werks,
-            @Query("[I_LGORT]") String lgort,
-            @Query("[I_CHARG]") String charg,
-            @Query("[I_ANFME]") String anfme,
-            @Query("[I_ALTME]") String altme,
-            @Query("[I_NLQNR]") String nlqnr,
-            @Query("[I_COMMIT_WORK]") String commit,
-            @Query("[I_BNAME]") String bname,
-            @Query("[I_KOMPL]") String kompl
+            @Query("data[I_LGNUM]") String i_lgnum,
+            @Query("data[I_BWLVS]") String bwlvs,
+            @Query("data[I_MATNR]") String matnr,
+            @Query("data[I_WERKS]") String werks,
+            @Query("data[I_LGORT]") String lgort,
+            @Query("data[I_CHARG]") String charg,
+            @Query("data[I_ANFME]") String anfme,
+            @Query("data[I_ALTME]") String altme,
+            @Query("data[I_NLQNR]") String nlqnr,
+            @Query("data[I_COMMIT_WORK]") String commit,
+            @Query("data[I_BNAME]") String bname,
+            @Query("data[I_KOMPL]") String kompl
     );
     @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<InterimResponse> getSobkz(
-            @Query("[I_LGNUM]") String i_lgnum,
-            @Query("[I_BWLVS]") String bwlvs,
-            @Query("[I_MATNR]") String matnr,
-            @Query("[I_WERKS]") String werks,
-            @Query("[I_LGORT]") String lgort,
-            @Query("[I_CHARG]") String charg,
-            @Query("[I_ANFME]") String anfme,
-            @Query("[I_ALTME]") String altme,
-            @Query("[I_NLQNR]") String nlqnr,
-            @Query("[I_COMMIT_WORK]") String commit,
-            @Query("[I_BNAME]") String bname,
-            @Query("[I_KOMPL]") String kompl,
-            @Query("[I_SOBKZ]") String sobkz,
-            @Query("[I_SONUM]") String sonum
+            @Query("data[I_LGNUM]") String i_lgnum,
+            @Query("data[I_BWLVS]") String bwlvs,
+            @Query("data[I_MATNR]") String matnr,
+            @Query("data[I_WERKS]") String werks,
+            @Query("data[I_LGORT]") String lgort,
+            @Query("data[I_CHARG]") String charg,
+            @Query("data[I_ANFME]") String anfme,
+            @Query("data[I_ALTME]") String altme,
+            @Query("data[I_NLQNR]") String nlqnr,
+            @Query("data[I_COMMIT_WORK]") String commit,
+            @Query("data[I_BNAME]") String bname,
+            @Query("data[I_KOMPL]") String kompl,
+            @Query("data[I_SOBKZ]") String sobkz,
+            @Query("data[I_SONUM]") String sonum
     );
 
     @GET("save_detail.php")
@@ -228,6 +235,20 @@ public interface ApiInterface {
             @Query("RESERV_NO") String RESERV_NO
     );
 
+    @GET("all_reservasi.php")
+    Call<CallCartResponse> getAll(
+            @Query("RESERV_NO") String RESERV_NO,
+            @Query("PR_UNAME") String PR_UNAME
+    );
+
+    @POST("get_data.php")
+    @FormUrlEncoded
+    Call <CallCartResponse> setPostIssued(
+            @Field("header[DOC_DATE]") String DOC_DATE,
+            @Field("header[PSTNG_DATE]") String PSTNG_DATE,
+            @Field("header[HEADER_TXT]") String HEADER_TXT
+    );
+
 
     @POST ("Reservation/goodIssue/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     @FormUrlEncoded
@@ -235,17 +256,50 @@ public interface ApiInterface {
             @Field("header[PSTNG_DATE]") String PSTNG_DATE,
             @Field("header[DOC_DATE]") String DOC_DATE,
             @Field("header[HEADER_TXT]") String HEADER_TXT,
-            @Field("detail[0][PR_UNAME]") String PR_UNAME,
-            @Field("detail[0][PLANT}") String PLANT,
-            @Field("detail[0][MOVE_TYPE]") String MOVE_TYPE,
-            @Field("detail[0][ENTRY_QNT]") String ENTRY_QNT,
-            @Field("detail[0][RESERV_NO]") String RESERV_NO,
-            @Field("detail[0][RES_ITEM]") String RES_ITEM,
+            @Field("detail[][PR_UNAME]") ArrayList<String> PR_UNAME,
+            @Field("detail[][PLANT]") ArrayList<String> PLANT,
+            @Field("detail[][MOVE_TYPE]") ArrayList<String> MOVE_TYPE,
+            @Field("detail[][ENTRY_QNT]") ArrayList<String> ENTRY_QNT,
+            @Field("detail[][RESERV_NO]") ArrayList<String> RESERV_NO,
+            @Field("detail[][RES_ITEM]") ArrayList<String> RES_ITEM,
+            @Field("detail[][STGE_LOC]") ArrayList<String> STGE_LOC,
+            @Field("detail[][VAL_TYPE]") ArrayList<String> VAL_TYPE,
+            @Field("detail[][SPEC_STOCK]") ArrayList<String> SPEC_STOCK,
+            @Field("detail[][WBS_ELEM]") ArrayList<String> WBS_ELEM
+    );
+
+    @POST ("Transfer/sloc/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    @FormUrlEncoded
+    Call <TranslocResponse> setTransfer(
+            @Field("header[PSTNG_DATE]") String PSTNG_DATE,
+            @Field("header[DOC_DATE]") String DOC_DATE,
+            @Field("header[HEADER_TXT]") String HEADER_TXT,
+            @Field("detail[0][MATERIAL]") String MATERIAL,
+            @Field("detail[0][PLANT]") String PLANT,
             @Field("detail[0][STGE_LOC]") String STGE_LOC,
+            @Field("detail[0][MOVE_TYPE]") String MOVE_TYPE,
             @Field("detail[0][VAL_TYPE]") String VAL_TYPE,
+            @Field("detail[0][ENTRY_QNT]") String ENTRY_QNT,
+            @Field("detail[0][MOVE_STLOC]") String MOVE_STLOC,
             @Field("detail[0][SPEC_STOCK]") String SPEC_STOCK,
             @Field("detail[0][WBS_ELEM]") String WBS_ELEM
     );
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
