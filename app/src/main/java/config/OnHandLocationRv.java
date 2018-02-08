@@ -61,6 +61,7 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
 
         if (OnhandLocationActivity.scan.equalsIgnoreCase(dataList.get(position).getSBIN())){
             holder.et2.setEnabled(true);
+            holder.et2.setFocusable(true);
         }
 //        clickEvents(holder, position);
 
@@ -69,14 +70,6 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
 
     }
 
-    @Override/* holder.et2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                OnhandLocationActivity.qtybro = holder.et2.getText().toString();
-                return false;
-            }
-        });
-*/
     public int getItemCount() {
         return dataList.size();
     }
@@ -112,7 +105,6 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
                     OnhandLocationActivity.wbs_elem[position] = (holder.ohl5.getText().toString());
                     OnhandLocationActivity.val_type[position] = (holder.ohl3.getText().toString());
 
-
                     Log.e("SHIt", "onKey: "+ OnhandLocationActivity.qtybroo[position]);
                     Log.e("SHIt", "onKey: "+ OnhandLocationActivity.specialStock[position]);
                     Log.e("SHIt", "onKey: "+ OnhandLocationActivity.wbs_elem[position]);
@@ -122,10 +114,5 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
                 return false;
             }
         });
-    }
-
-    public static void Scanner(String sbin){
-
-
     }
 }

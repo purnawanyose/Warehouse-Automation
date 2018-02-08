@@ -142,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
         Interim = (TextView) findViewById(R.id.interim_count);
         Bon = (TextView) findViewById(R.id.bonsementara_count);
 
-        Bon();
-        Interim();
+//        Bon();
+//        Interim();
 
         final KProgressHUD khud = KProgressHUD.create(MainActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)

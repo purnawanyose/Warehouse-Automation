@@ -7,15 +7,19 @@ package model;
 public class Cart {
 
     String PSTNG_DATE, DOC_DATE, HEADER_TXT;
-    String PR_UNAME, PLANT, MOVE_TYPE, ENTRY_QNT, RESERV_NO, RES_ITEM, STGE_LOC, VAL_TYPE, SPEC_STOCK, WBS_ELEM;
+    String PR_UNAME, PLANT, MOVE_TYPE, ENTRY_QNT, RESERV_NO, RES_ITEM, STGE_LOC, VAL_TYPE, SPEC_STOCK, WBS_ELEM, STATUS;
 
     public Cart() {
 
     }
 
+<<<<<<< HEAD
     public Cart(String PSTNG_DATE, String DOC_DATE, String HEADER_TXT, String PR_UNAME, String PLANT, String MOVE_TYPE,
                 String ENTRY_QNT, String RESERV_NO, String RES_ITEM, String STGE_LOC, String VAL_TYPE, String SPEC_STOCK,
                 String WBS_ELEM) {
+=======
+    public Cart(String PSTNG_DATE, String DOC_DATE, String HEADER_TXT, String PR_UNAME, String PLANT, String MOVE_TYPE, String ENTRY_QNT, String RESERV_NO, String RES_ITEM, String STGE_LOC, String VAL_TYPE, String SPEC_STOCK, String WBS_ELEM, String STATUS) {
+>>>>>>> 62f4b10ddc89129d6f397675954cc428c0c4cce3
         this.PSTNG_DATE = PSTNG_DATE;
         this.DOC_DATE = DOC_DATE;
         this.HEADER_TXT = HEADER_TXT;
@@ -29,6 +33,7 @@ public class Cart {
         this.VAL_TYPE = VAL_TYPE;
         this.SPEC_STOCK = SPEC_STOCK;
         this.WBS_ELEM = WBS_ELEM;
+        this.STATUS = STATUS;
     }
 
     public String getPSTNG_DATE() {
@@ -134,4 +139,12 @@ public class Cart {
     public void setWBS_ELEM(String WBS_ELEM) {
         this.WBS_ELEM = WBS_ELEM;
     }
+    public String getSTATUS() {
+        return STATUS;
+    }
+
+    public void setSTATUS(String STATUS) {
+        this.STATUS = STATUS;
+    }
+
 }

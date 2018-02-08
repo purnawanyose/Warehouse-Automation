@@ -119,7 +119,18 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
 
                     /*Call the method with parameter in the interface to get the employee data*/
 //                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getVermePositif("A","A","A","A","A","A","A","A","A","A","A","A");
+                    Call<InterimResponse> call = apiService.getVermePositif(dataList.get(position).getLGNUM()
+                            ,dataList.get(position).getLGNUM() // BWLVS
+                            ,dataList.get(position).getMATNR()
+                            ,dataList.get(position).getWERKS()
+                            ,dataList.get(position).getLGORT()
+                            ,dataList.get(position).getCHARG()
+                            ,dataList.get(position).getLGNUM() //ANFME
+                            ,dataList.get(position).getLGNUM() //ALTME
+                            ,dataList.get(position).getLGNUM() // VLQNR
+                            ,dataList.get(position).getLGNUM() // COMMIT WORK
+                            ,dataList.get(position).getLGNUM() // BNAME
+                            ,dataList.get(position).getLGNUM());// COMPL
 
                     /*Log the URL called*/
                     Log.wtf("URL Called", call.request().url() + "");
@@ -147,7 +158,18 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
 
                     /*Call the method with parameter in the interface to get the employee data*/
 //                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getVermeNegatif("A","A","A","A","A","A","A","A","A","A","A","A");
+                    Call<InterimResponse> call = apiService.getVermeNegatif(dataList.get(position).getLGNUM()
+                            ,dataList.get(position).getLGNUM() // BWLVS
+                            ,dataList.get(position).getMATNR()
+                            ,dataList.get(position).getWERKS()
+                            ,dataList.get(position).getLGORT()
+                            ,dataList.get(position).getCHARG()
+                            ,dataList.get(position).getLGNUM() //ANFME
+                            ,dataList.get(position).getLGNUM() //ALTME
+                            ,dataList.get(position).getLGNUM() // NLQNR
+                            ,dataList.get(position).getLGNUM() // COMMIT WORK
+                            ,dataList.get(position).getLGNUM() // BNAME
+                            ,dataList.get(position).getLGNUM());// COMPL
                     /*Log the URL called*/
                     Log.wtf("URL Called", call.request().url() + "");
 
@@ -172,7 +194,20 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
 
                     /*Call the method with parameter in the interface to get the employee data*/
 //                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getSobkz("A","A","A","A","A","A","A","A","A","A","A","A");
+                    Call<InterimResponse> call = apiService.getSobkz(dataList.get(position).getLGNUM()
+                            ,dataList.get(position).getLGNUM() // BWLVS
+                            ,dataList.get(position).getMATNR()
+                            ,dataList.get(position).getWERKS()
+                            ,dataList.get(position).getLGORT()
+                            ,dataList.get(position).getCHARG()
+                            ,dataList.get(position).getLGNUM() //ANFME
+                            ,dataList.get(position).getLGNUM() //ALTME
+                            ,dataList.get(position).getLGNUM() // NLQNR
+                            ,dataList.get(position).getLGNUM() // COMMIT WORK
+                            ,dataList.get(position).getLGNUM() // BNAME
+                            ,dataList.get(position).getLGNUM() // COMPL
+                            ,dataList.get(position).getSOBKZ() //
+                            ,dataList.get(position).getSONUM());
                     /*Log the URL called*/
                     Log.wtf("URL Called", call.request().url() + "");
 

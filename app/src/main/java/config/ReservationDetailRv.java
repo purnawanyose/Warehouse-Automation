@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.semenindonesia.sisi.warehouseautomation.HomeActivity;
 import com.semenindonesia.sisi.warehouseautomation.OnhandLocationActivity;
@@ -20,10 +21,19 @@ import com.semenindonesia.sisi.warehouseautomation.R;
 import com.semenindonesia.sisi.warehouseautomation.ReservationDetailActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import adapter.Main_ReservationRv;
+import model.Cart;
 import model.Interim;
 import model.Reservation;
+import response.CallCartResponse;
+import response.ReservationDetailResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import service.ApiClientLocal;
+import service.ApiInterface;
 
 import static com.semenindonesia.sisi.warehouseautomation.OnhandLocationActivity.nilaiAkhir;
 
@@ -56,7 +66,9 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
     }
 
     @Override
-    public void onBindViewHolder(ReservationDetailViewHolder holder, int position) {
+    public void onBindViewHolder(final ReservationDetailViewHolder holder, final int position) {
+
+
         String scanner = dataList.get(position).getBDMNG();
         String[] scan = scanner.split("\\.");
         String scannerr = dataList.get(position).getENMNG();
@@ -75,39 +87,63 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
         holder.textView69.setText(scan[0] + "/" + scann[0]);
         holder.textView70.setText(dataList.get(position).getMEINS());
 
-
-//        holder.textView72.setText(ttl);
-
+        holder.textView72.setFocusable(false);
         click(holder, position);
+        callBack(holder, position);
 
-        if (OnhandLocationActivity.matnooo != null)
-        {
-            holder.img.setEnabled(false);
-            if (OnhandLocationActivity.matnooo.equals(dataList.get(position).getMATNR()))
-            {
-                akhirNilai = String.valueOf(OnhandLocationActivity.nilaiAkhir);
-                holder.textView72.setText(akhirNilai);
-                ReservationDetailActivity.RSPOS = dataList.get(position).getRSPOS();
-
-                if (holder.textView72 != null){
-                    b = dataList.get(position).getRSPOS();
-                    Log.e("BB", "onBindViewHolder: "+b);
-
-                }else{
-                    Log.e("ERRpppp", "onBindViewHolder: "+holder.textView72);
-
-                }
-
-
-
-//                Keranjang.nilaiTampung[position] = Integer.parseInt((holder.textView72.getText().toString()));
-
-            }else {
-                }
-        }
 
     }
+    // END
 
+    private void callBack(final ReservationDetailViewHolder holder, final int position){
+         /*Create handle for the RetrofitInstance interface*/
+        final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
+
+        Call<CallCartResponse> call = apiService.getCallCart(dataList.get(position).getRSNUM(),
+                dataList.get(position).getRSPOS());
+
+                /*Log the URL called*/
+        Log.wtf("URL Called", call.request().url() + "");
+
+        call.enqueue(new Callback<CallCartResponse>() {
+
+            @Override
+            public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
+                List<Cart> content = response.body().getCart();
+                for (Cart data : content) {
+                    if (data.getSTATUS().equalsIgnoreCase("1")){
+
+                        Log.e("Test CallBack", "onResponse: "+data.getENTRY_QNT());
+                        holder.textView72.setText(data.getENTRY_QNT());
+
+                    }else{
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CallCartResponse> call, Throwable t) {
+                Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("Test", "onFailure: "+Call.class );
+            }
+        });
+        cart(holder, position);
+    }
+
+    private void cart(final ReservationDetailViewHolder holder, final int position){
+
+        if (holder.textView72.getText() != null){
+            ReservationDetailActivity.cart[position] =  1;
+            Log.e("Test Textview  " +position, "onResponse: "+holder.textView72.getText());
+            Log.e("Test Cart Position Value  " +position, "onResponse: "+ReservationDetailActivity.cart[position]);
+        }else{
+            ReservationDetailActivity.cart[position] =  0;
+            Log.e("Test Cart Position Value  " +position, "onResponse: 0");
+        }
+
+
+    }
     @Override
     public int getItemCount() {
         return dataList.size();
@@ -145,6 +181,9 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
                 intent.putExtra("ORDER", data.getAUFNR());
                 intent.putExtra("MATNR", data.getMAKTX()+" "+data.getMATNR());
                 intent.putExtra("MATNO", data.getMATNR());
+                intent.putExtra("WERKS", data.getBWART());
+                intent.putExtra("LGORT", data.getLGORT());
+                intent.putExtra("RSPOS", data.getRSPOS());
                 context = v.getContext();
                 v.getContext().startActivity(intent);
             }

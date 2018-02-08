@@ -12,6 +12,7 @@ import javax.xml.transform.Result;
 import model.Interim;
 import model.Reservation;
 import response.BonSementaraResponse;
+import response.CallCartResponse;
 import response.ClearResponse;
 import response.InterimResponse;
 import response.IssuedResponse;
@@ -181,7 +182,7 @@ public interface ApiInterface {
             @Query("[I_CHARG]") String charg,
             @Query("[I_ANFME]") String anfme,
             @Query("[I_ALTME]") String altme,
-            @Query("[I_VLQNR]") String vlqnr,
+            @Query("[I_NLQNR]") String nlqnr,
             @Query("[I_COMMIT_WORK]") String commit,
             @Query("[I_BNAME]") String bname,
             @Query("[I_KOMPL]") String kompl
@@ -196,19 +197,16 @@ public interface ApiInterface {
             @Query("[I_CHARG]") String charg,
             @Query("[I_ANFME]") String anfme,
             @Query("[I_ALTME]") String altme,
-            @Query("[I_VLQNR]") String vlqnr,
+            @Query("[I_NLQNR]") String nlqnr,
             @Query("[I_COMMIT_WORK]") String commit,
             @Query("[I_BNAME]") String bname,
-            @Query("[I_KOMPL]") String kompl
+            @Query("[I_KOMPL]") String kompl,
+            @Query("[I_SOBKZ]") String sobkz,
+            @Query("[I_SONUM]") String sonum
     );
 
-
-    @POST ("Reservation/goodIssue/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-    @FormUrlEncoded
-    Call <IssuedResponse> setGoodIssued(
-        /*    @Query("PSTNG_DATE") String PSTNG_DATE,
-            @Query("DOC_DATE") String DOC_DATE,
-            @Query("HEADER_TXT") String HEADER_TXT,
+    @GET("save_detail.php")
+    Call<ReservationDetailResponse> getApiLocal(
             @Query("PR_UNAME") String PR_UNAME,
             @Query("PLANT") String PLANT,
             @Query("MOVE_TYPE") String MOVE_TYPE,
@@ -218,7 +216,22 @@ public interface ApiInterface {
             @Query("STGE_LOC") String STGE_LOC,
             @Query("VAL_TYPE") String VAL_TYPE,
             @Query("SPEC_STOCK") String SPEC_STOCK,
-            @Query("WBS_ELEM") String WBS_ELEM*/
+            @Query("WBS_ELEM") String WBS_ELEM
+    );
+    @GET("list_reservasi.php")
+    Call<CallCartResponse> getCallCart(
+            @Query("RESERV_NO") String RESERV_NO,
+            @Query("RES_ITEM") String RES_ITEM
+    );
+    @GET("delete_reservasi.php")
+    Call<CallCartResponse> getDelete(
+            @Query("RESERV_NO") String RESERV_NO
+    );
+
+
+    @POST ("Reservation/goodIssue/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    @FormUrlEncoded
+    Call <IssuedResponse> setGoodIssued(
             @Field("header[PSTNG_DATE]") String PSTNG_DATE,
             @Field("header[DOC_DATE]") String DOC_DATE,
             @Field("header[HEADER_TXT]") String HEADER_TXT,
@@ -233,4 +246,6 @@ public interface ApiInterface {
             @Field("detail[0][SPEC_STOCK]") String SPEC_STOCK,
             @Field("detail[0][WBS_ELEM]") String WBS_ELEM
     );
+
+
 }
