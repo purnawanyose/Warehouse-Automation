@@ -73,13 +73,8 @@ public class OnhandLocationActivity extends AppCompatActivity {
         btnAction = (Button) findViewById(R.id.btnAction);
 
         list = new ArrayList<String>();
-<<<<<<< HEAD
-=======
-
 //        tvScann.setFocusable(false);
 
-
->>>>>>> 62f4b10ddc89129d6f397675954cc428c0c4cce3
 //        tvScann.setOnKeyListener(null);
 
           /* Bundle extras = getIntent().getExtras();*/

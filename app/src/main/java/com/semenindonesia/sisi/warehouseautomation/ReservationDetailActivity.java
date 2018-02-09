@@ -47,6 +47,8 @@ import service.ApiInterface;
 
 public class ReservationDetailActivity extends AppCompatActivity {
 
+    String TAG = ReservationDetailActivity.class.getSimpleName();
+
     TextView WERKS;
     TextView rsv,order,textView68,textView66;
 
@@ -66,6 +68,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
     public static int cartt;
     int chartNilai;
 
+
     Button btnGoodIssued;
 
     @Override
@@ -79,6 +82,16 @@ public class ReservationDetailActivity extends AppCompatActivity {
         textView66 = (TextView) findViewById(R.id.textView66);
 
         btnGoodIssued = (Button) findViewById(R.id.btnGoodIssued);
+
+        Bundle extras = getIntent().getExtras();
+        rNumber = extras.getString("RSNUM");
+        rwerks = extras.getString("WERKS");
+        rlgort = extras.getString("LGORT");
+        akhirTampung = extras.getString("TAMPUNG");
+        tampung1 = extras.getString("QTY");
+        wbs_elem = extras.getString("WBS");
+        val_type = extras.getString("VAL");
+        specialStock = extras.getString("SS");
 
         final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -95,8 +108,11 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
                 // Pretend it's doing some background processing
                 try {
-                    Thread.sleep(6000);
-
+                    getdata();
+                    //textView66.setText(cartt);
+                    textView66.setText("123"+cartt);
+                    Thread.sleep(9000);
+                    Log.e(TAG, "cart value: "+cartt);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -109,65 +125,13 @@ public class ReservationDetailActivity extends AppCompatActivity {
                     @Override
                     public void doInUIThread() {
                         khud.dismiss();
+
                     }
                 });
             }
         });
 
         final Context context = this.getApplicationContext();
-
-        Bundle extras = getIntent().getExtras();
-        rNumber = extras.getString("RSNUM");
-        rwerks = extras.getString("WERKS");
-        rlgort = extras.getString("LGORT");
-        akhirTampung = extras.getString("TAMPUNG");
-        tampung1 = extras.getString("QTY");
-        wbs_elem = extras.getString("WBS");
-        val_type = extras.getString("VAL");
-        specialStock = extras.getString("SS");
-
-
-
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,rNumber,"1");
-        call.enqueue(new Callback<ReservationDetailResponse>() {
-            @Override
-            public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
-                generateReservationDetailResponse((ArrayList<Reservation>) response.body().getReservation());
-                List<Reservation> content = response.body().getReservation();
-                for (Reservation data : content) {
-                    Log.e("content", "Material No " + content.toString());
-
-                    WERKS.setText("Plant \t\t\t\t\t\t : "+data.getWERKS());
-                    rsv.setText("Reservation No. \t : "+data.getRSNUM());
-                    order.setText("Order \t\t\t\t\t\t : "+data.getAUFNR());
-
-                    WERKSS = data.getWERKS();
-                    RSVNO = data.getRSNUM();
-                    BWART = data.getBWART();
-                    LGORT = data.getLGORT();
-                }
-
-                Log.e("CART LENGTH","onCreate: "+cart.length );
-
-                for (int i = 0; i <cart.length ; i++) {
-
-                     chartNilai = cart[i];
-                    Log.e("Test Cart "+i, "onCreate: "+chartNilai);
-
-                    chart = chart + chartNilai;
-//                    Log.e("TESTISTESTIS", "onCreate: "+chart);
-                }
-//                textView66.setText(chartNilai);
-            }
-
-            @Override
-            public void onFailure(Call<ReservationDetailResponse> call, Throwable t) {
-                t.printStackTrace();
-                Log.e("Reservation", "Material Noooooooooooo"+ call);
-
-            }
-        });
 
         btnGoodIssued.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,11 +161,54 @@ public class ReservationDetailActivity extends AppCompatActivity {
             }
         });
 
-        Log.e("TESTSTTSTSTSTTST","onCreate: "+"aaaaaaaaaaaa");
+        //isicart();
+
     }
     // END ON CREATE
 
+    private void getdata(){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,rNumber,"1");
+        call.enqueue(new Callback<ReservationDetailResponse>() {
+            @Override
+            public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
+                generateReservationDetailResponse((ArrayList<Reservation>) response.body().getReservation());
+                List<Reservation> content = response.body().getReservation();
+                for (Reservation data : content) {
+                    Log.e("content", "Material No " + content.toString());
 
+                    WERKS.setText("Plant \t\t\t\t\t\t : "+data.getWERKS());
+                    rsv.setText("Reservation No. \t : "+data.getRSNUM());
+                    order.setText("Order \t\t\t\t\t\t : "+data.getAUFNR());
+
+                    WERKSS = data.getWERKS();
+                    RSVNO = data.getRSNUM();
+                    BWART = data.getBWART();
+                    LGORT = data.getLGORT();
+                }
+
+                Log.e("CART LENGTH","onCreate: "+cart.length );
+
+                for (int i = 0; i <cart.length ; i++) {
+
+                    chartNilai = cart[i];
+                    Log.e("Test Cart "+i, "onCreate: "+chartNilai);
+
+                    chart = chart + chartNilai;
+    //                    Log.e("TESTISTESTIS", "onCreate: "+chart);
+                }
+    //                textView66.setText(chartNilai);
+
+            }
+
+            @Override
+            public void onFailure(Call<ReservationDetailResponse> call, Throwable t) {
+                t.printStackTrace();
+                Log.e("Reservation", "Material Noooooooooooo"+ call);
+
+            }
+        });
+    }
 
     private void generateReservationDetailResponse(ArrayList<Reservation> empDataList) {
         cart = new int[empDataList.size()];
@@ -220,6 +227,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
@@ -265,6 +273,44 @@ public class ReservationDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void isicart(){
+        final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Retrieve Data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+            @Override
+            public void doOnBackground() {
+
+                // Pretend it's doing some background processing
+                try {
+                    textView66.setText(cartt);
+                    Log.e(TAG, "cart value: "+cartt);
+                    Thread.sleep(9000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Create a fake result (MUST be final)
+                final boolean result = true;
+
+                // Send the result to the UI thread and show it on a Toast
+                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                    @Override
+                    public void doInUIThread() {
+                        khud.dismiss();
+
+                    }
+                });
+            }
+        });
     }
 
 }
