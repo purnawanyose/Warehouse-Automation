@@ -251,12 +251,14 @@ public class ReservationDetailActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
                             Toast.makeText(ReservationDetailActivity.this, "Berhasil Delete", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
 
                         @Override
                         public void onFailure(Call<CallCartResponse> call, Throwable t) {
                             Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                             Log.e("Test", "onFailure: "+Call.class );
+                            finish();
                         }
                     });
                 }

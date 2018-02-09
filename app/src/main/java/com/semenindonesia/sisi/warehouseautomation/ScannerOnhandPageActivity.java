@@ -44,6 +44,7 @@ public class ScannerOnhandPageActivity extends AppCompatActivity {
     private OnHandRv adapter;
     private RecyclerView recyclerView;
     String level, plant, whn, stype, slc,strgbin;
+    public static String testSloc;
 
 
     @Override
@@ -75,6 +76,9 @@ public class ScannerOnhandPageActivity extends AppCompatActivity {
         whn = extras.getString("whs");
         stype = extras.getString("stype");
         strgbin = extras.getString("sbin");
+
+
+        testSloc = String.valueOf(sloc.getText());
 
 
 

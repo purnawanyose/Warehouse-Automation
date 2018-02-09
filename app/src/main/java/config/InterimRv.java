@@ -64,7 +64,7 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
         holder.textView56.setText(dataList.get(position).getLQNUM());
 
         applyClickEvents(holder,position);
-//        clearInterim(holder, position);
+        clear(holder, position);
  }
 
     @Override
@@ -88,8 +88,160 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
             textView56 = (TextView) itemView.findViewById(R.id.textView56);
             imgClear = (ImageView) itemView.findViewById(R.id.imgClear);
             linearClear = (LinearLayout) itemView.findViewById(R.id.linearClear);
+
+
         }
     }
+    private void clear(final InterimRv.InterimViewHolder holder, final int position){
+        holder.imgClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String verme =dataList.get(position).getVERME();
+                String[] vermeArray = verme.split("\\.");
+
+                int verme1 = Integer.parseInt(vermeArray[0]);
+                Log.e("Test Verme", "clear: "+verme1);
+
+                if (verme1 >=0){
+                     /*Create handle for the RetrofitInstance interface*/
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+//                    Call<InterimResponse> call = apiService.getInterim();
+                    Call<InterimResponse> call = apiService.getVermePositif(dataList.get(position).getLGNUM()
+                            ,"999" // BWLVS
+                            ,dataList.get(position).getMATNR()
+                            ,dataList.get(position).getWERKS()
+                            ,dataList.get(position).getLGORT()
+                            ,dataList.get(position).getCHARG()
+                            ,dataList.get(position).getVERME()
+                            ,dataList.get(position).getMEINS()
+                            ,dataList.get(position).getLQNUM()
+                            ,"X"
+                            ,"YOSEE"
+                            ,"X");
+
+                    /*Log the URL called*/
+                    Log.wtf("URL Called", call.request().url() + "");
+
+                    call.enqueue(new Callback<InterimResponse>() {
+
+                        @Override
+                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
+                            List<Interim> content = response.body().getInterim();
+                            String status = response.body().getStatus();
+                            Log.e("CEK STATUS", "onResponse: "+status );
+                            if (status.equals("0")){
+                                Toast.makeText(context,"Gagal Melakukan Clearing!",Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(context,"Sukses Melakukan Clearing!",Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                        @Override
+                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else if (verme1 <=1){
+
+                    /*Create handle for the RetrofitInstance interface*/
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+//                    Call<InterimResponse> call = apiService.getInterim();
+                    Call<InterimResponse> call = apiService.getVermeNegatif(dataList.get(position).getLGNUM()
+                            ,"999" // BWLVS
+                            ,dataList.get(position).getMATNR()
+                            ,dataList.get(position).getWERKS()
+                            ,dataList.get(position).getLGORT()
+                            ,dataList.get(position).getCHARG()
+                            ,dataList.get(position).getVERME()
+                            ,dataList.get(position).getMEINS()
+                            ,dataList.get(position).getLQNUM()
+                            ,"X"
+                            ,"YOSEE"
+                            ,"X");
+                    /*Log the URL called*/
+                    Log.wtf("URL Called", call.request().url() + "");
+
+                    call.enqueue(new Callback<InterimResponse>() {
+
+                        @Override
+                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
+                            List<Interim> content = response.body().getInterim();
+                            String status = response.body().getStatus();
+                            if (status.equals("0")){
+                                Toast.makeText(context,"Gagal Melakukan Clearing!",Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(context,"Sukses Melakukan Clearing!",Toast.LENGTH_LONG).show();
+                            }
+                            if (content.size() < 1){
+                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else if (dataList.get(position).getSOBKZ().equalsIgnoreCase("K") && verme1 <=1){
+                    /*Create handle for the RetrofitInstance interface*/
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+//                    Call<InterimResponse> call = apiService.getInterim();
+                    Call<InterimResponse> call = apiService.getSobkz(dataList.get(position).getLGNUM()
+                            ,"999"
+                            ,dataList.get(position).getMATNR()
+                            ,dataList.get(position).getWERKS()
+                            ,dataList.get(position).getLGORT()
+                            ,dataList.get(position).getCHARG()
+                            ,dataList.get(position).getVERME()
+                            ,dataList.get(position).getMEINS()
+                            ,dataList.get(position).getLQNUM()
+                            ,"X"
+                            ,"YOSEE"
+                            ,"X"
+                            ,dataList.get(position).getSOBKZ()
+                            ,dataList.get(position).getSONUM());
+                    /*Log the URL called*/
+                    Log.wtf("URL Called", call.request().url() + "");
+
+                    call.enqueue(new Callback<InterimResponse>() {
+
+                        @Override
+                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
+                            List<Interim> content = response.body().getInterim();
+                            String status = response.body().getStatus();
+                            if (status.equals("0")){
+                                Toast.makeText(context,"Gagal Melakukan Clearing!",Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(context,"Sukses Melakukan Clearing!",Toast.LENGTH_LONG).show();
+                            }
+                            if (content.size() < 1){
+                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else{
+
+                }
+
+            }
+        });
+
+
+    }
+
     private void applyClickEvents(InterimRv.InterimViewHolder holder, final int position) {
         holder.textView56.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,133 +255,9 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
                                 intent.putExtra("LGTYP", data.getLGTYP());
                 context = view.getContext();
                 view.getContext().startActivity(intent);
+
             }
         });
     }
 
-    private void clearInterim(InterimRv.InterimViewHolder holder, final int position){
-        holder.imgClear.setOnClickListener(new View.OnClickListener() {
-            int a = Integer.parseInt(dataList.get(position).getVERME());
-            @Override
-            public void onClick(View v) {
-//                if (dataList.get(position).getVERME(())
-                if (a >=1){
-                     /*Create handle for the RetrofitInstance interface*/
-                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-                    /*Call the method with parameter in the interface to get the employee data*/
-//                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getVermePositif(dataList.get(position).getLGNUM()
-                            ,dataList.get(position).getLGNUM() // BWLVS
-                            ,dataList.get(position).getMATNR()
-                            ,dataList.get(position).getWERKS()
-                            ,dataList.get(position).getLGORT()
-                            ,dataList.get(position).getCHARG()
-                            ,dataList.get(position).getLGNUM() //ANFME
-                            ,dataList.get(position).getLGNUM() //ALTME
-                            ,dataList.get(position).getLGNUM() // VLQNR
-                            ,dataList.get(position).getLGNUM() // COMMIT WORK
-                            ,dataList.get(position).getLGNUM() // BNAME
-                            ,dataList.get(position).getLGNUM());// COMPL
-
-                    /*Log the URL called*/
-                    Log.wtf("URL Called", call.request().url() + "");
-
-                    call.enqueue(new Callback<InterimResponse>() {
-
-                        @Override
-                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
-//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
-                            List<Interim> content = response.body().getInterim();
-                            if (content.size() < 1){
-
-                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<InterimResponse> call, Throwable t) {
-                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else if (a <=1){
-
-                    /*Create handle for the RetrofitInstance interface*/
-                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-                    /*Call the method with parameter in the interface to get the employee data*/
-//                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getVermeNegatif(dataList.get(position).getLGNUM()
-                            ,dataList.get(position).getLGNUM() // BWLVS
-                            ,dataList.get(position).getMATNR()
-                            ,dataList.get(position).getWERKS()
-                            ,dataList.get(position).getLGORT()
-                            ,dataList.get(position).getCHARG()
-                            ,dataList.get(position).getLGNUM() //ANFME
-                            ,dataList.get(position).getLGNUM() //ALTME
-                            ,dataList.get(position).getLGNUM() // NLQNR
-                            ,dataList.get(position).getLGNUM() // COMMIT WORK
-                            ,dataList.get(position).getLGNUM() // BNAME
-                            ,dataList.get(position).getLGNUM());// COMPL
-                    /*Log the URL called*/
-                    Log.wtf("URL Called", call.request().url() + "");
-
-                    call.enqueue(new Callback<InterimResponse>() {
-
-                        @Override
-                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
-//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
-                            List<Interim> content = response.body().getInterim();
-                            if (content.size() < 1){
-                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<InterimResponse> call, Throwable t) {
-                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else if (dataList.get(position).getSOBKZ().equalsIgnoreCase("K") && a <=1){
-                    /*Create handle for the RetrofitInstance interface*/
-                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-                    /*Call the method with parameter in the interface to get the employee data*/
-//                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getSobkz(dataList.get(position).getLGNUM()
-                            ,dataList.get(position).getLGNUM() // BWLVS
-                            ,dataList.get(position).getMATNR()
-                            ,dataList.get(position).getWERKS()
-                            ,dataList.get(position).getLGORT()
-                            ,dataList.get(position).getCHARG()
-                            ,dataList.get(position).getLGNUM() //ANFME
-                            ,dataList.get(position).getLGNUM() //ALTME
-                            ,dataList.get(position).getLGNUM() // NLQNR
-                            ,dataList.get(position).getLGNUM() // COMMIT WORK
-                            ,dataList.get(position).getLGNUM() // BNAME
-                            ,dataList.get(position).getLGNUM() // COMPL
-                            ,dataList.get(position).getSOBKZ() //
-                            ,dataList.get(position).getSONUM());
-                    /*Log the URL called*/
-                    Log.wtf("URL Called", call.request().url() + "");
-
-                    call.enqueue(new Callback<InterimResponse>() {
-
-                        @Override
-                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
-//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
-                            List<Interim> content = response.body().getInterim();
-                            if (content.size() < 1){
-                                Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<InterimResponse> call, Throwable t) {
-                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else{
-
-                }
-            }
-        });
-    }
 }
