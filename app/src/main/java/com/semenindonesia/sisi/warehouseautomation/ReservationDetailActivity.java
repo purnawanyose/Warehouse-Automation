@@ -36,6 +36,7 @@ import model.OnHandLocation;
 import model.Reservation;
 import response.CallCartResponse;
 import response.InterimResponse;
+import response.IssuedResponse;
 import response.OnHandLocationResponse;
 import response.ReservationDetailResponse;
 import retrofit2.Call;
@@ -48,7 +49,10 @@ import service.ApiInterface;
 public class ReservationDetailActivity extends AppCompatActivity {
 
     TextView WERKS;
-    TextView rsv,order,textView68,textView66;
+    TextView rsv;
+    TextView order;
+    TextView textView68;
+    TextView textView66;
 
     String rNumber, rwerks,rlgort;
     private ReservationDetailRv adapter;
@@ -65,6 +69,8 @@ public class ReservationDetailActivity extends AppCompatActivity {
     public static int cart[];
     public static int cartt;
     int chartNilai;
+
+    int cartValue;
 
     Button btnGoodIssued;
 
@@ -135,17 +141,17 @@ public class ReservationDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
                 generateReservationDetailResponse((ArrayList<Reservation>) response.body().getReservation());
                 List<Reservation> content = response.body().getReservation();
-                for (Reservation data : content) {
+                for (Reservation dataList : content) {
                     Log.e("content", "Material No " + content.toString());
 
-                    WERKS.setText("Plant \t\t\t\t\t\t : "+data.getWERKS());
-                    rsv.setText("Reservation No. \t : "+data.getRSNUM());
-                    order.setText("Order \t\t\t\t\t\t : "+data.getAUFNR());
+                    WERKS.setText("Plant \t\t\t\t\t\t : "+dataList.getWERKS());
+                    rsv.setText("Reservation No. \t : "+dataList.getRSNUM());
+                    order.setText("Order \t\t\t\t\t\t : "+dataList.getAUFNR());
 
-                    WERKSS = data.getWERKS();
-                    RSVNO = data.getRSNUM();
-                    BWART = data.getBWART();
-                    LGORT = data.getLGORT();
+                    WERKSS = dataList.getWERKS();
+                    RSVNO = dataList.getRSNUM();
+                    BWART = dataList.getBWART();
+                    LGORT = dataList.getLGORT();
                 }
 
                 Log.e("CART LENGTH","onCreate: "+cart.length );
@@ -198,8 +204,53 @@ public class ReservationDetailActivity extends AppCompatActivity {
         });
 
         Log.e("TESTSTTSTSTSTTST","onCreate: "+"aaaaaaaaaaaa");
+
+        cart();
     }
     // END ON CREATE
+
+    private void cart(){
+
+
+        final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
+
+        Call<CallCartResponse> call = apiService.getCartValue(rNumber);
+
+                /*Log the URL called*/
+        Log.wtf("URL Called", call.request().url() + "");
+
+        call.enqueue(new Callback<CallCartResponse>() {
+
+            @Override
+            public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
+                List<Cart> content = response.body().getCart();
+
+                for (Cart data : content) {
+
+                    Log.e("Test Cart Value CUK", "onResponse: "+data.getSTATUS());
+                    Log.e("Test Cart Value CUK", "onResponse: "+rNumber);
+                    if (data.getSTATUS().equalsIgnoreCase("1")){
+
+                         cartValue = cartValue +1;
+//                        Log.e("Test Cart Value CUK", "onResponse: "+cartValue);
+                        textView66.setText(data.getJUMLAH());
+                        Log.e("Test Cart Value CUK", "onResponse: "+data.getJUMLAH());
+                    }else{
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CallCartResponse> call, Throwable t) {
+                Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("Test", "onFailure: "+Call.class );
+            }
+        });
+    }
+
+
 
 
 
