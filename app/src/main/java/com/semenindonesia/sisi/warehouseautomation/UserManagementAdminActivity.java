@@ -80,7 +80,6 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rvUser);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd = (Button) findViewById(R.id.btnAdd);
-        view = (Button) findViewById(R.id.button3);
 
         Realm.init(this);
         realm=Realm.getDefaultInstance();
@@ -120,7 +119,7 @@ public class UserManagementAdminActivity extends AppCompatActivity {
             }
         });
 
-        view.setOnKeyListener(new View.OnKeyListener() {
+      /*  view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
@@ -131,8 +130,6 @@ public class UserManagementAdminActivity extends AppCompatActivity {
                 recycle.setAdapter(recyclerAdapter);
                 return false;
             }
-        });
-
-
+        });*/
     }
 }

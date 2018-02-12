@@ -28,7 +28,7 @@
             android:name=".DetailOpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".UserManagementAdminActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,7 +72,7 @@
             android:name=".OnhandLocationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AdminInitialPage" />
-        <activity android:name=".UserManagementAdminActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".ConnectionSettingActivity" />
         <activity android:name=".PlantAssigmentActivity" />
         <activity android:name=".AddUserManagementActivity" />
@@ -88,8 +88,9 @@
         <activity android:name=".LayoutKetiga" />
         <activity android:name=".LayoutKeempat" />
         <activity android:name=".LayoutKelima" />
-        <activity android:name=".PostIssuedActivity"></activity>
-        <activity android:name=".PostTransferLocActivity"></activity>
+        <activity android:name=".PostIssuedActivity" />
+        <activity android:name=".PostTransferLocActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
