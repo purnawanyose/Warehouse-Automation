@@ -115,7 +115,7 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
 
                         Log.e("Test CallBack", "onResponse: "+data.getENTRY_QNT());
                         holder.textView72.setText(data.getENTRY_QNT());
-
+                        cart(holder, position);
                     }else{
 
                     }
@@ -128,7 +128,7 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
                 Log.e("Test", "onFailure: "+Call.class );
             }
         });
-        cart(holder, position);
+
     }
 
     private void cart(final ReservationDetailViewHolder holder, final int position){
@@ -137,6 +137,9 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
             ReservationDetailActivity.cart[position] =  1;
             Log.e("Test Textview  " +position, "onResponse: "+holder.textView72.getText());
             Log.e("Test Cart Position Value  " +position, "onResponse: "+ReservationDetailActivity.cart[position]);
+            ReservationDetailActivity.cartt = ReservationDetailActivity.cartt +1;
+            Log.e("cart update", "cart: "+ReservationDetailActivity.cartt);
+
         }else{
             ReservationDetailActivity.cart[position] =  0;
             Log.e("Test Cart Position Value  " +position, "onResponse: 0");

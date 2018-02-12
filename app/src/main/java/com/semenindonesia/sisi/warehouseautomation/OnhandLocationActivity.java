@@ -73,9 +73,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
         btnAction = (Button) findViewById(R.id.btnAction);
 
         list = new ArrayList<String>();
-
 //        tvScann.setFocusable(false);
-
 
 //        tvScann.setOnKeyListener(null);
 
@@ -207,13 +205,13 @@ public class OnhandLocationActivity extends AppCompatActivity {
 
     }
     private void retrofit(){
-        /*Create handle for the RetrofitInstance interface*/
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        /*Create handle for the RetrofitInstance interface*/
 
         /*Call the method with parameter in the interface to get the employee data*/
         Call<OnHandLocationResponse> call = apiService.getOnhandLocation(plantt,matnoo);
 
-        /*Log the URL called*/
         Log.wtf("URL Called", call.request().url() + "");
 
         call.enqueue(new Callback<OnHandLocationResponse>() {

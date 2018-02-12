@@ -48,6 +48,8 @@ import service.ApiInterface;
 
 public class ReservationDetailActivity extends AppCompatActivity {
 
+    String TAG = ReservationDetailActivity.class.getSimpleName();
+
     TextView WERKS;
     TextView rsv;
     TextView order;
@@ -70,7 +72,10 @@ public class ReservationDetailActivity extends AppCompatActivity {
     public static int cartt;
     int chartNilai;
 
+<<<<<<< HEAD
     int cartValue;
+=======
+>>>>>>> cd0ee72994721adb90597d030f28445632dcf6cd
 
     Button btnGoodIssued;
 
@@ -85,6 +90,16 @@ public class ReservationDetailActivity extends AppCompatActivity {
         textView66 = (TextView) findViewById(R.id.textView66);
 
         btnGoodIssued = (Button) findViewById(R.id.btnGoodIssued);
+
+        Bundle extras = getIntent().getExtras();
+        rNumber = extras.getString("RSNUM");
+        rwerks = extras.getString("WERKS");
+        rlgort = extras.getString("LGORT");
+        akhirTampung = extras.getString("TAMPUNG");
+        tampung1 = extras.getString("QTY");
+        wbs_elem = extras.getString("WBS");
+        val_type = extras.getString("VAL");
+        specialStock = extras.getString("SS");
 
         final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -101,8 +116,11 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
                 // Pretend it's doing some background processing
                 try {
-                    Thread.sleep(6000);
-
+                    getdata();
+                    //textView66.setText(cartt);
+                    textView66.setText("123"+cartt);
+                    Thread.sleep(9000);
+                    Log.e(TAG, "cart value: "+cartt);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -115,6 +133,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
                     @Override
                     public void doInUIThread() {
                         khud.dismiss();
+
                     }
                 });
             }
@@ -122,18 +141,40 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
         final Context context = this.getApplicationContext();
 
-        Bundle extras = getIntent().getExtras();
-        rNumber = extras.getString("RSNUM");
-        rwerks = extras.getString("WERKS");
-        rlgort = extras.getString("LGORT");
-        akhirTampung = extras.getString("TAMPUNG");
-        tampung1 = extras.getString("QTY");
-        wbs_elem = extras.getString("WBS");
-        val_type = extras.getString("VAL");
-        specialStock = extras.getString("SS");
+        btnGoodIssued.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PostIssuedActivity.class);
+
+                intent.putExtra("PLANT", WERKSS);
+                intent.putExtra("RSVNO", RSVNO);
+                intent.putExtra("BWART", BWART);
+                intent.putExtra("LGORT", LGORT);
+                intent.putExtra("RSPOS", RSPOS);
+                intent.putExtra("WBS", wbs_elem);
+                intent.putExtra("SS", specialStock);
+                intent.putExtra("VAL", val_type);
 
 
+//                intent.putExtra("ORDER", order.getText().toString());
+                intent.putExtra("NILAIAKHIR", ReservationDetailRv.akhirNilai);
+                Log.e("Test BTN ISSUED", "onClick: "+ReservationDetailRv.akhirNilai);
+                Log.e("Test RSPOS", "onClick: "+RSPOS);
+                Log.e("Test RSPOS", "onClick: "+wbs_elem);
+                Log.e("Test RSPOS", "onClick: "+specialStock);
+                Log.e("Test RSPOS", "onClick: "+val_type);
+                startActivity(intent);
 
+
+            }
+        });
+
+        //isicart();
+
+    }
+    // END ON CREATE
+
+    private void getdata(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<ReservationDetailResponse> call = apiService.getReservation(rwerks,rNumber,"1");
         call.enqueue(new Callback<ReservationDetailResponse>() {
@@ -158,13 +199,14 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
                 for (int i = 0; i <cart.length ; i++) {
 
-                     chartNilai = cart[i];
+                    chartNilai = cart[i];
                     Log.e("Test Cart "+i, "onCreate: "+chartNilai);
 
                     chart = chart + chartNilai;
-//                    Log.e("TESTISTESTIS", "onCreate: "+chart);
+    //                    Log.e("TESTISTESTIS", "onCreate: "+chart);
                 }
-//                textView66.setText(chartNilai);
+    //                textView66.setText(chartNilai);
+
             }
 
             @Override
@@ -174,6 +216,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
             }
         });
+<<<<<<< HEAD
 
         btnGoodIssued.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +296,9 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
 
 
+=======
+    }
+>>>>>>> cd0ee72994721adb90597d030f28445632dcf6cd
 
     private void generateReservationDetailResponse(ArrayList<Reservation> empDataList) {
         cart = new int[empDataList.size()];
@@ -271,6 +317,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
@@ -318,6 +365,44 @@ public class ReservationDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void isicart(){
+        final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Retrieve Data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+            @Override
+            public void doOnBackground() {
+
+                // Pretend it's doing some background processing
+                try {
+                    textView66.setText(cartt);
+                    Log.e(TAG, "cart value: "+cartt);
+                    Thread.sleep(9000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Create a fake result (MUST be final)
+                final boolean result = true;
+
+                // Send the result to the UI thread and show it on a Toast
+                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                    @Override
+                    public void doInUIThread() {
+                        khud.dismiss();
+
+                    }
+                });
+            }
+        });
     }
 
 }
