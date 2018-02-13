@@ -38,6 +38,7 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
 
+    String TAG = PostTransferLocActivity.class.getSimpleName();
 
     EditText docDate, postDate,etHeaderText;
     Date dateObject;
@@ -167,7 +168,11 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
 
             @Override
             public void onResponse(Call<TranslocResponse> call, Response<TranslocResponse> response) {
-                Toast.makeText(PostTransferLocActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
+                int status = response.body().getStatus();
+
+                Log.e(TAG, "onResponse: "+ status);
+
+                Toast.makeText(PostTransferLocActivity.this, "status: "+status, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<TranslocResponse> call, Throwable t) {

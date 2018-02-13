@@ -117,7 +117,6 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
 
                     /*
                     if (data.getSTATUS().equalsIgnoreCase("1")){
-
                         Log.e("Test CallBack", "onResponse: "+data.getENTRY_QNT());
 
                     }else{
