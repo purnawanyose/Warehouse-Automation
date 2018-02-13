@@ -70,7 +70,7 @@ public class UserManagementAdminActivity extends AppCompatActivity {
                 // Get Post object and use the values to update the UI
                 User user = dataSnapshot.getValue(User.class);
                 // [START_EXCLUDE]
-                Log.e(TAG, "onDataChange: "+user.username );
+                Log.e(TAG, "onDataChange: "+user.getUsername() );
                 // [END_EXCLUDE]
             }
 
