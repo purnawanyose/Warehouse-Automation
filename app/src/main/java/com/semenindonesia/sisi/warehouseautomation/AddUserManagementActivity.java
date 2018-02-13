@@ -63,7 +63,7 @@ public class AddUserManagementActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         btnSave = (Button) findViewById(R.id.btn_savee);
         spinner = (Spinner) findViewById(R.id.spinner);
-        
+
         final List<String> spinnerArray = new ArrayList<String>();
         spinnerArray.add("Admin");
         spinnerArray.add("Operator");

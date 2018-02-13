@@ -111,11 +111,8 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 try {
 
                     getdata();
-<<<<<<< HEAD
                     //textView66.setText(cartt);
 //                    textView66.setText("123"+cartt);
-=======
->>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
                     Thread.sleep(9000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -159,13 +156,9 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-<<<<<<< HEAD
         textView66.setText(cartt);
         //isicart();
-=======
         cart();
->>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
 
     }
     // END ON CREATE
@@ -191,10 +184,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
                     LGORT = dataList.getLGORT();
                 }
 
-<<<<<<< HEAD
-=======
                 Log.e("CART LENGTH","onCreate: "+cart.length );
->>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
             }
 
             @Override
@@ -343,12 +333,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-<<<<<<< HEAD
     private void isicart(){
 
     }
-=======
->>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
-
 }

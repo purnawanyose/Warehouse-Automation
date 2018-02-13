@@ -7,12 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import helper.RealmHelper;
-
 public class AddActivity extends AppCompatActivity {
 
-
-    private RealmHelper realmHelper;
     private EditText password;
     private EditText username;
     private Button save;
@@ -22,9 +18,6 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user_management);
-
-
-        realmHelper = new RealmHelper(AddActivity.this);
 
 
         password = (EditText) findViewById(R.id.password);
@@ -41,8 +34,6 @@ public class AddActivity extends AppCompatActivity {
                 usr = username.getText().toString();
                 psw = password.getText().toString();
 
-                //menambahkan data pada database
-                realmHelper.addArticle(usr, psw);
 
                 //menutup Add Activity
                 finish();
