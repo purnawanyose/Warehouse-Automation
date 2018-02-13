@@ -7,11 +7,8 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         android:orientation="vertical"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -38,7 +35,7 @@
             android:paddingTop="10dp">
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/connectionName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -46,12 +43,18 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/serverIP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Server IP"
                 android:inputType="textPersonName" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/addConnection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Connection" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -72,7 +72,7 @@
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="94dp" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             android:checked="false"
             tools:layout_editor_absoluteX="280dp"
             tools:layout_editor_absoluteY="208dp" />
-
+-->
     </LinearLayout>
 
     <LinearLayout

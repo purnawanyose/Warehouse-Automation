@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.semenindonesia.sisi.warehouseautomation.ScannerReservationDetail;
 
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -237,8 +238,21 @@ public interface ApiInterface {
 
     @GET("all_reservasi.php")
     Call<CallCartResponse> getAll(
-            @Query("RESERV_NO") String RESERV_NO,
-            @Query("PR_UNAME") String PR_UNAME
+            @Query("RESERV_NO") String RESERV_NO
+    );
+
+    @GET("cart_count.php")
+    Call<CallCartResponse> getCartValue(
+            @Query("RESERV_NO") String RESERV_NO
+    );
+
+
+    @GET("Reservation/bonSementara/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<BonSementaraResponse> getUnflagBon(
+            @Query("rsnum[]") String rsnum,
+            @Query("rspos[]") String rspos,
+            @Query("flag") String flag
+
     );
 
     @POST("get_data.php")

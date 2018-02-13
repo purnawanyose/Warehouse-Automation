@@ -1,12 +1,15 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.User;
+import model.UserModel;
 
 public class AddUserManagementActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -39,6 +43,9 @@ public class AddUserManagementActivity extends AppCompatActivity {
     EditText password;
     Button save;
     Spinner spinner;
+
+    // variable yang merefers ke Firebase Realtime Database
+    private DatabaseReference database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,5 +198,11 @@ public class AddUserManagementActivity extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(role))
             mFirebaseDatabase.child(userId).child("role").setValue(role);
+    }
+
+
+    private boolean isEmpty(String s) {
+        // Cek apakah ada fields yang kosong, sebelum disubmit
+        return TextUtils.isEmpty(s);
     }
 }

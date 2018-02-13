@@ -36,6 +36,7 @@ import model.OnHandLocation;
 import model.Reservation;
 import response.CallCartResponse;
 import response.InterimResponse;
+import response.IssuedResponse;
 import response.OnHandLocationResponse;
 import response.ReservationDetailResponse;
 import retrofit2.Call;
@@ -50,15 +51,15 @@ public class ReservationDetailActivity extends AppCompatActivity {
     String TAG = ReservationDetailActivity.class.getSimpleName();
 
     TextView WERKS;
-    TextView rsv,order,textView68,textView66;
+    TextView rsv;
+    TextView order;
+    TextView textView68;
+    TextView textView66;
 
     String rNumber, rwerks,rlgort;
     private ReservationDetailRv adapter;
     private RecyclerView recyclerView;
-    int chart = 0;
     public static String akhirTampung, tampung1;
-    public static int[] akhirNilaii;
-    public static int akhirNilaiii;
     String WERKSS,RSVNO, BWART, LGORT;
     public static String RSPOS;
     public static String specialStock;
@@ -68,7 +69,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
     public static int cartt;
     int chartNilai;
 
-
+    int cartValue;
     Button btnGoodIssued;
 
     @Override
@@ -108,11 +109,14 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
                 // Pretend it's doing some background processing
                 try {
+
                     getdata();
+<<<<<<< HEAD
                     //textView66.setText(cartt);
 //                    textView66.setText("123"+cartt);
+=======
+>>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
                     Thread.sleep(9000);
-                    Log.e(TAG, "cart value: "+cartt);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -146,9 +150,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 intent.putExtra("WBS", wbs_elem);
                 intent.putExtra("SS", specialStock);
                 intent.putExtra("VAL", val_type);
-
-
-//                intent.putExtra("ORDER", order.getText().toString());
                 intent.putExtra("NILAIAKHIR", ReservationDetailRv.akhirNilai);
                 Log.e("Test BTN ISSUED", "onClick: "+ReservationDetailRv.akhirNilai);
                 Log.e("Test RSPOS", "onClick: "+RSPOS);
@@ -156,13 +157,15 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 Log.e("Test RSPOS", "onClick: "+specialStock);
                 Log.e("Test RSPOS", "onClick: "+val_type);
                 startActivity(intent);
-
-
             }
         });
 
+<<<<<<< HEAD
         textView66.setText(cartt);
         //isicart();
+=======
+        cart();
+>>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
 
     }
     // END ON CREATE
@@ -175,19 +178,23 @@ public class ReservationDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
                 generateReservationDetailResponse((ArrayList<Reservation>) response.body().getReservation());
                 List<Reservation> content = response.body().getReservation();
-                for (Reservation data : content) {
+                for (Reservation dataList : content) {
                     Log.e("content", "Material No " + content.toString());
 
-                    WERKS.setText("Plant \t\t\t\t\t\t : "+data.getWERKS());
-                    rsv.setText("Reservation No. \t : "+data.getRSNUM());
-                    order.setText("Order \t\t\t\t\t\t : "+data.getAUFNR());
+                    WERKS.setText("Plant \t\t\t\t\t\t : "+dataList.getWERKS());
+                    rsv.setText("Reservation No. \t : "+dataList.getRSNUM());
+                    order.setText("Order \t\t\t\t\t\t : "+dataList.getAUFNR());
 
-                    WERKSS = data.getWERKS();
-                    RSVNO = data.getRSNUM();
-                    BWART = data.getBWART();
-                    LGORT = data.getLGORT();
+                    WERKSS = dataList.getWERKS();
+                    RSVNO = dataList.getRSNUM();
+                    BWART = dataList.getBWART();
+                    LGORT = dataList.getLGORT();
                 }
 
+<<<<<<< HEAD
+=======
+                Log.e("CART LENGTH","onCreate: "+cart.length );
+>>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
             }
 
             @Override
@@ -198,6 +205,44 @@ public class ReservationDetailActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void cart(){
+
+        final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
+
+        Call<CallCartResponse> call = apiService.getCartValue(rNumber);
+
+                /*Log the URL called*/
+        Log.wtf("URL Called", call.request().url() + "");
+
+        call.enqueue(new Callback<CallCartResponse>() {
+
+            @Override
+            public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
+                List<Cart> content = response.body().getCart();
+
+                for (Cart data : content) {
+
+                    Log.e("Test Cart Value Status", "onResponse: "+data.getSTATUS());
+                    Log.e("Test Cart Value Reservation Number", "onResponse: "+rNumber);
+
+                    if(data.getJUMLAH().equalsIgnoreCase("0")){
+                        textView66.setText("0");
+                        Log.e("Test Cart Value CUK", "onResponse: "+data.getJUMLAH());
+                    }else {
+                        cartValue = cartValue +1;
+                        textView66.setText(data.getJUMLAH());
+                        Log.e("Test Cart Value CUK", "onResponse: "+data.getJUMLAH());
+                    }}
+            }
+            @Override
+            public void onFailure(Call<CallCartResponse> call, Throwable t) {
+                Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("Test", "onFailure: "+Call.class );
+            }
+        });
+    }
+
 
     private void generateReservationDetailResponse(ArrayList<Reservation> empDataList) {
         cart = new int[empDataList.size()];
@@ -212,9 +257,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
-
-
-
     }
 
     @Override
@@ -226,6 +268,42 @@ public class ReservationDetailActivity extends AppCompatActivity {
             builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
+
+                    final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
+                            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                            .setLabel("Please wait")
+                            .setDetailsLabel("Retrieve Data")
+                            .setCancellable(false)
+                            .setAnimationSpeed(2)
+                            .setDimAmount(0.5f)
+                            .show();
+
+                    AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+                        @Override
+                        public void doOnBackground() {
+
+                            // Pretend it's doing some background processing
+                            try {
+
+                                getdata();
+                                Thread.sleep(9000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Create a fake result (MUST be final)
+                            final boolean result = true;
+
+                            // Send the result to the UI thread and show it on a Toast
+                            AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                                @Override
+                                public void doInUIThread() {
+                                    khud.dismiss();
+
+                                }
+                            });
+                        }
+                    });
 
                    /*Create handle for the RetrofitInstance interface*/
                     final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
@@ -239,24 +317,24 @@ public class ReservationDetailActivity extends AppCompatActivity {
                     call.enqueue(new Callback<CallCartResponse>() {
                         @Override
                         public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
-                            Toast.makeText(ReservationDetailActivity.this, "Berhasil Delete", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReservationDetailActivity.this, " Data Deleted", Toast.LENGTH_SHORT).show();
                             finish();
                         }
 
                         @Override
                         public void onFailure(Call<CallCartResponse> call, Throwable t) {
                             Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                            Log.e("Test", "onFailure: "+Call.class );
+                            Log.e("Test Error", "onFailure: "+Call.class );
                             finish();
                         }
                     });
                 }
             });
-            builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
+            builder.setPositiveButton("No", new DialogInterface.OnClickListener(){
 
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
-                    finish();
+                    dialog.cancel();
                 }
             });
             AlertDialog alertDialog = builder.create();
@@ -266,8 +344,11 @@ public class ReservationDetailActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+<<<<<<< HEAD
     private void isicart(){
 
     }
+=======
+>>>>>>> a1bf1e6b2f860683ab86f3b81a0c9d232e80826c
 
 }

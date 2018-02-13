@@ -353,13 +353,13 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
             final AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
             builder.setMessage("Apakah Anda Yakin Akan Keluar?");
             builder.setCancelable(true);
-            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
                     dialog.cancel();
                 }
             });
-            builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 
                 @Override
                 public void onClick(DialogInterface dialog, int i) {

@@ -111,13 +111,17 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
             public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
                 List<Cart> content = response.body().getCart();
                 for (Cart data : content) {
+
+                    holder.textView72.setText(data.getQUANTITY());
+                    cart(holder, position);
+
+                    /*
                     if (data.getSTATUS().equalsIgnoreCase("1")){
                         Log.e("Test CallBack", "onResponse: "+data.getENTRY_QNT());
-                        holder.textView72.setText(data.getENTRY_QNT());
-                        cart(holder, position);
+
                     }else{
 
-                    }
+                    }*/
                 }
             }
 
