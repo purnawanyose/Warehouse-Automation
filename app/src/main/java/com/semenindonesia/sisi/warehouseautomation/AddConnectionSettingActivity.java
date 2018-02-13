@@ -36,14 +36,14 @@ public class AddConnectionSettingActivity extends AppCompatActivity {
         addConnection = (Button) findViewById(R.id.addConnection);
 
         connections = new ArrayList<>();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseReference = mFirebaseDatabase.getReference("connection");
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            mFirebaseReference = mFirebaseDatabase.getReference("connection");
 
         addConnection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                simpanAgenda();
-            }
+                @Override
+                public void onClick(View v) {
+                    simpanAgenda();
+                }
         });
     }
 

@@ -207,7 +207,7 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
         });
     }*/
 
-    private void postRetrofit(){
+   /* private void postRetrofit(){
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         for (int i = 0; i <norsv.length() ; i++) {
             Call<IssuedResponse> call = apiService.setGoodIssued
@@ -250,7 +250,7 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
         }
 
 
-    }
+    }*/
 
     @Override
     public void onClick(View view) {
