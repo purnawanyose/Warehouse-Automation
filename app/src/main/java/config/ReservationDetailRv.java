@@ -112,7 +112,6 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
                 List<Cart> content = response.body().getCart();
                 for (Cart data : content) {
                     if (data.getSTATUS().equalsIgnoreCase("1")){
-
                         Log.e("Test CallBack", "onResponse: "+data.getENTRY_QNT());
                         holder.textView72.setText(data.getENTRY_QNT());
                         cart(holder, position);

@@ -110,7 +110,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 try {
                     getdata();
                     //textView66.setText(cartt);
-                    textView66.setText("123"+cartt);
+//                    textView66.setText("123"+cartt);
                     Thread.sleep(9000);
                     Log.e(TAG, "cart value: "+cartt);
                 } catch (InterruptedException e) {
@@ -161,6 +161,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
             }
         });
 
+        textView66.setText(cartt);
         //isicart();
 
     }
@@ -186,18 +187,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
                     BWART = data.getBWART();
                     LGORT = data.getLGORT();
                 }
-
-                Log.e("CART LENGTH","onCreate: "+cart.length );
-
-                for (int i = 0; i <cart.length ; i++) {
-
-                    chartNilai = cart[i];
-                    Log.e("Test Cart "+i, "onCreate: "+chartNilai);
-
-                    chart = chart + chartNilai;
-    //                    Log.e("TESTISTESTIS", "onCreate: "+chart);
-                }
-    //                textView66.setText(chartNilai);
 
             }
 
@@ -278,41 +267,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
     }
 
     private void isicart(){
-        final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("Please wait")
-                .setDetailsLabel("Retrieve Data")
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
-                .show();
 
-        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
-            @Override
-            public void doOnBackground() {
-
-                // Pretend it's doing some background processing
-                try {
-                    textView66.setText(cartt);
-                    Log.e(TAG, "cart value: "+cartt);
-                    Thread.sleep(9000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                // Create a fake result (MUST be final)
-                final boolean result = true;
-
-                // Send the result to the UI thread and show it on a Toast
-                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
-                    @Override
-                    public void doInUIThread() {
-                        khud.dismiss();
-
-                    }
-                });
-            }
-        });
     }
 
 }
