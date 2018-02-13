@@ -21,7 +21,10 @@ import java.util.List;
 import java.util.Locale;
 
 import model.Cart;
+import model.Content;
+import model.ContentModel;
 import model.Issued;
+import model.MatDoc;
 import model.Reservation;
 import response.CallCartResponse;
 import response.TranslocResponse;
@@ -169,13 +172,24 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
             @Override
             public void onResponse(Call<TranslocResponse> call, Response<TranslocResponse> response) {
                 int status = response.body().getStatus();
+                List<ContentModel> content = response.body().getContent();
 
                 Log.e(TAG, "onResponse: "+ status);
+                Log.e(TAG, "onResponse: "+ content);
+
+                for (ContentModel dataList : content) {
+                    Log.e("content", "Material No " + content.toString());
+                    Log.e("content", "success " + dataList.getSuccess());
+                }
+
+                
+
 
                 Toast.makeText(PostTransferLocActivity.this, "status: "+status, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<TranslocResponse> call, Throwable t) {
+
                 Toast.makeText(PostTransferLocActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 Log.e("Test", "onFailure: "+Call.class );
 

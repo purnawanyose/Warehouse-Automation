@@ -156,8 +156,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        textView66.setText(cartt);
-        //isicart();
         cart();
 
     }

@@ -63,7 +63,8 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.btnAdd);
 
         // Initialize Database
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users")
+                .child("username");
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
