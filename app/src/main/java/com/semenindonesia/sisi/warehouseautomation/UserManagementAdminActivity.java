@@ -1,25 +1,17 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,16 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.OnClick;
-import config.Management_User_Rv;
-import database.Users;
-import de.mrapp.android.dialog.WizardDialog;
-import fragment.AddUserManagement;
-import fragment.Filter_Movtype;
 import database.RealmHelper;
-import helper.User;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import model.User;
 import model.UserModel;
 
 public class UserManagementAdminActivity extends AppCompatActivity {
@@ -57,7 +42,7 @@ public class UserManagementAdminActivity extends AppCompatActivity {
     List<model.User>list;
     RecyclerView recycle;
     Button view;
-
+    private DatabaseReference mDatabase;
 
     String user,pass,role;
 
@@ -73,43 +58,34 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
 
-/*
-        data = new ArrayList<>();
-        helper = new RealmHelper(UserManagementAdminActivity.this);
-*/
         recyclerView = (RecyclerView) findViewById(R.id.rvUser);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd = (Button) findViewById(R.id.btnAdd);
 
-        Realm.init(this);
-        realm=Realm.getDefaultInstance();
-        helper = new RealmHelper(UserManagementAdminActivity.this);
-
-        myRef.addValueEventListener(new ValueEventListener() {
+        // Initialize Database
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                list = new ArrayList<model.User>();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                    model.User value = dataSnapshot1.getValue(model.User.class);
-                    model.User fire = new model.User();
-
-                    String username = value.getUsername();
-                    String password = value.getPassword();
-                    String role = value.getRole();
-
-                    fire.setUsername(username);
-                    fire.setPassword(password);
-                    fire.setRole(role);
-                    list.add(fire);
-                }
+                // Get Post object and use the values to update the UI
+                User user = dataSnapshot.getValue(User.class);
+                // [START_EXCLUDE]
+                Log.e(TAG, "onDataChange: "+user.username );
+                // [END_EXCLUDE]
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "onCancelled: ",databaseError.toException() );
-
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(UserManagementAdminActivity.this, "Failed to load post.",
+                        Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
             }
-        });
+        };
+        mDatabase.addValueEventListener(postListener);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
