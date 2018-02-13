@@ -5,23 +5,42 @@ package model;
  */
 
 public class Connection {
-    private String ConnectionName;
-    private String ServerIp;
+    private String connectionName;
+    private String serverIp;
+    private String Id;
 
+
+    public Connection(){
+
+    }
+
+    public Connection (String Id, String connectionName, String serverIp){
+        this.Id = Id;
+        this.connectionName = connectionName;
+        this.serverIp = serverIp;
+    }
 
     public String getConnectionName() {
-        return ConnectionName;
+        return connectionName;
     }
 
     public void setConnectionName(String connectionName) {
-        ConnectionName = connectionName;
+        this.connectionName = connectionName;
     }
 
     public String getServerIp() {
-        return ServerIp;
+        return serverIp;
     }
 
     public void setServerIp(String serverIp) {
-        ServerIp = serverIp;
+        this.serverIp = serverIp;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 }

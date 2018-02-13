@@ -249,8 +249,8 @@ public interface ApiInterface {
 
     @GET("Reservation/bonSementara/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<BonSementaraResponse> getUnflagBon(
-            @Query("rsnum[]") ArrayList<String> rsnum,
-            @Query("rspos[]") ArrayList<String> rspos,
+            @Query("rsnum[]") String rsnum,
+            @Query("rspos[]") String rspos,
             @Query("flag") String flag
 
     );

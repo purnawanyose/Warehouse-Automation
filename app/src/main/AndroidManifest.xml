@@ -28,7 +28,7 @@
             android:name=".DetailOpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UserManagementAdminActivity"
+            android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -90,7 +90,8 @@
         <activity android:name=".LayoutKelima" />
         <activity android:name=".PostIssuedActivity" />
         <activity android:name=".PostTransferLocActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".UserManagementAdminActivity" />
+        <activity android:name=".AddConnectionSettingActivity"></activity>
     </application>
 
 </manifest>

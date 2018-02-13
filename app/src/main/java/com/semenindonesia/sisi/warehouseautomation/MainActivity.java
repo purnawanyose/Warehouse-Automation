@@ -214,5 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ForceCloseDebugger.handle(this);
     }
 }

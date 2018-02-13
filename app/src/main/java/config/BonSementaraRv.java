@@ -1,9 +1,11 @@
 package config;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 import model.BonSementara;
 import model.Interim;
+import model.MovTypeSelection;
 
 import static android.R.id.list;
 import static com.semenindonesia.sisi.warehouseautomation.R.id.combo1;
@@ -35,6 +38,15 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
 
     public ArrayList<BonSementara> dataList;
     CheckBox cb2, cb1, cb3;
+/*
+
+    private Context context;
+    public static String selected;
+
+    private int selectedPosition = -1;
+*/
+
+
 
     public BonSementaraRv(ArrayList<BonSementara> dataList) {
         this.dataList = dataList;
@@ -47,10 +59,10 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
 
         return new BonSementaraRv.BonViewHolder(view);
 
-
     }
     @Override
-    public void onBindViewHolder(BonSementaraRv.BonViewHolder holder, int position) {
+    public void onBindViewHolder(final BonSementaraRv.BonViewHolder holder, final int position) {
+
 
         holder.textView43.setText(dataList.get(position).getRSNUM()+"\t\t"+dataList.get(position).getRSPOS());
         holder.textView44.setText(dataList.get(position).getMAKTX()+"\n"+dataList.get(position).getMATNR());
@@ -58,6 +70,18 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
         holder.textView46.setText(dataList.get(position).getBDMNG());
         holder.textView47.setText(dataList.get(position).getMEINS());
 
+
+       /* holder.cb1.setChecked(position == selectedPosition);
+        holder.cb1.setId(position);
+        holder.cb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.checked = dataList.get(position).getBWART();
+                selected = holder.checked;
+                Log.e("checked"," "+selected);
+                itemCheckChanged(v);
+            }
+        });*/
     }
 
     @Override
@@ -69,20 +93,24 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
         TextView textView43, textView44, textView45, textView46, textView47;
         CheckBox cb1, cb2, cb3;
         Button button11;
+        String checked;
 
         BonViewHolder(final View itemView) {
             super(itemView);
-//            context = itemView.getContext();
             textView43 = itemView.findViewById(R.id.textView43);
             textView44 = itemView.findViewById(R.id.textView44);
             textView45 = itemView.findViewById(R.id.textView45);
             textView46 = itemView.findViewById(R.id.textView46);
             textView47 = itemView.findViewById(R.id.textView47);
             cb1 = itemView.findViewById(R.id.combo1);
-            cb2 = itemView.findViewById(R.id.cb2);
-            cb2 = itemView.findViewById(R.id.cb3);
             button11 = itemView.findViewById(R.id.button11);
 
         }
     }
+
+   /* //On selecting any view set the current position to selectedPositon and notify adapter
+    private void itemCheckChanged(View v) {
+        selectedPosition = (Integer) v.getId();
+        notifyDataSetChanged();
+    }*/
 }

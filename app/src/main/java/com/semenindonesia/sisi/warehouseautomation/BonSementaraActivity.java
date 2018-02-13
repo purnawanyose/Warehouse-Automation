@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -43,12 +45,26 @@ public class BonSementaraActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     Button btnUnflag;
 
+//    CheckBox cb2, cb3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bon_sementara);
 
         btnUnflag = (Button) findViewById(R.id.button11);
+/*
+        cb2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (cb2.isChecked()){
+                    cb3.setChecked(true);
+                }else{
+                    cb3.setChecked(false);
+                }
+            }
+        });*/
+
 
         btnUnflag.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +125,7 @@ public class BonSementaraActivity extends AppCompatActivity {
                 });
             }
         });
-
+        ForceCloseDebugger.handle(this);
     }
 
     public void retrofit(){
@@ -137,12 +153,43 @@ public class BonSementaraActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BonSementaraResponse> call, Throwable t) {
-                
+
                 Toast.makeText(BonSementaraActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+
+    /*public void unflag(){
+        *//*Create handle for the RetrofitInstance interface*//*
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        *//*Call the method with parameter in the interface to get the employee data*//*
+        Call<BonSementaraResponse> call = apiService.getUnflagBon("a","a","UNFLAG");
+
+        *//*Log the URL called*//*
+        Log.wtf("URL Called", call.request().url() + "");
+
+        call.enqueue(new Callback<BonSementaraResponse>() {
+
+            @Override
+            public void onResponse(Call<BonSementaraResponse> call, Response<BonSementaraResponse> response) {
+                generateBonresponse((ArrayList<BonSementara>) response.body().getBonSementara());
+                List<BonSementara> content = response.body().getBonSementara();
+                if (content.size() < 1){
+                    Toast.makeText(BonSementaraActivity.this,"Data Not Found!",Toast.LENGTH_LONG).show();
+                }
+
+                Log.e("aa","aaas"+content.toString());
+            }
+
+            @Override
+            public void onFailure(Call<BonSementaraResponse> call, Throwable t) {
+
+                Toast.makeText(BonSementaraActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }*/
 
 
     /*Method to generate List of employees using RecyclerView with custom adapter*/

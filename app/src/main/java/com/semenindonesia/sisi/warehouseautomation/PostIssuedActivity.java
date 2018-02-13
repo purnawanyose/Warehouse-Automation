@@ -159,10 +159,13 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
 
     private void issuedBaru(){
         String et = etHeaderText.getText().toString();
+        Log.e("Nilai Header Text", "issuedBaru: "+et.toString() );
+        Log.e("Nilai Date1", "issuedBaru: "+date1 );
+        Log.e("Nilai Date2", "issuedBaru: "+date2);
 
         final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
 
-        Call<CallCartResponse> call = apiService.setPostIssued("222","2221","asdfa");
+        Call<CallCartResponse> call = apiService.setPostIssued(date1,date2,et);
 
         Log.wtf("URL Called", call.request().url() + "");
 
@@ -204,7 +207,7 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
         });
     }*/
 
-   /* private void postRetrofit(){
+    private void postRetrofit(){
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         for (int i = 0; i <norsv.length() ; i++) {
             Call<IssuedResponse> call = apiService.setGoodIssued
@@ -247,7 +250,7 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
         }
 
 
-    }*/
+    }
 
     @Override
     public void onClick(View view) {

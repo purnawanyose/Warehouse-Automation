@@ -7,23 +7,15 @@ package model;
 public class Cart {
 
     String PSTNG_DATE, DOC_DATE, HEADER_TXT;
-    String PR_UNAME, PLANT, MOVE_TYPE, ENTRY_QNT, RESERV_NO, RES_ITEM, STGE_LOC, VAL_TYPE, SPEC_STOCK, WBS_ELEM, STATUS, JUMLAH;
+    String PR_UNAME, PLANT, MOVE_TYPE, ENTRY_QNT, RESERV_NO, RES_ITEM, STGE_LOC, VAL_TYPE, SPEC_STOCK, WBS_ELEM, STATUS, JUMLAH, QUANTITY;
 
     public Cart() {
 
     }
-
-<<<<<<< HEAD
-
-
-    public Cart(String PSTNG_DATE, String DOC_DATE, String HEADER_TXT, String PR_UNAME, String PLANT, String MOVE_TYPE, String ENTRY_QNT, String RESERV_NO, String RES_ITEM, String STGE_LOC, String VAL_TYPE, String SPEC_STOCK, String WBS_ELEM, String STATUS, String JUMLAH) {
-=======
     public Cart(String PSTNG_DATE, String DOC_DATE, String HEADER_TXT, String PR_UNAME, String PLANT, String MOVE_TYPE,
                 String ENTRY_QNT, String RESERV_NO, String RES_ITEM, String STGE_LOC, String VAL_TYPE, String SPEC_STOCK,
-                String WBS_ELEM) {
+                String WBS_ELEM, String  QUANTITY) {
 
-
->>>>>>> cd0ee72994721adb90597d030f28445632dcf6cd
         this.PSTNG_DATE = PSTNG_DATE;
         this.DOC_DATE = DOC_DATE;
         this.HEADER_TXT = HEADER_TXT;
@@ -39,6 +31,7 @@ public class Cart {
         this.WBS_ELEM = WBS_ELEM;
         this.STATUS = STATUS;
         this.JUMLAH = JUMLAH;
+        this.QUANTITY = QUANTITY;
     }
 
     public String getPSTNG_DATE() {
@@ -151,6 +144,7 @@ public class Cart {
     public void setSTATUS(String STATUS) {
         this.STATUS = STATUS;
     }
+
     public String getJUMLAH() {
         return JUMLAH;
     }
@@ -159,4 +153,11 @@ public class Cart {
         this.JUMLAH = JUMLAH;
     }
 
+    public String getQUANTITY() {
+        return QUANTITY;
+    }
+
+    public void setQUANTITY(String QUANTITY) {
+        this.QUANTITY = QUANTITY;
+    }
 }

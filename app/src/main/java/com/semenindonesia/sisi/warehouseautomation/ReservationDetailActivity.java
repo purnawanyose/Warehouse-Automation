@@ -59,10 +59,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
     String rNumber, rwerks,rlgort;
     private ReservationDetailRv adapter;
     private RecyclerView recyclerView;
-    int chart = 0;
     public static String akhirTampung, tampung1;
-    public static int[] akhirNilaii;
-    public static int akhirNilaiii;
     String WERKSS,RSVNO, BWART, LGORT;
     public static String RSPOS;
     public static String specialStock;
@@ -72,11 +69,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
     public static int cartt;
     int chartNilai;
 
-<<<<<<< HEAD
     int cartValue;
-=======
->>>>>>> cd0ee72994721adb90597d030f28445632dcf6cd
-
     Button btnGoodIssued;
 
     @Override
@@ -116,11 +109,9 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
                 // Pretend it's doing some background processing
                 try {
+
                     getdata();
-                    //textView66.setText(cartt);
-                    textView66.setText("123"+cartt);
                     Thread.sleep(9000);
-                    Log.e(TAG, "cart value: "+cartt);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -154,9 +145,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 intent.putExtra("WBS", wbs_elem);
                 intent.putExtra("SS", specialStock);
                 intent.putExtra("VAL", val_type);
-
-
-//                intent.putExtra("ORDER", order.getText().toString());
                 intent.putExtra("NILAIAKHIR", ReservationDetailRv.akhirNilai);
                 Log.e("Test BTN ISSUED", "onClick: "+ReservationDetailRv.akhirNilai);
                 Log.e("Test RSPOS", "onClick: "+RSPOS);
@@ -164,12 +152,10 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 Log.e("Test RSPOS", "onClick: "+specialStock);
                 Log.e("Test RSPOS", "onClick: "+val_type);
                 startActivity(intent);
-
-
             }
         });
 
-        //isicart();
+        cart();
 
     }
     // END ON CREATE
@@ -196,17 +182,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 }
 
                 Log.e("CART LENGTH","onCreate: "+cart.length );
-
-                for (int i = 0; i <cart.length ; i++) {
-
-                    chartNilai = cart[i];
-                    Log.e("Test Cart "+i, "onCreate: "+chartNilai);
-
-                    chart = chart + chartNilai;
-    //                    Log.e("TESTISTESTIS", "onCreate: "+chart);
-                }
-    //                textView66.setText(chartNilai);
-
             }
 
             @Override
@@ -216,44 +191,9 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
             }
         });
-<<<<<<< HEAD
-
-        btnGoodIssued.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, PostIssuedActivity.class);
-
-                intent.putExtra("PLANT", WERKSS);
-                intent.putExtra("RSVNO", RSVNO);
-                intent.putExtra("BWART", BWART);
-                intent.putExtra("LGORT", LGORT);
-                intent.putExtra("RSPOS", RSPOS);
-                intent.putExtra("WBS", wbs_elem);
-                intent.putExtra("SS", specialStock);
-                intent.putExtra("VAL", val_type);
-
-
-//                intent.putExtra("ORDER", order.getText().toString());
-                intent.putExtra("NILAIAKHIR", ReservationDetailRv.akhirNilai);
-                Log.e("Test BTN ISSUED", "onClick: "+ReservationDetailRv.akhirNilai);
-                Log.e("Test RSPOS", "onClick: "+RSPOS);
-                Log.e("Test RSPOS", "onClick: "+wbs_elem);
-                Log.e("Test RSPOS", "onClick: "+specialStock);
-                Log.e("Test RSPOS", "onClick: "+val_type);
-                startActivity(intent);
-
-
-            }
-        });
-
-        Log.e("TESTSTTSTSTSTTST","onCreate: "+"aaaaaaaaaaaa");
-
-        cart();
     }
-    // END ON CREATE
 
     private void cart(){
-
 
         final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
 
@@ -270,21 +210,18 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
                 for (Cart data : content) {
 
-                    Log.e("Test Cart Value CUK", "onResponse: "+data.getSTATUS());
-                    Log.e("Test Cart Value CUK", "onResponse: "+rNumber);
-                    if (data.getSTATUS().equalsIgnoreCase("1")){
+                    Log.e("Test Cart Value Status", "onResponse: "+data.getSTATUS());
+                    Log.e("Test Cart Value Reservation Number", "onResponse: "+rNumber);
 
-                         cartValue = cartValue +1;
-//                        Log.e("Test Cart Value CUK", "onResponse: "+cartValue);
+                    if(data.getJUMLAH().equalsIgnoreCase("0")){
+                        textView66.setText("0");
+                        Log.e("Test Cart Value CUK", "onResponse: "+data.getJUMLAH());
+                    }else {
+                        cartValue = cartValue +1;
                         textView66.setText(data.getJUMLAH());
                         Log.e("Test Cart Value CUK", "onResponse: "+data.getJUMLAH());
-                    }else{
-
-                    }
-                }
-
+                    }}
             }
-
             @Override
             public void onFailure(Call<CallCartResponse> call, Throwable t) {
                 Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
@@ -293,12 +230,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-=======
-    }
->>>>>>> cd0ee72994721adb90597d030f28445632dcf6cd
 
     private void generateReservationDetailResponse(ArrayList<Reservation> empDataList) {
         cart = new int[empDataList.size()];
@@ -313,9 +244,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
-
-
-
     }
 
     @Override
@@ -327,6 +255,42 @@ public class ReservationDetailActivity extends AppCompatActivity {
             builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
+
+                    final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
+                            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                            .setLabel("Please wait")
+                            .setDetailsLabel("Retrieve Data")
+                            .setCancellable(false)
+                            .setAnimationSpeed(2)
+                            .setDimAmount(0.5f)
+                            .show();
+
+                    AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+                        @Override
+                        public void doOnBackground() {
+
+                            // Pretend it's doing some background processing
+                            try {
+
+                                getdata();
+                                Thread.sleep(9000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Create a fake result (MUST be final)
+                            final boolean result = true;
+
+                            // Send the result to the UI thread and show it on a Toast
+                            AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                                @Override
+                                public void doInUIThread() {
+                                    khud.dismiss();
+
+                                }
+                            });
+                        }
+                    });
 
                    /*Create handle for the RetrofitInstance interface*/
                     final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
@@ -340,24 +304,24 @@ public class ReservationDetailActivity extends AppCompatActivity {
                     call.enqueue(new Callback<CallCartResponse>() {
                         @Override
                         public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
-                            Toast.makeText(ReservationDetailActivity.this, "Berhasil Delete", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReservationDetailActivity.this, " Data Deleted", Toast.LENGTH_SHORT).show();
                             finish();
                         }
 
                         @Override
                         public void onFailure(Call<CallCartResponse> call, Throwable t) {
                             Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                            Log.e("Test", "onFailure: "+Call.class );
+                            Log.e("Test Error", "onFailure: "+Call.class );
                             finish();
                         }
                     });
                 }
             });
-            builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
+            builder.setPositiveButton("No", new DialogInterface.OnClickListener(){
 
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
-                    finish();
+                    dialog.cancel();
                 }
             });
             AlertDialog alertDialog = builder.create();
@@ -367,42 +331,5 @@ public class ReservationDetailActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private void isicart(){
-        final KProgressHUD khud = KProgressHUD.create(ReservationDetailActivity.this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("Please wait")
-                .setDetailsLabel("Retrieve Data")
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
-                .show();
-
-        AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
-            @Override
-            public void doOnBackground() {
-
-                // Pretend it's doing some background processing
-                try {
-                    textView66.setText(cartt);
-                    Log.e(TAG, "cart value: "+cartt);
-                    Thread.sleep(9000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                // Create a fake result (MUST be final)
-                final boolean result = true;
-
-                // Send the result to the UI thread and show it on a Toast
-                AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
-                    @Override
-                    public void doInUIThread() {
-                        khud.dismiss();
-
-                    }
-                });
-            }
-        });
-    }
 
 }
