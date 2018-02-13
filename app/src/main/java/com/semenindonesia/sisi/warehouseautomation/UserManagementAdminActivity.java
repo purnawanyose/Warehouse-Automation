@@ -34,8 +34,10 @@ public class UserManagementAdminActivity extends AppCompatActivity {
     private static final String TAG = "UserManagementActivity";
     private RecyclerView recyclerView;
     private RealmHelper helper;
-    private ArrayList<UserModel> data;
+    private ArrayList<User> data;
     Realm realm;
+
+    public static String usernameLogin;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -67,11 +69,28 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                data = new ArrayList<>();
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()){
+                    User user = noteDataSnapshot.getValue(User.class);
+//                    user.setPassword(noteDataSnapshot.getKey());
+                    Log.e(TAG, "onDataChange1: "+dataSnapshot.getValue());
+                    Log.e(TAG, "onDataChange2: "+noteDataSnapshot.getKey());
+
+                    data.add(user);
+
+                }
+                for (int i = 0; i <data.size() ; i++) {
+                    Log.e(TAG, "onDataChange3000: "+data.get(i).getUsername());
+                    usernameLogin = data.get(i).getUsername();
+
+                }
                 // Get Post object and use the values to update the UI
-                User user = dataSnapshot.getValue(User.class);
+              /*  User user = dataSnapshot.getValue(User.class);
                 // [START_EXCLUDE]
-                Log.e(TAG, "onDataChange: "+user.getUsername() );
-                // [END_EXCLUDE]
+                Log.e(TAG, "onDataChange: "+dataSnapshot.getValue());
+                Log.e(TAG, "onDataChange: "+user.getPassword().toString());
+                // [END_EXCLUDE]*/
             }
 
 

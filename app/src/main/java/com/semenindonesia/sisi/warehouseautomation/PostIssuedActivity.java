@@ -162,10 +162,12 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
         Log.e("Nilai Header Text", "issuedBaru: "+et.toString() );
         Log.e("Nilai Date1", "issuedBaru: "+date1 );
         Log.e("Nilai Date2", "issuedBaru: "+date2);
+        Log.e("Nilai NO RESERVASI", "issuedBaru: "+norsv);
+        Log.e("Nilai PR_UNAME", "issuedBaru: "+LoginActivity.pr_uname);
 
         final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
 
-        Call<CallCartResponse> call = apiService.setPostIssued(date1,date2,et);
+        Call<CallCartResponse> call = apiService.setPostIssued(date1,date2,et.toString(),norsv);
 
         Log.wtf("URL Called", call.request().url() + "");
 

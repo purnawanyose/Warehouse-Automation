@@ -146,8 +146,8 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
 
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<TranslocResponse> call = apiService.setTransfer(date1,date2,"AZMI",MATNO,PLANT
-                                    ,"W213","311",etBatch.getText().toString(),etQty.getText().toString()
+        Call<TranslocResponse> call = apiService.setTransfer(date1,date2,LoginActivity.pr_uname,MATNO,PLANT
+                                    ,SLOC,"311",etBatch.getText().toString(),etQty.getText().toString()
                                     ,etSloc.getText().toString(),etSS.getText().toString(),etVendor.getText().toString());
 
         Log.wtf("URL Called", call.request().url() + "");

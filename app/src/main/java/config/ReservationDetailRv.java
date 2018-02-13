@@ -114,14 +114,6 @@ public class ReservationDetailRv extends RecyclerView.Adapter<ReservationDetailR
 
                     holder.textView72.setText(data.getQUANTITY());
                     cart(holder, position);
-
-                    /*
-                    if (data.getSTATUS().equalsIgnoreCase("1")){
-                        Log.e("Test CallBack", "onResponse: "+data.getENTRY_QNT());
-
-                    }else{
-
-                    }*/
                 }
             }
 

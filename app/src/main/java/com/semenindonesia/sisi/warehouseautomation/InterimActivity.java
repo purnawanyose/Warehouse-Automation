@@ -81,7 +81,7 @@ public class InterimActivity extends AppCompatActivity {
             }
         });
 
-        ForceCloseDebugger.handle(this);
+//        ForceCloseDebugger.handle(this);
     }
     public void  retrifit(){
          /*Create handle for the RetrofitInstance interface*/

@@ -8,7 +8,30 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class User {
 
-        public String username;
+    public String username;
+    public String pass;
+    public String role;
+    public String id;
+
+
+    public User() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public User(String username, String role, String pass, String id) {
+        this.username = username;
+        this.pass = pass;
+        this.role = role;
+        this.id = id;
+    }
+
 
     public String getUsername() {
         return username;
@@ -16,14 +39,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {
@@ -34,17 +49,11 @@ public class User {
         this.role = role;
     }
 
-    public String password;
-        public String role;
+    public String getPass() {
+        return pass;
+    }
 
-        // Default constructor required for calls to
-        // DataSnapshot.getValue(User.class)
-        public User() {
-        }
-
-        public User(String username, String password, String role) {
-            this.username = username;
-            this.password = password;
-            this.role = role;
-        }
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 }

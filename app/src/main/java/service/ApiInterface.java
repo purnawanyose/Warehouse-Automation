@@ -258,9 +258,11 @@ public interface ApiInterface {
     @POST("get_data.php")
     @FormUrlEncoded
     Call <CallCartResponse> setPostIssued(
-            @Field("header[DOC_DATE]") String DOC_DATE,
-            @Field("header[PSTNG_DATE]") String PSTNG_DATE,
-            @Field("header[HEADER_TXT]") String HEADER_TXT
+            @Field("DOC_DATE") String DOC_DATE,
+            @Field("PSTNG_DATE") String PSTNG_DATE,
+            @Field("HEADER_TXT") String HEADER_TXT,
+            @Field("RESERV_NO") String RESERV_NO
+
     );
 
 

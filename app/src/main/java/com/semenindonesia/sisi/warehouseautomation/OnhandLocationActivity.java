@@ -237,7 +237,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
         /*Call the method with parameter in the interface to get the employee data*/
         for (int i = 0; i <specialStock.length ; i++) {
             if (qtybroo[i] > 0 && String.valueOf(qtybroo[i]) != null ){
-                Call<ReservationDetailResponse> call = apiService.getApiLocal("BURHAN",plantt,werkss,
+                Call<ReservationDetailResponse> call = apiService.getApiLocal(LoginActivity.pr_uname,plantt,werkss,
                         String.valueOf(qtybroo[i]),rsvnoo,rsposs,lgortt,val_type[i],specialStock[i],wbs_elem[i]);
 
                 /*Log the URL called*/

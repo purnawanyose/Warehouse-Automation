@@ -33,13 +33,5 @@ public class TranslocResponse {
     public void setContent(Content content) {
         this.content = content;
     }
-/*
-    @SerializedName("content")
-    private List <ContentIssued> contentIssued;
 
-
-    public List<ContentIssued> getContentIssued()
-    {
-        return contentIssued;
-    }*/
 }

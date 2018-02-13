@@ -37,7 +37,7 @@ public class Management_User_Rv extends RecyclerView.Adapter<Management_User_Rv.
     public void onBindViewHolder(Management_User_Rv.MyHolder myHolder, int i) {
         User mylist = list.get(i);
         myHolder.textView87.setText(mylist.username);
-        myHolder.textView88.setText(mylist.password);
+//        myHolder.textView88.setText(mylist.password);
         myHolder.textView84.setText(mylist.role);
 
     }
