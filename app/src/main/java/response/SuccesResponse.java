@@ -19,7 +19,7 @@ public class SuccesResponse {
     private List<Object> error = null;
     @SerializedName("success")
     @Expose
-    private MatDoc success;
+    private List<MatDoc success;
 
     public List<Object> getError() {
         return error;

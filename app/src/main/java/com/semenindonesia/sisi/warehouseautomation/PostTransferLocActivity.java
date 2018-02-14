@@ -182,7 +182,7 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
                     Log.e("content", "success " + dataList.getSuccess());
                 }
 
-                
+
 
 
                 Toast.makeText(PostTransferLocActivity.this, "status: "+status, Toast.LENGTH_SHORT).show();
