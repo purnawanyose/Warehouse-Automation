@@ -21,8 +21,12 @@ import java.util.List;
 import java.util.Locale;
 
 import model.Cart;
+import model.Content;
+import model.ContentModel;
 import model.Issued;
+import model.MatDoc;
 import model.Reservation;
+import model.Transloc;
 import response.CallCartResponse;
 import response.TranslocResponse;
 import retrofit2.Call;
@@ -143,10 +147,9 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
 
     private void transferLoc(){
 
+        final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
 
-        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<TranslocResponse> call = apiService.setTransfer(date1,date2,LoginActivity.pr_uname,MATNO,PLANT
+        Call<TranslocResponse> call = apiService.setTransloc(date1,date2,LoginActivity.pr_uname,MATNO,PLANT
                                     ,SLOC,"311",etBatch.getText().toString(),etQty.getText().toString()
                                     ,etSloc.getText().toString(),etSS.getText().toString(),etVendor.getText().toString());
 
@@ -168,14 +171,16 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
 
             @Override
             public void onResponse(Call<TranslocResponse> call, Response<TranslocResponse> response) {
-                int status = response.body().getStatus();
+                List<Transloc> content = response.body().getTransloc();
+                for (Transloc data : content) {
+                    Log.e(TAG, "Test Transloc: "+data.getMATDOC() );
 
-                Log.e(TAG, "onResponse: "+ status);
-
-                Toast.makeText(PostTransferLocActivity.this, "status: "+status, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostTransferLocActivity.this, "Hasil : "+data.getMATDOC(), Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onFailure(Call<TranslocResponse> call, Throwable t) {
+
                 Toast.makeText(PostTransferLocActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 Log.e("Test", "onFailure: "+Call.class );
 

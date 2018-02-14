@@ -108,8 +108,14 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e(TAG, "onDataChange5000: " + roleFix);
                             Log.e(TAG, "onDataChange6000: " + idFix);
 
+                           if(usernameKey.equalsIgnoreCase("")){
 
-                             if (usernameKey.equals(userFix) && passwordKey.equals(passFix) && roleFix.equalsIgnoreCase("Operator")) {
+                               username.setError("This field is required");
+
+                           }else if(passwordKey.equalsIgnoreCase("")){
+                               password.setError("This field is required");
+
+                           }else if (usernameKey.equals(userFix) && passwordKey.equals(passFix) && roleFix.equalsIgnoreCase("Operator")) {
                                 Toast.makeText(getApplicationContext(), "LOGIN SUKSES  Denga Userfix Operator", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
@@ -124,7 +130,10 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                                 Log.e("login", "testtt" + username.getText());
                                  pr_uname = userFix;
-                            }
+                            }else{
+                               Toast.makeText(getApplicationContext(), "Gagal Login !!\nSilahkan Periksa Kembali Username & Password Anda", Toast.LENGTH_SHORT).show();
+
+                           }
                         }
                         // Get Post object and use the values to update the UI
               /*  User user = dataSnapshot.getValue(User.class);

@@ -27,9 +27,11 @@ import model.Issued;
 import model.OnHandLocation;
 import model.Quant;
 import model.Reservation;
+import model.Transloc;
 import response.CallCartResponse;
 import response.IssuedResponse;
 import response.ReservationDetailResponse;
+import response.TranslocResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -167,92 +169,27 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
 
         final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
 
-        Call<CallCartResponse> call = apiService.setPostIssued(date1,date2,et.toString(),norsv);
+        Call<IssuedResponse> call = apiService.setPostIssued(date1,date2,et.toString(),norsv);
 
         Log.wtf("URL Called", call.request().url() + "");
 
-        call.enqueue(new Callback<CallCartResponse>() {
+        call.enqueue(new Callback<IssuedResponse>() {
 
             @Override
-            public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
+            public void onResponse(Call<IssuedResponse> call, Response<IssuedResponse> response) {
+
+                    Log.e("OOO", "Test Issued: "+response.body().getContent());
+
+                    Toast.makeText(PostIssuedActivity.this, "Hasil : "+response.body().getContent(), Toast.LENGTH_SHORT).show();
 
             }
             @Override
-            public void onFailure(Call<CallCartResponse> call, Throwable t) {
-
+            public void onFailure(Call<IssuedResponse> call, Throwable t) {
+                Toast.makeText(PostIssuedActivity.this, "ERROR BRO : ", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
-    /*private void panggilAll(){
-        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<CallCartResponse> call = apiService.getAll(norsv,"YOSE");
-        Log.wtf("URL Called", call.request().url() + "");
-
-        call.enqueue(new Callback<CallCartResponse>() {
-
-            @Override
-            public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
-
-                List<Cart> content = response.body().getCart();
-                Log.e("content", "Material No " + content);
-                for (Cart data : content) {
-
-
-                }
-            }
-            @Override
-            public void onFailure(Call<CallCartResponse> call, Throwable t) {
-
-            }
-        });
-    }*/
-
-   /* private void postRetrofit(){
-        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        for (int i = 0; i <norsv.length() ; i++) {
-            Call<IssuedResponse> call = apiService.setGoodIssued
-                    (date2,date1,etHeaderText.getText().toString(),user1,
-                            "","","","","","","","","");
-
-            Log.e("TEST ISSUED", "postRetrofit: "+date1);
-            Log.e("TEST ISSUED", "postRetrofit: "+date2);
-            Log.e("TEST ISSUED", "postRetrofit: "+etHeaderText.getText());
-            Log.e("TEST ISSUED", "postRetrofit: "+"YORAMZI");
-            Log.e("TEST ISSUED", "postRetrofit: "+plant);
-            Log.e("TEST ISSUED", "postRetrofit: "+bwart);
-            Log.e("TEST ISSUED", "postRetrofit: "+nilaiInput);
-            Log.e("TEST ISSUED", "postRetrofit: "+norsv);
-            Log.e("TEST ISSUED", "postRetrofit: "+rspos);
-            Log.e("TEST ISSUED", "postRetrofit: "+lgort );
-            Log.e("TEST ISSUED", "postRetrofit: "+wbs_elem );
-            Log.e("TEST ISSUED", "postRetrofit: "+val_type );
-            Log.e("TEST ISSUED", "postRetrofit: "+specialStock );
-
-
-            Log.wtf("URL Called", call.request().url() + "");
-            call.enqueue(new Callback<IssuedResponse>() {
-
-                @Override
-                public void onResponse(Call<IssuedResponse> call, Response<IssuedResponse> response) {
-
-                }
-                @Override
-                public void onFailure(Call<IssuedResponse> call, Throwable t) {
-                    Toast.makeText(PostIssuedActivity.this, "FAILED \n"
-                            +"TYPE : \n"
-                            +"ID : \n"
-                            +"NUMBER : \n"
-                            +"MESSAGE : \n"
-                            + "Does Not Exist", Toast.LENGTH_SHORT).show();
-                    Log.e("TEST ERROR", "onFailure: "+apiService);
-                }
-            });
-        }
-
-
-    }*/
 
     @Override
     public void onClick(View view) {

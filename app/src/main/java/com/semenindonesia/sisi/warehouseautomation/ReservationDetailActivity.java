@@ -219,7 +219,8 @@ public class ReservationDetailActivity extends AppCompatActivity {
                         cartValue = cartValue +1;
                         textView66.setText(data.getJUMLAH());
                         Log.e("Test Cart Value CUK", "onResponse: "+data.getJUMLAH());
-                    }}
+                    }
+                }
             }
             @Override
             public void onFailure(Call<CallCartResponse> call, Throwable t) {

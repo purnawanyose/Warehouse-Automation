@@ -100,16 +100,15 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    OnhandLocationActivity.qtybroo[position] = Integer.parseInt(holder.et2.getText().toString());
-                    OnhandLocationActivity.specialStock[position] =(holder.ohl4.getText().toString());
-                    OnhandLocationActivity.wbs_elem[position] = (holder.ohl5.getText().toString());
-                    OnhandLocationActivity.val_type[position] = (holder.ohl3.getText().toString());
 
-                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.qtybroo[position]);
-                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.specialStock[position]);
-                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.wbs_elem[position]);
-                    Log.e("SHIt", "onKey: "+ OnhandLocationActivity.val_type[position]);
+                    if (holder.et2.getText().length() <1){
 
+                    }else{
+                        OnhandLocationActivity.qtybroo[position] = Integer.parseInt(holder.et2.getText().toString());
+                        OnhandLocationActivity.specialStock[position] =(holder.ohl4.getText().toString());
+                        OnhandLocationActivity.wbs_elem[position] = (holder.ohl5.getText().toString());
+                        OnhandLocationActivity.val_type[position] = (holder.ohl3.getText().toString());
+                    }
                 }
                 return false;
             }

@@ -10,11 +10,20 @@ public class User {
 
     public String username;
     public String pass;
-    public String role;
     public String id;
+    public String password;
+    public String role;
 
-
+    // Default constructor required for calls to
+    // DataSnapshot.getValue(User.class)
     public User() {
+
+    }
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     public String getId() {
@@ -56,4 +65,5 @@ public class User {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
 }

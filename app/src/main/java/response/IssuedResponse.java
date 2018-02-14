@@ -5,10 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import model.Content;
-import model.ContentIssued;
 import model.Issued;
-import model.Reservation;
+import model.Transloc;
 
 /**
  * Created by muham on 2/5/2018.
@@ -16,12 +14,12 @@ import model.Reservation;
 
 public class IssuedResponse {
 
-     @SerializedName("status")
+    @SerializedName("status")
     @Expose
     private Integer status;
     @SerializedName("content")
     @Expose
-    private Content content;
+    private String content;
 
     public Integer getStatus() {
         return status;
@@ -31,20 +29,12 @@ public class IssuedResponse {
         this.status = status;
     }
 
-    public Content getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Content content) {
+    public void setContent(String content) {
         this.content = content;
     }
-/*
-    @SerializedName("content")
-    private List <ContentIssued> contentIssued;
 
-
-    public List<ContentIssued> getContentIssued()
-    {
-        return contentIssued;
-    }*/
 }

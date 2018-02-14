@@ -3,7 +3,14 @@ package response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Cart;
 import model.Content;
+import model.ContentModel;
+import model.Interim;
+import model.Transloc;
 
 /**
  * Created by muham on 2/5/2018.
@@ -11,27 +18,21 @@ import model.Content;
 
 public class TranslocResponse {
 
-     @SerializedName("status")
-    @Expose
-    private Integer status;
-    @SerializedName("content")
-    @Expose
-    private Content content;
+    @SerializedName("status")
+    public String status;
 
-    public Integer getStatus() {
+    @SerializedName("content")
+    private List<Transloc> transloc;
+
+    public List<Transloc> getTransloc()
+    {
+
+        return transloc;
+    }
+
+    public String getStatus()
+
+    {
         return status;
     }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Content getContent() {
-        return content;
-    }
-
-    public void setContent(Content content) {
-        this.content = content;
-    }
-
 }
