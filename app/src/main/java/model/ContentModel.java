@@ -3,6 +3,7 @@ package model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,25 +14,33 @@ public class ContentModel {
 
     @SerializedName("error")
     @Expose
-    private List<Object> error = null;
+    private ArrayList<Object> error = null;
+
     @SerializedName("success")
     @Expose
-    private MatDoc success;
+    private ArrayList<MatDoc> success;
 
-    public List<Object> getError() {
-        return error;
-    }
-
-    public void setError(List<Object> error) {
+    public ContentModel(ArrayList<Object> error, ArrayList<MatDoc> success) {
         this.error = error;
-    }
-
-    public MatDoc getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(MatDoc success) {
         this.success = success;
     }
 
+    public ContentModel() {
+    }
+
+    public ArrayList<Object> getError() {
+        return error;
+    }
+
+    public void setError(ArrayList<Object> error) {
+        this.error = error;
+    }
+
+    public ArrayList<MatDoc> getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(ArrayList<MatDoc> success) {
+        this.success = success;
+    }
 }

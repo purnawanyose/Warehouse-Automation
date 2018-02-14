@@ -9,6 +9,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class User {
 
     public String username;
+    public String pass;
+    public String id;
     public String password;
     public String role;
 
@@ -24,20 +26,28 @@ public class User {
         this.role = role;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public User(String username, String role, String pass, String id) {
+        this.username = username;
+        this.pass = pass;
+        this.role = role;
+        this.id = id;
+    }
+
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {
@@ -48,7 +58,12 @@ public class User {
         this.role = role;
     }
 
+    public String getPass() {
+        return pass;
+    }
 
-
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
 }

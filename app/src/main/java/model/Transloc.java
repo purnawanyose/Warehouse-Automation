@@ -7,12 +7,12 @@ import com.google.gson.annotations.SerializedName;
  * Created by muham on 2/13/2018.
  */
 
-public class Issued {
+public class Transloc {
 
-    public Issued() {
+    public Transloc() {
     }
 
-    public Issued(String mATDOC) {
+    public Transloc(String mATDOC) {
         this.mATDOC = mATDOC;
     }
 

@@ -1,6 +1,7 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -12,13 +13,28 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import model.Cart;
 import model.Content;
@@ -27,12 +43,16 @@ import model.Issued;
 import model.OnHandLocation;
 import model.Quant;
 import model.Reservation;
+import model.Transloc;
+import okio.Timeout;
 import response.CallCartResponse;
 import response.IssuedResponse;
 import response.ReservationDetailResponse;
-import retrofit2.Call;
+import response.TranslocResponse;
+/*import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
+import retrofit2.Response;*/
+import retrofit2.http.Field;
 import service.ApiClient;
 import service.ApiClientLocal;
 import service.ApiInterface;
@@ -52,15 +72,11 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
     String plant,norsv,order,nilaiInput, bwart, lgort, rspos;
     String specialStock, wbs_elem, val_type;
 
+    String URL_LOGIN = "http://10.15.26.4/API_Warehouse/get_data.php";
+
     public String plant1[];
     public List<String> user1 = new ArrayList<>();
-    public String nilaiInput1[];
-    public String bwart1[];
-    public String lgort1[];
-    public String rspos1[];
-    public String specialStock1[];
-    public String wbs_elem1[];
-    public String val_type1[];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +96,41 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final KProgressHUD khud = KProgressHUD.create(PostIssuedActivity.this)
+                        .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                        .setLabel("Please wait")
+                        .setDetailsLabel("Retrieve Data")
+                        .setCancellable(false)
+                        .setAnimationSpeed(2)
+                        .setDimAmount(0.5f)
+                        .show();
 
-                issuedBaru();
+                AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+                    @Override
+                    public void doOnBackground() {
+
+                        // Pretend it's doing some background processing
+                        try {
+                            checkIssued();
+                            Thread.sleep(6000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Create a fake result (MUST be final)
+                        final boolean result = true;
+
+                        // Send the result to the UI thread and show it on a Toast
+                        AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                            @Override
+                            public void doInUIThread() {
+                                khud.dismiss();
+
+                            }
+                        });
+                    }
+                });
+
 
             }
         });
@@ -152,106 +201,105 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    private void issuedBaru(){
-        String et = etHeaderText.getText().toString();
-        Log.e("Nilai Header Text", "issuedBaru: "+et.toString() );
-        Log.e("Nilai Date1", "issuedBaru: "+date1 );
-        Log.e("Nilai Date2", "issuedBaru: "+date2);
+    /*private void issuedBaru(){
 
         final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
 
-        Call<CallCartResponse> call = apiService.setPostIssued(date1,date2,et);
+        Call<IssuedResponse> call = apiService.setPostIssued(date1,date2,etHeaderText.getText().toString(),norsv);
+        Log.e("Nilai Header Text", "issuedBaru: "+etHeaderText.getText().toString());
+        Log.e("Nilai Date1", "issuedBaru: "+date1 );
+        Log.e("Nilai Date2", "issuedBaru: "+date2);
+        Log.e("Nilai NO RESERVASI", "issuedBaru: "+norsv);
+        Log.e("Nilai PR_UNAME", "issuedBaru: "+LoginActivity.pr_uname);
 
         Log.wtf("URL Called", call.request().url() + "");
 
-        call.enqueue(new Callback<CallCartResponse>() {
+        call.enqueue(new Callback<IssuedResponse>() {
 
             @Override
-            public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
+            public void onResponse(Call<IssuedResponse> call, Response<IssuedResponse> response) {
+
+                    Toast.makeText(PostIssuedActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
 
             }
             @Override
-            public void onFailure(Call<CallCartResponse> call, Throwable t) {
-
+            public void onFailure(Call<IssuedResponse> call, Throwable t) {
+                Toast.makeText(PostIssuedActivity.this, "Error  " +t.getMessage(), Toast.LENGTH_SHORT).show();
+                   Log.e("Error  "," " +t.getMessage());
             }
         });
+    }*/
+
+    private void checkIssued() {
+        // Tag used to cancel the request
+        String tag_string_req = "req_login";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                URL_LOGIN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.e("", "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String content = jObj.getString("content");
+
+
+                    Toast.makeText(getApplicationContext(),
+                            ""+content, Toast.LENGTH_LONG).show();
+
+                    if(content.equalsIgnoreCase("List di database kosong") || content.equalsIgnoreCase("Gagal issued")){
+
+
+                    }else{
+                        Intent intent = new Intent(PostIssuedActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                    //}
+
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Log.e("TAG", "onResponse: "+e.getMessage() );
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("DOC_DATE", date1);
+                params.put("PSTNG_DATE", date2);
+                params.put("HEADER_TXT", etHeaderText.getText().toString());
+                params.put("RESERV_NO", norsv);
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(strReq);
     }
-
-
-    /*private void panggilAll(){
-        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<CallCartResponse> call = apiService.getAll(norsv,"YOSE");
-        Log.wtf("URL Called", call.request().url() + "");
-
-        call.enqueue(new Callback<CallCartResponse>() {
-
-            @Override
-            public void onResponse(Call<CallCartResponse> call, Response<CallCartResponse> response) {
-
-                List<Cart> content = response.body().getCart();
-                Log.e("content", "Material No " + content);
-                for (Cart data : content) {
-
-
-                }
-            }
-            @Override
-            public void onFailure(Call<CallCartResponse> call, Throwable t) {
-
-            }
-        });
-    }*/
-
-   /* private void postRetrofit(){
-        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        for (int i = 0; i <norsv.length() ; i++) {
-            Call<IssuedResponse> call = apiService.setGoodIssued
-                    (date2,date1,etHeaderText.getText().toString(),user1,
-                            "","","","","","","","","");
-
-            Log.e("TEST ISSUED", "postRetrofit: "+date1);
-            Log.e("TEST ISSUED", "postRetrofit: "+date2);
-            Log.e("TEST ISSUED", "postRetrofit: "+etHeaderText.getText());
-            Log.e("TEST ISSUED", "postRetrofit: "+"YORAMZI");
-            Log.e("TEST ISSUED", "postRetrofit: "+plant);
-            Log.e("TEST ISSUED", "postRetrofit: "+bwart);
-            Log.e("TEST ISSUED", "postRetrofit: "+nilaiInput);
-            Log.e("TEST ISSUED", "postRetrofit: "+norsv);
-            Log.e("TEST ISSUED", "postRetrofit: "+rspos);
-            Log.e("TEST ISSUED", "postRetrofit: "+lgort );
-            Log.e("TEST ISSUED", "postRetrofit: "+wbs_elem );
-            Log.e("TEST ISSUED", "postRetrofit: "+val_type );
-            Log.e("TEST ISSUED", "postRetrofit: "+specialStock );
-
-
-            Log.wtf("URL Called", call.request().url() + "");
-            call.enqueue(new Callback<IssuedResponse>() {
-
-                @Override
-                public void onResponse(Call<IssuedResponse> call, Response<IssuedResponse> response) {
-
-                }
-                @Override
-                public void onFailure(Call<IssuedResponse> call, Throwable t) {
-                    Toast.makeText(PostIssuedActivity.this, "FAILED \n"
-                            +"TYPE : \n"
-                            +"ID : \n"
-                            +"NUMBER : \n"
-                            +"MESSAGE : \n"
-                            + "Does Not Exist", Toast.LENGTH_SHORT).show();
-                    Log.e("TEST ERROR", "onFailure: "+apiService);
-                }
-            });
-        }
-
-
-    }*/
-
     @Override
     public void onClick(View view) {
         if(view == docDate) {

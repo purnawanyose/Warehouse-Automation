@@ -1,6 +1,7 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +30,7 @@ import model.ContentModel;
 import model.Issued;
 import model.MatDoc;
 import model.Reservation;
+import model.Transloc;
 import response.CallCartResponse;
 import response.TranslocResponse;
 import retrofit2.Call;
@@ -75,7 +80,42 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
             @Override
             public void onClick(View v) {
 
-                transferLoc();
+
+                final KProgressHUD khud = KProgressHUD.create(PostTransferLocActivity.this)
+                        .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                        .setLabel("Please wait")
+                        .setDetailsLabel("Retrieve Data")
+                        .setCancellable(false)
+                        .setAnimationSpeed(2)
+                        .setDimAmount(0.5f)
+                        .show();
+
+                AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+                    @Override
+                    public void doOnBackground() {
+
+                        // Pretend it's doing some background processing
+                        try {
+                            transferLoc();
+                            Thread.sleep(6000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Create a fake result (MUST be final)
+                        final boolean result = true;
+
+                        // Send the result to the UI thread and show it on a Toast
+                        AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                            @Override
+                            public void doInUIThread() {
+                                khud.dismiss();
+
+                            }
+                        });
+                    }
+                });
+
 
             }
         });
@@ -146,11 +186,10 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
 
     private void transferLoc(){
 
+        final ApiInterface apiService = ApiClientLocal.getClient().create(ApiInterface.class);
 
-        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<TranslocResponse> call = apiService.setTransfer(date1,date2,"AZMI",MATNO,PLANT
-                                    ,"W213","311",etBatch.getText().toString(),etQty.getText().toString()
+        Call<TranslocResponse> call = apiService.setTransloc(date1,date2,LoginActivity.pr_uname,MATNO,PLANT
+                                    ,SLOC,"311",etBatch.getText().toString(),etQty.getText().toString()
                                     ,etSloc.getText().toString(),etSS.getText().toString(),etVendor.getText().toString());
 
         Log.wtf("URL Called", call.request().url() + "");
@@ -171,21 +210,25 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
 
             @Override
             public void onResponse(Call<TranslocResponse> call, Response<TranslocResponse> response) {
-                int status = response.body().getStatus();
-                List<ContentModel> content = response.body().getContent();
+                List<Transloc> content = response.body().getTransloc();
+                for (Transloc data : content) {
+                    Log.e(TAG, "Test Transloc: "+data.getMATDOC() );
 
-                Log.e(TAG, "onResponse: "+ status);
-                Log.e(TAG, "onResponse: "+ content);
 
-                for (ContentModel dataList : content) {
-                    Log.e("content", "Material No " + content.toString());
-                    Log.e("content", "success " + dataList.getSuccess());
+                    if(data.getMATDOC().equalsIgnoreCase("Gagal Transloc")) {
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> ddae2f51d1228c52e70d7d9fb94024636e9185e5
+
+                    }else{
+                        Intent intent = new Intent(PostTransferLocActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }
+                    Toast.makeText(PostTransferLocActivity.this, data.getMATDOC(), Toast.LENGTH_SHORT).show();
                 }
-
-
-
-
-                Toast.makeText(PostTransferLocActivity.this, "status: "+status, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<TranslocResponse> call, Throwable t) {

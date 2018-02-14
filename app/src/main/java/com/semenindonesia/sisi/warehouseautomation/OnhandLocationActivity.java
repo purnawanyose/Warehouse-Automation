@@ -46,7 +46,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
     String plantt, norsvv,orderr,matnoo,rsvnoo,ordr,matnrr, werkss, lgortt, rsposs;
     private RecyclerView recyclerView;
     public static String scan = "dfsgfsdgs";
-    public static Button btnAction;
+    public  Button btnAction;
     public static String  matnooo,ambilTampung;
     public static List<String>list;
     public static List<String>qtybro;
@@ -73,11 +73,8 @@ public class OnhandLocationActivity extends AppCompatActivity {
         btnAction = (Button) findViewById(R.id.btnAction);
 
         list = new ArrayList<String>();
-//        tvScann.setFocusable(false);
 
-//        tvScann.setOnKeyListener(null);
-
-          /* Bundle extras = getIntent().getExtras();*/
+        /* Bundle extras = getIntent().getExtras();*/
         plant.setText("Plant \t\t\t\t\t\t : "+getIntent().getStringExtra("PLANT"));
         norsv.setText("Reservation No. \t : "+getIntent().getStringExtra("RSVNO"));
         order.setText("Order \t\t\t\t\t\t : "+getIntent().getStringExtra("ORDER"));
@@ -138,7 +135,10 @@ public class OnhandLocationActivity extends AppCompatActivity {
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     tvScann.setVisibility(View.GONE);
                     btnAction.setVisibility(View.VISIBLE);
-                    btnAction.setEnabled(true);
+                    btnAction.setEnabled(false);
+                    if (qtybroo != null) {
+                        btnAction.setEnabled(true);
+                    }
                     // Perform action on key press
                     String scanner = tvScann.getText().toString();
                     String[] scann = scanner.split("#");
@@ -154,62 +154,29 @@ public class OnhandLocationActivity extends AppCompatActivity {
             }
         });
 
-        btnAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                retrofitLokal();
 
-                Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailActivity.class);
-                intent.putExtra("WERKS",plantt);
-                intent.putExtra("matno",matnooo);
-                intent.putExtra("RSNUM",rsvnoo);
-                intent.putExtra("WERKS",ordr);
-                intent.putExtra("matnr",matnrr);
-                intent.putExtra("TAMPUNG",ambilTampung);
+            btnAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-               /* list.size();
+                    retrofitLokal();
+                    Intent intent = new Intent(OnhandLocationActivity.this, ReservationDetailActivity.class);
+                    intent.putExtra("WERKS",plantt);
+                    intent.putExtra("matno",matnooo);
+                    intent.putExtra("RSNUM",rsvnoo);
+                    intent.putExtra("WERKS",ordr);
+                    intent.putExtra("matnr",matnrr);
+                    intent.putExtra("TAMPUNG",ambilTampung);
 
-                for (int i = 0; i <qtybroo.length ; i++) {
-                    int nilai = qtybroo[i];
-                    Log.e("TESTIS", "onCreate: "+nilai);
-
-                    nilaiAkhir = nilaiAkhir + nilai;
-                    Log.e("TESTISTESTIS", "onCreate: "+nilaiAkhir);
-
+                    startActivity(intent);
+                    finish();
                 }
-                for (int i = 0; i <specialStock.length ; i++) {
-                     ss = specialStock[i];
-
-                }
-                int index = 0;
-                Log.e("TEST ARRAY", "onCreate: "+qtybroo.length);
-
-                intent.putExtra("QTY",nilaiAkhir);
-                intent.putExtra("SS",ss);
-                intent.putExtra("WBS",wbs_elem);
-                intent.putExtra("VAL",val_type);
-
-                Log.e("TESTISTESTIS", "onCreate: "+specialStock[0]);
-                Log.e("TESTISTESTIS", "onCreate: "+wbs_elem);
-                Log.e("TESTISTESTIS", "onCreate: "+val_type);
-*/
-
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
-
-
+            });
     }
     private void retrofit(){
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        /*Create handle for the RetrofitInstance interface*/
-
-        /*Call the method with parameter in the interface to get the employee data*/
         Call<OnHandLocationResponse> call = apiService.getOnhandLocation(plantt,matnoo);
 
         Log.wtf("URL Called", call.request().url() + "");
@@ -237,7 +204,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
         /*Call the method with parameter in the interface to get the employee data*/
         for (int i = 0; i <specialStock.length ; i++) {
             if (qtybroo[i] > 0 && String.valueOf(qtybroo[i]) != null ){
-                Call<ReservationDetailResponse> call = apiService.getApiLocal("BURHAN",plantt,werkss,
+                Call<ReservationDetailResponse> call = apiService.getApiLocal(LoginActivity.pr_uname,plantt,werkss,
                         String.valueOf(qtybroo[i]),rsvnoo,rsposs,lgortt,val_type[i],specialStock[i],wbs_elem[i]);
 
                 /*Log the URL called*/
@@ -247,8 +214,7 @@ public class OnhandLocationActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call<ReservationDetailResponse> call, Response<ReservationDetailResponse> response) {
-//                generateReservationDetailResponse((ArrayList<OnHandLocation>) response.body().getOnHandLocation());
-//                List<OnHandLocation> content = response.body().getOnHandLocation();
+
                     }
 
                     @Override
@@ -278,5 +244,4 @@ public class OnhandLocationActivity extends AppCompatActivity {
         wbs_elem = new String[empDataList.size()];
         val_type = new String[empDataList.size()];
     }
-
 }

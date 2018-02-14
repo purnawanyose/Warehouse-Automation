@@ -5,10 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import model.Content;
-import model.ContentIssued;
 import model.Issued;
-import model.Reservation;
+import model.Transloc;
 
 /**
  * Created by muham on 2/5/2018.
@@ -16,35 +14,22 @@ import model.Reservation;
 
 public class IssuedResponse {
 
-     @SerializedName("status")
-    @Expose
-    private Integer status;
-    @SerializedName("content")
-    @Expose
-    private Content content;
+    @SerializedName("status")
+    public String status;
 
-    public Integer getStatus() {
+    @SerializedName("content")
+    private List<Issued> issued;
+
+    public List<Issued> getIssued()
+    {
+
+        return issued;
+    }
+
+    public String getStatus()
+
+    {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Content getContent() {
-        return content;
-    }
-
-    public void setContent(Content content) {
-        this.content = content;
-    }
-/*
-    @SerializedName("content")
-    private List <ContentIssued> contentIssued;
-
-
-    public List<ContentIssued> getContentIssued()
-    {
-        return contentIssued;
-    }*/
 }

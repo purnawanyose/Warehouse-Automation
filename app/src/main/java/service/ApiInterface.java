@@ -257,10 +257,12 @@ public interface ApiInterface {
 
     @POST("get_data.php")
     @FormUrlEncoded
-    Call <CallCartResponse> setPostIssued(
-            @Field("header[DOC_DATE]") String DOC_DATE,
-            @Field("header[PSTNG_DATE]") String PSTNG_DATE,
-            @Field("header[HEADER_TXT]") String HEADER_TXT
+    Call <IssuedResponse> setPostIssued(
+            @Field("DOC_DATE") String DOC_DATE,
+            @Field("PSTNG_DATE") String PSTNG_DATE,
+            @Field("HEADER_TXT") String HEADER_TXT,
+            @Field("RESERV_NO") String RESERV_NO
+
     );
 
 
@@ -282,21 +284,21 @@ public interface ApiInterface {
             @Field("detail[][WBS_ELEM]") ArrayList<String> WBS_ELEM
     );
 
-    @POST ("Transfer/sloc/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    @POST ("get_transloc.php")
     @FormUrlEncoded
-    Call <TranslocResponse> setTransfer(
-            @Field("header[PSTNG_DATE]") String PSTNG_DATE,
-            @Field("header[DOC_DATE]") String DOC_DATE,
-            @Field("header[HEADER_TXT]") String HEADER_TXT,
-            @Field("detail[0][MATERIAL]") String MATERIAL,
-            @Field("detail[0][PLANT]") String PLANT,
-            @Field("detail[0][STGE_LOC]") String STGE_LOC,
-            @Field("detail[0][MOVE_TYPE]") String MOVE_TYPE,
-            @Field("detail[0][VAL_TYPE]") String VAL_TYPE,
-            @Field("detail[0][ENTRY_QNT]") String ENTRY_QNT,
-            @Field("detail[0][MOVE_STLOC]") String MOVE_STLOC,
-            @Field("detail[0][SPEC_STOCK]") String SPEC_STOCK,
-            @Field("detail[0][WBS_ELEM]") String WBS_ELEM
+    Call <TranslocResponse> setTransloc(
+            @Field("PSTNG_DATE") String PSTNG_DATE,
+            @Field("DOC_DATE") String DOC_DATE,
+            @Field("HEADER_TXT") String HEADER_TXT,
+            @Field("MATERIAL") String MATERIAL,
+            @Field("PLANT") String PLANT,
+            @Field("STGE_LOC") String STGE_LOC,
+            @Field("MOVE_TYPE") String MOVE_TYPE,
+            @Field("VAL_TYPE") String VAL_TYPE,
+            @Field("ENTRY_QNT") String ENTRY_QNT,
+            @Field("MOVE_STLOC") String MOVE_STLOC,
+            @Field("SPEC_STOCK") String SPEC_STOCK,
+            @Field("WBS_ELEM") String WBS_ELEM
     );
 
 

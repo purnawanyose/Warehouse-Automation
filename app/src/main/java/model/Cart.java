@@ -7,14 +7,14 @@ package model;
 public class Cart {
 
     String PSTNG_DATE, DOC_DATE, HEADER_TXT;
-    String PR_UNAME, PLANT, MOVE_TYPE, ENTRY_QNT, RESERV_NO, RES_ITEM, STGE_LOC, VAL_TYPE, SPEC_STOCK, WBS_ELEM, STATUS, JUMLAH, QUANTITY;
+    String PR_UNAME, PLANT, MOVE_TYPE, ENTRY_QNT, RESERV_NO, RES_ITEM, STGE_LOC, VAL_TYPE, SPEC_STOCK, WBS_ELEM, STATUS, JUMLAH, QUANTITY, MATDOC;
 
     public Cart() {
 
     }
     public Cart(String PSTNG_DATE, String DOC_DATE, String HEADER_TXT, String PR_UNAME, String PLANT, String MOVE_TYPE,
                 String ENTRY_QNT, String RESERV_NO, String RES_ITEM, String STGE_LOC, String VAL_TYPE, String SPEC_STOCK,
-                String WBS_ELEM, String  QUANTITY) {
+                String WBS_ELEM, String  QUANTITY, String MATDOC) {
 
         this.PSTNG_DATE = PSTNG_DATE;
         this.DOC_DATE = DOC_DATE;
@@ -32,6 +32,7 @@ public class Cart {
         this.STATUS = STATUS;
         this.JUMLAH = JUMLAH;
         this.QUANTITY = QUANTITY;
+        this.MATDOC = MATDOC;
     }
 
     public String getPSTNG_DATE() {
@@ -159,5 +160,13 @@ public class Cart {
 
     public void setQUANTITY(String QUANTITY) {
         this.QUANTITY = QUANTITY;
+    }
+
+    public String getMATDOC() {
+        return MATDOC;
+    }
+
+    public void setMATDOC(String MATDOC) {
+        this.MATDOC = MATDOC;
     }
 }

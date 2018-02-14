@@ -111,8 +111,6 @@ public class ReservationDetailActivity extends AppCompatActivity {
                 try {
 
                     getdata();
-                    //textView66.setText(cartt);
-//                    textView66.setText("123"+cartt);
                     Thread.sleep(9000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -221,7 +219,8 @@ public class ReservationDetailActivity extends AppCompatActivity {
                         cartValue = cartValue +1;
                         textView66.setText(data.getJUMLAH());
                         Log.e("Test Cart Value CUK", "onResponse: "+data.getJUMLAH());
-                    }}
+                    }
+                }
             }
             @Override
             public void onFailure(Call<CallCartResponse> call, Throwable t) {
@@ -311,8 +310,8 @@ public class ReservationDetailActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<CallCartResponse> call, Throwable t) {
-                            Toast.makeText(ReservationDetailActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                            Log.e("Test Error", "onFailure: "+Call.class );
+                            Toast.makeText(ReservationDetailActivity.this, " Data Deleted", Toast.LENGTH_SHORT).show();
+//                            Log.e("Test Error", "onFailure: "+Call.class );
                             finish();
                         }
                     });
@@ -330,8 +329,5 @@ public class ReservationDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-    private void isicart(){
-
     }
 }

@@ -1,3 +1,4 @@
+/*
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.app.Activity;
@@ -7,9 +8,11 @@ import android.os.Build;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+*/
 /**
  * Created by muham on 2/12/2018.
- */
+ *//*
+
 
 public class ForceCloseException implements java.lang.Thread.UncaughtExceptionHandler {
 
@@ -50,3 +53,4 @@ public class ForceCloseException implements java.lang.Thread.UncaughtExceptionHa
 
     }
 }
+*/

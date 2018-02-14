@@ -125,7 +125,7 @@ public class BonSementaraActivity extends AppCompatActivity {
                 });
             }
         });
-        ForceCloseDebugger.handle(this);
+//        ForceCloseDebugger.handle(this);
     }
 
     public void retrofit(){
