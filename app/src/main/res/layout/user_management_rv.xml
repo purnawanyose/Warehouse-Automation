@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -17,35 +17,14 @@
 
             <TextView
                 android:id="@+id/textView87"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="8dp"
                 android:paddingRight="20dp"
                 android:paddingTop="4dp"
                 android:text="Username"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView88"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingRight="20dp"
-                android:paddingTop="4dp"
-                android:text="Password"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView86"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingRight="40dp"
-                android:paddingTop="4dp"
-                android:text="AD"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
@@ -60,5 +39,21 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/linear1"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/black" />
     </LinearLayout>
 </LinearLayout>

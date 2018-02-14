@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Management_User_Rv extends RecyclerView.Adapter<Management_User_Rv.MyHolder> {
 
-    List<UserAdmin> list;
+    ArrayList<UserAdmin> list;
     Context context;
 
 
@@ -30,11 +30,20 @@ public class Management_User_Rv extends RecyclerView.Adapter<Management_User_Rv.
         this.list = list;
     }
 
+
+    class UserViewHolder extends RecyclerView.ViewHolder{
+        TextView textView87,textView88;
+        UserViewHolder(View v){
+            super(v);
+        }
+    }
+
     @Override
-    public Management_User_Rv.MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.user_management_rv, viewGroup, false);
-        MyHolder myHolder = new MyHolder(view);
-        return myHolder;
+    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_management_rv, parent,false);
+        MyHolder vh = new MyHolder(v);
+
+        return vh;
     }
 
     @Override
@@ -48,8 +57,6 @@ public class Management_User_Rv extends RecyclerView.Adapter<Management_User_Rv.
 
     @Override
     public int getItemCount() {
-
-
         return list.size();
     }
 

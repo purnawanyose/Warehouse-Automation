@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                password.setError("This field is required");
 
                            }else if (usernameKey.equals(userFix) && passwordKey.equals(passFix) && roleFix.equalsIgnoreCase("Operator")) {
-                                Toast.makeText(getApplicationContext(), "LOGIN SUKSES  Denga Userfix Operator", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Login Sukses Dengan Username " +userFix, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -124,15 +124,13 @@ public class LoginActivity extends AppCompatActivity {
                                  pr_uname = userFix;
 
                             }else if (usernameKey.equals(userFix) && passwordKey.equals(passFix) && roleFix.equalsIgnoreCase("Admin")){
-                                Toast.makeText(getApplicationContext(), "LOGIN SUKSES  Denga Userfix Admin", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "LOGIN SUKSES  Denga Username " +userFix, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, AdminInitialPage.class);
                                 startActivity(intent);
                                 finish();
                                 Log.e("login", "testtt" + username.getText());
                                  pr_uname = userFix;
                             }else{
-                               Toast.makeText(getApplicationContext(), "Gagal Login !!\nSilahkan Periksa Kembali Username & Password Anda", Toast.LENGTH_SHORT).show();
-
                            }
                         }
                         // Get Post object and use the values to update the UI

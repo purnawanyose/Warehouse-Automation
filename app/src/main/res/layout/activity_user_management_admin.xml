@@ -157,35 +157,13 @@
 
                 <TextView
                     android:id="@+id/textView87"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="8dp"
                     android:paddingRight="20dp"
                     android:paddingTop="4dp"
                     android:text="Username"
-                    android:textColor="@android:color/background_light"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView107"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingRight="20dp"
-                    android:paddingTop="4dp"
-                    android:text="Password"
-                    android:textColor="@android:color/background_light"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView86"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingRight="40dp"
-                    android:paddingTop="4dp"
-                    android:text="AD"
                     android:textColor="@android:color/background_light"
                     android:textStyle="bold" />
 
