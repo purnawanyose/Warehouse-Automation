@@ -19,11 +19,7 @@ public class SuccesResponse {
     private List<Object> error = null;*/
     @SerializedName("success")
     @Expose
-<<<<<<< HEAD
-    private List<MatDoc success;
-=======
     private List<MatDoc> success;
->>>>>>> ddae2f51d1228c52e70d7d9fb94024636e9185e5
 
   /*  public List<Object> getError() {
         return error;

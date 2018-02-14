@@ -23,11 +23,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapter.Filter_MovtypeRv;
 import config.Management_User_Rv;
 import config.ReservationDetailRv;
 import config.UserManagementRv;
 import database.RealmHelper;
 import io.realm.Realm;
+import model.MovTypeSelection;
 import model.Reservation;
 import model.User;
 import model.UserAdmin;
@@ -41,6 +43,7 @@ public class UserManagementAdminActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RealmHelper helper;
     private ArrayList<UserAdmin> dataUser;
+    private ArrayList<UserAdmin> datalist;
     Realm realm;
 
     String userFix, passFix, roleFix, idFix;
@@ -63,21 +66,19 @@ public class UserManagementAdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_management_admin);
 
-        rvView = (RecyclerView) findViewById(R.id.rvUser);
-        rvView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        rvView.setLayoutManager(layoutManager);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
 
-        recyclerView = (RecyclerView) findViewById(R.id.rvUser);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         btnAdd = (Button) findViewById(R.id.btnAdd);
 
+
+        recyclerView = (RecyclerView) findViewById(R.id.rvUser);
+
         // Initialize Database
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("users")
-                .child("username");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -94,24 +95,39 @@ public class UserManagementAdminActivity extends AppCompatActivity {
                     dataUser.add(user);
 
                 }
-                adapter = new UserManagementRv(dataUser, UserManagementAdminActivity.this);
-                rvView.setAdapter(adapter);
-                Log.e(TAG, "TESTING USER MANAGEMENT "+dataUser);
 
 
-               /* for (int i = 0; i < dataUser.size(); i++) {
+                Log.e("ASDASD", "TESTING USER MANAGEMENT "+dataUser.size());
+
+                datalist =  new ArrayList<UserAdmin>();
+                for (int i = 0; i < dataUser.size(); i++) {
                     userFix = dataUser.get(i).getUsername();
                     passFix = dataUser.get(i).getPassword();
                     idFix = dataUser.get(i).getId();
                     roleFix = dataUser.get(i).getRole();
+
+                    UserAdmin userlist= new UserAdmin(idFix,userFix,passFix,roleFix);
+                    datalist.add(userlist);
+
                     Log.e(TAG, "onDataChange3000: " + userFix);
                     Log.e(TAG, "onDataChange4000: " + passFix);
                     Log.e(TAG, "onDataChange5000: " + roleFix);
                     Log.e(TAG, "onDataChange6000: " + idFix);
-
-                    generateReservationDetailResponse(dataUser);
+                    Log.e(TAG, "TESTING USER MANAGEMENT "+datalist.size());
                     Log.e(TAG, "onDataChange: "+dataSnapshot.getValue() );
-                }*/
+                }
+
+
+                adapter = new Management_User_Rv(dataUser);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(UserManagementAdminActivity.this);
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+
+
+
+
 
             }
 
