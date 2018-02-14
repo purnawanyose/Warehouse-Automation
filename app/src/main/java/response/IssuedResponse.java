@@ -15,26 +15,21 @@ import model.Transloc;
 public class IssuedResponse {
 
     @SerializedName("status")
-    @Expose
-    private Integer status;
+    public String status;
+
     @SerializedName("content")
-    @Expose
-    private String content;
+    private List<Issued> issued;
 
-    public Integer getStatus() {
+    public List<Issued> getIssued()
+    {
+
+        return issued;
+    }
+
+    public String getStatus()
+
+    {
         return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
 }

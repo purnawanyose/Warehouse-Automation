@@ -1,6 +1,7 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.arasthel.asyncjob.AsyncJob;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -76,7 +80,42 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
             @Override
             public void onClick(View v) {
 
-                transferLoc();
+
+                final KProgressHUD khud = KProgressHUD.create(PostTransferLocActivity.this)
+                        .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                        .setLabel("Please wait")
+                        .setDetailsLabel("Retrieve Data")
+                        .setCancellable(false)
+                        .setAnimationSpeed(2)
+                        .setDimAmount(0.5f)
+                        .show();
+
+                AsyncJob.doInBackground(new AsyncJob.OnBackgroundJob() {
+                    @Override
+                    public void doOnBackground() {
+
+                        // Pretend it's doing some background processing
+                        try {
+                            transferLoc();
+                            Thread.sleep(6000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Create a fake result (MUST be final)
+                        final boolean result = true;
+
+                        // Send the result to the UI thread and show it on a Toast
+                        AsyncJob.doOnMainThread(new AsyncJob.OnMainThreadJob() {
+                            @Override
+                            public void doInUIThread() {
+                                khud.dismiss();
+
+                            }
+                        });
+                    }
+                });
+
 
             }
         });
@@ -175,7 +214,16 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
                 for (Transloc data : content) {
                     Log.e(TAG, "Test Transloc: "+data.getMATDOC() );
 
-                    Toast.makeText(PostTransferLocActivity.this, "Hasil : "+data.getMATDOC(), Toast.LENGTH_SHORT).show();
+
+                    if(data.getMATDOC().equalsIgnoreCase("Gagal Transloc")) {
+
+
+                    }else{
+                        Intent intent = new Intent(PostTransferLocActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }
+                    Toast.makeText(PostTransferLocActivity.this, data.getMATDOC(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
