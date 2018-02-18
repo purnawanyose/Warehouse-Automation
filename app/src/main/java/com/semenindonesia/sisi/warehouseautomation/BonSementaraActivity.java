@@ -53,19 +53,6 @@ public class BonSementaraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bon_sementara);
 
         btnUnflag = (Button) findViewById(R.id.button11);
-/*
-        cb2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (cb2.isChecked()){
-                    cb3.setChecked(true);
-                }else{
-                    cb3.setChecked(false);
-                }
-            }
-        });*/
-
-
         btnUnflag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +113,30 @@ public class BonSementaraActivity extends AppCompatActivity {
             }
         });
 //        ForceCloseDebugger.handle(this);
+
+        btnUnflag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(BonSementaraActivity.this);
+                builder.setMessage("Apakah Anda Yakin Akan Melakukan UNFLAg :"+BonSementaraRv.selectedRSNUM);
+                builder.setCancelable(true);
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
     }
 
     public void retrofit(){
@@ -160,14 +171,15 @@ public class BonSementaraActivity extends AppCompatActivity {
     }
 
 
-    /*public void unflag(){
-        *//*Create handle for the RetrofitInstance interface*//*
+        public void unflag(){
+        //Create handle for the RetrofitInstance interface
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        *//*Call the method with parameter in the interface to get the employee data*//*
-        Call<BonSementaraResponse> call = apiService.getUnflagBon("a","a","UNFLAG");
+       // Call the method with parameter in the interface to get the employee data
+        Call<BonSementaraResponse> call = apiService.getUnflagBon
+                (BonSementaraRv.selectedRSNUM,BonSementaraRv.selectedRSNUM,"UNFLAG");
 
-        *//*Log the URL called*//*
+       // Log the URL called
         Log.wtf("URL Called", call.request().url() + "");
 
         call.enqueue(new Callback<BonSementaraResponse>() {
@@ -176,11 +188,11 @@ public class BonSementaraActivity extends AppCompatActivity {
             public void onResponse(Call<BonSementaraResponse> call, Response<BonSementaraResponse> response) {
                 generateBonresponse((ArrayList<BonSementara>) response.body().getBonSementara());
                 List<BonSementara> content = response.body().getBonSementara();
-                if (content.size() < 1){
-                    Toast.makeText(BonSementaraActivity.this,"Data Not Found!",Toast.LENGTH_LONG).show();
-                }
+                for (BonSementara data : content){
 
-                Log.e("aa","aaas"+content.toString());
+                    Toast.makeText(BonSementaraActivity.this, data.getKETERANGAN(), Toast.LENGTH_SHORT).show();
+                    Log.e("aa","aaas"+data.getKETERANGAN());
+                }
             }
 
             @Override
@@ -189,8 +201,7 @@ public class BonSementaraActivity extends AppCompatActivity {
                 Toast.makeText(BonSementaraActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
-
+    }
 
     /*Method to generate List of employees using RecyclerView with custom adapter*/
     private void generateBonresponse(ArrayList<BonSementara> empDataList) {
@@ -204,6 +215,7 @@ public class BonSementaraActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {

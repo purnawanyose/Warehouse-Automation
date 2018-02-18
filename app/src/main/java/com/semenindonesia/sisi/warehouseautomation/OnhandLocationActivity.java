@@ -43,7 +43,15 @@ public class OnhandLocationActivity extends AppCompatActivity {
     TextView tvScann,et2;
     TextView plant, norsv, order, matno;
 
-    String plantt, norsvv,orderr,matnoo,rsvnoo,ordr,matnrr, werkss, lgortt, rsposs;
+    String norsvv,orderr, werkss, rsposs;
+
+    public static String plantt;
+    public static String matnoo;
+    public static String rsvnoo;
+    public static String matnrr;
+    public static String lgortt;
+    public static String ordr;
+
     private RecyclerView recyclerView;
     public static String scan = "dfsgfsdgs";
     public  Button btnAction;
@@ -178,6 +186,9 @@ public class OnhandLocationActivity extends AppCompatActivity {
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<OnHandLocationResponse> call = apiService.getOnhandLocation(plantt,matnoo);
+
+        Log.e("PLANT TEST NILAI", "retrofit: "+plantt);
+        Log.e("MATNO TEST NILAI", "retrofit: "+matnoo);
 
         Log.wtf("URL Called", call.request().url() + "");
 

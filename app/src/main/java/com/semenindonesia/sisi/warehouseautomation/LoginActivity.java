@@ -3,6 +3,7 @@ package com.semenindonesia.sisi.warehouseautomation;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
     List<User> list;
     RecyclerView recycle;
     Button view;
+
+    ImageView imgView;
     private DatabaseReference mDatabase;
 
     String user,pass,role;
@@ -66,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        imgView  = (ImageView) findViewById(R.id.imgView);
 
         recycle = (RecyclerView) findViewById(R.id.rvUser);
         database = FirebaseDatabase.getInstance();
@@ -73,6 +78,20 @@ public class LoginActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.rvUser);
         btnAdd = (Button) findViewById(R.id.btnAdd);
+
+
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String huruf = (String) username.getText().toString();
+                String akhir = huruf.substring(1,3);
+                Log.e("Testing Map Baru", "onClicdsfhgjgfdsafghk: "+akhir );
+
+                Intent intent = new Intent(LoginActivity.this, MapUtamaActivity.class);
+                intent.putExtra("sbin", username.getText().toString());
+                startActivity(intent);
+            }
+        });
 
         // Initialize Database
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
@@ -131,6 +150,12 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("login", "testtt" + username.getText());
                                  pr_uname = userFix;
                             }else{
+                               Toast.makeText(getApplicationContext(), "LOGIN SUKSES  Denga Username " +userFix, Toast.LENGTH_SHORT).show();
+                               Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                               startActivity(intent);
+                               finish();
+                               Log.e("login", "testtt" + username.getText());
+
                            }
                         }
                         // Get Post object and use the values to update the UI

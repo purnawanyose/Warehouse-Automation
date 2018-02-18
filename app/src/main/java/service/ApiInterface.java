@@ -32,6 +32,7 @@ import response.ReservationDetailResponse;
 import response.ReservationMainResponse;
 import response.ScannerReservationDetailResponse;
 import response.ScannerReservationPageResponse;
+import response.StockOpnameDetailResponse;
 import response.StockOpnameResponse;
 import response.TranslocResponse;
 import retrofit2.Call;
@@ -53,8 +54,14 @@ public interface ApiInterface {
     @GET("Interim/detail/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=7702&lgtyp[0]=9*")
     Call<InterimResponse> getInterim();
 
+    @GET("Reservation/resumeInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=7702&lgtyp[0]=9*")
+    Call<ClearResponse> getHomeInterim();
+
     @GET("Reservation/resumeReservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=2702&werks[1]=7702")
-    Call<ReservationMainResponse> getHomeReservation();
+    Call<ClearResponse> getHomeReservation();
+
+    @GET("Reservation/resumeOpname/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=7702")
+    Call<ClearResponse> getHomeOpname();
 
     @GET("Reservation/stockwm/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
     Call<OnHandResponse> getOnHand(
@@ -108,8 +115,20 @@ public interface ApiInterface {
     @GET("Reservation/listBonSementara/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[1]=7702&rsortf[0]=BS*&rdetail=1")
     Call<BonSementaraResponse> getBonSementara();
 
+
+    @GET("Reservation/listBonSementara/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[1]=7702&rsortf[0]=BS*")
+    Call<ClearResponse> getHomeBonSementara();
+
     @GET("Opname/list/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?werks[0]=7702")
     Call<StockOpnameResponse> getStockOpname();
+
+    @GET("Opname/detail/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<StockOpnameDetailResponse> getOpnameDetail(
+            @Query("pid") String pid,
+            @Query("fiscalyear") String fiscalyear
+    );
+
+
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[0]=7702&rlgort[0]=W210&mvtind=X&includeUnapprove=1")
     Call<ScannerReservationPageResponse> getScannerReservationPage();
@@ -166,7 +185,7 @@ public interface ApiInterface {
     );
 
     @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-    Call<InterimResponse> getVermePositif(
+    Call<ClearResponse> getVermePositif(
             @Query("data[I_LGNUM]") String i_lgnum,
             @Query("data[I_BWLVS]") String bwlvs,
             @Query("data[I_MATNR]") String matnr,
@@ -181,7 +200,7 @@ public interface ApiInterface {
             @Query("data[I_KOMPL]") String kompl
     );
     @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-    Call<InterimResponse> getVermeNegatif(
+    Call<ClearResponse> getVermeNegatif(
             @Query("data[I_LGNUM]") String i_lgnum,
             @Query("data[I_BWLVS]") String bwlvs,
             @Query("data[I_MATNR]") String matnr,
@@ -196,7 +215,7 @@ public interface ApiInterface {
             @Query("data[I_KOMPL]") String kompl
     );
     @GET("Interim/clearInterim/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-    Call<InterimResponse> getSobkz(
+    Call<ClearResponse> getSobkz(
             @Query("data[I_LGNUM]") String i_lgnum,
             @Query("data[I_BWLVS]") String bwlvs,
             @Query("data[I_MATNR]") String matnr,

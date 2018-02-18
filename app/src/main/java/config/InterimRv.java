@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.semenindonesia.sisi.warehouseautomation.ImageViewActivity;
 import com.semenindonesia.sisi.warehouseautomation.InterimActivity;
+import com.semenindonesia.sisi.warehouseautomation.PostIssuedActivity;
+import com.semenindonesia.sisi.warehouseautomation.LoginActivity;
 import com.semenindonesia.sisi.warehouseautomation.QuantDetailActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
 import java.util.ArrayList;
@@ -109,7 +111,7 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
 
                     /*Call the method with parameter in the interface to get the employee data*/
 //                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getVermePositif(dataList.get(position).getLGNUM()
+                    Call<ClearResponse> call = apiService.getVermePositif(dataList.get(position).getLGNUM()
                             ,"999" // BWLVS
                             ,dataList.get(position).getMATNR()
                             ,dataList.get(position).getWERKS()
@@ -119,29 +121,21 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
                             ,dataList.get(position).getMEINS()
                             ,dataList.get(position).getLQNUM()
                             ,"X"
-                            ,"YOSEE"
+                            ,LoginActivity.pr_uname
                             ,"X");
 
                     /*Log the URL called*/
                     Log.wtf("URL Called", call.request().url() + "");
 
-                    call.enqueue(new Callback<InterimResponse>() {
+                    call.enqueue(new Callback<ClearResponse>() {
 
                         @Override
-                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+                        public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
 //                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
-                            List<Interim> content = response.body().getInterim();
-                            String status = response.body().getStatus();
-                            Log.e("CEK STATUS", "onResponse: "+status );
-                            if (status.equals("0")){
-                                Toast.makeText(context,"Gagal Melakukan Clearing!",Toast.LENGTH_LONG).show();
-                            }else{
-                                Toast.makeText(context,"Sukses Melakukan Clearing!",Toast.LENGTH_LONG).show();
-                            }
-
+                            Toast.makeText(context,response.body().getContent(),Toast.LENGTH_LONG).show();
                         }
                         @Override
-                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                        public void onFailure(Call<ClearResponse> call, Throwable t) {
                             Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -152,7 +146,7 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
 
                     /*Call the method with parameter in the interface to get the employee data*/
 //                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getVermeNegatif(dataList.get(position).getLGNUM()
+                    Call<ClearResponse> call = apiService.getVermeNegatif(dataList.get(position).getLGNUM()
                             ,"999" // BWLVS
                             ,dataList.get(position).getMATNR()
                             ,dataList.get(position).getWERKS()
@@ -162,17 +156,20 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
                             ,dataList.get(position).getMEINS()
                             ,dataList.get(position).getLQNUM()
                             ,"X"
-                            ,"YOSEE"
+                            ,LoginActivity.pr_uname
                             ,"X");
                     /*Log the URL called*/
                     Log.wtf("URL Called", call.request().url() + "");
 
-                    call.enqueue(new Callback<InterimResponse>() {
+                    call.enqueue(new Callback<ClearResponse>() {
 
                         @Override
-                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
+                        public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
+
+                            Toast.makeText(context,response.body().getContent(),Toast.LENGTH_LONG).show();
+
 //                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
-                            List<Interim> content = response.body().getInterim();
+                           /* List<Interim> content = response.body().getInterim();
                             String status = response.body().getStatus();
                             if (status.equals("0")){
                                 Toast.makeText(context,"Gagal Melakukan Clearing!",Toast.LENGTH_LONG).show();
@@ -181,10 +178,10 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
                             }
                             if (content.size() < 1){
                                 Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
-                            }
+                            }*/
                         }
                         @Override
-                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                        public void onFailure(Call<ClearResponse> call, Throwable t) {
                             Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -194,7 +191,7 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
 
                     /*Call the method with parameter in the interface to get the employee data*/
 //                    Call<InterimResponse> call = apiService.getInterim();
-                    Call<InterimResponse> call = apiService.getSobkz(dataList.get(position).getLGNUM()
+                    Call<ClearResponse> call = apiService.getSobkz(dataList.get(position).getLGNUM()
                             ,"999"
                             ,dataList.get(position).getMATNR()
                             ,dataList.get(position).getWERKS()
@@ -204,18 +201,21 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
                             ,dataList.get(position).getMEINS()
                             ,dataList.get(position).getLQNUM()
                             ,"X"
-                            ,"YOSEE"
+                            ,LoginActivity.pr_uname
                             ,"X"
                             ,dataList.get(position).getSOBKZ()
                             ,dataList.get(position).getSONUM());
                     /*Log the URL called*/
                     Log.wtf("URL Called", call.request().url() + "");
 
-                    call.enqueue(new Callback<InterimResponse>() {
+                    call.enqueue(new Callback<ClearResponse>() {
 
                         @Override
-                        public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
-//                            generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
+                        public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
+                            Toast.makeText(context,response.body().getContent(),Toast.LENGTH_LONG).show();
+
+
+                          /*  generateInterimResponse((ArrayList<Interim>) response.body().getInterim());
                             List<Interim> content = response.body().getInterim();
                             String status = response.body().getStatus();
                             if (status.equals("0")){
@@ -225,10 +225,10 @@ public class InterimRv extends RecyclerView.Adapter<InterimRv.InterimViewHolder>
                             }
                             if (content.size() < 1){
                                 Toast.makeText(context,"Data Not Found!",Toast.LENGTH_LONG).show();
-                            }
+                            }*/
                         }
                         @Override
-                        public void onFailure(Call<InterimResponse> call, Throwable t) {
+                        public void onFailure(Call<ClearResponse> call, Throwable t) {
                             Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                         }
                     });

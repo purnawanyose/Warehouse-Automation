@@ -38,13 +38,9 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
 
     public ArrayList<BonSementara> dataList;
     CheckBox cb2, cb1, cb3;
-/*
-
-    private Context context;
-    public static String selected;
-
     private int selectedPosition = -1;
-*/
+    public static String selectedRSPOS;
+    public static String selectedRSNUM;
 
 
 
@@ -71,17 +67,22 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
         holder.textView47.setText(dataList.get(position).getMEINS());
 
 
-       /* holder.cb1.setChecked(position == selectedPosition);
+
+        holder.cb1.setChecked(position == selectedPosition);
         holder.cb1.setId(position);
         holder.cb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.checked = dataList.get(position).getBWART();
-                selected = holder.checked;
-                Log.e("checked"," "+selected);
+                holder.rsnum = dataList.get(position).getRSNUM();
+                holder.rspos = dataList.get(position).getRSPOS();
+                selectedRSNUM = holder.rsnum;
+                selectedRSPOS = holder.rspos;
+                Log.e("checked1"," "+selectedRSNUM);
+                Log.e("checked2"," "+selectedRSPOS);
                 itemCheckChanged(v);
             }
-        });*/
+        });
+
     }
 
     @Override
@@ -93,7 +94,8 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
         TextView textView43, textView44, textView45, textView46, textView47;
         CheckBox cb1, cb2, cb3;
         Button button11;
-        String checked;
+        String rsnum;
+        String rspos;
 
         BonViewHolder(final View itemView) {
             super(itemView);
@@ -108,9 +110,8 @@ public class BonSementaraRv extends RecyclerView.Adapter<BonSementaraRv.BonViewH
         }
     }
 
-   /* //On selecting any view set the current position to selectedPositon and notify adapter
     private void itemCheckChanged(View v) {
         selectedPosition = (Integer) v.getId();
         notifyDataSetChanged();
-    }*/
+    }
 }

@@ -1,9 +1,12 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ public class LayoutKetiga extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     public static String sbinnn,sbinFull;
     TextView textView73;
+
+    Button btnKembali3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,8 @@ public class LayoutKetiga extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.rvKetiga2);
         mRecyclerView2 = (RecyclerView) findViewById(R.id.rvKetiga1);
         textView73 = (TextView) findViewById(R.id.tvKetiga);
+
+        btnKembali3 = (Button) findViewById(R.id.btnkembali3);
 
         bin = new ArrayList<>();
         bin.add("7");
@@ -65,5 +72,18 @@ public class LayoutKetiga extends AppCompatActivity {
         textView73.setText("STORAGE BIN\t\t: "+sbinFull);
 
 
+        btnKembali3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LayoutKetiga.this, OnhandLocationActivity.class);
+                intent.putExtra("PLANT", OnhandLocationActivity.plantt);
+                intent.putExtra("ORDER", OnhandLocationActivity.ordr);
+                intent.putExtra("MATNR", OnhandLocationActivity.matnrr);
+                intent.putExtra("RSVNO", OnhandLocationActivity.rsvnoo);
+                intent.putExtra("MATNO", OnhandLocationActivity.matnoo);
+                startActivity(intent);
+            }
+        });
     }
 }

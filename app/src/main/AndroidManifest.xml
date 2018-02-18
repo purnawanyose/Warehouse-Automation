@@ -16,7 +16,7 @@
         <activity
             android:name=".ImageViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".ScannerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -28,7 +28,7 @@
             android:name=".DetailOpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

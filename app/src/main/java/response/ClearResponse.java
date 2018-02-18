@@ -1,5 +1,6 @@
 package response;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -13,21 +14,26 @@ import model.Interim;
 
 public class ClearResponse {
     @SerializedName("status")
-    public String status;
-
+    @Expose
+    private Integer status;
     @SerializedName("content")
-    private List<Interim> interim;
+    @Expose
+    private String content;
 
-    public List<Interim> getInterim()
-    {
-
-        return interim;
+    public Integer getStatus() {
+        return status;
     }
 
-    public String getStatus()
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-    {
-        return status;
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }

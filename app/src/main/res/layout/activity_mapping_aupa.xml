@@ -77,17 +77,24 @@
                 app:srcCompat="@drawable/partjalana" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView101"
-            android:layout_width="140dp"
+        <LinearLayout
+            android:layout_width="137dp"
             android:layout_height="match_parent"
-            android:background="@color/mdtp_accent_color"
-            android:paddingTop="150dp"
-            android:text="AUPB"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView101"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mdtp_accent_color"
+                android:paddingTop="150dp"
+                android:text="AUPB"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

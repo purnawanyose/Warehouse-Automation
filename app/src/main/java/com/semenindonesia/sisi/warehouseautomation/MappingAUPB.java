@@ -1,9 +1,12 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,9 @@ public class MappingAUPB extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     public static String sbin,sbinFull;
+    public static String plantt;
+    public static String matnoo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,7 @@ public class MappingAUPB extends AppCompatActivity {
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvAUPB);
+
 
         lorong = new ArrayList<>();
         lorong = new ArrayList<>();
@@ -64,5 +71,6 @@ public class MappingAUPB extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         sbin = extras.getString("sbin");
         sbinFull = extras.getString("sbinFull");
+
     }
 }

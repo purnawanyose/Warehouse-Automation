@@ -1,9 +1,12 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ public class LayoutPertama extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     public static String sbinnn,sbinFull;
     TextView textView73;
+    Button btnKembali1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,7 @@ public class LayoutPertama extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.rvPertama2);
         mRecyclerView2 = (RecyclerView) findViewById(R.id.rvPertama1);
         textView73 = (TextView) findViewById(R.id.textView73);
+        btnKembali1= (Button) findViewById(R.id.btnKembali1);
 
         bin = new ArrayList<>();
         bin.add("6");
@@ -61,7 +66,18 @@ public class LayoutPertama extends AppCompatActivity {
 
         textView73.setText("STORAGE BIN\t\t: "+sbinFull);
 
+        btnKembali1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
+                Intent intent = new Intent(LayoutPertama.this, OnhandLocationActivity.class);
+                intent.putExtra("PLANT", OnhandLocationActivity.plantt);
+                intent.putExtra("ORDER", OnhandLocationActivity.ordr);
+                intent.putExtra("MATNR", OnhandLocationActivity.matnrr);
+                intent.putExtra("RSVNO", OnhandLocationActivity.rsvnoo);
+                intent.putExtra("MATNO", OnhandLocationActivity.matnoo);
+                startActivity(intent);
+            }
+        });
     }
 }

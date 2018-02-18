@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arasthel.asyncjob.AsyncJob;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -29,6 +30,7 @@ import model.BonSementara;
 import model.Interim;
 import model.Reservation;
 import response.BonSementaraResponse;
+import response.ClearResponse;
 import response.InterimResponse;
 import response.ReservationMainResponse;
 import retrofit2.Call;
@@ -48,33 +50,39 @@ public class MainActivity extends AppCompatActivity {
     private View layInterim;
     private View layReservation;
     private View layBon;
+    private View stockOpname;
 
     int d = 0;
     int e = 0;
     TextView Reservation;
     TextView Interim;
     TextView Bon;
+    TextView StockOpname;
 
 
     public void Reservation(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ReservationMainResponse> call = apiService.getHomeReservation();
-        call.enqueue(new Callback<ReservationMainResponse>() {
+        Call<ClearResponse> call = apiService.getHomeReservation();
+        call.enqueue(new Callback<ClearResponse>() {
 
             @Override
-            public void onResponse(Call<ReservationMainResponse> call, Response<ReservationMainResponse> response) {
-                List<model.Reservation> content = response.body().getReservationMain();
+            public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
+
+
+                Reservation.setText(response.body().getContent());
+
+                /*List<model.Reservation> content = response.body().getReservationMain();
                 int i = 0;
                 for (Reservation data : content) {
                     d = d + 1;
                     Log.e("sa", "as" + d);
 
                 }
-                Reservation.setText("" + d);
+                Reservation.setText("" + d);*/
             }
 
             @Override
-            public void onFailure(Call<ReservationMainResponse> call, Throwable t) {
+            public void onFailure(Call<ClearResponse> call, Throwable t) {
                 t.printStackTrace();
                 Log.e("Interim", "Material Noooooooooooo" + call);
             }
@@ -82,23 +90,26 @@ public class MainActivity extends AppCompatActivity {
     }
     public void Bon(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<BonSementaraResponse> call = apiService.getBonSementara();
-        call.enqueue(new Callback<BonSementaraResponse>() {
+        Call<ClearResponse> call = apiService.getHomeBonSementara();
+        Log.wtf("URL Called", call.request().url() + "");
+        call.enqueue(new Callback<ClearResponse>() {
 
             @Override
-            public void onResponse(Call<BonSementaraResponse> call, Response<BonSementaraResponse> response) {
-                List<BonSementara> content = response.body().getBonSementara();
+            public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
+
+
+              /*  List<BonSementara> content = response.body().getBonSementara();
                 int i = 0;
                 for (BonSementara data : content) {
                     d = d + 1;
                     Log.e("sa", "as" + d);
 
-                }
-                Bon.setText("" + d);
+                }*/
+                Bon.setText(response.body().getContent());
             }
 
             @Override
-            public void onFailure(Call<BonSementaraResponse> call, Throwable t) {
+            public void onFailure(Call<ClearResponse> call, Throwable t) {
                 t.printStackTrace();
                 Log.e("Interim", "Material Noooooooooooo" + call);
             }
@@ -106,29 +117,53 @@ public class MainActivity extends AppCompatActivity {
     }
     public void Interim(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<InterimResponse> call = apiService.getInterim();
-        call.enqueue(new Callback<InterimResponse>() {
+        Call<ClearResponse> call = apiService.getHomeInterim();
+        call.enqueue(new Callback<ClearResponse>() {
 
             @Override
-            public void onResponse(Call<InterimResponse> call, Response<InterimResponse> response) {
-                List<Interim> content = response.body().getInterim();
+            public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
+                /*List<Interim> content = response.body().getInterim();
                 int i = 0;
                 for (Interim data : content) {
                     e = e + 1;
                     Log.e("sa", "as" + e);
 
-                }
-                Interim.setText("" + e);
+                }*/
+                Interim.setText(response.body().getContent());
             }
 
             @Override
-            public void onFailure(Call<InterimResponse> call, Throwable t) {
+            public void onFailure(Call<ClearResponse> call, Throwable t) {
                 t.printStackTrace();
                 Log.e("Interim", "Material Noooooooooooo" + call);
             }
         });
     }
 
+    public void StockOpname(){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<ClearResponse> call = apiService.getHomeOpname();
+        call.enqueue(new Callback<ClearResponse>() {
+
+            @Override
+            public void onResponse(Call<ClearResponse> call, Response<ClearResponse> response) {
+                /*List<Interim> content = response.body().getInterim();
+                int i = 0;
+                for (Interim data : content) {
+                    e = e + 1;
+                    Log.e("sa", "as" + e);
+
+                }*/
+                StockOpname.setText(response.body().getContent());
+            }
+
+            @Override
+            public void onFailure(Call<ClearResponse> call, Throwable t) {
+                t.printStackTrace();
+                Log.e("Interim", "Material Noooooooooooo" + call);
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,13 +175,17 @@ public class MainActivity extends AppCompatActivity {
         layInterim = (View) findViewById(R.id.layInterim);
         layReservation = (View) findViewById(R.id.layReservation);
         layBon = (View) findViewById(R.id.layBon);
+        stockOpname = (View) findViewById(R.id.stockopname);
 
         Reservation = (TextView) findViewById(R.id.reservation_count);
         Interim = (TextView) findViewById(R.id.interim_count);
         Bon = (TextView) findViewById(R.id.bonsementara_count);
+        StockOpname = (TextView) findViewById(R.id.stockopname_count);
 
         Bon();
         Interim();
+        Reservation();
+        StockOpname();
 
         final KProgressHUD khud = KProgressHUD.create(MainActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -206,6 +245,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BonSementaraActivity.class );
+                startActivity(intent);
+            }
+        });
+
+        stockOpname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StockOpnameActivity.class );
                 startActivity(intent);
             }
         });

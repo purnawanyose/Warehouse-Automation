@@ -13,8 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.semenindonesia.sisi.warehouseautomation.MapUtamaActivity;
 import com.semenindonesia.sisi.warehouseautomation.OnhandLocationActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
+import com.semenindonesia.sisi.warehouseautomation.ScannerActivity;
 
 import java.util.ArrayList;
 
@@ -67,6 +69,8 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
 
 
         clickEvents(holder, position);
+        mapping(holder, position);
+
 
     }
 
@@ -111,6 +115,29 @@ public class OnHandLocationRv extends RecyclerView.Adapter<OnHandLocationRv.Onha
                     }
                 }
                 return false;
+            }
+        });
+    }
+
+    private void mapping(final OnHandLocationRv.OnhandLocationViewHolder holder, final int position){
+        holder.ohl2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dataList.get(position).getSBIN().equalsIgnoreCase("") || dataList.get(position).getSBIN().equalsIgnoreCase("")){
+
+                }else{
+                    String huruf = (String) dataList.get(position).getSBIN();
+                    String akhir = huruf.substring(1,3);
+                    Log.e("Testing Map Baru", "onClicdsfhgjgfdsafghk: "+akhir );
+
+                    Intent intent = new Intent(context, MapUtamaActivity.class);
+                    intent.putExtra("sbin", dataList.get(position).getSBIN());
+                    intent.putExtra("plant", OnhandLocationActivity.matnoo);
+                    intent.putExtra("matno", OnhandLocationActivity.plantt);
+
+
+                    context = v.getContext();
+                    v.getContext().startActivity(intent);                }
             }
         });
     }
