@@ -217,7 +217,6 @@ public class PostTransferLocActivity extends AppCompatActivity implements View.O
 
                     if(data.getMATDOC().equalsIgnoreCase("Gagal Transloc")) {
 
-
                     }else{
                         Intent intent = new Intent(PostTransferLocActivity.this, MainActivity.class);
                         startActivity(intent);
