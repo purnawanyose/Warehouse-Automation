@@ -290,21 +290,21 @@
 
             <TextView
                 android:id="@+id/textView39"
-                android:layout_width="50dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Book\nQty"
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView40"
-                android:layout_width="50dp"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:text="Count\nQty"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -315,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Count\nQty"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -326,6 +326,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="UoM"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView123"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textAlignment="center"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
@@ -334,7 +344,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/detailOpnameRv"
+            android:id="@+id/scannerdetailOpnameRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
