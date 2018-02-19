@@ -15,7 +15,6 @@ import model.Opname;
 
 public class StockOpnameDetailResponse {
 
-
     @SerializedName("head")
     @Expose
     private HeadDetailOpname head;

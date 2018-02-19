@@ -7,7 +7,10 @@
         android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,40 +19,18 @@
 
             <TextView
                 android:id="@+id/textView92"
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="\nPID."
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView104"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.33"
-                android:text="\nPlan"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView105"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="\nSloc"
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView106"
-                android:layout_width="70dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="\nPeriod"
@@ -64,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="\nSS"
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

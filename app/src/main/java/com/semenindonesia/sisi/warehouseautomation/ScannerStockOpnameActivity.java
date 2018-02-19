@@ -100,7 +100,7 @@ public class ScannerStockOpnameActivity extends AppCompatActivity {
         //====================== End Retrofit ======================\\
     }
     private void generateInterimResponse(ArrayList<Opname> empDataList) {
-        recyclerView = (RecyclerView) findViewById(R.id.opnameRv);
+        recyclerView = (RecyclerView) findViewById(R.id.scanner_opname_rv);
 
         adapter = new ScannerStockOpnameRv(empDataList);
 

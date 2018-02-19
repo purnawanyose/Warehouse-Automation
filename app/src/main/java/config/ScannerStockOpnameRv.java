@@ -32,7 +32,7 @@ public class ScannerStockOpnameRv extends RecyclerView.Adapter<ScannerStockOpnam
     @Override
     public OpnameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.opname_rv, parent, false);
+        View view = layoutInflater.inflate(R.layout.scanner_opname_rv, parent, false);
         return new OpnameViewHolder(view);
 
 
@@ -41,8 +41,6 @@ public class ScannerStockOpnameRv extends RecyclerView.Adapter<ScannerStockOpnam
     public void onBindViewHolder(OpnameViewHolder holder, int position) {
 
         holder.textView92.setText(dataList.get(position).getPHYSINVENTORY());
-        holder.textView104.setText(dataList.get(position).getPLANT());
-        holder.textView105.setText(dataList.get(position).getSTGELOC());
         holder.textView106.setText(dataList.get(position).getFISCALYEAR()+"-"+dataList.get(position).getFISPERIOD());
         holder.textView107.setText(dataList.get(position).getSPECSTOCK());
         if (dataList.get(position).getCOUNTSTATUS().equalsIgnoreCase("")){
@@ -61,7 +59,7 @@ public class ScannerStockOpnameRv extends RecyclerView.Adapter<ScannerStockOpnam
     }
 
     public class OpnameViewHolder  extends RecyclerView.ViewHolder{
-        TextView textView92,textView104, textView105, textView106, textView107, textView108;
+        TextView textView92, textView106, textView107, textView108;
         ImageView imgDetail;
         LinearLayout linearClear;
         CheckBox cbOpname;
@@ -70,8 +68,6 @@ public class ScannerStockOpnameRv extends RecyclerView.Adapter<ScannerStockOpnam
             super(itemView);
             context = itemView.getContext();
             textView92 = (TextView) itemView.findViewById(R.id.textView92);
-            textView104 = (TextView) itemView.findViewById(R.id.textView104);
-            textView105 = (TextView) itemView.findViewById(R.id.textView105);
             textView106 = (TextView) itemView.findViewById(R.id.textView106);
             textView107 = (TextView) itemView.findViewById(R.id.textView107);
             imgDetail = (ImageView) itemView.findViewById(R.id.imgDetail);
