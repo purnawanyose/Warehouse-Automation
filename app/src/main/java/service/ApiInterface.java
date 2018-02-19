@@ -20,6 +20,7 @@ import model.Reservation;
 import response.BonSementaraResponse;
 import response.CallCartResponse;
 import response.ClearResponse;
+import response.DetailResponse;
 import response.InterimResponse;
 import response.IssuedResponse;
 import response.MasterSpecialStockResponse;
@@ -123,7 +124,7 @@ public interface ApiInterface {
     Call<StockOpnameResponse> getStockOpname();
 
     @GET("Opname/detail/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
-    Call<StockOpnameDetailResponse> getOpnameDetail(
+    Call<DetailResponse> getOpnameDetail(
             @Query("pid") String pid,
             @Query("fiscalyear") String fiscalyear
     );

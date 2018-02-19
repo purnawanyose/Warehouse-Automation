@@ -20,6 +20,7 @@ import model.HeadDetailOpname;
 import model.ItemDetailOpname;
 import model.Opname;
 import model.Reservation;
+import response.DetailResponse;
 import response.StockOpnameDetailResponse;
 import response.StockOpnameResponse;
 import retrofit2.Call;
@@ -35,6 +36,9 @@ public class DetailOpActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     String PID, FYEAR;
+    String TAG = DetailOpActivity.class.getSimpleName();
+    private ArrayList<ItemDetailOpname> itemlist = new ArrayList<ItemDetailOpname>();
+
 
     TextView pid;
     @Override
@@ -47,28 +51,34 @@ public class DetailOpActivity extends AppCompatActivity {
         pid = (TextView)findViewById(R.id.pid);
 
         Bundle extras = getIntent().getExtras();
-        PID = extras.getString("PID");
-        FYEAR = extras.getString("FYEAR");
+        PID = "1000000040";
+        FYEAR = "2015";
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<StockOpnameDetailResponse> call = apiService.getOpnameDetail(PID,FYEAR);
+        Call<DetailResponse> call = apiService.getOpnameDetail(PID, FYEAR);
          /*Log the URL called*/
         Log.wtf("URL Called", call.request().url() + "");
 
-        call.enqueue(new Callback<StockOpnameDetailResponse>() {
+        call.enqueue(new Callback<DetailResponse>() {
             @Override
-            public void onResponse(Call<StockOpnameDetailResponse> call, Response<StockOpnameDetailResponse> response) {
-                generateInterimResponse((ArrayList<ItemDetailOpname>) response.body().getItems());
+            public void onResponse(Call<DetailResponse> call, Response<DetailResponse> response) {
+                //generateInterimResponse((ArrayList<ItemDetailOpname>) response.body().getItems());
                 /*HeadDetailOpname aa = response.body().getHead();
                 Log.e("StockOpname", "Sukses"+aa.getPHYSINVENTORY());
-                    pid.setText(aa.getPHYSINVENTORY());
-*/
+                    pid.setText(aa.getPHYSINVENTORY());*/
+
+                int i = response.body().getStatus();
+                List<ItemDetailOpname> items = response.body().getContent().getItems();
+
+                generateInterimResponse((ArrayList<ItemDetailOpname>) response.body().getContent().getItems());
+
+                String user = response.body().getContent().getHead().getUSERNAME();
+                Log.e(TAG, "Sukses: user head " + user);
 
 
-                Log.e("StockOpname", "Sukses");
             }
 
             @Override
-            public void onFailure(Call<StockOpnameDetailResponse> call, Throwable t) {
+            public void onFailure(Call<DetailResponse> call, Throwable t) {
                 t.printStackTrace();
                 Log.e("Interim", "Material Noooooooooooo"+ call);
 
