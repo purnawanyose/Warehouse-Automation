@@ -25,6 +25,11 @@ public class ScannerDetailStockOpnameRv extends RecyclerView.Adapter<ScannerDeta
     private int selectedPosition = -1;
     public ArrayList<ItemDetailOpname> dataList;
 
+    public static String ITEM;
+    public static String MATERIAL;
+    public static String ENTRY_QNT;
+    public static String ENTRY_UOM;
+
     public ScannerDetailStockOpnameRv(ArrayList<ItemDetailOpname> dataList) {
         this.dataList = dataList;
     }
@@ -68,6 +73,10 @@ public class ScannerDetailStockOpnameRv extends RecyclerView.Adapter<ScannerDeta
 
         if (holder.checkBox4.isChecked()){
             holder.etCount.setEnabled(true);
+            ITEM = dataList.get(position).getITEM();
+            MATERIAL = dataList.get(position).getMATERIAL();
+            ENTRY_UOM = dataList.get(position).getENTRYUOM();
+            ENTRY_QNT = dataList.get(position).getENTRYQNT();
             Log.e("TESTING ITM MATERIAL", "onBindViewHolder: "+dataList.get(position).getMATNRDESCRIPTION());
         }else{
 

@@ -28,6 +28,7 @@ import response.MaterialResponse;
 import response.MovTypeSelectionResponse;
 import response.OnHandLocationResponse;
 import response.OnHandResponse;
+import response.PostingResponse;
 import response.QuantResponse;
 import response.ReservationDetailResponse;
 import response.ReservationMainResponse;
@@ -133,6 +134,18 @@ public interface ApiInterface {
             @Query("werks[0]") String werks,
             @Query("stge[0]") String stge
     );
+
+    @GET(" Opname/count/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<PostingResponse> getCountOpname(
+            @Query("pid") String pid,
+            @Query("fiscalyear") String fiscalyear,
+            @Query("date") String date,
+            @Query("items[0][ITEM]") String ITEM,
+            @Query("items[0][MATERIAL]") String MATERIAL,
+            @Query("items[0][ENTRY_QNT]") String ENTRY_QNT,
+            @Query("items[0][ENTRY_UOM]") String ENTRY_UOM
+    );
+
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[0]=7702&rlgort[0]=W210&mvtind=X&includeUnapprove=1")
     Call<ScannerReservationPageResponse> getScannerReservationPage();

@@ -1,14 +1,18 @@
 package com.semenindonesia.sisi.warehouseautomation;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +20,16 @@ import java.util.List;
 import config.DetailStockOpnameRv;
 import config.ScannerDetailStockOpnameRv;
 import model.ItemDetailOpname;
+import model.Posting;
+import response.CallCartResponse;
 import response.DetailResponse;
+import response.PostingResponse;
+import response.StockOpnameResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import service.ApiClient;
+import service.ApiClientLocal;
 import service.ApiInterface;
 
 public class ScannerDetailOpActivity extends AppCompatActivity {
@@ -33,6 +42,8 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
 
     String PID, FYEAR;
     String TAG = ScannerDetailOpActivity.class.getSimpleName();
+
+    String PID1,FYEAR1;
     private ArrayList<ItemDetailOpname> itemlist = new ArrayList<ItemDetailOpname>();
 
     CheckBox cbCountSt, cbAdjust, cbDel, cbPostBlack, cbFreeze;
@@ -83,6 +94,9 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                 planDate.setText("Plan Date       : "+response.body().getContent().getHead().getPLANDATE());
                 countDate.setText("Count Dat       : "+response.body().getContent().getHead().getCOUNTDATE());
 
+                PID1 = response.body().getContent().getHead().getPHYSINVENTORY();
+                FYEAR1 = response.body().getContent().getHead().getFISCALYEAR();
+
 
                 if (response.body().getContent().getHead().getPOSTBLOCK().equalsIgnoreCase("")){
                     cbPostBlack.setChecked(false);
@@ -111,6 +125,9 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
 
             }
         });
+
+        count();
+
     }
 
     private void generateInterimResponse(ArrayList<ItemDetailOpname> empDataList) {
@@ -123,5 +140,71 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+    }
+
+    public void count(){
+        btnCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ScannerDetailOpActivity.this);
+                builder.setMessage("Count Confirmation"+"\n"+
+                                    "\n"+"PID No.         :"+PID1+"\n"+
+                                    "\n"+"Fiscal Year   :"+FYEAR1+"\n"+
+                                    "\n"+"Count Date");
+                builder.setCancelable(true);
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                         /*Create handle for the RetrofitInstance interface*/
+                        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                        Log.e(TAG, "ITEM: "+ScannerDetailStockOpnameRv.ITEM );
+                        Log.e(TAG, "MATERIAL: "+ ScannerDetailStockOpnameRv.MATERIAL);
+                        Log.e(TAG, "QNT: "+ScannerDetailStockOpnameRv.ENTRY_QNT);
+                        Log.e(TAG, "UOM: "+ScannerDetailStockOpnameRv.ENTRY_UOM);
+
+                    /*Call the method with parameter in the interface to get the employee data*/
+                        Call<PostingResponse> call = apiService.getCountOpname(PID1,FYEAR1,"20160219",ScannerDetailStockOpnameRv.ITEM,
+                                                        ScannerDetailStockOpnameRv.MATERIAL,ScannerDetailStockOpnameRv.ENTRY_QNT,
+                                                        ScannerDetailStockOpnameRv.ENTRY_UOM);
+
+                    /*Log the URL called*/
+                        Log.wtf("URL Called", call.request().url() + "");
+
+                        call.enqueue(new Callback<PostingResponse>() {
+                            @Override
+                            public void onResponse(Call<PostingResponse> call, Response<PostingResponse> response) {
+                                Toast.makeText(ScannerDetailOpActivity.this, "TYPE            : "+response.body().getContent().getTYPE()+
+                                                "\n"+"ID                 : "+response.body().getContent().getID()+
+                                                "\n"+"NUMBER         : "+response.body().getContent().getNUMBER()+
+                                                "\n"+"MESSAGE        : "+response.body().getContent().getMESSAGE()
+
+                                        ,Toast.LENGTH_LONG).show();
+                                String user = response.body().getContent().getID();
+                                Log.e(TAG, "TESTING RESPONSE ID: "+user);
+
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<PostingResponse> call, Throwable t) {
+                                Toast.makeText(ScannerDetailOpActivity.this, " Data Deleted", Toast.LENGTH_SHORT).show();
+//                            Log.e("Test Error", "onFailure: "+Call.class );
+                                finish();
+                            }
+                        });
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
     }
 }
