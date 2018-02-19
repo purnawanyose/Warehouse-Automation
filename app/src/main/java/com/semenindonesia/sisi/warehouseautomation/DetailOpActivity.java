@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,8 +40,8 @@ public class DetailOpActivity extends AppCompatActivity {
     String TAG = DetailOpActivity.class.getSimpleName();
     private ArrayList<ItemDetailOpname> itemlist = new ArrayList<ItemDetailOpname>();
 
-
-    TextView pid;
+    CheckBox cbCountSt, cbAdjust, cbDel, cbPostBlack, cbFreeze;
+    TextView pid, plantText, slocText, spcsloc, crtd, docDate, planDate, countDate, postDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +50,27 @@ public class DetailOpActivity extends AppCompatActivity {
         final Context context = this.getApplicationContext();
 
         pid = (TextView)findViewById(R.id.pid);
+        plantText = (TextView)findViewById(R.id.plantText);
+        slocText = (TextView)findViewById(R.id.slocText);
+        spcsloc = (TextView)findViewById(R.id.spcsloc);
+        crtd = (TextView)findViewById(R.id.crtd);
+        docDate = (TextView)findViewById(R.id.docdate);
+        planDate = (TextView)findViewById(R.id.plandate);
+        countDate = (TextView)findViewById(R.id.countdate);
+        postDate = (TextView)findViewById(R.id.postdate);
+
+
+        cbCountSt = (CheckBox) findViewById(R.id.cbCountSt);
+        cbAdjust = (CheckBox) findViewById(R.id.cbAdjust);
+        cbDel = (CheckBox) findViewById(R.id.cbDel);
+        cbPostBlack = (CheckBox) findViewById(R.id.cbPostBlack);
+        cbFreeze = (CheckBox) findViewById(R.id.cbFreeze);
+
 
         Bundle extras = getIntent().getExtras();
-        PID = "1000000040";
-        FYEAR = "2015";
+        PID = extras.getString("PID");
+        FYEAR = extras.getString("FYEAR");
+
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<DetailResponse> call = apiService.getOpnameDetail(PID, FYEAR);
          /*Log the URL called*/
@@ -61,20 +79,47 @@ public class DetailOpActivity extends AppCompatActivity {
         call.enqueue(new Callback<DetailResponse>() {
             @Override
             public void onResponse(Call<DetailResponse> call, Response<DetailResponse> response) {
-                //generateInterimResponse((ArrayList<ItemDetailOpname>) response.body().getItems());
-                /*HeadDetailOpname aa = response.body().getHead();
-                Log.e("StockOpname", "Sukses"+aa.getPHYSINVENTORY());
-                    pid.setText(aa.getPHYSINVENTORY());*/
-
                 int i = response.body().getStatus();
                 List<ItemDetailOpname> items = response.body().getContent().getItems();
-
                 generateInterimResponse((ArrayList<ItemDetailOpname>) response.body().getContent().getItems());
 
                 String user = response.body().getContent().getHead().getUSERNAME();
-                Log.e(TAG, "Sukses: user head " + user);
+                pid.setText("PID.              : "+response.body().getContent().getHead().getPHYSINVENTORY());
+                plantText.setText("Plant             : "+response.body().getContent().getHead().getPLANT());
+                slocText.setText("Sloc               : "+response.body().getContent().getHead().getSTGELOC());
+                spcsloc.setText("Spc Sloc        : "+"");
+                crtd.setText("Crty by           : "+response.body().getContent().getHead().getUSERNAME());
+                docDate.setText("Doc Date        : "+response.body().getContent().getHead().getDOCDATE());
+                planDate.setText("Plan Date       : "+response.body().getContent().getHead().getPLANDATE());
+                countDate.setText("Count Dat       : "+response.body().getContent().getHead().getCOUNTDATE());
+                postDate.setText("Post Date       : "+response.body().getContent().getHead().getPSTNGDATE());
 
 
+                if (response.body().getContent().getHead().getPOSTBLOCK().equalsIgnoreCase("")){
+                    cbPostBlack.setChecked(false);
+                }else{
+                    cbPostBlack.setChecked(true);
+                }
+                if (response.body().getContent().getHead().getFREEZEBOOKINV().equalsIgnoreCase("")){
+                    cbFreeze.setChecked(false);
+                }else{
+                    cbFreeze.setChecked(true);
+                }
+                if (response.body().getContent().getHead().getCOUNTSTATUS().equalsIgnoreCase("")){
+                    cbCountSt.setChecked(false);
+                }else{
+                    cbCountSt.setChecked(true);
+                }
+                if (response.body().getContent().getHead().getADJUSTSTATUS().equalsIgnoreCase("")){
+                    cbAdjust.setChecked(false);
+                }else{
+                    cbAdjust.setChecked(true);
+                }
+                if (response.body().getContent().getHead().getDELETESTATUS().equalsIgnoreCase("")){
+                    cbDel.setChecked(false);
+                }else{
+                    cbDel.setChecked(true);
+                }
             }
 
             @Override

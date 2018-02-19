@@ -15,16 +15,15 @@ import com.semenindonesia.sisi.warehouseautomation.R;
 import java.util.ArrayList;
 
 import model.ItemDetailOpname;
-import model.Opname;
 
-public class DetailStockOpnameRv extends RecyclerView.Adapter<DetailStockOpnameRv.DetailOpnameViewHolder> {
+public class ScannerDetailStockOpnameRv extends RecyclerView.Adapter<ScannerDetailStockOpnameRv.DetailOpnameViewHolder> {
 
 
     private Context context;
 
     public ArrayList<ItemDetailOpname> dataList;
 
-    public DetailStockOpnameRv(ArrayList<ItemDetailOpname> dataList) {
+    public ScannerDetailStockOpnameRv(ArrayList<ItemDetailOpname> dataList) {
         this.dataList = dataList;
     }
 
