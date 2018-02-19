@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.semenindonesia.sisi.warehouseautomation.DetailOpActivity;
+import com.semenindonesia.sisi.warehouseautomation.ScannerDetailOpActivity;
 import com.semenindonesia.sisi.warehouseautomation.R;
 
 import java.util.ArrayList;
@@ -73,8 +74,6 @@ public class ScannerStockOpnameRv extends RecyclerView.Adapter<ScannerStockOpnam
             imgDetail = (ImageView) itemView.findViewById(R.id.imgDetail);
             cbOpname = (CheckBox) itemView.findViewById(R.id.cbOpname);
             linearClear = (LinearLayout) itemView.findViewById(R.id.linearClear);
-
-
         }
     }
     private void applyClickEvents(ScannerStockOpnameRv.OpnameViewHolder holder, final int position) {
@@ -83,7 +82,7 @@ public class ScannerStockOpnameRv extends RecyclerView.Adapter<ScannerStockOpnam
             public void onClick(View view) {
                 final Opname data = dataList.get(position);
                 //======== Menuju ke form quant ========
-                Intent intent = new Intent(context, DetailOpActivity.class );
+                Intent intent = new Intent(context, ScannerDetailOpActivity.class );
                                 intent.putExtra("PID", data.getPHYSINVENTORY());
                                 intent.putExtra("FYEAR", data.getFISCALYEAR());
                 context = view.getContext();

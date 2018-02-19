@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.DetailStockOpnameRv;
+import config.ScannerDetailStockOpnameRv;
 import model.ItemDetailOpname;
 import response.DetailResponse;
 import retrofit2.Call;
@@ -24,8 +26,10 @@ import service.ApiInterface;
 public class ScannerDetailOpActivity extends AppCompatActivity {
 
 
-    private DetailStockOpnameRv adapter;
+    private ScannerDetailStockOpnameRv adapter;
     private RecyclerView recyclerView;
+
+    Button btnCount,btnPosting;
 
     String PID, FYEAR;
     String TAG = ScannerDetailOpActivity.class.getSimpleName();
@@ -36,27 +40,24 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_op);
+        setContentView(R.layout.activity_scanner_detail_op);
 
         final Context context = this.getApplicationContext();
 
         pid = (TextView)findViewById(R.id.pid);
         plantText = (TextView)findViewById(R.id.plantText);
         slocText = (TextView)findViewById(R.id.slocText);
-        spcsloc = (TextView)findViewById(R.id.spcsloc);
-        crtd = (TextView)findViewById(R.id.crtd);
         docDate = (TextView)findViewById(R.id.docdate);
         planDate = (TextView)findViewById(R.id.plandate);
         countDate = (TextView)findViewById(R.id.countdate);
-        postDate = (TextView)findViewById(R.id.postdate);
-
-
         cbCountSt = (CheckBox) findViewById(R.id.cbCountSt);
-        cbAdjust = (CheckBox) findViewById(R.id.cbAdjust);
-        cbDel = (CheckBox) findViewById(R.id.cbDel);
         cbPostBlack = (CheckBox) findViewById(R.id.cbPostBlack);
         cbFreeze = (CheckBox) findViewById(R.id.cbFreeze);
+        btnCount = (Button) findViewById(R.id.btnCount);
+        btnPosting = (Button) findViewById(R.id.btnPosting);
 
+        btnCount.setEnabled(false);
+        btnPosting.setEnabled(false);
 
         Bundle extras = getIntent().getExtras();
         PID = extras.getString("PID");
@@ -78,12 +79,9 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                 pid.setText("PID.              : "+response.body().getContent().getHead().getPHYSINVENTORY());
                 plantText.setText("Plant             : "+response.body().getContent().getHead().getPLANT());
                 slocText.setText("Sloc               : "+response.body().getContent().getHead().getSTGELOC());
-                spcsloc.setText("Spc Sloc        : "+"");
-                crtd.setText("Crty by           : "+response.body().getContent().getHead().getUSERNAME());
                 docDate.setText("Doc Date        : "+response.body().getContent().getHead().getDOCDATE());
                 planDate.setText("Plan Date       : "+response.body().getContent().getHead().getPLANDATE());
                 countDate.setText("Count Dat       : "+response.body().getContent().getHead().getCOUNTDATE());
-                postDate.setText("Post Date       : "+response.body().getContent().getHead().getPSTNGDATE());
 
 
                 if (response.body().getContent().getHead().getPOSTBLOCK().equalsIgnoreCase("")){
@@ -98,18 +96,11 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                 }
                 if (response.body().getContent().getHead().getCOUNTSTATUS().equalsIgnoreCase("")){
                     cbCountSt.setChecked(false);
+                    btnCount.setEnabled(true);
+                    btnPosting.setEnabled(false);
+
                 }else{
                     cbCountSt.setChecked(true);
-                }
-                if (response.body().getContent().getHead().getADJUSTSTATUS().equalsIgnoreCase("")){
-                    cbAdjust.setChecked(false);
-                }else{
-                    cbAdjust.setChecked(true);
-                }
-                if (response.body().getContent().getHead().getDELETESTATUS().equalsIgnoreCase("")){
-                    cbDel.setChecked(false);
-                }else{
-                    cbDel.setChecked(true);
                 }
             }
 
@@ -123,9 +114,9 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
     }
 
     private void generateInterimResponse(ArrayList<ItemDetailOpname> empDataList) {
-        recyclerView = (RecyclerView) findViewById(R.id.detailOpnameRv);
+        recyclerView = (RecyclerView) findViewById(R.id.scannerdetailOpnameRv);
 
-        adapter = new DetailStockOpnameRv(empDataList);
+        adapter = new ScannerDetailStockOpnameRv(empDataList);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ScannerDetailOpActivity.this);
 

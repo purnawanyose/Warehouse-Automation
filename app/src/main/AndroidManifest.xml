@@ -93,7 +93,8 @@
         <activity android:name=".PostTransferLocActivity" />
         <activity android:name=".UserManagementAdminActivity" />
         <activity android:name=".AddConnectionSettingActivity" />
-        <activity android:name=".ScannerStockOpnameActivity"></activity>
+        <activity android:name=".ScannerStockOpnameActivity"/>
+        <activity android:name=".ScannerDetailOpActivity"></activity>
     </application>
 
 </manifest>
