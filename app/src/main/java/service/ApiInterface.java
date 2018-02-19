@@ -145,6 +145,21 @@ public interface ApiInterface {
             @Query("items[0][ENTRY_QNT]") String ENTRY_QNT,
             @Query("items[0][ENTRY_UOM]") String ENTRY_UOM
     );
+    @GET(" Opname/recount/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<PostingResponse> getRecountOpname(
+            @Query("pid") String pid,
+            @Query("fiscalyear") String fiscalyear,
+            @Query("items[0][ITEM]") String ITEM,
+            @Query("items[0][MATERIAL]") String MATERIAL,
+            @Query("items[0][ENTRY_QNT]") String ENTRY_QNT,
+            @Query("items[0][ENTRY_UOM]") String ENTRY_UOM
+    );
+    @GET(" Opname/posting/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<PostingResponse> getPostingOpname(
+            @Query("pid") String pid,
+            @Query("fiscalyear") String fiscalyear,
+            @Query("date") String date
+    );
 
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[0]=7702&rlgort[0]=W210&mvtind=X&includeUnapprove=1")

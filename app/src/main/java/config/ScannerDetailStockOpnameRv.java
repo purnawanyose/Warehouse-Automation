@@ -56,6 +56,14 @@ public class ScannerDetailStockOpnameRv extends RecyclerView.Adapter<ScannerDeta
         holder.textView113.setText(dataList.get(position).getBASEUOM());
 
 
+        if (dataList.get(position).getQUANTITY().equalsIgnoreCase("0.000")){
+            holder.etCount.setText("0");
+        }else{
+            holder.etCount.setText(dataList.get(position).getQUANTITY());
+            holder.checkBox4.setChecked(true);
+
+        }
+
         holder.checkBox4.setChecked(position == selectedPosition);
         holder.checkBox4.setId(position);
         holder.checkBox4.setOnClickListener(new View.OnClickListener() {
@@ -81,8 +89,6 @@ public class ScannerDetailStockOpnameRv extends RecyclerView.Adapter<ScannerDeta
         }else{
 
         }
-
-
  }
 
     @Override

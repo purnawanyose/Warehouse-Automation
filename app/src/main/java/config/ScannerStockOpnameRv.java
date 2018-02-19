@@ -44,10 +44,12 @@ public class ScannerStockOpnameRv extends RecyclerView.Adapter<ScannerStockOpnam
         holder.textView92.setText(dataList.get(position).getPHYSINVENTORY());
         holder.textView106.setText(dataList.get(position).getFISCALYEAR()+"-"+dataList.get(position).getFISPERIOD());
         holder.textView107.setText(dataList.get(position).getSPECSTOCK());
+
+
         if (dataList.get(position).getCOUNTSTATUS().equalsIgnoreCase("")){
-            holder.cbOpname.setChecked(true);
-        }else{
             holder.cbOpname.setChecked(false);
+        }else{
+            holder.cbOpname.setChecked(true);
         }
 
 
