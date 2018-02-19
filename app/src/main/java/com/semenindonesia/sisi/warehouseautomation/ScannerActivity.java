@@ -149,13 +149,25 @@ public class ScannerActivity extends AppCompatActivity {
                 intent.putExtra("sbin", sbinText.getText().toString());
                 intent.putExtra("whs", whText.getText().toString());
                 intent.putExtra("stype", strgText.getText().toString());
-//
-//                intent.putExtra("MATNR", data.getMATNR());
-//                intent.putExtra("WERKS", data.getWERKS());
-//                intent.putExtra("LQNUM", data.getLQNUM());
-//                intent.putExtra("LGTYP", data.getLGTYP());
                 startActivity(intent);
-                    //======== Menuju ke form quant ========
+                    //======== Menuju ke form Onhand ========
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ScannerActivity.this, ScannerStockOpnameActivity.class);
+
+                intent.putExtra("level", levelText.getText().toString());
+                intent.putExtra("plant", plantText.getText().toString());
+                intent.putExtra("sloc", slocText.getText().toString());
+                intent.putExtra("sbin", sbinText.getText().toString());
+                intent.putExtra("whs", whText.getText().toString());
+                intent.putExtra("stype", strgText.getText().toString());
+                startActivity(intent);
+                    //======== Menuju ke form Onhand ========
             }
         });
 
@@ -180,17 +192,6 @@ public class ScannerActivity extends AppCompatActivity {
 
         });
 
-    }
-    private void generateInterimResponse(ArrayList<OnHand> empDataList) {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_onhand);
-
-        adapter = new OnHandRv(empDataList);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ScannerActivity.this);
-
-        recyclerView.setLayoutManager(layoutManager);
-
-        recyclerView.setAdapter(adapter);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

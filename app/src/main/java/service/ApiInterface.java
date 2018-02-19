@@ -127,8 +127,11 @@ public interface ApiInterface {
             @Query("pid") String pid,
             @Query("fiscalyear") String fiscalyear
     );
-
-
+    @GET(" Opname/list/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8")
+    Call<StockOpnameResponse> getScannerOpnameDetail(
+            @Query("werks[0]") String werks,
+            @Query("stge[0]") String stge
+    );
 
     @GET("Reservation/reservasi/X-API-KEY/80ccwwsk44ko4k8ko0wgw0sog484s8kg44ooc8s8?rwerks[0]=7702&rlgort[0]=W210&mvtind=X&includeUnapprove=1")
     Call<ScannerReservationPageResponse> getScannerReservationPage();
