@@ -19,6 +19,8 @@ import java.util.List;
 
 import config.DetailStockOpnameRv;
 import config.ScannerDetailStockOpnameRv;
+import de.mrapp.android.dialog.WizardDialog;
+import fragment.CountDialog;
 import model.ItemDetailOpname;
 import model.Posting;
 import response.CallCartResponse;
@@ -40,10 +42,10 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
 
     Button btnCount,btnPosting,btnRecount;
 
-    String PID, FYEAR;
+    public static String PID, FYEAR;
     String TAG = ScannerDetailOpActivity.class.getSimpleName();
 
-    String PID1,FYEAR1;
+    String PID1, FYEAR1, CURDATE;
     private ArrayList<ItemDetailOpname> itemlist = new ArrayList<ItemDetailOpname>();
 
     CheckBox cbCountSt, cbAdjust, cbDel, cbPostBlack, cbFreeze;
@@ -153,7 +155,60 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
         btnPosting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(ScannerDetailOpActivity.this);
+                WizardDialog.Builder dialogBuilder = new WizardDialog.Builder(ScannerDetailOpActivity.this);
+                dialogBuilder.addFragment("", CountDialog.class);
+                dialogBuilder.setFinishButtonText("Count Confirmation");
+                dialogBuilder.showHeader(true);
+                dialogBuilder.setFullscreen(false);
+                dialogBuilder.setMaxHeight(500);
+                dialogBuilder.setCancelable(true);
+                dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        CURDATE = CountDialog.rangeDate;
+
+                        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                        Log.e(TAG, "ITEM: " + ScannerDetailStockOpnameRv.ITEM);
+                        Log.e(TAG, "MATERIAL: " + ScannerDetailStockOpnameRv.MATERIAL);
+                        Log.e(TAG, "QNT: " + ScannerDetailStockOpnameRv.ENTRY_QNT);
+                        Log.e(TAG, "UOM: " + ScannerDetailStockOpnameRv.ENTRY_UOM);
+
+                        //*Call the method with parameter in the interface to get the employee data*//*
+                        Call<PostingResponse> call = apiService.getPostingOpname(PID1, FYEAR1, CURDATE/*"20180219"*/);
+
+                        //*Log the URL called*//*
+                        Log.wtf("URL Called", call.request().url() + "");
+
+                        call.enqueue(new Callback<PostingResponse>() {
+                            @Override
+                            public void onResponse(Call<PostingResponse> call, Response<PostingResponse> response) {
+                                Toast.makeText(ScannerDetailOpActivity.this, "TYPE            : " + response.body().getContent().getTYPE() +
+                                                "\n" + "ID                 : " + response.body().getContent().getID() +
+                                                "\n" + "NUMBER         : " + response.body().getContent().getNUMBER() +
+                                                "\n" + "MESSAGE        : " + response.body().getContent().getMESSAGE()
+
+                                        , Toast.LENGTH_LONG).show();
+                                String user = response.body().getContent().getID();
+                                Log.e(TAG, "TESTING RESPONSE ID: " + user);
+
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<PostingResponse> call, Throwable t) {
+                                Toast.makeText(ScannerDetailOpActivity.this, " Data Deleted", Toast.LENGTH_SHORT).show();
+//                            Log.e("Test Error", "onFailure: "+Call.class );
+                                finish();
+                            }
+                        });
+
+                    }
+                });
+                WizardDialog dialog = dialogBuilder.create();
+                dialog.show(getSupportFragmentManager(), "test");
+
+                /*final AlertDialog.Builder builder = new AlertDialog.Builder(ScannerDetailOpActivity.this);
                 builder.setMessage("Count Confirmation"+"\n"+
                         "\n"+"PID No.         :"+PID1+"\n"+
                         "\n"+"Fiscal Year   :"+FYEAR1+"\n"+
@@ -169,7 +224,7 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                         /*Create handle for the RetrofitInstance interface*/
+                         *//*Create handle for the RetrofitInstance interface*//*
                         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
                         Log.e(TAG, "ITEM: "+ScannerDetailStockOpnameRv.ITEM );
@@ -177,10 +232,10 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                         Log.e(TAG, "QNT: "+ScannerDetailStockOpnameRv.ENTRY_QNT);
                         Log.e(TAG, "UOM: "+ScannerDetailStockOpnameRv.ENTRY_UOM);
 
-                    /*Call the method with parameter in the interface to get the employee data*/
+                    *//*Call the method with parameter in the interface to get the employee data*//*
                         Call<PostingResponse> call = apiService.getPostingOpname(PID1,FYEAR1,"20180219");
 
-                    /*Log the URL called*/
+                    *//*Log the URL called*//*
                         Log.wtf("URL Called", call.request().url() + "");
 
                         call.enqueue(new Callback<PostingResponse>() {
@@ -208,7 +263,7 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                     }
                 });
                 AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                alertDialog.show();*/
             }
         });
 
@@ -286,7 +341,7 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
         btnCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(ScannerDetailOpActivity.this);
+                /*final AlertDialog.Builder builder = new AlertDialog.Builder(ScannerDetailOpActivity.this);
                 builder.setMessage("Count Confirmation"+"\n"+
                                     "\n"+"PID No.         :"+PID1+"\n"+
                                     "\n"+"Fiscal Year   :"+FYEAR1+"\n"+
@@ -302,7 +357,7 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                         /*Create handle for the RetrofitInstance interface*/
+                         *//*Create handle for the RetrofitInstance interface*//*
                         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
                         Log.e(TAG, "ITEM: "+ScannerDetailStockOpnameRv.ITEM );
@@ -310,12 +365,12 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                         Log.e(TAG, "QNT: "+ScannerDetailStockOpnameRv.ENTRY_QNT);
                         Log.e(TAG, "UOM: "+ScannerDetailStockOpnameRv.ENTRY_UOM);
 
-                    /*Call the method with parameter in the interface to get the employee data*/
+                    *//*Call the method with parameter in the interface to get the employee data*//*
                         Call<PostingResponse> call = apiService.getCountOpname(PID1,FYEAR1,"20160219",ScannerDetailStockOpnameRv.ITEM,
                                                         ScannerDetailStockOpnameRv.MATERIAL,ScannerDetailStockOpnameRv.ENTRY_QNT,
                                                         ScannerDetailStockOpnameRv.ENTRY_UOM);
 
-                    /*Log the URL called*/
+                    *//*Log the URL called*//*
                         Log.wtf("URL Called", call.request().url() + "");
 
                         call.enqueue(new Callback<PostingResponse>() {
@@ -343,7 +398,61 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                     }
                 });
                 AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                alertDialog.show();*/
+                WizardDialog.Builder dialogBuilder = new WizardDialog.Builder(ScannerDetailOpActivity.this);
+                dialogBuilder.addFragment("", CountDialog.class);
+                dialogBuilder.setFinishButtonText("Count Confirmation");
+                dialogBuilder.showHeader(true);
+                dialogBuilder.setFullscreen(false);
+                dialogBuilder.setMaxHeight(500);
+                dialogBuilder.setCancelable(true);
+                dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        CURDATE = CountDialog.rangeDate;
+
+                        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+                        Log.e(TAG, "ITEM: " + ScannerDetailStockOpnameRv.ITEM);
+                        Log.e(TAG, "MATERIAL: " + ScannerDetailStockOpnameRv.MATERIAL);
+                        Log.e(TAG, "QNT: " + ScannerDetailStockOpnameRv.ENTRY_QNT);
+                        Log.e(TAG, "UOM: " + ScannerDetailStockOpnameRv.ENTRY_UOM);
+
+                        //*Call the method with parameter in the interface to get the employee data*//*
+                        Call<PostingResponse> call = apiService.getCountOpname(PID1, FYEAR1, CURDATE,/*"20160219"*/ScannerDetailStockOpnameRv.ITEM,
+                                ScannerDetailStockOpnameRv.MATERIAL, ScannerDetailStockOpnameRv.ENTRY_QNT,
+                                ScannerDetailStockOpnameRv.ENTRY_UOM);
+
+                        //*Log the URL called*//*
+                        Log.wtf("URL Called", call.request().url() + "");
+
+                        call.enqueue(new Callback<PostingResponse>() {
+                            @Override
+                            public void onResponse(Call<PostingResponse> call, Response<PostingResponse> response) {
+                                Toast.makeText(ScannerDetailOpActivity.this, "TYPE            : " + response.body().getContent().getTYPE() +
+                                                "\n" + "ID                 : " + response.body().getContent().getID() +
+                                                "\n" + "NUMBER         : " + response.body().getContent().getNUMBER() +
+                                                "\n" + "MESSAGE        : " + response.body().getContent().getMESSAGE()
+
+                                        , Toast.LENGTH_LONG).show();
+                                String user = response.body().getContent().getID();
+                                Log.e(TAG, "TESTING RESPONSE ID: " + user);
+
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<PostingResponse> call, Throwable t) {
+                                Toast.makeText(ScannerDetailOpActivity.this, " Data Deleted", Toast.LENGTH_SHORT).show();
+//                            Log.e("Test Error", "onFailure: "+Call.class );
+                                finish();
+                            }
+                        });
+
+                    }
+                });
+                WizardDialog dialog = dialogBuilder.create();
+                dialog.show(getSupportFragmentManager(), "test");
             }
         });
     }
