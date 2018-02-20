@@ -71,15 +71,16 @@ public class CountDialog extends Fragment {
                             String aa = curdate.getText().toString();
                             dateObject = dateFormatter.parse(aa);
                             date1 = new SimpleDateFormat("yyyyMMdd", Locale.US).format(dateObject);
+                            curdate.setText(date1);
+                            rangeDate = date1;
                         } catch (ParseException e) {
                             e.printStackTrace();
-
                         }
 
                     }
 
                 }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
+                fromDatePickerDialog.show();
 
                 /*SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(
                         new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
