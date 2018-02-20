@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.semenindonesia.sisi.warehouseautomation.R;
+import com.semenindonesia.sisi.warehouseautomation.ScannerDetailOpActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,6 +49,9 @@ public class CountDialog extends Fragment {
         View view = inflater.inflate(R.layout.fragment_count_dialog, container, false);
         pid = view.findViewById(R.id.pidno);
         fiscal = view.findViewById(R.id.fiscal);
+
+        pid.setText(ScannerDetailOpActivity.PID);
+        fiscal.setText(ScannerDetailOpActivity.FYEAR);
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         dateFormatterr = new SimpleDateFormat("yyyyMMdd", Locale.US);
