@@ -166,7 +166,7 @@ public class ScannerDetailOpActivity extends AppCompatActivity {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
                         CURDATE = CountDialog.rangeDate;
-
+                        Log.e(TAG, "onDismiss: " + CURDATE);
                         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
                         Log.e(TAG, "ITEM: " + ScannerDetailStockOpnameRv.ITEM);
