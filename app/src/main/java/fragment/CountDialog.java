@@ -1,16 +1,24 @@
 package fragment;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.semenindonesia.sisi.warehouseautomation.R;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +28,13 @@ public class CountDialog extends Fragment {
     TextView pid, fiscal;
     EditText curdate;
     public static String rangeDate;
+    private SimpleDateFormat dateFormatter, dateFormatterr;
+    private DatePickerDialog fromDatePickerDialog;
+    private DatePickerDialog toDatePickerDialog;
+
+    String date1, date2;
+    Date dateObject;
+
 
     public CountDialog() {
         // Required empty public constructor
@@ -33,12 +48,40 @@ public class CountDialog extends Fragment {
         View view = inflater.inflate(R.layout.fragment_count_dialog, container, false);
         pid = view.findViewById(R.id.pidno);
         fiscal = view.findViewById(R.id.fiscal);
+
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatterr = new SimpleDateFormat("yyyyMMdd", Locale.US);
+
+
         curdate = view.findViewById(R.id.currentyear);
         curdate.setFocusable(false);
         curdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(
+
+                Calendar newCalendar = Calendar.getInstance();
+                fromDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year, monthOfYear, dayOfMonth);
+                        curdate.setText(dateFormatter.format(newDate.getTime()));
+
+                        try {
+                            String aa = curdate.getText().toString();
+                            dateObject = dateFormatter.parse(aa);
+                            date1 = new SimpleDateFormat("yyyyMMdd", Locale.US).format(dateObject);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+
+                        }
+
+                    }
+
+                }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+
+                /*SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(
                         new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
                             @Override
                             public void onDateRangeSet(SmoothDateRangePickerFragment view,
@@ -71,7 +114,7 @@ public class CountDialog extends Fragment {
                             }
                         });
 
-                smoothDateRangePickerFragment.show(getActivity().getFragmentManager(), "smoothDateRangePicker");
+                smoothDateRangePickerFragment.show(getActivity().getFragmentManager(), "smoothDateRangePicker");*/
             }
         });
 
