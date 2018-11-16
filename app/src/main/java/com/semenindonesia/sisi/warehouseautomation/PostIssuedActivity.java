@@ -247,7 +247,7 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
                 try {
                     JSONObject jObj = new JSONObject(response);
                     String content = jObj.getString("content");
-
+                    Log.e("postissues", "onResponse: "+content );
 
                     Toast.makeText(getApplicationContext(),
                             ""+content, Toast.LENGTH_LONG).show();
@@ -258,7 +258,6 @@ public class PostIssuedActivity extends AppCompatActivity implements View.OnClic
                     }else{
                         Intent intent = new Intent(PostIssuedActivity.this, MainActivity.class);
                         startActivity(intent);
-
                     }
 
                     //}
